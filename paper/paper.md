@@ -7,7 +7,7 @@
 > deep-research passes + the Asphodel whitepaper and need one final verification pass
 > (see [`../research/literature.md`](../research/literature.md)). Supporting material:
 > [`../research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md)
-> and the [`../research/deep-research/`](../research/deep-research/) reports.
+> and the [`../research/deep-research/`](../research/deep-research/) brief.
 
 ---
 
