@@ -4,12 +4,11 @@
 > continuously-learning agents" thesis (see `kamigotchi-as-benchmark.md`). Feeds the
 > paper's related-work section.
 
-> **Status.** Updated 2026-07-04 from two independent deep-research passes (run with the
-> brief in `deep-research/`). One pass verified most entries below with arXiv IDs and
-> explicit VERIFIED tags; the other corroborated the themes. **Still do one final
-> independent citation check before camera-ready** — a few IDs/claims were flagged
-> unverified (noted inline). Lower-confidence items surfaced by only one pass are
-> quarantined in section H.
+> **Status.** Updated 2026-07-04 from two independent deep-research passes. One pass
+> verified most entries below with arXiv IDs and explicit VERIFIED tags; the other
+> corroborated the themes. **Still do one final independent citation check before
+> camera-ready** — a few IDs/claims were flagged unverified (noted inline). Lower-
+> confidence items surfaced by only one pass are quarantined in section H.
 
 ---
 

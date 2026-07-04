@@ -44,7 +44,6 @@ run by an operator. An autonomous on-chain world gives properties an operated sa
 | [`paper/paper.md`](paper/paper.md) | The research-ready paper draft — content where we have it, explicit `[TODO]`/`[PENDING]` markers where we don't. |
 | [`research/literature.md`](research/literature.md) | Annotated bibliography grouped by theme (the related-work foundation), with a must-cite core set. |
 | [`research/asphodel-whitepaper-notes.md`](research/asphodel-whitepaper-notes.md) | Full reading notes on the Asphodel/Kamigotchi whitepaper, incl. the creators' own "benchmarking system" framing and the token economy. |
-| [`research/deep-research/`](research/deep-research/) | The reusable, paste-ready research brief used to run the deep-research passes that ground the draft. |
 
 ## What this is *not* (yet)
 

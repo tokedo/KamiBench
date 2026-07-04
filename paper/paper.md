@@ -6,8 +6,7 @@
 > `**[TODO: …]**` markers say exactly what each part still needs. Citations are from two
 > deep-research passes + the Asphodel whitepaper and need one final verification pass
 > (see [`../research/literature.md`](../research/literature.md)). Supporting material:
-> [`../research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md)
-> and the [`../research/deep-research/`](../research/deep-research/) brief.
+> [`../research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md).
 
 ---
 
