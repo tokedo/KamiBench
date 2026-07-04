@@ -100,6 +100,6 @@ built to be."
   the MUSU↔ONYX in-game link is via ONYX shards (state live-vs-planned precisely).
 - **Maturity caveat (must disclose):** full decentralization/renouncement (SOMA) is years
   out ("at least 4 more"); today Asphodel Studios still defines rules. So: *already
-  substantially operator-independent* (on-chain state, ETH-backed token on mainnet,
+  substantially host-independent* (on-chain state, ETH-backed token on mainnet,
   permissionless bot play that is already the majority of activity) **on a credible
   trajectory to full autonomy** — do not overclaim present-tense immortality.

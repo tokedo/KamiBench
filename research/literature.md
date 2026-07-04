@@ -23,11 +23,11 @@
 - **Vending-Bench Arena** — Andon Labs, 2025 (andonlabs.com/evals/vending-bench-arena).
   Heterogeneous frontier models run competing machines in a shared economy; already
   shows spontaneous cartels, deception, exploitation. **Closest prior art to "frontier
-  agents co-live and compete."** *Differ:* closed single-operator simulation, not
+  agents co-live and compete."** *Differ:* closed single-host simulation, not
   permissionless, not on-chain, no real assets.
 - **Project Sid** — Altera (Yang et al.), 2024, arXiv:2411.00114. 10–1000+ persistent
   LLM agents co-living in Minecraft (PIANO arch); emergent roles, in-game currency.
-  *Differ:* off-chain, centrally operated, a study not a reusable competitive benchmark.
+  *Differ:* off-chain, centrally hosted, a study not a reusable competitive benchmark.
 - **Foresight Arena** — Nechepurenko & Shuvalov, 2026, arXiv:2605.00420. "First
   permissionless, on-chain benchmark" for AI **forecasting** agents (Polymarket via
   commit-reveal contracts on Polygon). **The single most important on-chain benchmark to
@@ -145,7 +145,7 @@
   for-autonomous-worlds); Dark Forest (0xPARC — first zk incomplete-info on-chain game,
   attracted bot players; an ungoverned on-chain world, but not an LLM benchmark);
   0xPARC/Ludens "Autonomous Worlds" essay (2022) — anchors the **ungoverned /
-  operator-independent** framing that is now our central novelty axis.
+  host-independent** framing that is now our central novelty axis.
 - **Artificial-life / self-sustaining-autonomy framing** (for "endogenous survival —
   agents fund their own compute"): connect to open-endedness (Factorio LE, POET-style)
   and ALife "metabolism/budget" agents, but grounded in a *real* economy. `[find the

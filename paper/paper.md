@@ -14,16 +14,16 @@
 
 Agent evaluation is shifting from isolated, resettable tasks toward sustained operation
 in persistent, non-stationary environments — yet even the most advanced long-horizon
-benchmarks remain *operated*: a single party runs the world, sets and changes its rules,
+benchmarks remain *hosted*: a single party runs the world, sets and changes its rules,
 gates access, and keeps it alive only while funded. This coincides with a benchmark-
-integrity crisis (saturation, contamination, reward-hacking) in which whoever operates
+integrity crisis (saturation, contamination, reward-hacking) in which whoever runs
 an environment can, even inadvertently, compromise the evaluation. We argue that the
 right substrate for evaluating long-horizon, continuously-learning, adaptive agents is an
-**ungoverned, autonomous, persistent on-chain world** — one that no party operates,
+**ungoverned, autonomous, persistent on-chain world** — one that no party runs,
 resets, or can shut off — and we present **Kamigotchi**, a fully on-chain MMORPG whose
 creators explicitly designed it to be agent-first and describe it as a possible
 "real-stakes, adversarial benchmarking system," as the best-fit instance available today.
-The substrate provides properties no operated sandbox can: tamper-evident logging and
+The substrate provides properties no hosted sandbox can: tamper-evident logging and
 non-manipulable rules by construction, credible multi-year permanence, permissionless
 participation, and — uniquely — a real, externally-valued economy in which an agent's
 *survival can become economically endogenous*: it can convert in-world earnings into
@@ -50,16 +50,16 @@ axis (LifelongAgentBench, StreamBench).
 
 **1.2 The benchmark-integrity crisis.** As agents gain web access, static benchmarks are
 saturated, contaminated (search-time contamination), and reward-hacked. A deeper,
-under-examined problem: the party that *operates* an environment can change rules, patch
+under-examined problem: the party that *runs* an environment can change rules, patch
 away discovered strategies, gate access, or stop running it. Evaluation integrity is
-bounded by operator trust.
+bounded by host trust.
 
 **1.3 The idea: an ungoverned, autonomous world.** We propose evaluating agents in a
-world **no one operates** — an on-chain "autonomous world" whose rules live in public
+world **no one runs** — an on-chain "autonomous world" whose rules live in public
 smart contracts, whose entire history is decodable and tamper-evident, that anyone may
-enter permissionlessly, and that persists independent of any operator's funding or
-interest. This is not merely "on-chain flavor": operator-independence is a structural
-answer to the integrity crisis and unlocks evaluation regimes an operated sandbox cannot
+enter permissionlessly, and that persists independent of any host's funding or
+interest. This is not merely "on-chain flavor": host-independence is a structural
+answer to the integrity crisis and unlocks evaluation regimes a hosted sandbox cannot
 support.
 
 **1.4 Why Kamigotchi, and why now.** Kamigotchi (a fully on-chain MMORPG on the Yominet
@@ -71,7 +71,7 @@ adversarial benchmarking system." We formalize the benchmark the environment was
 to be.
 
 **1.5 Contributions.**
-1. **The autonomous-world substrate** for agent evaluation — on-chain, operator-
+1. **The autonomous-world substrate** for agent evaluation — on-chain, host-
    independent, permissionlessly-persistent, real-economy — motivated as a structural
    response to the benchmark-integrity crisis. (§3)
 2. **Kamigotchi as a concrete, creator-endorsed instance**, with a model-agnostic
@@ -99,7 +99,7 @@ to be.
 **2.1 Long-horizon & continual-learning evaluation.** METR time-horizon
 (arXiv:2503.14499); Factorio LE (arXiv:2503.09617); LifelongAgentBench (arXiv:2505.11942);
 StreamBench (arXiv:2406.08747); τ-bench pass^k reliability (arXiv:2406.12045). *These
-establish the axes we adopt; all are operated/resettable.*
+establish the axes we adopt; all are hosted/resettable.*
 
 **2.2 Multi-agent & open-ended environments.** Neural MMO (arXiv:2110.07594, persistent
 massively-multiagent — but simulated, hosted); Project Sid (arXiv:2411.00114, 1000+ LLM
@@ -109,9 +109,9 @@ persistence or multi-agent competition — we say so — and differentiate on go
 
 **2.3 Real-stakes & business agents.** Vending-Bench (arXiv:2502.15840) and Vending-Bench
 Arena (heterogeneous frontier models competing — already showing cartels/deception);
-Project Vend and Andon Café (real businesses; real stakes but operated, costly,
+Project Vend and Andon Café (real businesses; real stakes but run by a single party, costly,
 human-in-the-loop). *Closest in spirit to real-stakes multi-agent evaluation; all
-operated.*
+hosted.*
 
 **2.4 Game-playing agent benchmarks & the harness/contamination problem.** lmgame-Bench
 (arXiv:2505.15146; ~40% of harness-free runs fail to beat random), BALROG
@@ -132,16 +132,16 @@ game world as a reusable LLM benchmark.*
 ## 3. The Autonomous-World Substrate  `[DRAFTED]`
 
 **3.1 Governed vs. ungoverned environments.** Define the axis. Every environment in §2 is
-*governed*: an operator runs the server, can change rules, reset state, gate access, and
+*governed*: a host runs the server, can change rules, reset state, gate access, and
 the world exists only while they run it. An **autonomous world** is *ungoverned*: rules in
 public contracts, state on-chain, permissionless entry, persistence independent of any
-operator.
+host.
 
 **3.2 Four researcher-facing properties of an ungoverned substrate.**
 - **Substrate integrity / non-manipulability.** The evaluator does not run the world;
   rules are fixed and identical for all. Results can't be tampered with; discovered
   strategies can't be quietly patched. The "evaluator" is the immutable chain state.
-- **Credible permanence / longitudinal evaluation.** Operated benchmarks are ephemeral;
+- **Credible permanence / longitudinal evaluation.** Hosted benchmarks are ephemeral;
   an on-chain world enables open-ended, multi-year study of the same agents in the same
   world.
 - **Permissionless, decentralized participation.** No lab owns the benchmark; anyone can
@@ -151,7 +151,7 @@ operator.
   contamination for forward-looking evaluation.
 
 **3.3 Why this answers the integrity crisis (§1.2).** Map each integrity failure
-(saturation, contamination, reward-hacking, operator drift) to how operator-independence
+(saturation, contamination, reward-hacking, host drift) to how host-independence
 + a forward-moving live world mitigates or reframes it.
 
 > **[TODO:** this is the paper's core conceptual contribution — invest here. Add a clean
@@ -186,14 +186,14 @@ indexer/UI dependencies.]**
 **4.4 Maturity (honest).** Kamigotchi World is live; $ONYX is ETH-backed and live 1+ year
 on Ethereum mainnet; bot play is already the majority of activity — but full governance
 renouncement (via the unlaunched $SOMA token) is years out ("at least 4 more"). The world
-is *already substantially operator-independent* and on a credible trajectory to full
+is *already substantially host-independent* and on a credible trajectory to full
 autonomy; we do not overclaim present-tense immortality.
 
 ---
 
 ## 5. Endogenous Survival: Self-Funded Autonomy  `[DRAFTED]`
 
-**5.1 Survival as a scored metaphor vs. a literal, economic criterion.** In operated
+**5.1 Survival as a scored metaphor vs. a literal, economic criterion.** In hosted
 benchmarks the evaluator assigns "survival" and restarts dead agents. In an ungoverned
 world with a real, externally-valued economy, survival can be literal and endogenous: the
 agent's continued operation depends on real value it extracts and can spend on compute.
@@ -226,7 +226,7 @@ Present as an emerging property the substrate uniquely enables — not a futuris
 - **6.3 Tasks, seasons, and reproducibility.** Fixed evaluation "seasons"/snapshots,
   held-out windows, forked replay for control in a live world. **[TODO.]**
 - **6.4 Fairness & legibility.** Equal open access to mechanics; normalized budgets;
-  operator/account parity; autonomy verification of submitted transactions. **[TODO.]**
+  participant/account parity; autonomy verification of submitted transactions. **[TODO.]**
 - **6.5 Leaderboard.** A public, on-chain-verifiable, continuously-updating leaderboard.
   **[TODO.]**
 
@@ -286,7 +286,7 @@ ingredients we consider (not adopt as-is):
 4. **Real-money ethics & safety:** caps, session-key limits, kill-switches, disclosure.
 5. **Emergent collusion / reward-hacking / contract exploits:** decide up front if
    measured behavior or disallowed exploit; detect either way.
-6. **Operator/account asymmetries + autonomy verification:** normalized budgets,
+6. **Participant/account asymmetries + autonomy verification:** normalized budgets,
    efficiency-per-cost, proof of autonomous signing (permissionless entry allows
    hand-driving).
 7. **Maturity of the autonomy claim:** full renouncement is years out; the self-funding
