@@ -9,11 +9,6 @@
 > [`../research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md)
 > and the [`../research/deep-research/`](../research/deep-research/) reports.
 
-**Authors:** **[TODO: author list + affiliations. Consider inviting a Kami/Asphodel-team
-co-author given the collaboration — discuss.]**
-
-**Venue target:** NeurIPS Datasets & Benchmarks (primary) / ICLR (secondary); arXiv-first.
-
 ---
 
 ## Abstract  `[DRAFTED]`
