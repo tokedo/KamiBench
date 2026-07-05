@@ -26,7 +26,8 @@ MMORPG whose creators explicitly designed it to be agent-first and describe it a
 "real-stakes, adversarial benchmarking system," as the best-fit instance available today.
 The substrate provides properties no hosted sandbox can: tamper-evident logging and
 rule changes by construction (with immutability the explicit design endpoint), credible
-multi-year permanence, permissionless participation, and — uniquely — a real, externally-valued economy in which an agent's
+multi-year permanence, permissionless participation, co-habitation with real human
+players on identical terms through the same transaction interface, and — uniquely — a real, externally-valued economy in which an agent's
 *survival can become economically endogenous*: it can convert in-world earnings into
 ETH-denominated value and fund its own compute. We formalize the autonomous-world
 substrate, describe a model-agnostic harness for dropping heterogeneous frontier agents
@@ -109,6 +110,10 @@ massively-multiagent — but simulated, hosted); Project Sid (arXiv:2411.00114, 
 agents co-living in Minecraft — hosted, a study); Generative Agents (arXiv:2304.03442);
 Melting Pot 2.0 (arXiv:2211.13746, cross-play evaluation). *We are not first on
 persistence or multi-agent competition — we say so — and differentiate on governance.*
+AI has faced real humans live before — **Cicero** (human-level Diplomacy against humans
+on webDiplomacy.net; Meta AI, Science 2022) and **AlphaStar** (anonymized ranked play on
+the Battle.net ladder; DeepMind, Nature 2019) — but as *episodic matches*; no prior
+benchmark has agents and humans co-inhabiting a persistent shared economy over months.
 
 **2.3 Real-stakes & business agents.** Vending-Bench (arXiv:2502.15840) and Vending-Bench
 Arena (heterogeneous frontier models competing — already showing cartels/deception);
@@ -159,7 +164,7 @@ Even before renouncement completes, the world differs in kind from hosted worlds
 *designed from inception* to run forever with no centralized game server — state and
 mechanics are embedded on-chain.
 
-**3.2 Four researcher-facing properties of an ungoverned substrate.**
+**3.2 Five researcher-facing properties of an ungoverned substrate.**
 - **Substrate integrity: tamper-evident today, immutable on trajectory.** The evaluator
   does not run the world — the evaluator is the chain state itself — and rules are
   identical for all. Every rule change is a public, permanent, decodable transaction:
@@ -172,6 +177,17 @@ mechanics are embedded on-chain.
   full on trajectory (§3.1, §4.5).
 - **Permissionless, decentralized participation.** No lab owns the benchmark; anyone can
   enter any model into the same live world.
+- **Mixed human–agent population with interface parity.** The world is co-inhabited by
+  real human players and agents *on exactly the same terms*: the native action interface
+  — transactions — is literally identical for humans and machines, with no segregated
+  bot ladder or flagged-bot regime; bots are the majority population and explicitly
+  welcomed by the creators (§4.2). Hundreds of active human players manage kamis (often
+  dozens to hundreds each), form clans, and trade in the same economy, at the same time,
+  through the same interface agents use **[VERIFY: active-human-player count +
+  estimation method — nontrivial since the whitepaper states the majority of activity is
+  automated; distinguish human-operated vs. automated accounts via the on-chain
+  analytics layer, or cite Asphodel figures]**. Benchmarking against a live human
+  population tests adaptation to *human* behavior, not just other models.
 - **Contamination resistance by forward motion.** Future world state depends on live
   actors and cannot be searched or memorized — blunting search-time and pretraining
   contamination for forward-looking evaluation.
@@ -204,7 +220,8 @@ acquired the Kamibots automation team, plans 2026 LLM-play events, and names it 
 market." We formalize that intent.
 
 **4.3 The property stack.** Persistent & open-ended; non-stationary (real adversarial
-population); **natively agentic** (actions are transactions — no UI/pixels, removing the
+population); **mixed human–agent population** (real human players and agents co-inhabit
+the same economy through the identical transaction interface — §3.2); **natively agentic** (actions are transactions — no UI/pixels, removing the
 GUI-brittleness confound of lmgame-Bench/OSWorld/Cradle); **fully observable** (decodable
 on-chain history); **open mechanics** (public contracts; extracted to a machine-readable
 GDD); **real stakes** (gas + tradable assets). **[TODO: state the open-source/license

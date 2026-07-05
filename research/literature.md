@@ -99,6 +99,15 @@
 - **Concordia** — Vezhnevets et al., 2023, arXiv:2312.03664 (+ NeurIPS 2024 contest).
   LLM agents in physical/social/digital space via a game-master; mixed-motive eval.
 
+**Live human–agent competition (episodic precedents for the co-habitation claim):**
+- **Cicero** — Bakhtin et al. (Meta AI), Science 2022. Human-level Diplomacy playing
+  against real humans on webDiplomacy.net. *Differ:* episodic matches with fixed
+  endpoints; no persistent shared economy, no stakes carried across games.
+- **AlphaStar** — Vinyals et al. (DeepMind), Nature 2019. Grandmaster StarCraft II via
+  anonymized ranked matches against humans on the Battle.net ladder. *Differ:* episodic
+  ladder games; RL not LLM; no persistence or economy — vs. our persistent shared
+  economy co-inhabited by humans and agents over months.
+
 ---
 
 ## E. Continual / lifelong / streaming learning for LLM agents (VERIFIED)
