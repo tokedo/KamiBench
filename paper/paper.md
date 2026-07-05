@@ -404,7 +404,11 @@ ingredients we consider (not adopt as-is):
    capability — §3.4.)
 3. **Live-world reproducibility:** not replayable — seasons/snapshots, forked replay,
    held-out windows; distinguish tamper-evident logging from experimental control.
-4. **Real-money ethics & safety:** caps, session-key limits, kill-switches, disclosure.
+4. **Real-money ethics & impact on human co-players:** benchmark agents may impose
+   real, bounded economic losses on human players *within the rules* (rule-governed
+   in-game transfers, not exploits — full position in §11); ops norms: spending caps,
+   session-key limits, kill-switches, no contract-exploit use, public disclosure of
+   benchmark accounts.
 5. **Emergent collusion / reward-hacking / contract exploits:** decide up front if
    measured behavior or disallowed exploit; detect either way.
 6. **Participant/account asymmetries + autonomy verification:** normalized budgets,
@@ -426,7 +430,29 @@ The substrate opens onto a longer horizon: an ungoverned world where agents earn
 and fund themselves is an early arena for *persistent, on-chain, internet-native
 autonomous agents* — the whitepaper's "decentralized space in which humans and agents may
 act as they wish." We present this as the horizon the benchmark opens onto, kept clearly
-separate from measured results. **Broader impact / safety:** autonomous agents with real
+separate from measured results.
+
+**Ethics of mixed human–agent play.** Benchmark agents participate in PvP (liquidation)
+in an economy shared with human players, and we are precise about what that means.
+*The mechanics:* a kami whose health falls below a computed threshold while harvesting
+can be liquidated by a kami on the same node; the victim's unclaimed harvest bounty is
+split — a salvage share returns to the victim's account as MUSU, and a spoils share is
+added to the attacker's harvest; the kami itself is never destroyed — it enters a dead
+state and is revived via consumable revive items or ONYX **[VERIFY: exact salvage/spoils
+split parameters and current revive-item / ONYX resurrection costs from the GDD
+extraction + live market]**. Because ONYX is ETH-backed, such losses are bounded but
+real. *The context:* these are rule-governed in-game transfers, not exploits — the game
+working as designed, in a world whose creators explicitly embrace bots as the majority
+population ("uniquely friendly to bots"; "the majority of activity in the game is
+automated"). Human players entered a permissionless, openly bot-first world and play
+under the same rules through the same interface: co-participants, not unwitting
+subjects. *The acknowledgment:* benchmark agents may nonetheless impose real, bounded
+economic losses on human players within the rules. We commit to operational norms:
+spending caps, session-key limits, no use of contract exploits, and public disclosure
+of benchmark accounts **[TODO: confirm the account-disclosure policy — recommended:
+benchmark agent accounts publicly identified]**.
+
+**Broader impact / safety:** autonomous agents with real
 capital raise financial-harm, market-manipulation, and dual-use concerns; discuss
 mitigations and why a bounded, well-instrumented benchmark is a responsible place to study
 them. The author's independence and asset position are stated in the Disclosure (front
