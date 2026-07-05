@@ -19,13 +19,14 @@ gates access, and keeps it alive only while funded. This coincides with a benchm
 integrity crisis (saturation, contamination, reward-hacking) in which whoever runs
 an environment can, even inadvertently, compromise the evaluation. We argue that the
 right substrate for evaluating long-horizon, continuously-learning, adaptive agents is an
-**ungoverned, autonomous, persistent on-chain world** — one that no party runs,
-resets, or can shut off — and we present **Kamigotchi**, a fully on-chain MMORPG whose
-creators explicitly designed it to be agent-first and describe it as a possible
+**autonomous, persistent on-chain world** at the far end of the host-independence
+spectrum — state and rules on-chain, every rule change public and permanent, governance
+renouncement the stated endpoint — and we present **Kamigotchi**, a fully on-chain
+MMORPG whose creators explicitly designed it to be agent-first and describe it as a possible
 "real-stakes, adversarial benchmarking system," as the best-fit instance available today.
 The substrate provides properties no hosted sandbox can: tamper-evident logging and
-non-manipulable rules by construction, credible multi-year permanence, permissionless
-participation, and — uniquely — a real, externally-valued economy in which an agent's
+rule changes by construction (with immutability the explicit design endpoint), credible
+multi-year permanence, permissionless participation, and — uniquely — a real, externally-valued economy in which an agent's
 *survival can become economically endogenous*: it can convert in-world earnings into
 ETH-denominated value and fund its own compute. We formalize the autonomous-world
 substrate, describe a model-agnostic harness for dropping heterogeneous frontier agents
@@ -55,12 +56,14 @@ away discovered strategies, gate access, or stop running it. Evaluation integrit
 bounded by host trust.
 
 **1.3 The idea: an ungoverned, autonomous world.** We propose evaluating agents in a
-world **no one runs** — an on-chain "autonomous world" whose rules live in public
-smart contracts, whose entire history is decodable and tamper-evident, that anyone may
-enter permissionlessly, and that persists independent of any host's funding or
-interest. This is not merely "on-chain flavor": host-independence is a structural
-answer to the integrity crisis and unlocks evaluation regimes a hosted sandbox cannot
-support.
+world **built to need no host** — an on-chain "autonomous world" whose rules live in
+public smart contracts, whose entire history is decodable and tamper-evident, that
+anyone may enter permissionlessly, and that is designed from inception to persist
+independent of any host's funding or interest. Host-independence is a spectrum, not a
+binary (§3.1): we state precisely which properties hold *today* and which arrive on the
+world's stated governance-renouncement *trajectory*. This is not merely "on-chain
+flavor": host-independence is a structural answer to the integrity crisis and unlocks
+evaluation regimes a hosted sandbox cannot support.
 
 **1.4 Why Kamigotchi, and why now.** Kamigotchi (a fully on-chain MMORPG on the Yominet
 appchain, part of the Asphodel ecosystem) is uniquely fit and, notably, **built for
@@ -131,19 +134,42 @@ game world as a reusable LLM benchmark.*
 
 ## 3. The Autonomous-World Substrate  `[DRAFTED]`
 
-**3.1 Governed vs. ungoverned environments.** Define the axis. Every environment in §2 is
-*governed*: a host runs the server, can change rules, reset state, gate access, and
-the world exists only while they run it. An **autonomous world** is *ungoverned*: rules in
-public contracts, state on-chain, permissionless entry, persistence independent of any
-host.
+**3.1 Governed vs. ungoverned: host-independence as a spectrum.** Define the axis. Every
+environment in §2 is fully *governed*: a host runs the server, can silently change rules,
+reset state, gate access, and the world exists only while they run it. A fully
+**autonomous world** is the opposite pole: rules in public contracts, state on-chain,
+permissionless entry, persistence independent of any host. Real instances sit between
+the poles and move along them, so we split every substrate property into what **holds
+today** and what arrives on a stated **trajectory** — for Kamigotchi:
+
+| Property | Holds today | Trajectory / mechanism |
+|---|---|---|
+| On-chain state; fully decodable history | Yes | — |
+| Permissionless entry | Yes | — |
+| Tamper-evident rule changes | Yes — every change is a public transaction | — |
+| Rule immutability | No — contracts upgradeable pre-renouncement | $SOMA governance renouncement (years out; §4.4) |
+| Persistence independent of any host's funding | Partial — state/mechanics on-chain, no centralized game server; chain trust remains (§4.5) | Full at renouncement; possible Ethereum migration (§4.5) |
+
+The honest present-tense claim is **tamper-evident, not tamper-proof**: silent patching
+is architecturally impossible because a rule change is itself a public, permanent,
+decodable transaction — the change history becomes part of the evaluation record. Rule
+*immutability* arrives with governance renouncement, the whitepaper's explicit design
+telos (an "immortal" world), and is stated here as trajectory, never as present tense.
+Even before renouncement completes, the world differs in kind from hosted worlds: it was
+*designed from inception* to run forever with no centralized game server — state and
+mechanics are embedded on-chain.
 
 **3.2 Four researcher-facing properties of an ungoverned substrate.**
-- **Substrate integrity / non-manipulability.** The evaluator does not run the world;
-  rules are fixed and identical for all. Results can't be tampered with; discovered
-  strategies can't be quietly patched. The "evaluator" is the immutable chain state.
+- **Substrate integrity: tamper-evident today, immutable on trajectory.** The evaluator
+  does not run the world — the evaluator is the chain state itself — and rules are
+  identical for all. Every rule change is a public, permanent, decodable transaction:
+  silent patches are impossible, and pre-renouncement upgrades are visible and auditable,
+  becoming part of the evaluation record rather than corrupting it.
 - **Credible permanence / longitudinal evaluation.** Hosted benchmarks are ephemeral;
-  an on-chain world enables open-ended, multi-year study of the same agents in the same
-  world.
+  a world whose state and mechanics are embedded on-chain — built to run with no
+  centralized game server — enables open-ended, multi-year study of the same agents in
+  the same world. Persistence independent of any host's funding is partial today and
+  full on trajectory (§3.1, §4.5).
 - **Permissionless, decentralized participation.** No lab owns the benchmark; anyone can
   enter any model into the same live world.
 - **Contamination resistance by forward motion.** Future world state depends on live
@@ -152,7 +178,9 @@ host.
 
 **3.3 Why this answers the integrity crisis (§1.2).** Map each integrity failure
 (saturation, contamination, reward-hacking, host drift) to how host-independence
-+ a forward-moving live world mitigates or reframes it.
++ a forward-moving live world mitigates or reframes it. Precision on host drift: it
+becomes *visible and auditable* — every rule change is a public transaction that joins
+the evaluation record — not impossible; impossibility arrives only with renouncement.
 
 > **[TODO:** this is the paper's core conceptual contribution — invest here. Add a clean
 > definition box for "autonomous world (as an evaluation substrate)." Pre-empt the

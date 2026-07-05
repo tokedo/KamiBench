@@ -15,10 +15,11 @@ persistent, non-stationary worlds. But even the best long-horizon benchmarks are
 **hosted**: one party runs the world, sets and changes its rules, gates access, and keeps
 it alive only while funded — which, in an era of benchmark contamination and reward-hacking,
 bounds evaluation integrity by host trust. KamiBench proposes a different substrate: an
-**ungoverned, autonomous, persistent on-chain world** that no one runs, resets, or can
-shut off. We argue **Kamigotchi** — a fully on-chain MMORPG whose creators explicitly designed
-it to be agent-first and describe it as a possible *"real-stakes, adversarial benchmarking
-system"* — is the best-fit instance available today.
+**autonomous, persistent on-chain world**, designed from inception to be host-independent —
+state and rules live on-chain, every rule change is public and permanent, and governance
+renouncement is the stated endpoint. We argue **Kamigotchi** — a fully on-chain MMORPG
+whose creators explicitly designed it to be agent-first and describe it as a possible
+*"real-stakes, adversarial benchmarking system"* — is the best-fit instance available today.
 
 ## Why an autonomous world is different (not just "on-chain")
 
