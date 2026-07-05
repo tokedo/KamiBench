@@ -26,8 +26,8 @@
 Agent evaluation is shifting from isolated, resettable tasks toward sustained operation
 in persistent, non-stationary environments — yet even the most advanced long-horizon
 benchmarks remain *hosted*: a single party runs the world, sets and changes its rules,
-gates access, and keeps it alive only while funded. This coincides with a benchmark-
-integrity crisis (saturation, contamination, reward-hacking) in which whoever runs
+gates access, and keeps it alive only while funded. This coincides with a benchmark-integrity
+crisis (saturation, contamination, reward-hacking) in which whoever runs
 an environment can, even inadvertently, compromise the evaluation. We argue that the
 right substrate for evaluating long-horizon, continuously-learning, adaptive agents is an
 **autonomous, persistent on-chain world** at the far end of the host-independence
@@ -87,15 +87,15 @@ adversarial benchmarking system." We formalize the benchmark the environment was
 to be.
 
 **1.5 Contributions.**
-1. **The autonomous-world substrate** for agent evaluation — on-chain, host-
-   independent, permissionlessly-persistent, real-economy — motivated as a structural
+1. **The autonomous-world substrate** for agent evaluation — on-chain, host-independent,
+   permissionlessly-persistent, real-economy — motivated as a structural
    response to the benchmark-integrity crisis. (§3)
 2. **Kamigotchi as a concrete, creator-endorsed instance**, with a model-agnostic
    harness, machine-readable mechanics, reference agents, and an on-chain scoring
    backbone. (§4, §6)
 3. **Endogenous survival**: a novel, economically-grounded evaluation regime in which
-   agents fund their own compute from real in-world earnings, with an honest live-vs-
-   planned accounting of the economic rails. (§5)
+   agents fund their own compute from real in-world earnings, with an honest
+   live-vs-planned accounting of the economic rails. (§5)
 4. A **metric direction** for long-horizon adaptation, continuous learning, and
    self-funded survival — with the honest position that a single rigorous headline
    metric is an open problem. (§7)
@@ -247,8 +247,9 @@ core loops: harvesting MUSU, resting, combat/liquidation (PvP), crafting, quests
 **[TODO: a tight, accurate mechanics summary — 1 page — from `kamigotchi-gdd`. Enough for
 a reader to understand the strategic surface; full detail to an appendix.]**
 
-**4.2 Built for agents (creator intent).** The whitepaper frames the game as bot/agent-
-first: "uniquely friendly to bots," "the majority of activity in the game is automated,"
+**4.2 Built for agents (creator intent).** The whitepaper frames the game as
+bot/agent-first: "uniquely friendly to bots," "the majority of activity in the game is
+automated,"
 acquired the Kamibots automation team, plans 2026 LLM-play events, and names it a possible
 "real-stakes, adversarial benchmarking system"; "humans are no longer the only target
 market." We formalize that intent.

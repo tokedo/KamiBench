@@ -63,8 +63,9 @@ run by a host. An autonomous on-chain world gives properties a hosted sandbox ca
 ## What this is *not* (yet)
 
 - **Not** claiming to be the first persistent or first multi-agent benchmark — Neural MMO,
-  Vending-Bench Arena, and Project Sid predate us. The novelty is the **ungoverned/autonomous-
-  world substrate** and **endogenous survival**, and the paper differentiates explicitly.
+  Vending-Bench Arena, and Project Sid predate us. The novelty is the
+  **ungoverned/autonomous-world substrate** and **endogenous survival**, and the paper
+  differentiates explicitly.
 - **Not** experimentally validated yet — the multi-model study is pending.
 - **Not** free of the pretraining-absorption confound: a model trained after season N carries
   that season's strategies in its weights, so cross-*time* comparisons are indicative only —
