@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path of the current page, used for the canonical URL, e.g. "/paper". */
+  path?: string;
+}
+
+const { title, description, path = '/' } = Astro.props;
+const canonical = new URL(path, Astro.site);
+const github = 'https://github.com/tokedo/KamiBench';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container">
+        <a class="wordmark" href="/">KamiBench</a>
+        <nav class="site-nav" aria-label="Site">
+          <a href="/paper" aria-current={path === '/paper' ? 'page' : undefined}>Paper</a>
+          <a href={github}>GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <h2>Disclosure</h2>
+        <p>
+          The author plays Kamigotchi and holds the in-game assets (Kamis, ONYX) used to
+          operate the research agents; he has no affiliation with and receives no
+          compensation from Asphodel, and has to date extracted no funds from the game —
+          verifiable on-chain. This is independent, individual open research, unaffiliated
+          with any company.
+        </p>
+        <div class="footer-meta">
+          <span><a href={`${github}/blob/main/LICENSE`}>MIT License</a></span>
+          <span><a href={github}>GitHub</a></span>
+          <span><a href="https://x.com/0xTokedo">@0xTokedo</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

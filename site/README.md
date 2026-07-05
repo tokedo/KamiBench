@@ -1,0 +1,33 @@
+# KamiBench website
+
+The project website: a landing page and a build-time render of
+[`../paper/paper.md`](../paper/paper.md). Static [Astro](https://astro.build) site,
+no client-side JavaScript.
+
+## Local development
+
+Requires Node 22+ and [pnpm](https://pnpm.io).
+
+```sh
+cd site
+pnpm install       # install dependencies
+pnpm dev           # dev server at http://localhost:4321
+pnpm build         # production build into site/dist/
+pnpm preview       # serve the production build locally
+```
+
+The paper page reads `../paper/paper.md` at build time — the site is regenerated from
+the current paper source on every build, with no manual sync step.
+
+## Deploying on Vercel
+
+1. Vercel dashboard → **Add New… → Project** → import the `KamiBench` GitHub repo.
+2. Set **Root Directory** to `site`. Leave "Include files outside the root directory"
+   enabled (default) — the build reads `../paper/paper.md`.
+3. Framework preset auto-detects as **Astro**; keep the default build settings.
+4. **Deploy.**
+
+Once connected, every push to `main` deploys automatically (pushes to other branches
+get preview deployments). If the production domain differs from
+`https://kamibench.vercel.app`, update `site` in `astro.config.mjs` and
+`public/sitemap.xml`.
