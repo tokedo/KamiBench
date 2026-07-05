@@ -7,8 +7,8 @@
 > **Status.** Updated 2026-07-04 from two independent deep-research passes. One pass
 > verified most entries below with arXiv IDs and explicit VERIFIED tags; the other
 > corroborated the themes. **Still do one final independent citation check before
-> camera-ready** — a few IDs/claims were flagged unverified (noted inline). Lower-
-> confidence items surfaced by only one pass are quarantined in section H.
+> camera-ready** — a few IDs/claims were flagged unverified (noted inline).
+> Lower-confidence items surfaced by only one pass are quarantined in section H.
 
 ---
 
@@ -54,8 +54,8 @@
 - **Andon Café ("Mona")** — Andon Labs, opened mid-April 2026, Stockholm
   (andonlabs.com/cafe; PBS/AP coverage). Agent on **Google Gemini** hires/manages two
   human baristas via Slack, handles permits/pricing/inventory; humans brew. Reportedly
-  >$5.7k sales vs. <$5k left of a $21k+ budget; failure modes (impersonation, over-
-  ordering). **Our anchor for "open environment, but expensive + human-in-loop +
+  >$5.7k sales vs. <$5k left of a $21k+ budget; failure modes (impersonation,
+  over-ordering). **Our anchor for "open environment, but expensive + human-in-loop +
   single-agent."** *(Exact Gemini version behind "Mona" not authoritatively confirmed;
   reported as Gemini, possibly "Gemini 3.1 Pro Preview" — verify.)*
 - **CoffeeBench** — Sugiura et al. (Sakana AI + KPMG), 2026, arXiv:2606.16613. 90-day
@@ -79,8 +79,8 @@
   generation for contamination resistance; fine-grained progress metrics. Good model for
   game-based agent eval + contamination mitigation; episodic/resettable.
 - **lmgame-Bench** — Hu et al., 2025, arXiv:2505.15146. Six games via unified Gym-style
-  API with toggleable perception/memory/reasoning scaffolds. **Key for the harness-
-  sensitivity threat:** "~40% of game runs without the harness fail to outperform a
+  API with toggleable perception/memory/reasoning scaffolds. **Key for the
+  harness-sensitivity threat:** "~40% of game runs without the harness fail to outperform a
   random-play baseline"; prompt sensitivity + contamination confound naive game evals.
 - Contrast points (perception/GUI brittleness — cite briefly): **MineDojo** (Fan et al.,
   2022), **SIMA** (DeepMind, 2024), **Cradle** (2024, GUI/AAA control), **OSWorld** (Xie
@@ -159,11 +159,11 @@
 - **Named on-chain agent projects with NO rigorous benchmark paper** (press/whitepaper
   only): Freysa (adversarial treasury game, Base, 2024), ElizaOS/ai16z, Virtuals
   Protocol, Olas/Autonolas. Mention to show the *gap*.
-- **Autonomous Worlds substrate:** MUD engine (Lattice, lattice.xyz/blog/mud-an-engine-
-  for-autonomous-worlds); Dark Forest (0xPARC — first zk incomplete-info on-chain game,
-  attracted bot players; an ungoverned on-chain world, but not an LLM benchmark);
-  0xPARC/Ludens "Autonomous Worlds" essay (2022) — anchors the **ungoverned /
-  host-independent** framing that is now our central novelty axis.
+- **Autonomous Worlds substrate:** MUD engine (Lattice,
+  lattice.xyz/blog/mud-an-engine-for-autonomous-worlds); Dark Forest (0xPARC — first zk
+  incomplete-info on-chain game, attracted bot players; an ungoverned on-chain world,
+  but not an LLM benchmark); 0xPARC/Ludens "Autonomous Worlds" essay (2022) — anchors
+  the **ungoverned / host-independent** framing that is now our central novelty axis.
 - **Artificial-life / self-sustaining-autonomy framing** (for "endogenous survival —
   agents fund their own compute"): connect to open-endedness (Factorio LE, POET-style)
   and ALife "metabolism/budget" agents, but grounded in a *real* economy. `[find the
@@ -229,8 +229,8 @@ Vending-Bench (2502.15840) · Vending-Bench 2/Arena · Project Vend 1&2 · Voyag
 (2503.09617) · BALROG (2411.13543) · lmgame-Bench (2505.15146) · Generative Agents
 (2304.03442) · Melting Pot 2.0 (2211.13746) · Concordia (2312.03664) · LifelongAgentBench
 (2505.11942) · StreamBench (2406.08747) · METR time-horizon (2503.14499) · τ-bench
-(2406.12045) · Foresight Arena (2605.00420) · CoffeeBench (2606.16613). Plus: MUD/Lattice
-+ 0xPARC Autonomous Worlds; AlphaStar (Vinyals et al., Nature 2019) / OpenAI Five as
+(2406.12045) · Foresight Arena (2605.00420) · CoffeeBench (2606.16613). Plus: MUD/Lattice +
+0xPARC Autonomous Worlds; AlphaStar (Vinyals et al., Nature 2019) / OpenAI Five as
 self-play motivation; lifelong-learning roadmap (2501.07278).
 
 ---
