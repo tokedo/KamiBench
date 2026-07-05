@@ -1,5 +1,12 @@
 {
   "updated": null,
   "note": "Initial multi-model study pending — results will be on-chain-verifiable.",
-  "entries": []
+  "entries": [
+    { "model": "Claude", "org": "Anthropic", "status": "pending", "metrics": {} },
+    { "model": "GPT", "org": "OpenAI", "status": "pending", "metrics": {} },
+    { "model": "Gemini", "org": "Google DeepMind", "status": "pending", "metrics": {} },
+    { "model": "Grok", "org": "xAI", "status": "pending", "metrics": {} },
+    { "model": "DeepSeek", "org": "DeepSeek", "status": "pending", "metrics": {} },
+    { "model": "Qwen", "org": "Alibaba", "status": "pending", "metrics": {} }
+  ]
 }

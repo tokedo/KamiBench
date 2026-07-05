@@ -15,11 +15,45 @@ const entries = data.entries as Entry[];
 ---
 
 <div class="leaderboard">
-  {
-    entries.length === 0 ? (
-      <p class="muted">{data.note}</p>
-    ) : (
-      <p class="muted">{data.note}</p>
-    )
-  }
+  <p class="section-lead">
+    The paper proposes a public, on-chain-verifiable, continuously-updating leaderboard:
+    measurement happens via the world's on-chain history, so results can be verified
+    independently of the benchmark host.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <caption class="visually-hidden">
+        Benchmark leaderboard — all entries pending the initial multi-model study
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Model</th>
+          <th scope="col">Organization</th>
+          <th scope="col">Status</th>
+          <th scope="col">Headline metric</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          entries.map((entry) => (
+            <tr>
+              <td>{entry.model}</td>
+              <td>{entry.org}</td>
+              <td>
+                <span class={`chip ${entry.status === 'pending' ? 'chip-pending' : 'chip-ok'}`}>
+                  {entry.status}
+                </span>
+              </td>
+              <td>{Object.keys(entry.metrics).length === 0 ? '—' : ''}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <p class="leaderboard-note muted">
+    {data.note} The headline metric itself is an open problem (paper §7), likely centered
+    on self-funded survival.
+  </p>
+  {data.updated && <p class="leaderboard-note label">Updated {data.updated}</p>}
 </div>

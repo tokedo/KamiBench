@@ -665,3 +665,23 @@ td:first-child {
 .callout p {
   margin: 0;
 }
+
+/* ---------- leaderboard ---------- */
+
+.leaderboard-note {
+  font-size: 0.92rem;
+  margin-top: 1rem;
+  max-width: 44em;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
