@@ -295,9 +295,31 @@ this must be precise in the paper.]**
 open-endedness and artificial-life "metabolism" agents, but grounded in a real economy.
 Present as an emerging property the substrate uniquely enables — not a futurist claim.
 
+**5.4 Feasibility: can the loop close?  `[SKELETON — structure ready, numbers pending]`**
+The self-funding claim invites back-of-envelope scrutiny (agent inference $/day vs. kami
+earnings $/day), so we do the math first. Two design facts matter. First, the agent
+architecture is deliberately unconstrained: mechanics and interface are fully known, so
+any orchestration is allowed — and the designed path to solvency is **cost-tiering**: a
+frontier model acts as a periodic *strategist* that reviews play and updates standing
+instructions, while a small model (or a plain script) executes the repetitive play
+loop. Second, proactively converting repeatable procedures into cheaper executors is
+*itself part of the measured skill* — economic self-optimization, avoiding token sinks
+the way a business avoids cost sinks.
+
+| Agent configuration | Est. inference $/day | Est. earnings $/day | Coverage ratio |
+|---|---|---|---|
+| Frontier model only | `[PENDING]` | `[PENDING]` | `[PENDING]` |
+| Frontier strategist + small-model executor | `[PENDING]` | `[PENDING]` | `[PENDING]` |
+| Frontier strategist + script executor | `[PENDING]` | `[PENDING]` | `[PENDING]` |
+
+Earnings $/day = MUSU/day/kami × kamis managed × MUSU→ONYX→USD. **[PENDING: compute the
+MUSU/day/kami earn-rate distribution from the on-chain analytics layer; ONYX/USD from
+live DEX data; inference costs from current provider pricing.]** The honest headline
+shape is "the agent covers X% of its own inference cost over N days" — a striking
+result even for modest X.
+
 > **[TODO:** decide how much of §5 is measured now vs. positioned as the substrate's
-> distinctive future capability. Even a *bounded* self-funding demonstration (agent covers
-> a fraction of its own inference cost over N days) would be a striking headline result.**]**
+> distinctive future capability (the §5.4 table is the concrete first step).**]**
 
 ---
 
