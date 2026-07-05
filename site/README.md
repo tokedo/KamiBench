@@ -19,6 +19,12 @@ pnpm preview       # serve the production build locally
 The paper page reads `../paper/paper.md` at build time — the site is regenerated from
 the current paper source on every build, with no manual sync step.
 
+## Static assets
+
+`public/og.png` (the social-share card) is rendered from `og/og.html` — the regeneration
+command is in a comment at the top of that file. `public/favicon.png` and
+`public/apple-touch-icon.png` are rasterized from `public/favicon.svg`.
+
 ## Deploying on Vercel
 
 1. Vercel dashboard → **Add New… → Project** → import the `KamiBench` GitHub repo.

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Two pages; hand-maintained. Domain: [VERIFY after first deploy] -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://kamibench.vercel.app/</loc>
+  </url>
+  <url>
+    <loc>https://kamibench.vercel.app/paper</loc>
+  </url>
+</urlset>
