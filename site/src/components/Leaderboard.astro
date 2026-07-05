@@ -11,50 +11,44 @@ interface Entry {
   metrics: Record<string, string | number>;
 }
 
+// Placeholder for now: entries stay empty until the study design (models, metrics,
+// scoring) is settled, so the section renders as an intentional pending state.
 const entries = data.entries as Entry[];
 ---
 
 <div class="leaderboard">
-  <p class="section-lead">
-    The paper proposes a public, on-chain-verifiable, continuously-updating leaderboard:
-    measurement happens via the world's on-chain history, so results can be verified
-    independently of the benchmark host, once the scoring pipeline and benchmark accounts
-    are published.
-  </p>
-  <div class="table-wrap">
-    <table>
-      <caption class="visually-hidden">
-        Benchmark leaderboard — all entries pending the initial multi-model study
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col">Model</th>
-          <th scope="col">Organization</th>
-          <th scope="col">Status</th>
-          <th scope="col">Headline metric</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          entries.map((entry) => (
+  {
+    entries.length === 0 ? (
+      <div class="placeholder">
+        <span class="chip chip-pending">Pending</span>
+        <p>{data.note}</p>
+      </div>
+    ) : (
+      <div class="table-wrap">
+        <table>
+          <thead>
             <tr>
-              <td>{entry.model}</td>
-              <td>{entry.org}</td>
-              <td>
-                <span class={`chip ${entry.status === 'pending' ? 'chip-pending' : 'chip-ok'}`}>
-                  {entry.status}
-                </span>
-              </td>
-              <td>{Object.keys(entry.metrics).length === 0 ? '—' : ''}</td>
+              <th scope="col">Model</th>
+              <th scope="col">Organization</th>
+              <th scope="col">Status</th>
             </tr>
-          ))
-        }
-      </tbody>
-    </table>
-  </div>
-  <p class="leaderboard-note muted">
-    {data.note} The headline metric itself is an open problem (paper §7), likely centered
-    on self-funded survival.
-  </p>
+          </thead>
+          <tbody>
+            {entries.map((entry) => (
+              <tr>
+                <td>{entry.model}</td>
+                <td>{entry.org}</td>
+                <td>
+                  <span class={`chip ${entry.status === 'pending' ? 'chip-pending' : 'chip-ok'}`}>
+                    {entry.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
   {data.updated && <p class="leaderboard-note label">Updated {data.updated}</p>}
 </div>
