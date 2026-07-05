@@ -255,7 +255,8 @@ market." We formalize that intent.
 
 **4.3 The property stack.** Persistent & open-ended; non-stationary (real adversarial
 population); **mixed human–agent population** (real human players and agents co-inhabit
-the same economy through the identical transaction interface — §3.2); **natively agentic** (actions are transactions — no UI/pixels, removing the
+the same economy through the identical transaction interface — §3.2); **natively
+agentic** (actions are transactions — no UI/pixels, removing the
 GUI-brittleness confound of lmgame-Bench/OSWorld/Cradle); **fully observable** (decodable
 on-chain history); **open mechanics** (public contracts; extracted to a machine-readable
 GDD); **real stakes** (gas + tradable assets). A strategic dimension unique to on-chain
@@ -463,10 +464,9 @@ spending caps, session-key limits, no use of contract exploits, and public discl
 of benchmark accounts **[TODO: confirm the account-disclosure policy — recommended:
 benchmark agent accounts publicly identified]**.
 
-**Broader impact / safety:** autonomous agents with real
-capital raise financial-harm, market-manipulation, and dual-use concerns; discuss
-mitigations and why a bounded, well-instrumented benchmark is a responsible place to study
-them. The author's independence and asset position are stated in the Disclosure (front
+**Broader impact / safety:** autonomous agents with real capital raise financial-harm,
+market-manipulation, and dual-use concerns; discuss mitigations and why a bounded,
+well-instrumented benchmark is a responsible place to study them. The author's independence and asset position are stated in the Disclosure (front
 matter): the research agents are operated from the author's own in-game assets, with no
 affiliation with or compensation from Asphodel. **[TODO: a genuine impact statement —
 reviewers will expect it.]**
@@ -486,9 +486,10 @@ METR time-horizon (2503.14499) · Factorio LE (2503.09617) · LifelongAgentBench
 Project Sid (2411.00114) · Generative Agents (2304.03442) · Melting Pot 2.0 (2211.13746) ·
 Vending-Bench (2502.15840) + Arena · Project Vend / Andon Café · lmgame-Bench (2505.15146) ·
 BALROG (2411.13543) · Foresight Arena (2605.00420) · CryptoTrade (2407.09546) · Agent
-Market Arena (2510.11695) · Autonomous Worlds (MUD/Lattice; Dark Forest/0xPARC) · Asphodel
-whitepaper (docs.asphodel.io/whitepaper). **[TODO: AlphaStar/OpenAI Five for self-play
-motivation; a continual-learning foundations ref.]**
+Market Arena (2510.11695) · Autonomous Worlds (MUD/Lattice; Dark Forest/0xPARC) · Cicero
+(Meta AI, Science 2022) · AlphaStar (DeepMind, Nature 2019) · Agent Village (AI Digest,
+theaidigest.org/village) · Asphodel whitepaper (docs.asphodel.io/whitepaper).
+**[TODO: OpenAI Five for self-play motivation; a continual-learning foundations ref.]**
 
 ---
 
