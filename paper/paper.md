@@ -224,7 +224,10 @@ population); **mixed human–agent population** (real human players and agents c
 the same economy through the identical transaction interface — §3.2); **natively agentic** (actions are transactions — no UI/pixels, removing the
 GUI-brittleness confound of lmgame-Bench/OSWorld/Cradle); **fully observable** (decodable
 on-chain history); **open mechanics** (public contracts; extracted to a machine-readable
-GDD); **real stakes** (gas + tradable assets). **[TODO: state the open-source/license
+GDD); **real stakes** (gas + tradable assets). A strategic dimension unique to on-chain
+worlds: **transaction ordering / front-running between agents** — timing, mempool
+awareness, and ordering games are part of the strategic surface (bounded by sequencer
+policy; §4.5). **[TODO: state the open-source/license
 specifics precisely — repo, contract addresses, license — and note off-chain
 indexer/UI dependencies.]**
 
@@ -233,6 +236,26 @@ on Ethereum mainnet; bot play is already the majority of activity — but full g
 renouncement (via the unlaunched $SOMA token) is years out ("at least 4 more"). The world
 is *already substantially host-independent* and on a credible trajectory to full
 autonomy; we do not overclaim present-tense immortality.
+
+**4.5 Trust assumptions of the underlying chain.** Host-independence at the application
+layer does not eliminate trust at the chain layer, and we state this plainly. *Today:*
+Kamigotchi runs on Yominet, an Initia-based appchain; the sequencer is run by
+**[VERIFY: who runs the Yominet sequencer — Asphodel / Initia infrastructure? cite
+docs]**. Whoever sequences a chain can, in principle, censor, delay, or reorder
+transactions — powers that matter in a PvP game where ordering matters. Running their
+own chain during the build phase is a deliberate survival choice: it is how the world
+avoids dying the way most web3 games die. *Trajectory:* $ONYX is already live on
+Ethereum mainnet; bridging Kamis to Ethereum is being explored, and a fuller Ethereum
+migration is under consideration **[VERIFY: cite whitepaper/official statements for
+each — "exploring," not "planned," unless sourced]**. *Detection:* sequencer abuse
+(selective censorship or reordering targeting specific agents) would be statistically
+visible in the public transaction stream, and benchmark ops can monitor for it.
+*Randomness:* in-game randomness (loot droptables, gacha, sacrifice) uses a
+commit-reveal pattern with a blockhash-derived seed
+(`seed = keccak256(blockhash(commitBlockNum), commitID)`; reveal must occur within 256
+blocks) — per the GDD extraction of the contracts. Blockhash-based randomness is
+influenceable by the block producer in principle; if an agent finds it predictable,
+that feeds the "measured behavior vs. disallowed exploit" decision (§10, threat 5).
 
 ---
 
@@ -336,6 +359,11 @@ ingredients we consider (not adopt as-is):
    hand-driving).
 7. **Maturity of the autonomy claim:** full renouncement is years out; the self-funding
    loop is partly emerging — disclose live-vs-planned precisely.
+8. **Chain-level trust & MEV:** the Yominet sequencer can theoretically censor, delay,
+   or reorder transactions, and blockhash-based randomness is producer-influenceable in
+   principle (§4.5). Front-running *between agents* is measured strategic surface;
+   sequencer-level interference is a validity threat — monitor the public transaction
+   stream for statistical evidence of targeting.
 
 ---
 
