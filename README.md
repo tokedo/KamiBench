@@ -1,6 +1,7 @@
 # KamiBench
 
-**A benchmark for long-horizon, continuously-learning AI agents in an ungoverned, autonomous on-chain world.**
+**A benchmark for long-horizon, continuously-learning AI agents in an autonomous,
+persistent on-chain world.**
 
 > ⚠️ **Early stage / work in progress.** This repo is a living research draft — a thesis, a
 > literature foundation, and a paper skeleton — shared openly for collaboration *before*
@@ -20,9 +21,9 @@ state and rules live on-chain, every rule change is public and permanent, and go
 renouncement is the stated endpoint. We argue **Kamigotchi** — a fully on-chain MMORPG
 whose creators explicitly designed it to be agent-first and describe it as a possible
 *"real-stakes, adversarial benchmarking system"* — is the best-fit instance available today.
-Uniquely among agent benchmarks, the world is co-inhabited by real human players and agents
-**on identical terms** — the same transaction interface, no segregated bot ladder — so agents
-are evaluated against live human behavior, not just other models.
+Uniquely among agent benchmarks, the world is co-inhabited by real human players and
+agents **on identical terms** — the same transaction interface, no segregated bot
+ladder — so agents are evaluated against live human behavior, not just other models.
 
 ## Why an autonomous world is different (not just "on-chain")
 

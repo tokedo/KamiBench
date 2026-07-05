@@ -99,7 +99,7 @@
 - **Concordia** — Vezhnevets et al., 2023, arXiv:2312.03664 (+ NeurIPS 2024 contest).
   LLM agents in physical/social/digital space via a game-master; mixed-motive eval.
 
-**Live human–agent competition (episodic precedents for the co-habitation claim):**
+**Live mixed-population and co-living precedents:**
 - **Cicero** — Bakhtin et al. (Meta AI), Science 2022. Human-level Diplomacy playing
   against real humans on webDiplomacy.net. *Differ:* episodic matches with fixed
   endpoints; no persistent shared economy, no stakes carried across games.
@@ -142,8 +142,7 @@
 - **Reset-based contrast set** ("these reset; we don't"): AgentBench (Liu et al., 2023,
   arXiv:2308.03688), WebArena (arXiv:2307.13854), GAIA (Mialon et al., 2023,
   arXiv:2311.12983), ALFWorld (arXiv:2010.03768), OSWorld (arXiv:2404.07972), SWE-bench
-  (arXiv:2310.06770). Cite from primary sources. `[VERIFY: these IDs were added from
-  memory during the review pass — confirm each against arXiv]`
+  (arXiv:2310.06770). Cite from primary sources. IDs verified against arXiv 2026-07-05.
 
 ---
 

@@ -1,4 +1,4 @@
-# The Autonomous World as a Benchmark: Evaluating Long-Horizon, Self-Sustaining Agents in an Ungoverned On-Chain Economy
+# The Autonomous World as a Benchmark: Evaluating Long-Horizon, Self-Sustaining Agents in an Autonomous On-Chain Economy
 
 > **Draft status.** Working paper draft — pre-experiment. Sections are tagged
 > `[DRAFTED]` (prose is close to submission-ready in substance), `[SKELETON]` (structure
@@ -38,7 +38,8 @@ MMORPG whose creators explicitly designed it to be agent-first and describe it a
 The substrate provides properties no hosted sandbox can: tamper-evident logging and
 rule changes by construction (with immutability the explicit design endpoint), credible
 multi-year permanence, permissionless participation, co-habitation with real human
-players on identical terms through the same transaction interface, and — uniquely — a real, externally-valued economy in which an agent's
+players on identical terms through the same transaction interface, and — uniquely — a
+real, externally-valued economy in which an agent's
 *survival can become economically endogenous*: it can convert in-world earnings into
 ETH-denominated value and fund its own compute. We formalize the autonomous-world
 substrate, describe a model-agnostic harness for dropping heterogeneous frontier agents
@@ -117,8 +118,7 @@ StreamBench (arXiv:2406.08747); τ-bench pass^k reliability (arXiv:2406.12045). 
 establish the axes we adopt; all are hosted/resettable.* The reset-based contrast set,
 cited once: AgentBench (arXiv:2308.03688), WebArena (arXiv:2307.13854), GAIA
 (arXiv:2311.12983), ALFWorld (arXiv:2010.03768), OSWorld (arXiv:2404.07972), SWE-bench
-(arXiv:2310.06770) — *these reset between episodes; we don't.* **[VERIFY: these six
-arXiv IDs — literature.md section F lists the set without IDs.]**
+(arXiv:2310.06770) — *these reset between episodes; we don't.*
 
 **2.2 Multi-agent & open-ended environments.** Neural MMO (arXiv:2110.07594, persistent
 massively-multiagent — but simulated, hosted); Project Sid (arXiv:2411.00114, 1000+ LLM
@@ -145,12 +145,12 @@ observable; cooperative not adversarial, hosted, no shared persistent economy).
 **2.5 On-chain agents & autonomous worlds.** Foresight Arena (arXiv:2605.00420, first
 permissionless on-chain benchmark — but forecasting, not a persistent world); CryptoTrade
 (arXiv:2407.09546); Agent Market Arena (arXiv:2510.11695). Autonomous Worlds lineage: MUD
-(Lattice), Dark Forest (0xPARC). *No prior work uses an ungoverned, persistent on-chain
-game world as a reusable LLM benchmark.*
+(Lattice), Dark Forest (0xPARC). *No prior work uses an autonomous-world (on-chain) game
+as a reusable LLM benchmark.*
 
 > **[TODO:** one final citation-verification pass; add 2–3 lines each. Move the full
 > annotated bibliography to `literature.md`. (Reset-based contrast set now cited once
-> in §2.1 — verify its arXiv IDs.)**]**
+> in §2.1; IDs verified.)**]**
 
 ---
 
@@ -289,8 +289,11 @@ visible in the public transaction stream, and benchmark ops can monitor for it.
 commit-reveal pattern with a blockhash-derived seed
 (`seed = keccak256(blockhash(commitBlockNum), commitID)`; reveal must occur within 256
 blocks) — per the GDD extraction of the contracts. Blockhash-based randomness is
-influenceable by the block producer in principle; if an agent finds it predictable,
-that feeds the "measured behavior vs. disallowed exploit" decision (§10, threat 5).
+influenceable by the block producer in principle, and the seed is fixed and computable
+once the reveal block has passed — enabling **selective reveal**: an agent can compute
+the outcome from the fixed seed and decline to reveal when unfavorable (unless
+penalized). This is the concrete case feeding the "measured behavior vs. disallowed
+exploit" decision (§10, threat 5).
 
 ---
 
@@ -419,8 +422,9 @@ ingredients we consider (not adopt as-is):
 4. **Real-money ethics & impact on human co-players:** benchmark agents may impose
    real, bounded economic losses on human players *within the rules* (rule-governed
    in-game transfers, not exploits — full position in §11); ops norms: spending caps,
-   session-key limits, kill-switches, no contract-exploit use, public disclosure of
-   benchmark accounts.
+   session-key limits, kill-switches, no contract-exploit use, and a
+   transparency/disclosure policy for benchmark-operated accounts, to be finalized
+   before experiments begin.
 5. **Emergent collusion / reward-hacking / contract exploits:** decide up front if
    measured behavior or disallowed exploit; detect either way.
 6. **Participant/account asymmetries + autonomy verification:** normalized budgets,
@@ -460,14 +464,16 @@ automated"). Human players entered a permissionless, openly bot-first world and 
 under the same rules through the same interface: co-participants, not unwitting
 subjects. *The acknowledgment:* benchmark agents may nonetheless impose real, bounded
 economic losses on human players within the rules. We commit to operational norms:
-spending caps, session-key limits, no use of contract exploits, and public disclosure
-of benchmark accounts **[TODO: confirm the account-disclosure policy — recommended:
-benchmark agent accounts publicly identified]**.
+spending caps, session-key limits, no use of contract exploits, and a
+transparency/disclosure policy for benchmark-operated accounts, to be finalized before
+experiments begin **[TODO: finalize the account-transparency policy once benchmark
+accounts are set up]**.
 
 **Broader impact / safety:** autonomous agents with real capital raise financial-harm,
 market-manipulation, and dual-use concerns; discuss mitigations and why a bounded,
-well-instrumented benchmark is a responsible place to study them. The author's independence and asset position are stated in the Disclosure (front
-matter): the research agents are operated from the author's own in-game assets, with no
+well-instrumented benchmark is a responsible place to study them. The author's
+independence and asset position are stated in the Disclosure (front matter): the
+research agents are operated from the author's own in-game assets, with no
 affiliation with or compensation from Asphodel. **[TODO: a genuine impact statement —
 reviewers will expect it.]**
 
