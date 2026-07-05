@@ -8,6 +8,12 @@
 > (see [`../research/literature.md`](../research/literature.md)). Supporting material:
 > [`../research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md).
 
+> **Disclosure.** The author plays Kamigotchi and holds in-game assets (Kamis, ONYX),
+> which are used to operate the research agents described here. The author has no
+> affiliation with and receives no compensation from Asphodel, and has to date extracted
+> no funds from the game — a claim verifiable on-chain. This is independent, individual
+> open research, unaffiliated with any company.
+
 ---
 
 ## Abstract  `[DRAFTED]`
@@ -423,7 +429,10 @@ act as they wish." We present this as the horizon the benchmark opens onto, kept
 separate from measured results. **Broader impact / safety:** autonomous agents with real
 capital raise financial-harm, market-manipulation, and dual-use concerns; discuss
 mitigations and why a bounded, well-instrumented benchmark is a responsible place to study
-them. **[TODO: a genuine impact statement — reviewers will expect it.]**
+them. The author's independence and asset position are stated in the Disclosure (front
+matter): the research agents are operated from the author's own in-game assets, with no
+affiliation with or compensation from Asphodel. **[TODO: a genuine impact statement —
+reviewers will expect it.]**
 
 ---
 

@@ -79,6 +79,13 @@ Kamigotchi / Asphodel community and agent-evaluation researchers. Open an issue 
 you're building agents for on-chain worlds, or work on long-horizon / continual-learning
 evaluation, we'd love to compare notes.
 
+## Disclosure
+
+The author plays Kamigotchi and holds the in-game assets (Kamis, ONYX) used to operate the
+research agents; he has no affiliation with and receives no compensation from Asphodel, and
+has to date extracted no funds from the game — verifiable on-chain. This is independent,
+individual open research, unaffiliated with any company.
+
 ## License
 
 [MIT](LICENSE). Research prose is shared for open collaboration; please cite if you build on it.
