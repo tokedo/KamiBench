@@ -34,6 +34,6 @@ command is in a comment at the top of that file. `public/favicon.png` and
 4. **Deploy.**
 
 Once connected, every push to `main` deploys automatically (pushes to other branches
-get preview deployments). If the production domain differs from
-`https://kamibench.vercel.app`, update `site` in `astro.config.mjs` and
-`public/sitemap.xml`.
+get preview deployments). Production domain: `https://kamibench.xyz` — add it under
+Project → Settings → Domains. If it ever changes, update `site` in `astro.config.mjs`,
+`public/sitemap.xml`, and `public/robots.txt`.

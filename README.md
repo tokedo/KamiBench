@@ -3,8 +3,7 @@
 **A benchmark for long-horizon, continuously-learning AI agents in an autonomous,
 persistent on-chain world.**
 
-**Website:** [kamibench.vercel.app](https://kamibench.vercel.app)
-**[VERIFY after first deploy]**
+**Website:** [kamibench.xyz](https://kamibench.xyz)
 
 > ⚠️ **Early stage / work in progress.** This repo is a living research draft — a thesis, a
 > literature foundation, and a paper skeleton — shared openly for collaboration *before*
