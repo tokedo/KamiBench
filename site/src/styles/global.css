@@ -695,3 +695,17 @@ td:first-child {
 .placeholder p {
   margin: 0.65rem 0 0;
 }
+
+/* citation links in the paper body: quiet by default, accent on hover */
+.paper a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  text-underline-offset: 2px;
+}
+
+.paper a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
