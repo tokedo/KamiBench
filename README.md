@@ -3,6 +3,9 @@
 **A benchmark for long-horizon, continuously-learning AI agents in an autonomous,
 persistent on-chain world.**
 
+**Website:** [kamibench.vercel.app](https://kamibench.vercel.app)
+**[VERIFY after first deploy]**
+
 > ⚠️ **Early stage / work in progress.** This repo is a living research draft — a thesis, a
 > literature foundation, and a paper skeleton — shared openly for collaboration *before*
 > experiments are run. Claims are being verified; nothing here is a finished result.
@@ -59,6 +62,7 @@ run by a host. An autonomous on-chain world gives properties a hosted sandbox ca
 | [`paper/paper.md`](paper/paper.md) | The research-ready paper draft — content where we have it, explicit `[TODO]`/`[PENDING]` markers where we don't. |
 | [`research/literature.md`](research/literature.md) | Annotated bibliography grouped by theme (the related-work foundation), with a must-cite core set. |
 | [`research/asphodel-whitepaper-notes.md`](research/asphodel-whitepaper-notes.md) | Full reading notes on the Asphodel/Kamigotchi whitepaper, incl. the creators' own "benchmarking system" framing and the token economy. |
+| [`site/`](site/) | The project website — landing page + a build-time render of the paper (updates on every push). Astro, deployed on Vercel; see [`site/README.md`](site/README.md). |
 
 ## What this is *not* (yet)
 
