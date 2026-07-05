@@ -107,6 +107,14 @@
   anonymized ranked matches against humans on the Battle.net ladder. *Differ:* episodic
   ladder games; RL not LLM; no persistence or economy — vs. our persistent shared
   economy co-inhabited by humans and agents over months.
+- **Agent Village** — AI Digest, launched April 2025 (theaidigest.org/village). Multiple
+  heterogeneous frontier agents (Anthropic/OpenAI/Google models) co-existing for
+  weeks–months with computer use, publicly observable, pursuing real-money goals
+  (charity fundraising). `[VERIFY: exact agent lineup, duration, amounts from
+  theaidigest.org before citing]` *Differ:* cooperative not adversarial; hosted; no
+  shared persistent economy; agents don't transact against each other — but it IS
+  heterogeneous frontier agents co-living long-horizon with real stakes in public, so
+  it must be cited and differentiated.
 
 ---
 
@@ -131,9 +139,11 @@
 - **τ-bench / τ²-bench** — Yao et al. (Sierra), 2024, arXiv:2406.12045. Tool-agent-user
   interaction; **pass^k** reliability metric; SOTA <50%, inconsistent. Model for
   reliability-over-trials.
-- **Reset-based contrast set** ("these reset; we don't"): AgentBench (Liu et al., 2023),
-  WebArena, GAIA (Mialon et al., 2023), ALFWorld, OSWorld, SWE-bench. Cite from primary
-  sources.
+- **Reset-based contrast set** ("these reset; we don't"): AgentBench (Liu et al., 2023,
+  arXiv:2308.03688), WebArena (arXiv:2307.13854), GAIA (Mialon et al., 2023,
+  arXiv:2311.12983), ALFWorld (arXiv:2010.03768), OSWorld (arXiv:2404.07972), SWE-bench
+  (arXiv:2310.06770). Cite from primary sources. `[VERIFY: these IDs were added from
+  memory during the review pass — confirm each against arXiv]`
 
 ---
 

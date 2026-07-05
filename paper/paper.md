@@ -109,7 +109,11 @@ to be.
 **2.1 Long-horizon & continual-learning evaluation.** METR time-horizon
 (arXiv:2503.14499); Factorio LE (arXiv:2503.09617); LifelongAgentBench (arXiv:2505.11942);
 StreamBench (arXiv:2406.08747); τ-bench pass^k reliability (arXiv:2406.12045). *These
-establish the axes we adopt; all are hosted/resettable.*
+establish the axes we adopt; all are hosted/resettable.* The reset-based contrast set,
+cited once: AgentBench (arXiv:2308.03688), WebArena (arXiv:2307.13854), GAIA
+(arXiv:2311.12983), ALFWorld (arXiv:2010.03768), OSWorld (arXiv:2404.07972), SWE-bench
+(arXiv:2310.06770) — *these reset between episodes; we don't.* **[VERIFY: these six
+arXiv IDs — literature.md section F lists the set without IDs.]**
 
 **2.2 Multi-agent & open-ended environments.** Neural MMO (arXiv:2110.07594, persistent
 massively-multiagent — but simulated, hosted); Project Sid (arXiv:2411.00114, 1000+ LLM
@@ -124,8 +128,10 @@ benchmark has agents and humans co-inhabiting a persistent shared economy over m
 **2.3 Real-stakes & business agents.** Vending-Bench (arXiv:2502.15840) and Vending-Bench
 Arena (heterogeneous frontier models competing — already showing cartels/deception);
 Project Vend and Andon Café (real businesses; real stakes but run by a single party, costly,
-human-in-the-loop). *Closest in spirit to real-stakes multi-agent evaluation; all
-hosted.*
+human-in-the-loop); Agent Village (AI Digest, 2025 — heterogeneous frontier agents
+co-living for weeks–months with computer use and real-money charity goals, publicly
+observable; cooperative not adversarial, hosted, no shared persistent economy).
+*Closest in spirit to real-stakes multi-agent evaluation; all hosted.*
 
 **2.4 Game-playing agent benchmarks & the harness/contamination problem.** lmgame-Bench
 (arXiv:2505.15146; ~40% of harness-free runs fail to beat random), BALROG
@@ -137,9 +143,9 @@ permissionless on-chain benchmark — but forecasting, not a persistent world); 
 (Lattice), Dark Forest (0xPARC). *No prior work uses an ungoverned, persistent on-chain
 game world as a reusable LLM benchmark.*
 
-> **[TODO:** one final citation-verification pass; add 2–3 lines each; ensure the
-> reset-based contrast set (AgentBench/WebArena/GAIA/OSWorld/SWE-bench) is cited once as
-> "these reset; we don't." Move the full annotated bibliography to `literature.md`.**]**
+> **[TODO:** one final citation-verification pass; add 2–3 lines each. Move the full
+> annotated bibliography to `literature.md`. (Reset-based contrast set now cited once
+> in §2.1 — verify its arXiv IDs.)**]**
 
 ---
 
