@@ -7,6 +7,11 @@
 > deep-research passes + the Asphodel whitepaper and need one final verification pass
 > (see [`../research/literature.md`](../research/literature.md)). Supporting material:
 > [`../research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md).
+> Shape note: for an eventual NeurIPS D&B–style submission the emphasis inverts — the
+> artifact (harness, metrics, baselines, leaderboard) leads and the substrate argument
+> motivates; the current position-paper shape is intentional for the arXiv stage. The
+> "headline metric is an open problem" stance (§7) must be resolved to *a* provisional
+> headline metric before a D&B submission.
 
 > **Disclosure.** The author plays Kamigotchi and holds in-game assets (Kamis, ONYX),
 > which are used to operate the research agents described here. The author has no
