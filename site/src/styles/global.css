@@ -530,3 +530,138 @@ td:first-child {
 .bibtex {
   font-size: 0.82rem;
 }
+
+/* ---------- paper page ---------- */
+
+.paper-shell {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem 3rem;
+  padding-block: 2rem 1rem;
+}
+
+.toc {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
+  align-self: start;
+}
+
+.toc ol {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+
+.toc li {
+  margin: 0.35rem 0;
+  line-height: 1.4;
+}
+
+.toc a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+@media (min-width: 1100px) {
+  .paper-shell {
+    grid-template-columns: 15.5rem minmax(0, 1fr);
+  }
+
+  .toc {
+    position: sticky;
+    top: 1.25rem;
+    max-height: calc(100vh - 2.5rem);
+    overflow-y: auto;
+    border: none;
+    padding: 0.25rem 0 0;
+  }
+}
+
+.paper {
+  max-width: 47rem;
+  min-width: 0;
+}
+
+.paper-banner {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  background: var(--bg-raise);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.paper-banner strong {
+  color: var(--text);
+}
+
+.paper h1 {
+  font-size: clamp(1.7rem, 4.5vw, 2.25rem);
+  line-height: 1.2;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.paper h2 {
+  font-size: 1.4rem;
+  margin: 2.5rem 0 1rem;
+  scroll-margin-top: 1.5rem;
+}
+
+.paper h2 .chip {
+  margin-left: 0.4rem;
+}
+
+.paper li {
+  margin-block: 0.3rem;
+}
+
+.paper hr {
+  margin: 2.75rem 0;
+}
+
+/* muted annotation after a status chip in a heading or inline marker */
+.h-note {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+
+.aside-note {
+  border-left: 3px solid var(--line);
+  padding: 0.1rem 0 0.1rem 1.1rem;
+  margin: 1.5rem 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.aside-note p {
+  margin: 0.6rem 0;
+}
+
+.callout {
+  border: 1px solid color-mix(in srgb, var(--warn-fg) 30%, transparent);
+  background: color-mix(in srgb, var(--warn-bg) 55%, transparent);
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.callout p {
+  margin: 0;
+}

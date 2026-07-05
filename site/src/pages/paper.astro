@@ -1,14 +1,40 @@
 ---
 import Base from '../layouts/Base.astro';
+import { renderPaper } from '../lib/paper';
+// Single source of truth: the paper is read from the repo root at build time,
+// so every push re-renders this page with no manual sync step.
+import paperSource from '../../../paper/paper.md?raw';
+
+const { html, headings } = renderPaper(paperSource);
 ---
 
 <Base
-  title="Paper — KamiBench"
-  description="KamiBench: An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents — living working-paper draft."
+  title="KamiBench: An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents"
+  description="Working paper draft — the autonomous-world substrate, Kamigotchi as an instance, endogenous survival, and a metric direction for long-horizon, self-sustaining agents."
   path="/paper"
 >
-  <article class="container">
-    <h1>Paper</h1>
-    <p class="muted">Rendering lands in the next commit.</p>
-  </article>
+  <div class="paper-shell">
+    <nav class="toc" aria-label="Table of contents">
+      <span class="label">Contents</span>
+      <ol>
+        {
+          headings.map((h) => (
+            <li>
+              <a href={`#${h.id}`}>{h.text}</a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+    <article class="paper">
+      <aside class="paper-banner" role="note">
+        <strong>Living draft.</strong> This page is rendered from <a
+          href="https://github.com/tokedo/KamiBench/blob/main/paper/paper.md"
+        ><code>paper/paper.md</code></a> at build time and updates with every push — see
+        the <a href="https://github.com/tokedo/KamiBench/commits/main/paper/paper.md"
+        >revision history on GitHub</a>.
+      </aside>
+      <Fragment set:html={html} />
+    </article>
+  </div>
 </Base>
