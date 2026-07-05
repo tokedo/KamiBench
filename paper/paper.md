@@ -1,4 +1,4 @@
-# The Autonomous World as a Benchmark: Evaluating Long-Horizon, Self-Sustaining Agents in an Autonomous On-Chain Economy
+# KamiBench: An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents
 
 > **Draft status.** Working paper draft — pre-experiment. Sections are tagged
 > `[DRAFTED]` (prose is close to submission-ready in substance), `[SKELETON]` (structure
