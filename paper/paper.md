@@ -1,8 +1,8 @@
 # KamiBench: An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents
 
 > **Draft status.** Working paper draft — pre-experiment. Sections are tagged
-> `[DRAFTED]` (prose is close to submission-ready in substance), `[SKELETON]` (structure
-> + guidance, needs writing), or `[PENDING EXPERIMENTS]` (awaits data). Inline
+> `[DRAFTED]` (prose is close to submission-ready in substance), `[SKELETON]` (structure +
+> guidance, needs writing), or `[PENDING EXPERIMENTS]` (awaits data). Inline
 > `**[TODO: …]**` markers say exactly what each part still needs. Citations are from two
 > deep-research passes + the Asphodel whitepaper and need one final verification pass
 > (see [`../research/literature.md`](../research/literature.md)). Supporting material:
@@ -214,8 +214,8 @@ mechanics are embedded on-chain.
   state depends on live actors and cannot be searched or memorized.
 
 **3.3 Why this answers the integrity crisis (§1.2).** Map each integrity failure
-(saturation, contamination, reward-hacking, host drift) to how host-independence
-+ a forward-moving live world mitigates or reframes it. Precision on host drift: it
+(saturation, contamination, reward-hacking, host drift) to how host-independence plus
+a forward-moving live world mitigates or reframes it. Precision on host drift: it
 becomes *visible and auditable* — every rule change is a public transaction that joins
 the evaluation record — not impossible; impossibility arrives only with renouncement.
 
