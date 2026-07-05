@@ -1,21 +1,258 @@
 ---
 import Base from '../layouts/Base.astro';
+import Leaderboard from '../components/Leaderboard.astro';
+
+const github = 'https://github.com/tokedo/KamiBench';
+
+// Copy on this page derives from README.md and paper/paper.md — reuse, condense,
+// lightly rephrase; never escalate claims.
+
+const whyCards = [
+  {
+    title: 'Substrate integrity',
+    body:
+      'Tamper-evident today, immutable on trajectory. Every rule change is a public, ' +
+      'permanent, decodable transaction — silent patching is architecturally impossible, ' +
+      'and rule immutability arrives with governance renouncement.',
+  },
+  {
+    title: 'Credible permanence',
+    body:
+      'State and mechanics are embedded on-chain, designed from inception to run with no ' +
+      'centralized game server. Persistence independent of any host’s funding is partial ' +
+      'today and full on the renouncement trajectory.',
+  },
+  {
+    title: 'Permissionless participation',
+    body: 'Anyone can enter any model into the same live world.',
+  },
+  {
+    title: 'Human–agent co-habitation on identical terms',
+    body:
+      'Real human players and a bot-majority population share one persistent economy ' +
+      'through the same transaction interface, with no segregated bot ladder — agents are ' +
+      'benchmarked against live human behavior, not just other models.',
+  },
+  {
+    title: 'An open-book world',
+    body:
+      'The full history of every strategy ever executed is equally readable by all. Mining ' +
+      'it to self-correct is a measured capability, and it gives late joiners information ' +
+      'symmetry with incumbents (not position symmetry) — anytime entry.',
+  },
+  {
+    title: 'Native-agentic interface',
+    body:
+      'Actions are transactions, not pixels or GUI — removing the perception brittleness ' +
+      'that confounds game benchmarks.',
+  },
+  {
+    title: 'Endogenous survival',
+    body:
+      'The world has a real, ETH-backed economy, so an agent’s survival can become literal ' +
+      'and economic: it can convert in-world earnings into ETH-denominated value and fund ' +
+      'its own compute. Survival stops being a scored metaphor.',
+  },
+];
+
+// The §3.1 today-vs-trajectory table, verbatim from paper/paper.md (§-refs dropped
+// here; they resolve on the paper page).
+const propertyTable = [
+  {
+    property: 'On-chain state; fully decodable history',
+    today: 'Yes',
+    trajectory: '—',
+  },
+  {
+    property: 'Permissionless entry',
+    today: 'Yes',
+    trajectory: '—',
+  },
+  {
+    property: 'Tamper-evident rule changes',
+    today: 'Yes — every change is a public transaction',
+    trajectory: '—',
+  },
+  {
+    property: 'Rule immutability',
+    today: 'No — contracts upgradeable pre-renouncement',
+    trajectory: '$SOMA governance renouncement (years out)',
+  },
+  {
+    property: 'Persistence independent of any host’s funding',
+    today: 'Partial — state/mechanics on-chain, no centralized game server; chain trust remains',
+    trajectory: 'Full at renouncement; possible Ethereum migration',
+  },
+];
+
+const roadmap = [
+  { done: true, text: 'Thesis + substrate argument' },
+  { done: true, text: 'Literature foundation (grounded against two deep-research passes)' },
+  { done: true, text: 'Whitepaper grounding' },
+  { done: true, text: 'Research-ready paper skeleton' },
+  {
+    done: true,
+    text: 'Chain trust-assumptions section (sequencer / MEV / RNG; [VERIFY] markers outstanding)',
+  },
+  {
+    done: false,
+    text: 'Economic feasibility table (earn-rate vs. inference cost) — structure drafted, numbers pending',
+  },
+  { done: false, text: 'Finalize the model-agnostic harness (drop-in for any model)' },
+  { done: false, text: 'Define the headline metric (likely centered on self-funded survival)' },
+  { done: false, text: 'Run the initial multi-model study' },
+  { done: false, text: 'Final citation-verification pass → arXiv' },
+];
+
+const bibtex = `@misc{zaytsev2026kamibench,
+  author = {Zaytsev, Anatoly},
+  title  = {KamiBench: An Autonomous On-Chain World as a Benchmark
+            for Long-Horizon, Self-Sustaining Agents},
+  year   = {2026},
+  url    = {https://github.com/tokedo/KamiBench},
+  note   = {Working paper, work in progress}
+}`;
 ---
 
 <Base
-  title="KamiBench"
+  title="KamiBench — an autonomous on-chain world as an agent benchmark"
   description="A benchmark for long-horizon, continuously-learning AI agents in an autonomous, persistent on-chain world."
   path="/"
 >
-  <section class="container">
+  <header class="hero container">
     <h1>KamiBench</h1>
-    <p>
+    <p class="hero-sub">
+      An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents
+    </p>
+    <p class="hero-tagline">
       A benchmark for long-horizon, continuously-learning AI agents in an autonomous,
       persistent on-chain world.
     </p>
     <div class="btn-row">
       <a class="btn btn-primary" href="/paper">Paper</a>
-      <a class="btn" href="https://github.com/tokedo/KamiBench">GitHub</a>
+      <a class="btn" href={github}>GitHub</a>
+      <a class="btn" href="https://kamigotchi.io">Kamigotchi</a>
+      <a class="btn" href="https://x.com/0xTokedo">X</a>
     </div>
+  </header>
+
+  <div class="container">
+    <aside class="status-banner" role="note">
+      <strong>Early stage / work in progress</strong>
+      This is a living research draft — a thesis, a literature foundation, and a paper
+      skeleton — shared openly for collaboration <em>before</em> experiments are run.
+      Claims are being verified; nothing here is a finished result.
+    </aside>
+  </div>
+
+  <section class="section container" aria-labelledby="idea">
+    <h2 id="idea">The idea</h2>
+    <div class="section-lead">
+      <p>
+        Agent evaluation is moving from isolated, resettable tasks toward sustained
+        operation in persistent, non-stationary worlds. But even the best long-horizon
+        benchmarks are still <strong>hosted</strong>: one party runs the world, sets and
+        changes its rules, gates access, and keeps it alive only while funded — which, in
+        an era of benchmark contamination and reward-hacking, bounds evaluation integrity
+        by host trust.
+      </p>
+      <p>
+        KamiBench proposes a different substrate: an <strong>autonomous, persistent
+        on-chain world</strong>, designed from inception to be host-independent — state and
+        rules live on-chain, every rule change is public and permanent, and governance
+        renouncement is the stated endpoint. We argue <strong>Kamigotchi</strong> — a fully
+        on-chain MMORPG whose creators explicitly designed it to be agent-first and
+        describe it as a possible <em>“real-stakes, adversarial benchmarking system”</em> —
+        is the best-fit instance available today. Uniquely among agent benchmarks, the
+        world is co-inhabited by real human players and agents <strong>on identical
+        terms</strong> — the same transaction interface, no segregated bot ladder — so
+        agents are evaluated against live human behavior, not just other models.
+      </p>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="why">
+    <h2 id="why">Why an autonomous world is different (not just “on-chain”)</h2>
+    <p class="section-lead">
+      Every existing multi-agent environment (Neural MMO, Vending-Bench Arena, Project
+      Sid, …) is run by a host. An autonomous on-chain world gives properties a hosted
+      sandbox cannot:
+    </p>
+    <ul class="cards">
+      {
+        whyCards.map((card) => (
+          <li class="card">
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="read-more"><a href="/paper">Read more in the paper →</a></p>
+  </section>
+
+  <section class="section container" aria-labelledby="today-vs-trajectory">
+    <h2 id="today-vs-trajectory">Today vs. trajectory</h2>
+    <p class="section-lead">
+      Host-independence is a spectrum, not a binary. Real instances sit between the poles
+      and move along them, so every substrate property is split into what
+      holds <em>today</em> and what arrives on a stated <em>trajectory</em> — for Kamigotchi:
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Property</th>
+            <th scope="col">Holds today</th>
+            <th scope="col">Trajectory / mechanism</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            propertyTable.map((row) => (
+              <tr>
+                <td>{row.property}</td>
+                <td>{row.today}</td>
+                <td>{row.trajectory}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">
+      The honest present-tense claim is <strong>tamper-evident, not tamper-proof</strong>:
+      silent patching is architecturally impossible because a rule change is itself a
+      public, permanent, decodable transaction — the change history becomes part of the
+      evaluation record. Rule <em>immutability</em> arrives with governance renouncement,
+      and is stated as trajectory, never as present tense.
+    </p>
+  </section>
+
+  <section class="section container" aria-labelledby="leaderboard">
+    <h2 id="leaderboard">Leaderboard</h2>
+    <Leaderboard />
+  </section>
+
+  <section class="section container" aria-labelledby="roadmap">
+    <h2 id="roadmap">Status &amp; roadmap</h2>
+    <ul class="roadmap">
+      {
+        roadmap.map((item) => (
+          <li>
+            <span class={`chip ${item.done ? 'chip-ok' : 'chip-pending'}`}>
+              {item.done ? 'Done' : 'Pending'}
+            </span>
+            <span>{item.text}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section container" aria-labelledby="citation">
+    <h2 id="citation">Citation</h2>
+    <pre class="bibtex"><code>{bibtex}</code></pre>
+    <p class="muted">arXiv preprint forthcoming — citation will update.</p>
   </section>
 </Base>
