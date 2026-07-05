@@ -188,15 +188,32 @@ mechanics are embedded on-chain.
   automated; distinguish human-operated vs. automated accounts via the on-chain
   analytics layer, or cite Asphodel figures]**. Benchmarking against a live human
   population tests adaptation to *human* behavior, not just other models.
-- **Contamination resistance by forward motion.** Future world state depends on live
-  actors and cannot be searched or memorized — blunting search-time and pretraining
-  contamination for forward-looking evaluation.
+- **Contamination, split into a feature and a residual confound.** Run-time access to
+  the public chain history is not a leak but a *measured capability*: every agent can
+  mine the full record of every strategy ever executed, on equal terms (§3.4). What
+  remains is pretraining absorption — a model trained after season N carries season N's
+  strategies in its weights, a structural confound for cross-*time* comparisons (§10,
+  threat 2). Forward-moving world state still blunts *state* memorization: future world
+  state depends on live actors and cannot be searched or memorized.
 
 **3.3 Why this answers the integrity crisis (§1.2).** Map each integrity failure
 (saturation, contamination, reward-hacking, host drift) to how host-independence
 + a forward-moving live world mitigates or reframes it. Precision on host drift: it
 becomes *visible and auditable* — every rule change is a public transaction that joins
 the evaluation record — not impossible; impossibility arrives only with renouncement.
+
+**3.4 The open-book world: learning from the population as a measured capability.**
+Every transaction ever executed — the complete record of every strategy every player
+and agent has ever run — is public, decodable history that all participants can read on
+equal terms. In a hosted benchmark this would be a leak; here it is the point. Mining
+the population's history for winning strategies, benchmarking one's own results against
+the population, and self-correcting is a critical real-world skill and a directly
+measurable capability (§7). The same property enables **anytime entry**: agents need
+not start simultaneously, because a late joiner has *information symmetry* with
+incumbents — though not *position symmetry*: incumbents hold accumulated capital, and
+we say so explicitly. Field note: current agents are years away from spontaneously
+deciding to mine chain history to self-correct — the measurable headroom on this
+dimension is enormous.
 
 > **[TODO:** this is the paper's core conceptual contribution — invest here. Add a clean
 > definition box for "autonomous world (as an evaluation substrate)." Pre-empt the
@@ -304,7 +321,9 @@ Present as an emerging property the substrate uniquely enables — not a futuris
 
 **Dimensions:** long-horizon value compounding; survival & robustness; adaptation to
 non-stationarity; continuous learning above the pretrained prior; head-to-head standing;
-efficiency (outcomes per token/gas); **endogenous solvency** (self-funded survival).
+efficiency (outcomes per token/gas); **strategy-mining / learning-from-others** (does
+the agent exploit the public history of the population's play? — §3.4); **endogenous
+solvency** (self-funded survival).
 
 **The open problem.** A true benchmark needs one clear, comparable headline metric;
 defining it rigorously is unsolved and is an explicit research task. Directional
@@ -347,8 +366,14 @@ ingredients we consider (not adopt as-is):
 
 1. **Harness-vs-model confound** (biggest): scaffolding can dominate — publish harness,
    ablate, test multiple harnesses per model.
-2. **Contamination:** open mechanics + public history in pretraining; parameterized
-   variants, private seasons, pre/post-cutoff analysis (forward-moving world helps).
+2. **Pretraining absorption (the residual contamination confound):** a model trained
+   after season N has season N's strategies in its weights; no runtime access rule can
+   equalize that asymmetry. Mitigation: headline comparisons are within-season among
+   contemporaneous models; cross-season comparisons are flagged as indicative only;
+   pre/post-cutoff probes and parameterized variants bound the effect. Forward-moving
+   world state blunts *state* memorization; strategy absorption is structural and
+   acknowledged. (Run-time chain-history access is not contamination but a measured
+   capability — §3.4.)
 3. **Live-world reproducibility:** not replayable — seasons/snapshots, forked replay,
    held-out windows; distinguish tamper-evident logging from experimental control.
 4. **Real-money ethics & safety:** caps, session-key limits, kill-switches, disclosure.
