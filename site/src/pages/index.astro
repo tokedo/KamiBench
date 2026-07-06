@@ -115,23 +115,22 @@ const propertyTable = [
 // the repo link inline between `text` and `rest`.
 const roadmap = [
   { done: true, text: 'Main thesis' },
-  { done: true, text: 'Literature review' },
-  { done: true, text: 'Research paper skeleton' },
+  { done: true, text: 'Literature review + research paper skeleton' },
   {
     done: true,
     text: 'Technical Game Design Document — ',
     link: { label: 'kamigotchi-gdd', url: 'https://github.com/tokedo/kamigotchi-gdd' },
     rest:
-      ': every game mechanic distilled from source (48 mechanic files + complete data ' +
-      'catalogs: 192 quests, 178 items, 71 skills), so agents and researchers can ' +
-      'understand the world without reading the codebase',
+      ': every game mechanic and the complete data catalogs distilled from the game’s ' +
+      'source, so agents and researchers can understand the world without reading the ' +
+      'codebase',
   },
   {
     done: true,
     text: 'Agent harness prototype — ',
     link: { label: 'kami-harness', url: 'https://github.com/tokedo/kami-harness' },
     rest:
-      ': 64 MCP tools wrapping every on-chain action, with supervised and ' +
+      ': 60+ MCP tools wrapping every on-chain action, with supervised and ' +
       'fully-autonomous operating modes',
   },
   {
@@ -174,7 +173,7 @@ const roadmap = [
 
   <div class="container">
     <aside class="status-banner" role="note">
-      <strong>Open research — experiments running</strong>
+      <strong>Open research in progress</strong>
       <Fragment set:html={statusHtml} />
     </aside>
   </div>
