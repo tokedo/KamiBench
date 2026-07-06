@@ -13,11 +13,10 @@
 > "headline metric is an open problem" stance (§7) must be resolved to *a* provisional
 > headline metric before a D&B submission.
 
-> **Disclosure.** The author plays Kamigotchi and holds in-game assets (Kamis, ONYX),
-> which are used to operate the research agents described here. The author has no
-> affiliation with and receives no compensation from Asphodel, and has to date extracted
-> no funds from the game — a claim verifiable on-chain. This is independent, individual
-> open research, unaffiliated with any company.
+> **Disclosure.** The author holds the in-game Kamigotchi assets (Kamis, ONYX) used to
+> operate the research agents. He has no affiliation with and receives no compensation
+> from Asphodel. This is independent, individual open research, unaffiliated with any
+> company.
 
 ---
 

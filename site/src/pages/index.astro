@@ -1,33 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import Leaderboard from '../components/Leaderboard.astro';
-import { marked } from 'marked';
-// Single source of truth: the intro paragraph and the status-banner body are
-// extracted from the repo-root README at build time (between marker comments),
-// so every push re-renders them with no manual sync step.
-import readmeSource from '../../../README.md?raw';
+// Intro paragraph and status-banner body are extracted from the repo-root README
+// at build time (between marker comments) — see lib/readme.ts.
+import { readmeSection } from '../lib/readme';
 
 const github = 'https://github.com/tokedo/KamiBench';
 
 // Copy on this page derives from README.md and paper/paper.md — reuse, condense,
 // lightly rephrase; never escalate claims.
-
-/** Extract the copy between <!-- NAME:START --> / <!-- NAME:END --> in README.md and
- *  render it to HTML. Blockquote "> " prefixes are stripped so callout bodies read as
- *  plain text; `inline` skips the wrapping <p> for single-paragraph slots. Throws when
- *  the markers are missing so a stale README fails the build loudly. */
-function readmeSection(name: string, opts: { inline?: boolean } = {}): string {
-  const match = readmeSource.match(
-    new RegExp(`<!-- ${name}:START -->([\\s\\S]*?)<!-- ${name}:END -->`)
-  );
-  if (!match) {
-    throw new Error(
-      `README.md is missing the <!-- ${name}:START --> / <!-- ${name}:END --> markers — cannot extract the "${name}" copy.`
-    );
-  }
-  const src = match[1]!.replace(/^> ?/gm, '').trim();
-  return (opts.inline ? marked.parseInline(src) : marked.parse(src, { gfm: true })) as string;
-}
 
 const ideaHtml = readmeSection('IDEA');
 const statusHtml = readmeSection('STATUS', { inline: true });
@@ -38,14 +19,15 @@ const whyCards = [
     body:
       'Tamper-evident today, immutable on trajectory. Every rule change is a public, ' +
       'permanent, decodable transaction — silent patching is architecturally impossible, ' +
-      'and rule immutability arrives with governance renouncement.',
+      'and pre-lock upgrades are visible and auditable; the rules lock permanently once ' +
+      'the builders give up control.',
   },
   {
     title: 'Credible permanence',
     body:
       'State and mechanics are embedded on-chain, designed from inception to run with no ' +
       'centralized game server. Persistence independent of any host’s funding is partial ' +
-      'today and full on the renouncement trajectory.',
+      'today and full once control is given up.',
   },
   {
     title: 'Permissionless participation',
@@ -81,8 +63,8 @@ const whyCards = [
 ];
 
 // The §3.1 today-vs-trajectory table from paper/paper.md — same rows, but the
-// paper version additionally carries §-refs and the technical term "governance
-// renouncement".
+// paper version additionally carries §-refs and the formal governance terminology
+// for the rule-lock.
 const propertyTable = [
   {
     property: 'On-chain state; complete readable history',

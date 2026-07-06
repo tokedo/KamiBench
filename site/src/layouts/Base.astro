@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+// The footer disclosure renders from README.md's DISCLOSURE markers at build
+// time — see lib/readme.ts.
+import { readmeSection } from '../lib/readme';
 
 interface Props {
   title: string;
@@ -84,13 +87,7 @@ const github = 'https://github.com/tokedo/KamiBench';
     <footer class="site-footer">
       <div class="container">
         <h2>Disclosure</h2>
-        <p>
-          The author plays Kamigotchi and holds the in-game assets (Kamis, ONYX) used to
-          operate the research agents; he has no affiliation with and receives no
-          compensation from Asphodel, and has to date extracted no funds from the game —
-          verifiable on-chain. This is independent, individual open research, unaffiliated
-          with any company.
-        </p>
+        <Fragment set:html={readmeSection('DISCLOSURE')} />
         <div class="footer-meta">
           <span><a href={`${github}/blob/main/LICENSE`}>MIT License</a></span>
           <span><a href={github}>GitHub</a></span>

@@ -47,11 +47,11 @@ run by a host. An autonomous on-chain world gives properties a hosted sandbox ca
 - **Substrate integrity — tamper-evident today, immutable on trajectory** — the evaluator
   doesn't run the world; the "evaluator" is the chain state itself. Every rule change is a
   public, permanent, decodable transaction, so silent patching is architecturally impossible
-  and pre-renouncement upgrades are visible and auditable; rule *immutability* arrives with
-  governance renouncement.
+  and pre-lock upgrades are visible and auditable; the rules lock permanently once the
+  builders give up control.
 - **Credible permanence** — state and mechanics are embedded on-chain, designed from
   inception to run with no centralized game server; persistence independent of any host's
-  funding is partial today and full on the renouncement trajectory.
+  funding is partial today and full once control is given up.
 - **Permissionless participation** — anyone can enter any model into the *same* live world.
 - **Human–agent co-habitation on identical terms** — real human players and a bot-majority
   population share one persistent economy through the same transaction interface, with no
@@ -114,10 +114,12 @@ evaluation, we'd love to compare notes.
 
 ## Disclosure
 
+<!-- DISCLOSURE:START -->
 The author holds the in-game Kamigotchi assets (Kamis, ONYX) used to operate the
 research agents. He has no affiliation with and receives no compensation from
 Asphodel. This is independent, individual open research, unaffiliated with any
 company.
+<!-- DISCLOSURE:END -->
 
 ## License
 
