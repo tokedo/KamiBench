@@ -166,11 +166,11 @@ today** and what arrives on a stated **trajectory** — for Kamigotchi:
 
 | Property | Holds today | Trajectory / mechanism |
 |---|---|---|
-| On-chain state; fully decodable history | Yes | — |
+| On-chain state; complete readable history | Yes | — |
 | Permissionless entry | Yes | — |
 | Tamper-evident rule changes | Yes — every change is a public transaction | — |
-| Rule immutability | No — contracts upgradeable pre-renouncement | $SOMA governance renouncement (years out; §4.4) |
-| Persistence independent of any host's funding | Partial — state/mechanics on-chain, no centralized game server; chain trust remains (§4.5) | Full at renouncement; possible Ethereum migration (§4.5) |
+| Persistence independent of any host's funding | Partial — no central game server; state and rules on-chain; trust shifts to the underlying chain (§4.5) | Full once control is relinquished; possible Ethereum migration (§4.5) |
+| Rules permanently locked (immutability) | No — contracts remain upgradeable until governance renouncement | Handover to decentralized governance, then full renouncement of control (years out; §4.4) |
 
 The honest present-tense claim is **tamper-evident, not tamper-proof**: silent patching
 is architecturally impossible because a rule change is itself a public, permanent,

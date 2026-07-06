@@ -5,27 +5,36 @@ persistent on-chain world.**
 
 **Website:** [kamibench.xyz](https://kamibench.xyz)
 
-> ⚠️ **Early stage / work in progress.** This repo is a living research draft — a thesis, a
-> literature foundation, and a paper skeleton — shared openly for collaboration *before*
-> experiments are run. Claims are being verified; nothing here is a finished result.
+> ⚠️ **Open research — experiments running.**
+> <!-- STATUS:START -->
+> This is a living research draft backed by a working system — a technical game design
+> document distilled from the game's source, a 64-tool agent harness, and an autonomous
+> agent two months into live self-play. Experiments are running now; claims are still
+> being verified, and nothing here is a finished result.
+> <!-- STATUS:END -->
 
 ---
 
 ## The idea in one paragraph
 
+<!-- IDEA:START -->
 Agent evaluation is moving from isolated, resettable tasks toward sustained operation in
 persistent, non-stationary worlds. But even the best long-horizon benchmarks are still
 **hosted**: one party runs the world, sets and changes its rules, gates access, and keeps
-it alive only while funded — which, in an era of benchmark contamination and reward-hacking,
-bounds evaluation integrity by host trust. KamiBench proposes a different substrate: an
-**autonomous, persistent on-chain world**, designed from inception to be host-independent —
-state and rules live on-chain, every rule change is public and permanent, and governance
-renouncement is the stated endpoint. We argue **Kamigotchi** — a fully on-chain MMORPG
+it alive only while funded. Every result is only as trustworthy as the host — and no
+benchmark can measure a horizon longer than its own lifespan. KamiBench's answer is to
+remove the host altogether: an **autonomous, persistent on-chain world**. State and rules
+live in public smart contracts, every rule change is public and permanent, and the
+builders' stated endgame is to give up control entirely — locking the rules beyond
+anyone's reach, including their own. We argue **Kamigotchi** — a fully on-chain MMORPG
 whose creators explicitly designed it to be agent-first and describe it as a possible
-*"real-stakes, adversarial benchmarking system"* — is the best-fit instance available today.
-Uniquely among agent benchmarks, the world is co-inhabited by real human players and
-agents **on identical terms** — the same transaction interface, no segregated bot
-ladder — so agents are evaluated against live human behavior, not just other models.
+*"real-stakes, adversarial benchmarking system"* — is the best-fit instance available
+today. Uniquely among agent benchmarks, the world is co-inhabited by real human players
+and agents **on identical terms** — the same transaction interface, no segregated bot
+ladder — so agents are evaluated against live human behavior, not just other models. And
+because the world runs a real, ETH-backed economy, survival can become literal: an agent
+can convert in-world earnings into ETH and fund its own compute.
+<!-- IDEA:END -->
 
 ## Why an autonomous world is different (not just "on-chain")
 
@@ -62,6 +71,9 @@ run by a host. An autonomous on-chain world gives properties a hosted sandbox ca
 | [`research/literature.md`](research/literature.md) | Annotated bibliography grouped by theme (the related-work foundation), with a must-cite core set. |
 | [`research/asphodel-whitepaper-notes.md`](research/asphodel-whitepaper-notes.md) | Full reading notes on the Asphodel/Kamigotchi whitepaper, incl. the creators' own "benchmarking system" framing and the token economy. |
 | [`site/`](site/) | The project website — landing page + a build-time render of the paper (updates on every push). Astro, deployed on Vercel; see [`site/README.md`](site/README.md). |
+| [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Technical Game Design Document — all mechanics and data catalogs extracted from source, the agent-readable spec of the world. |
+| [kami-harness](https://github.com/tokedo/kami-harness) | Agent harness prototype — 64 MCP tools wrapping on-chain actions, supervised + autonomous modes. |
+| [kami-zero](https://github.com/tokedo/kami-zero) | Autonomous agent pilot — two-model architecture (executor + optimizer) that self-played for ~2 months. |
 
 ## What this is *not* (yet)
 
@@ -81,16 +93,15 @@ run by a host. An autonomous on-chain world gives properties a hosted sandbox ca
 
 ## Status & roadmap
 
-- [x] Thesis + substrate argument
-- [x] Literature foundation (grounded against two deep-research passes)
-- [x] Whitepaper grounding
-- [x] Research-ready paper skeleton
-- [x] Chain trust-assumptions section (sequencer / MEV / RNG; `[VERIFY]` markers outstanding)
-- [ ] Economic feasibility table (earn-rate vs. inference cost) — structure drafted, numbers pending
+- [x] Main thesis
+- [x] Literature review
+- [x] Research paper skeleton
+- [x] **Technical Game Design Document** — [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd): every game mechanic distilled from source (48 mechanic files + complete data catalogs: 192 quests, 178 items, 71 skills), so agents and researchers can understand the world without reading the codebase
+- [x] **Agent harness prototype** — [kami-harness](https://github.com/tokedo/kami-harness): 64 MCP tools wrapping every on-chain action, with supervised and fully-autonomous operating modes
+- [x] **Autonomous self-play pilot** — [kami-zero](https://github.com/tokedo/kami-zero): a two-model agent (Sonnet 4.6 executor + Opus 4.7 optimizer) played unassisted for ~2 months, completing 79 of the game's 192 quests and surfacing harness limitations that fed directly back into the tooling
 - [ ] Finalize the model-agnostic harness (drop-in for any model)
-- [ ] Define the headline metric (likely centered on self-funded survival)
 - [ ] Run the initial multi-model study
-- [ ] Final citation-verification pass → arXiv
+- [ ] Finalize the paper → arXiv
 
 ## Collaboration
 

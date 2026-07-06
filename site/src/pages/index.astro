@@ -1,11 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
 import Leaderboard from '../components/Leaderboard.astro';
+import { marked } from 'marked';
+// Single source of truth: the intro paragraph and the status-banner body are
+// extracted from the repo-root README at build time (between marker comments),
+// so every push re-renders them with no manual sync step.
+import readmeSource from '../../../README.md?raw';
 
 const github = 'https://github.com/tokedo/KamiBench';
 
 // Copy on this page derives from README.md and paper/paper.md — reuse, condense,
 // lightly rephrase; never escalate claims.
+
+/** Extract the copy between <!-- NAME:START --> / <!-- NAME:END --> in README.md and
+ *  render it to HTML. Blockquote "> " prefixes are stripped so callout bodies read as
+ *  plain text; `inline` skips the wrapping <p> for single-paragraph slots. Throws when
+ *  the markers are missing so a stale README fails the build loudly. */
+function readmeSection(name: string, opts: { inline?: boolean } = {}): string {
+  const match = readmeSource.match(
+    new RegExp(`<!-- ${name}:START -->([\\s\\S]*?)<!-- ${name}:END -->`)
+  );
+  if (!match) {
+    throw new Error(
+      `README.md is missing the <!-- ${name}:START --> / <!-- ${name}:END --> markers — cannot extract the "${name}" copy.`
+    );
+  }
+  const src = match[1]!.replace(/^> ?/gm, '').trim();
+  return (opts.inline ? marked.parseInline(src) : marked.parse(src, { gfm: true })) as string;
+}
+
+const ideaHtml = readmeSection('IDEA');
+const statusHtml = readmeSection('STATUS', { inline: true });
 
 const whyCards = [
   {
@@ -55,11 +80,12 @@ const whyCards = [
   },
 ];
 
-// The §3.1 today-vs-trajectory table, verbatim from paper/paper.md (§-refs dropped
-// here; they resolve on the paper page).
+// The §3.1 today-vs-trajectory table from paper/paper.md — same rows, but the
+// paper version additionally carries §-refs and the technical term "governance
+// renouncement".
 const propertyTable = [
   {
-    property: 'On-chain state; fully decodable history',
+    property: 'On-chain state; complete readable history',
     today: 'Yes',
     trajectory: '—',
   },
@@ -74,34 +100,52 @@ const propertyTable = [
     trajectory: '—',
   },
   {
-    property: 'Rule immutability',
-    today: 'No — contracts upgradeable pre-renouncement',
-    trajectory: '$SOMA governance renouncement (years out)',
+    property: 'Persistence independent of any host’s funding',
+    today: 'Partial — no central game server; state and rules live on-chain. Trust shifts to the chain that runs them',
+    trajectory: 'Full once control is given up; possible migration to Ethereum',
   },
   {
-    property: 'Persistence independent of any host’s funding',
-    today: 'Partial — state/mechanics on-chain, no centralized game server; chain trust remains',
-    trajectory: 'Full at renouncement; possible Ethereum migration',
+    property: 'Rules permanently locked',
+    today: 'No — the builders can still upgrade the contracts',
+    trajectory: 'Handover to decentralized governance, then control given up entirely (years out)',
   },
 ];
 
+// Mirrors the README's "Status & roadmap" checklist. Items with a `link` render
+// the repo link inline between `text` and `rest`.
 const roadmap = [
-  { done: true, text: 'Thesis + substrate argument' },
-  { done: true, text: 'Literature foundation (grounded against two deep-research passes)' },
-  { done: true, text: 'Whitepaper grounding' },
-  { done: true, text: 'Research-ready paper skeleton' },
+  { done: true, text: 'Main thesis' },
+  { done: true, text: 'Literature review' },
+  { done: true, text: 'Research paper skeleton' },
   {
     done: true,
-    text: 'Chain trust-assumptions section (sequencer / MEV / RNG; [VERIFY] markers outstanding)',
+    text: 'Technical Game Design Document — ',
+    link: { label: 'kamigotchi-gdd', url: 'https://github.com/tokedo/kamigotchi-gdd' },
+    rest:
+      ': every game mechanic distilled from source (48 mechanic files + complete data ' +
+      'catalogs: 192 quests, 178 items, 71 skills), so agents and researchers can ' +
+      'understand the world without reading the codebase',
   },
   {
-    done: false,
-    text: 'Economic feasibility table (earn-rate vs. inference cost) — structure drafted, numbers pending',
+    done: true,
+    text: 'Agent harness prototype — ',
+    link: { label: 'kami-harness', url: 'https://github.com/tokedo/kami-harness' },
+    rest:
+      ': 64 MCP tools wrapping every on-chain action, with supervised and ' +
+      'fully-autonomous operating modes',
+  },
+  {
+    done: true,
+    text: 'Autonomous self-play pilot — ',
+    link: { label: 'kami-zero', url: 'https://github.com/tokedo/kami-zero' },
+    rest:
+      ': a two-model agent (Sonnet 4.6 executor + Opus 4.7 optimizer) played unassisted ' +
+      'for ~2 months, completing 79 of the game’s 192 quests and surfacing harness ' +
+      'limitations that fed directly back into the tooling',
   },
   { done: false, text: 'Finalize the model-agnostic harness (drop-in for any model)' },
-  { done: false, text: 'Define the headline metric (likely centered on self-funded survival)' },
   { done: false, text: 'Run the initial multi-model study' },
-  { done: false, text: 'Final citation-verification pass → arXiv' },
+  { done: false, text: 'Finalize the paper → arXiv' },
 ];
 
 ---
@@ -123,43 +167,22 @@ const roadmap = [
     <div class="btn-row">
       <a class="btn btn-primary" href="/paper">Paper</a>
       <a class="btn" href={github}>GitHub</a>
-      <a class="btn" href="https://kamigotchi.io">Kamigotchi</a>
+      <a class="btn" href="https://docs.asphodel.io/kamigotchi">Kamigotchi</a>
       <a class="btn" href="https://x.com/0xTokedo">X</a>
     </div>
   </header>
 
   <div class="container">
     <aside class="status-banner" role="note">
-      <strong>Early stage / work in progress</strong>
-      This is a living research draft — a thesis, a literature foundation, and a paper
-      skeleton — shared openly for collaboration <em>before</em> experiments are run.
-      Claims are being verified; nothing here is a finished result.
+      <strong>Open research — experiments running</strong>
+      <Fragment set:html={statusHtml} />
     </aside>
   </div>
 
   <section class="section container" aria-labelledby="idea">
     <h2 id="idea">The idea</h2>
     <div class="section-lead">
-      <p>
-        Agent evaluation is moving from isolated, resettable tasks toward sustained
-        operation in persistent, non-stationary worlds. But even the best long-horizon
-        benchmarks are still <strong>hosted</strong>: one party runs the world, sets and
-        changes its rules, gates access, and keeps it alive only while funded — which, in
-        an era of benchmark contamination and reward-hacking, bounds evaluation integrity
-        by host trust.
-      </p>
-      <p>
-        KamiBench proposes a different substrate: an <strong>autonomous, persistent
-        on-chain world</strong>, designed from inception to be host-independent — state and
-        rules live on-chain, every rule change is public and permanent, and governance
-        renouncement is the stated endpoint. We argue <strong>Kamigotchi</strong> — a fully
-        on-chain MMORPG whose creators explicitly designed it to be agent-first and
-        describe it as a possible <em>“real-stakes, adversarial benchmarking system”</em> —
-        is the best-fit instance available today. Uniquely among agent benchmarks, the
-        world is co-inhabited by real human players and agents <strong>on identical
-        terms</strong> — the same transaction interface, no segregated bot ladder — so
-        agents are evaluated against live human behavior, not just other models.
-      </p>
+      <Fragment set:html={ideaHtml} />
     </div>
   </section>
 
@@ -215,9 +238,9 @@ const roadmap = [
     <p class="table-note">
       The honest present-tense claim is <strong>tamper-evident, not tamper-proof</strong>:
       silent patching is architecturally impossible because a rule change is itself a
-      public, permanent, decodable transaction — the change history becomes part of the
-      evaluation record. Rule <em>immutability</em> arrives with governance renouncement,
-      and is stated as trajectory, never as present tense.
+      public, permanent transaction — the change history becomes part of the evaluation
+      record. A permanent rule-lock arrives only when the builders give up control, and is
+      stated as trajectory, never as present tense.
     </p>
   </section>
 
@@ -235,7 +258,15 @@ const roadmap = [
             <span class={`chip ${item.done ? 'chip-ok' : 'chip-pending'}`}>
               {item.done ? 'Done' : 'Pending'}
             </span>
-            <span>{item.text}</span>
+            <span>
+              {item.text}
+              {item.link && (
+                <a href={item.link.url} target="_blank" rel="noopener">
+                  {item.link.label}
+                </a>
+              )}
+              {item.rest}
+            </span>
           </li>
         ))
       }
