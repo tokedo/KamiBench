@@ -1,6 +1,6 @@
 /* KamiBench — global styles.
    Quiet, typography-forward, academic-with-an-edge. System fonts only, one accent,
-   light/dark via prefers-color-scheme, near-zero JS. */
+   light/dark via prefers-color-scheme, no client JS beyond the GA tag (prod only). */
 
 :root {
   --font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia,

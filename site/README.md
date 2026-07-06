@@ -2,7 +2,7 @@
 
 The project website: a landing page and a build-time render of
 [`../paper/paper.md`](../paper/paper.md). Static [Astro](https://astro.build) site,
-no client-side JavaScript.
+no client-side JavaScript beyond the Google Analytics tag (production builds only).
 
 ## Local development
 

@@ -47,6 +47,25 @@ const github = 'https://github.com/tokedo/KamiBench';
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    {
+      /* Google Analytics (GA4) — production builds only, so dev-server visits
+         don't pollute the data. is:inline keeps Astro from bundling the tags. */
+      import.meta.env.PROD && (
+        <>
+          <script
+            is:inline
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-G0HWCTPZF7"
+          ></script>
+          <script is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-G0HWCTPZF7');
+          </script>
+        </>
+      )
+    }
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
