@@ -2,13 +2,15 @@
 // regenerates from the current paper source on every build, no manual sync step).
 //
 // Beyond plain markdown→HTML, this transforms the repo's draft conventions into UI:
-//   `[DRAFTED]` / `[SKELETON]` / `[PENDING EXPERIMENTS]`  →  status chips on headings
+//   `[DRAFTED]` / `[SKELETON]` / `[TODO]` / `[PENDING EXPERIMENTS]`  →  status chips
 //   **[TODO: …]** / **[VERIFY: …]** / **[PENDING…]**      →  inline badges
 //   > **[TODO:** … **]** blockquotes                      →  TODO callouts
 //   other blockquotes (guidance, draft status)            →  muted asides
 // and makes citations clickable (arXiv IDs, bare domain paths, and a named-link
-// map for §2 / References mentions) — all as post-processing; paper.md is never
-// edited.
+// map for §2 / References mentions). §N / §N.M cross-references become in-page
+// anchor links: h2 ids for sections, generated `s-N-M` ids on subsection lead-in
+// paragraphs (`**N.M …**`) — pure anchors, no client-side JS. All of this is
+// post-processing; paper.md is never edited.
 import { marked } from 'marked';
 
 const GITHUB_BLOB = 'https://github.com/tokedo/KamiBench/blob/main';
@@ -16,6 +18,7 @@ const GITHUB_BLOB = 'https://github.com/tokedo/KamiBench/blob/main';
 const STATUS_CLASS: Record<string, string> = {
   DRAFTED: 'chip-ok',
   SKELETON: 'chip-warn',
+  TODO: 'chip-warn', // same warn tint as the inline TODO badge
   PENDING: 'chip-pending',
   'PENDING EXPERIMENTS': 'chip-pending',
 };
@@ -187,6 +190,15 @@ export function renderPaper(src: string): RenderedPaper {
     return `<h2 id="${id}">${text}${chips}</h2>`;
   });
 
+  // Subsection lead-in paragraphs (`**N.M …** …`) get their own anchor ids so §N.M
+  // cross-references can land on the exact subsection, not just the parent section.
+  const subsectionIds = new Set<string>();
+  html = html.replace(/<p><strong>(\d+)\.(\d+) /g, (_, maj: string, min: string) => {
+    const id = `s-${maj}-${min}`;
+    subsectionIds.add(id);
+    return `<p id="${id}"><strong>${maj}.${min} `;
+  });
+
   // Remaining `[…]` code markers (inline section tags like §5.4, `[PENDING]` table
   // cells, the draft-status legend) → chips.
   html = html.replace(/<code>\[([^\]]+)\]<\/code>/g, (_, content: string) =>
@@ -229,6 +241,27 @@ export function renderPaper(src: string): RenderedPaper {
   html = transformTextNodes(html, linkArxivIds);
   html = transformTextNodes(html, linkBareDomains);
   html = applyNamedLinks(html);
+
+  // Clickable §N / §N.M cross-references → in-page anchors. `§N.M` prefers the
+  // subsection anchor and falls back to the parent section; unresolved refs are
+  // left as text and warned about at build time (the build should have none).
+  const sectionIds = new Map<string, string>();
+  for (const h of headings) {
+    const num = h.text.match(/^(\d+)\./)?.[1];
+    if (num) sectionIds.set(num, h.id);
+  }
+  html = transformTextNodes(html, (text) =>
+    text.replace(/§(\d+(?:\.\d+)?)/g, (m, ref: string) => {
+      const [maj, min] = ref.split('.');
+      const subId = min ? `s-${maj}-${min}` : undefined;
+      const target = subId && subsectionIds.has(subId) ? subId : sectionIds.get(maj!);
+      if (!target) {
+        console.warn(`[paper] unresolved cross-ref §${ref}`);
+        return m;
+      }
+      return `<a href="#${target}">${m}</a>`;
+    })
+  );
 
   return { html, headings };
 }
