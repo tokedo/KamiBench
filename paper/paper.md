@@ -42,9 +42,9 @@ substrate and release the groundwork as three public artifacts: a machine-readab
 design document covering the complete mechanics and data catalogs, an agent harness
 exposing 60+ MCP tools with supervised and fully-autonomous modes, and kami-zero — a
 two-model agent that self-played the live world for ~2 months, completing 79 of the
-game's 192 quests at a measured inference cost of ~$7–8/day (snapshot 2026-07-06). The
-model-agnostic harness, the headline metric (direction: endogenous solvency), and the
-initial multi-model study are **[PENDING]**.
+game's 192 quests (snapshot 2026-07-06). The model-agnostic harness, the headline
+metric (direction: endogenous solvency), and the initial multi-model study are
+**[PENDING]**.
 
 **Keywords:** agent evaluation, long-horizon autonomy, continual learning, multi-agent,
 non-stationarity, on-chain / autonomous worlds, self-sustaining agents.
@@ -95,7 +95,7 @@ to be.
    today-vs-trajectory accounting of its substrate properties. (§4)
 3. **Three released artifacts and a two-month autonomous pilot** in the live world: a
    machine-readable game design document, a 60+-tool agent harness, and the kami-zero
-   pilot (79 of 192 quests; measured inference cost ~$7–8/day; snapshot 2026-07-06). (§5)
+   pilot (79 of 192 quests; snapshot 2026-07-06). (§5)
 4. **[IN WORK]** A **headline metric** built around endogenous solvency / self-funded
    survival. (§8)
 5. **[PENDING]** An **initial multi-model study** of heterogeneous frontier agents
@@ -314,11 +314,6 @@ authority to edit that playbook (at most one rule change per session). It ran un
 in the live world for ~2 months, completing 79 of the game's 192 quests (snapshot
 2026-07-06), and is currently paused pending the model-agnostic harness.
 
-*Measured cost.* Executor ≈ $0.02/tick × 12 ticks/hour × 24 hours ≈ $6/day; optimizer
-≈ $0.30/session × 4 sessions/day ≈ $1.20/day — ~$7–8/day total for autonomous operation
-(snapshot 2026-07-06). This pins the cost side of the endogenous-solvency ledger (§6);
-the earn-rate side is pending the on-chain analytics pass.
-
 *The self-improvement loop.* The executor writes anomalies it cannot resolve to a
 structured "I don't know" queue; the optimizer consumes the queue and turns recurring
 anomalies into playbook rules and harness/tooling fixes — a concrete instance of harness
@@ -337,9 +332,8 @@ in-repo.
 
 ## 6. Endogenous Survival: Self-Funded Autonomy  `[TODO]`
 
-> **[TODO:** in work — deferred until measured. The regime is defined in the abstract
-> and §1; the pilot fixes the cost side of the solvency ledger at ~$7–8/day (§5.3); the
-> earn-rate side awaits the on-chain analytics pass.**]**
+> **[TODO:** in work — deferred until measured; the regime is defined in the
+> abstract.**]**
 
 ---
 
@@ -472,8 +466,17 @@ theaidigest.org/village) · Asphodel whitepaper (docs.asphodel.io/whitepaper).
 ---
 
 ## Appendices  `[SKELETON]`
-- **A. Kamigotchi mechanics** (full) — from the GDD. **[TODO]**
-- **B. Harness & action API** — tool list, observation schema. **[TODO]**
-- **C. Prompts & agent scaffolds** — for reproducibility + harness ablation. **[TODO]**
+- **A. Kamigotchi mechanics** (full) — released as
+  [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd): 48 mechanic files with
+  formulas, deployed configs, and source citations, plus the complete data catalogs.
+  **[TODO: condense into camera-ready appendix form.]**
+- **B. Harness & action API** — released as
+  [kami-harness](https://github.com/tokedo/kami-harness); the full MCP tool reference
+  lives in-repo (`executor/README.md`). **[TODO: extract the tool list and observation
+  schema into appendix form.]**
+- **C. Prompts & agent scaffolds** — the pilot's prompts and scaffolds are public in
+  [kami-zero](https://github.com/tokedo/kami-zero) (`executor-prompt.md`,
+  `optimizer-prompt.md`, `rules/`). **[TODO: harness-ablation scaffolds await the
+  model-agnostic harness.]**
 - **D. Economic rails** — MUSU/ONYX, live-vs-planned conversion steps. **[TODO]**
 - **E. Additional results / transcripts.** **[PENDING]**
