@@ -348,7 +348,7 @@ result even for modest X.
 ## 6. Benchmark Design  `[SKELETON]`
 
 - **6.1 Model-agnostic harness.** How any model is dropped into the same world via a thin
-  wrapper (context + tool/execution layer). **[TODO: describe from `kamigotchi-context`;
+  wrapper (context + tool/execution layer). **[TODO: describe from `kami-harness` (formerly `kamigotchi-context`);
   the harness is the benchmark — publish it; specify the tool/action API.]**
 - **6.2 Action & observation interface.** The native transaction action space; the
   observation/state abstraction; what is and isn't exposed to the agent. **[TODO.]**
