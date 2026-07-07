@@ -66,8 +66,8 @@ as its host's funding and interest. Evaluation integrity is bounded by host trus
 **1.3 The idea: an ungoverned, autonomous world.** We propose evaluating agents in a
 world **built to need no host** — an on-chain "autonomous world" whose rules live in
 public smart contracts, whose entire history is decodable and tamper-evident, that
-anyone may enter permissionlessly, and that is designed from inception to persist
-independent of any host's funding or interest. Host-independence is a spectrum, not a
+anyone may enter permissionlessly, and that is meant to persist independent of any
+host's funding or interest. Host-independence is a spectrum, not a
 binary (§3.1): we state precisely which properties hold *today* and which arrive on the
 world's stated trajectory of **governance renouncement** — the creators permanently
 relinquishing the ability to change the rules. This is not merely "on-chain flavor":
@@ -76,11 +76,9 @@ regimes a hosted sandbox cannot support.
 
 **1.4 Why Kamigotchi, and why now.** Kamigotchi (a fully on-chain MMORPG on the Yominet
 appchain, part of the Asphodel ecosystem) is uniquely fit and, notably, **built for
-this**. Its creators set out to be "uniquely friendly to bots," report that "the majority
-of activity in the game is automated," plan 2026 events "to encourage LLM-driven
-Kamigotchi play," and explicitly describe the system as a potential "real-stakes,
-adversarial benchmarking system." We formalize the benchmark the environment was designed
-to be.
+this**: its creators set out to be "uniquely friendly to bots" and explicitly frame the
+system as a potential benchmark (§4.2). We formalize the benchmark the environment was
+designed to be.
 
 **1.5 Contributions.**
 1. **The autonomous-world substrate** formalization — on-chain, host-independent,
@@ -170,15 +168,13 @@ mechanics are embedded on-chain.
 
 **3.2 Five researcher-facing properties of an ungoverned substrate.**
 - **Substrate integrity: tamper-evident today, immutable on trajectory.** The evaluator
-  does not run the world — the evaluator is the chain state itself — and rules are
-  identical for all. Every rule change is a public, permanent, decodable transaction:
-  silent patches are impossible, and pre-renouncement upgrades are visible and auditable,
-  becoming part of the evaluation record rather than corrupting it.
+  does not run the world — the evaluator is the chain state itself — and the rules are
+  identical for all participants; §3.1 states the mechanism and its precise
+  present-tense limits.
 - **Credible permanence / longitudinal evaluation.** Hosted benchmarks are ephemeral;
-  a world whose state and mechanics are embedded on-chain — built to run with no
-  centralized game server — enables open-ended, multi-year study of the same agents in
-  the same world. Persistence independent of any host's funding is partial today and
-  full on trajectory (§3.1, §4.5).
+  a world whose state and mechanics are embedded on-chain (§3.1) enables open-ended,
+  multi-year study of the same agents in the same world. Persistence independent of any
+  host's funding is partial today and full on trajectory (§3.1, §4.5).
 - **Permissionless, decentralized participation.** No lab owns the benchmark; anyone can
   enter any model into the same live world.
 - **Mixed human–agent population with interface parity.** The world is co-inhabited by
@@ -202,8 +198,8 @@ mechanics are embedded on-chain.
 **3.3 Why this answers the integrity crisis (§1.2).** Each integrity failure of §1.2 —
 saturation, contamination, reward-hacking, host drift — is mitigated or reframed by
 host-independence plus a forward-moving live world. Precision on host drift: it becomes
-*visible and auditable* — every rule change is a public transaction that joins the
-evaluation record — not impossible; impossibility arrives only with renouncement.
+*visible and auditable*, not impossible — impossibility arrives only with renouncement
+(§3.1).
 
 **3.4 The open-book world: learning from the population as a measured capability.**
 Every transaction ever executed — the complete record of every strategy every player
@@ -250,11 +246,11 @@ marketplace. Full detail: the [official docs](https://docs.asphodel.io/kamigotch
 [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) (§5.1).
 
 **4.2 Built for agents (creator intent).** The whitepaper frames the game as
-bot/agent-first: "uniquely friendly to bots," "the majority of activity in the game is
-automated,"
-acquired the Kamibots automation team, plans 2026 LLM-play events, and names it a possible
-"real-stakes, adversarial benchmarking system"; "humans are no longer the only target
-market." We formalize that intent.
+bot/agent-first: the creators set out to be "uniquely friendly to bots," report that
+"the majority of activity in the game is automated," acquired the Kamibots automation
+team, plan 2026 events "to encourage LLM-driven Kamigotchi play," and name the system a
+possible "real-stakes, adversarial benchmarking system" — "humans are no longer the
+only target market."
 
 **4.3 The property stack.** Persistent & open-ended; non-stationary (real adversarial
 population); **mixed human–agent population** (real human players and agents co-inhabit
@@ -369,11 +365,8 @@ in order:
 3. **Live-world reproducibility:** not replayable — seasons/snapshots, forked replay,
    held-out windows; distinguish tamper-evident logging from experimental control.
 4. **Real-money ethics & impact on human co-players:** benchmark agents may impose
-   real, bounded economic losses on human players *within the rules* (rule-governed
-   in-game transfers, not exploits — full position in §8); ops norms: spending caps,
-   session-key limits, kill-switches, no contract-exploit use, and a
-   transparency/disclosure policy for benchmark-operated accounts, to be finalized
-   before experiments begin.
+   real, bounded economic losses on human players *within the rules*. The full
+   position — mechanics, context, and the operational norms we commit to — is in §8.
 5. **Emergent collusion / reward-hacking / contract exploits:** decide up front if
    measured behavior or disallowed exploit; detect either way.
 6. **Participant/account asymmetries + autonomy verification:** normalized budgets,
@@ -409,8 +402,7 @@ documented in [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) —
 market pricing: pending). Because ONYX is ETH-backed, such losses are bounded but
 real. *The context:* these are rule-governed in-game transfers, not exploits — the game
 working as designed, in a world whose creators explicitly embrace bots as the majority
-population ("uniquely friendly to bots"; "the majority of activity in the game is
-automated"). Human players entered a permissionless, openly bot-first world and play
+population (§4.2). Human players entered a permissionless, openly bot-first world and play
 under the same rules through the same interface: co-participants, not unwitting
 subjects. *The acknowledgment:* benchmark agents may nonetheless impose real, bounded
 economic losses on human players within the rules. We commit to operational norms:
@@ -422,10 +414,8 @@ accounts are set up]**.
 **Broader impact / safety.** Autonomous agents with real capital raise financial-harm,
 market-manipulation, and dual-use concerns. A bounded, well-instrumented benchmark —
 spending caps, session keys, kill-switches, public on-chain logs — is a responsible
-place to study them. The author's independence and asset position are stated in the
-Disclosure (front matter): the research agents are operated from the author's own
-in-game assets, with no affiliation with or compensation from Asphodel. **[TODO: a
-genuine impact statement — reviewers will expect it.]**
+place to study them. Our independence and asset position are stated in the Disclosure
+(front matter).
 
 ---
 
