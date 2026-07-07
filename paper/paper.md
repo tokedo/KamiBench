@@ -22,29 +22,24 @@
 Agent evaluation is shifting from isolated, resettable tasks toward sustained operation
 in persistent, non-stationary environments — yet even the most advanced long-horizon
 benchmarks remain *hosted*: a single party runs the world, sets and changes its rules,
-gates access, and keeps it alive only while funded. This coincides with a benchmark-integrity
-crisis (saturation, contamination, reward-hacking) in which whoever runs
-an environment can, even inadvertently, compromise the evaluation. We argue that the
-right substrate for evaluating long-horizon, continuously-learning, adaptive agents is an
-**autonomous, persistent on-chain world** at the far end of the host-independence
-spectrum — state and rules on-chain, every rule change public and permanent, governance
-renouncement the stated endpoint — and we present **Kamigotchi**, a fully on-chain
-MMORPG whose creators explicitly designed it to be agent-first and describe it as a possible
-"real-stakes, adversarial benchmarking system," as the best-fit instance available today.
-The substrate provides properties no hosted sandbox can: tamper-evident logging and
-rule changes by construction (with immutability the explicit design endpoint), credible
-multi-year permanence, permissionless participation, co-habitation with real human
-players on identical terms through the same transaction interface, and — uniquely — a
-real, externally-valued economy in which an agent's
-*survival can become economically endogenous*: it can convert in-world earnings into
-ETH-denominated value and fund its own compute. We formalize the autonomous-world
-substrate and release the groundwork as three public artifacts: a machine-readable game
-design document covering the complete mechanics and data catalogs, an agent harness
-exposing 60+ MCP tools with supervised and fully-autonomous modes, and kami-zero — a
-two-model agent that self-played the live world for ~2 months, completing 79 of the
-game's 192 quests (snapshot 2026-07-06). The model-agnostic harness, the headline
-metric (direction: endogenous solvency), and the initial multi-model study are
-**[PENDING]**.
+gates access, and keeps it alive only while funded. This coincides with a
+benchmark-integrity crisis (saturation, contamination, reward-hacking) in which whoever
+runs an environment can, even inadvertently, compromise the evaluation. We argue that
+the right substrate for evaluating long-horizon, continuously-learning agents is an
+**autonomous, persistent on-chain world** — state and rules on-chain, every rule change
+public and permanent, governance renouncement the stated endpoint — and we present
+**Kamigotchi**, a fully on-chain MMORPG whose creators designed it to be agent-first and
+describe it as a possible "real-stakes, adversarial benchmarking system," as the
+best-fit instance available today. The substrate provides properties no hosted sandbox
+can: tamper-evident rule changes by construction, credible multi-year permanence,
+permissionless participation, co-habitation with real human players on identical terms,
+and — uniquely — a real, externally-valued economy in which an agent's *survival can
+become economically endogenous*: it can convert in-world earnings into ETH-denominated
+value and fund its own compute. We formalize the autonomous-world substrate and release
+the groundwork as three public artifacts: a machine-readable game design document, a
+60+-tool agent harness, and kami-zero — a two-model agent that self-played the live
+world for two months, completing 79 of the game's 192 quests (snapshot 2026-07-06); a
+research roadmap (§6) sequences the remaining work toward the initial multi-model study.
 
 **Keywords:** agent evaluation, long-horizon autonomy, continual learning, multi-agent,
 non-stationarity, on-chain / autonomous worlds, self-sustaining agents.
@@ -96,10 +91,10 @@ to be.
 3. **Three released artifacts and a two-month autonomous pilot** in the live world: a
    machine-readable game design document, a 60+-tool agent harness, and the kami-zero
    pilot (79 of 192 quests; snapshot 2026-07-06). (§5)
-4. **[IN WORK]** A **headline metric** built around endogenous solvency / self-funded
-   survival. (§6)
-5. **[PENDING]** An **initial multi-model study** of heterogeneous frontier agents
-   co-living in the same world. (§6)
+
+The remaining components — the model-agnostic harness, the endogenous-solvency headline
+metric, the experimental protocol, and the initial multi-model study — are sequenced in
+the Research Roadmap (§6).
 
 ---
 
