@@ -419,14 +419,31 @@ place to study them. Our independence and asset position are stated in the Discl
 
 ---
 
-## 9. Conclusion  `[SKELETON]`
-> **[TODO:** restate the substrate contribution, the creator-endorsed instance, the
-> released artifacts + pilot (§5), and the endogenous-survival regime; end on the open
-> metric problem + the multi-model study.**]**
+## 9. Conclusion
+
+We have argued that the natural substrate for evaluating long-horizon,
+continuously-learning agents is an autonomous world: rules and state in public smart
+contracts, a tamper-evident history, permissionless entry, and persistence not
+contingent on any host — a structural answer to an integrity crisis that host trust
+cannot solve from the inside. Kamigotchi is the best-fit instance available today, and
+not by accident: its creators built it agent-first and themselves frame it as a
+potential real-stakes benchmark (§4.2); we formalize that design intent with a precise
+accounting of which substrate properties hold today and which arrive on the world's
+stated trajectory (§3.1). The groundwork is released and exercised: a machine-readable
+game design document, a 60+-tool agent harness, and a two-model pilot agent that
+operated unassisted in the live world for two months, completing 79 of 192 quests (§5).
+Beyond the pilot lies the regime this substrate uniquely enables — endogenous survival,
+in which an agent funds its own operation from a real, externally-valued economy and
+solvency replaces score (§6). The open problem is the headline metric that makes that
+regime measurable; fixing it, and running the initial multi-model study on the
+model-agnostic harness, is the next step the Research Roadmap sequences (§6).
 
 ---
 
-## References  `[core verified set — full list in literature.md; verify before submission]`
+## References
+
+The annotated bibliography — grouped by theme, with the must-cite core set — lives in
+[`../research/literature.md`](../research/literature.md). The core set:
 
 METR time-horizon (2503.14499) · Factorio LE (2503.09617) · LifelongAgentBench
 (2505.11942) · StreamBench (2406.08747) · τ-bench (2406.12045) · Neural MMO (2110.07594) ·
@@ -436,22 +453,20 @@ BALROG (2411.13543) · Foresight Arena (2605.00420) · CryptoTrade (2407.09546) 
 Market Arena (2510.11695) · Autonomous Worlds (MUD/Lattice; Dark Forest/0xPARC) · Cicero
 (Meta AI, Science 2022) · AlphaStar (DeepMind, Nature 2019) · Agent Village (AI Digest,
 theaidigest.org/village) · Asphodel whitepaper (docs.asphodel.io/whitepaper).
-**[TODO: OpenAI Five for self-play motivation; a continual-learning foundations ref.]**
 
 ---
 
-## Appendices  `[SKELETON]`
-- **A. Kamigotchi mechanics** (full) — released as
-  [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd): 48 mechanic files with
-  formulas, deployed configs, and source citations, plus the complete data catalogs.
-  **[TODO: condense into camera-ready appendix form.]**
-- **B. Harness & action API** — released as
-  [kami-harness](https://github.com/tokedo/kami-harness); the full MCP tool reference
-  lives in-repo (`executor/README.md`). **[TODO: extract the tool list and observation
-  schema into appendix form.]**
-- **C. Prompts & agent scaffolds** — the pilot's prompts and scaffolds are public in
-  [kami-zero](https://github.com/tokedo/kami-zero) (`executor-prompt.md`,
-  `optimizer-prompt.md`, `rules/`). **[TODO: harness-ablation scaffolds await the
-  model-agnostic harness.]**
-- **D. Economic rails** — MUSU/ONYX, live-vs-planned conversion steps. **[TODO]**
-- **E. Additional results / transcripts.** **[PENDING]**
+## Artifacts
+
+The three released repositories are the paper's appendices — each is the full,
+maintained form of the material a static appendix would snapshot:
+
+- **[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd)** — the machine-readable
+  game design document: 48 mechanic files with formulas, deployed configs, and source
+  citations, plus the complete data catalogs (§5.1).
+- **[kami-harness](https://github.com/tokedo/kami-harness)** — the agent harness: 60+
+  MCP tools wrapping every on-chain action; the full tool reference and observation
+  schema live in-repo (`executor/README.md`) (§5.2).
+- **[kami-zero](https://github.com/tokedo/kami-zero)** — the autonomous pilot: prompts,
+  scaffolds, and playbook rules (`executor-prompt.md`, `optimizer-prompt.md`, `rules/`),
+  plus the documented v0→v2 version history (§5.3).
