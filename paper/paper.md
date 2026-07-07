@@ -184,10 +184,10 @@ mechanics are embedded on-chain.
 - **Contamination, split into a feature and a residual confound.** Run-time access to
   the public chain history is not a leak but a *measured capability*: every agent can
   mine the full record of every strategy ever executed, on equal terms (§3.4). What
-  remains is pretraining absorption — a model trained after season N carries season N's
-  strategies in its weights, a structural confound for cross-*time* comparisons (§7,
-  threat 2). Forward-moving world state still blunts *state* memorization: future world
-  state depends on live actors and cannot be searched or memorized.
+  remains is pretraining absorption of past seasons' strategies — a structural confound
+  for cross-*time* comparisons, treated in §7 (threat 2). Forward-moving world state
+  still blunts *state* memorization: future world state depends on live actors and
+  cannot be searched or memorized.
 
 **3.3 Why this answers the integrity crisis (§1.2).** Each integrity failure of §1.2 —
 saturation, contamination, reward-hacking, host drift — is mitigated or reframed by
@@ -454,12 +454,10 @@ theaidigest.org/village) · Asphodel whitepaper (docs.asphodel.io/whitepaper).
 The three released repositories are the paper's appendices — each is the full,
 maintained form of the material a static appendix would snapshot:
 
-- **[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd)** — the machine-readable
-  game design document: 48 mechanic files with formulas, deployed configs, and source
-  citations, plus the complete data catalogs (§5.1).
-- **[kami-harness](https://github.com/tokedo/kami-harness)** — the agent harness: 60+
-  MCP tools wrapping every on-chain action; the full tool reference and observation
-  schema live in-repo (`executor/README.md`) (§5.2).
-- **[kami-zero](https://github.com/tokedo/kami-zero)** — the autonomous pilot: prompts,
-  scaffolds, and playbook rules (`executor-prompt.md`, `optimizer-prompt.md`, `rules/`),
-  plus the documented v0→v2 version history (§5.3).
+- **[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd)** — the complete
+  mechanics and data catalogs, agent-readable (§5.1).
+- **[kami-harness](https://github.com/tokedo/kami-harness)** — the 60+-tool agent
+  harness; tool reference and observation schema in `executor/README.md` (§5.2).
+- **[kami-zero](https://github.com/tokedo/kami-zero)** — the pilot agent's prompts,
+  scaffolds, playbook rules (`executor-prompt.md`, `optimizer-prompt.md`, `rules/`),
+  and v0→v2 version history (§5.3).
