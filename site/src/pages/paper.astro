@@ -10,7 +10,7 @@ const { html, headings } = renderPaper(paperSource);
 
 <Base
   title="KamiBench: An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents"
-  description="Working paper draft — the autonomous-world substrate, Kamigotchi as an instance, and three released artifacts with a two-month autonomous pilot; the multi-model study is in progress."
+  description="Position paper + pilot report — the autonomous-world substrate, Kamigotchi as an instance, and three released artifacts with a two-month autonomous pilot; remaining work is sequenced in the Research Roadmap."
   path="/paper"
   ogType="article"
 >
@@ -28,13 +28,6 @@ const { html, headings } = renderPaper(paperSource);
       </ol>
     </nav>
     <article class="paper">
-      <aside class="paper-banner" role="note">
-        <strong>Living draft.</strong> This page is rendered from <a
-          href="https://github.com/tokedo/KamiBench/blob/main/paper/paper.md"
-        ><code>paper/paper.md</code></a> at build time and updates with every push — see
-        the <a href="https://github.com/tokedo/KamiBench/commits/main/paper/paper.md"
-        >revision history on GitHub</a>.
-      </aside>
       <Fragment set:html={html} />
     </article>
   </div>
