@@ -185,13 +185,12 @@ mechanics are embedded on-chain.
   real human players and agents *on exactly the same terms*: the native action interface
   — transactions — is literally identical for humans and machines, with no segregated
   bot ladder or flagged-bot regime; bots are the majority population and explicitly
-  welcomed by the creators (§4.2). Hundreds of active human players manage kamis (often
-  dozens to hundreds each), form clans, and trade in the same economy, at the same time,
-  through the same interface agents use **[VERIFY: active-human-player count +
-  estimation method — nontrivial since the whitepaper states the majority of activity is
-  automated; distinguish human-operated vs. automated accounts via the on-chain
-  analytics layer, or cite Asphodel figures]**. Benchmarking against a live human
-  population tests adaptation to *human* behavior, not just other models.
+  welcomed by the creators (§4.2). An active human player population manages kamis,
+  forms clans, and trades in the same economy, at the same time, through the same
+  interface agents use; precise human-vs-automated population counts are nontrivial
+  exactly because the interface is shared, and verifying them through the on-chain
+  analytics layer is future work. Benchmarking against a live human population tests
+  adaptation to *human* behavior, not just other models.
 - **Contamination, split into a feature and a residual confound.** Run-time access to
   the public chain history is not a leak but a *measured capability*: every agent can
   mine the full record of every strategy ever executed, on equal terms (§3.4). What
