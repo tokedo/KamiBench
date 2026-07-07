@@ -1,14 +1,11 @@
 # KamiBench: An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents
 
-> **Draft status.** Working paper draft — the pilot phase is complete (three released
-> repos and a two-month autonomous pilot, §5); the model-agnostic harness and the
-> multi-model study are in progress. Sections are tagged `[DRAFTED]`, `[SKELETON]`,
-> `[TODO]`, or `[PENDING EXPERIMENTS]`; inline markers say what each part still needs.
-> Citations await one final verification pass (see
-> [`../research/literature.md`](../research/literature.md)); supporting notes:
-> [`../research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md).
-> Shape note: this is deliberately a position-paper draft; for a D&B-style submission the
-> artifact leads and the headline metric (§6) must be fixed first.
+> **Draft status.** This is a living document: [kamibench.xyz/paper](https://kamibench.xyz/paper)
+> renders directly from this file, and the full
+> [revision history is on GitHub](https://github.com/tokedo/KamiBench/commits/main/paper/paper.md).
+> Everything still in progress is sequenced in the Research Roadmap (§6); working notes
+> live in [`paper/NOTES.md`](../paper/NOTES.md), supporting research notes in
+> [`research/`](https://github.com/tokedo/KamiBench/tree/main/research).
 
 > **Disclosure.** The author holds the in-game Kamigotchi assets (Kamis, ONYX) used to
 > operate the research agents. He has no affiliation with and receives no compensation
@@ -17,7 +14,7 @@
 
 ---
 
-## Abstract  `[DRAFTED]`
+## Abstract
 
 Agent evaluation is shifting from isolated, resettable tasks toward sustained operation
 in persistent, non-stationary environments — yet even the most advanced long-horizon
@@ -46,7 +43,7 @@ non-stationarity, on-chain / autonomous worlds, self-sustaining agents.
 
 ---
 
-## 1. Introduction  `[DRAFTED]`
+## 1. Introduction
 
 **1.1 The shift to long-horizon, continuously-learning evaluation.** Most agent
 benchmarks score a single episode and reset. The capability that matters for deployed
@@ -96,7 +93,7 @@ the Research Roadmap (§6).
 
 ---
 
-## 2. Background and Related Work  `[DRAFTED]`
+## 2. Background and Related Work
 
 **2.1 Long-horizon & continual-learning evaluation.** METR time-horizon
 (arXiv:2503.14499); Factorio LE (arXiv:2503.09617); LifelongAgentBench (arXiv:2505.11942);
@@ -134,12 +131,9 @@ permissionless on-chain benchmark — but forecasting, not a persistent world); 
 (Lattice), Dark Forest (0xPARC). *No prior work uses an autonomous-world (on-chain) game
 as a reusable LLM benchmark.*
 
-> **[TODO:** one final citation-verification pass outstanding (tracked in
-> [`../research/literature.md`](../research/literature.md)).**]**
-
 ---
 
-## 3. The Autonomous-World Substrate  `[DRAFTED]`
+## 3. The Autonomous-World Substrate
 
 **3.1 Governed vs. ungoverned: host-independence as a spectrum.** Every
 environment in §2 is fully *governed*: a host runs the server, can silently change rules,
@@ -224,7 +218,7 @@ survival, §6), that is new.
 
 ---
 
-## 4. Kamigotchi as an Instance  `[DRAFTED]`
+## 4. Kamigotchi as an Instance
 
 **4.1 The world.** Kamigotchi World is a fully on-chain MMORPG on Yominet (an
 Initia-based appchain in the Asphodel ecosystem), built on a MUD-derived engine: a
@@ -276,7 +270,7 @@ fuller treatment of chain-layer trust assumptions is deferred to a future revisi
 
 ---
 
-## 5. Released Artifacts and Pilot Deployment  `[DRAFTED]`
+## 5. Released Artifacts and Pilot Deployment
 
 The groundwork is released as three public artifacts — a machine-readable spec of the
 world, an agent harness, and an autonomous pilot agent that ran in the live world for
@@ -302,7 +296,7 @@ two-model agent: a Sonnet 4.6 *executor* acting on a ~5-minute tick against a pr
 playbook, and an Opus 4.7 *optimizer* reviewing tick history every ~6 hours with the
 authority to edit that playbook (at most one rule change per session). It ran unassisted
 in the live world for ~2 months, completing 79 of the game's 192 quests (snapshot
-2026-07-06), and is currently paused pending the model-agnostic harness.
+2026-07-06), and is currently paused while the harness is made model-agnostic (§6).
 
 *The self-improvement loop.* The executor writes anomalies it cannot resolve to a
 structured "I don't know" queue; the optimizer consumes the queue and turns recurring
@@ -350,7 +344,7 @@ in order:
 
 ---
 
-## 7. Threats to Validity  `[DRAFTED]`
+## 7. Threats to Validity
 
 1. **Harness-vs-model confound** (biggest): scaffolding can dominate — publish harness,
    ablate, test multiple harnesses per model.
@@ -381,7 +375,7 @@ in order:
 
 ---
 
-## 8. Discussion & Broader Impact  `[DRAFTED]`
+## 8. Discussion & Broader Impact
 
 The substrate opens onto a longer horizon: an ungoverned world where agents earn, persist,
 and fund themselves is an early arena for *persistent, on-chain, internet-native
@@ -398,8 +392,8 @@ account as MUSU, and a spoils share that scales with the *attacker's* Power is a
 the attacker's harvest; the kami itself is never destroyed — it enters a dead state and
 is revived via a consumable revive item or 33 Onyx shards (deployed parameters
 documented in [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) —
-`mechanics/combat/kill.md`, `mechanics/core-kami/death-revival.md`; live revive-item
-market pricing: pending). Because ONYX is ETH-backed, such losses are bounded but
+`mechanics/combat/kill.md`, `mechanics/core-kami/death-revival.md`). Because ONYX is
+ETH-backed, such losses are bounded but
 real. *The context:* these are rule-governed in-game transfers, not exploits — the game
 working as designed, in a world whose creators explicitly embrace bots as the majority
 population (§4.2). Human players entered a permissionless, openly bot-first world and play
@@ -408,8 +402,7 @@ subjects. *The acknowledgment:* benchmark agents may nonetheless impose real, bo
 economic losses on human players within the rules. We commit to operational norms:
 spending caps, session-key limits, no use of contract exploits, and a
 transparency/disclosure policy for benchmark-operated accounts, to be finalized before
-experiments begin **[TODO: finalize the account-transparency policy once benchmark
-accounts are set up]**.
+experiments begin.
 
 **Broader impact / safety.** Autonomous agents with real capital raise financial-harm,
 market-manipulation, and dual-use concerns. A bounded, well-instrumented benchmark —
