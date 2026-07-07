@@ -8,7 +8,7 @@
 > [`../research/literature.md`](../research/literature.md)); supporting notes:
 > [`../research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md).
 > Shape note: this is deliberately a position-paper draft; for a D&B-style submission the
-> artifact leads and the headline metric (§8) must be fixed first.
+> artifact leads and the headline metric (§6) must be fixed first.
 
 > **Disclosure.** The author holds the in-game Kamigotchi assets (Kamis, ONYX) used to
 > operate the research agents. He has no affiliation with and receives no compensation
@@ -97,9 +97,9 @@ to be.
    machine-readable game design document, a 60+-tool agent harness, and the kami-zero
    pilot (79 of 192 quests; snapshot 2026-07-06). (§5)
 4. **[IN WORK]** A **headline metric** built around endogenous solvency / self-funded
-   survival. (§8)
+   survival. (§6)
 5. **[PENDING]** An **initial multi-model study** of heterogeneous frontier agents
-   co-living in the same world. (§10)
+   co-living in the same world. (§6)
 
 ---
 
@@ -201,7 +201,7 @@ mechanics are embedded on-chain.
   the public chain history is not a leak but a *measured capability*: every agent can
   mine the full record of every strategy ever executed, on equal terms (§3.4). What
   remains is pretraining absorption — a model trained after season N carries season N's
-  strategies in its weights, a structural confound for cross-*time* comparisons (§11,
+  strategies in its weights, a structural confound for cross-*time* comparisons (§7,
   threat 2). Forward-moving world state still blunts *state* memorization: future world
   state depends on live actors and cannot be searched or memorized.
 
@@ -305,7 +305,7 @@ reading the codebase; it is the paper's machine-readable mechanics reference (§
 60+ MCP (Model Context Protocol) tools wrapping every on-chain action, bundled with the
 mechanics documentation and calibrated catalogs, with two operating modes: supervised
 (interactive) and fully autonomous (VM + cron). The model-agnostic rework of this
-harness is the current work item and the precondition for the multi-model study (§10).
+harness is the current work item and the precondition for the multi-model study (§6).
 
 **5.3 The kami-zero pilot.** [kami-zero](https://github.com/tokedo/kami-zero) is a
 two-model agent: a Sonnet 4.6 *executor* acting on a ~5-minute tick against a prose
@@ -330,46 +330,37 @@ in-repo.
 
 ---
 
-## 6. Endogenous Survival: Self-Funded Autonomy  `[TODO]`
+## 6. Research Roadmap
 
-> **[TODO:** in work — deferred until measured; the regime is defined in the
-> abstract.**]**
+The pilot (§5) closes the groundwork phase; what remains is sequenced work, not open
+speculation. The regime it builds toward is **endogenous survival**: an agent whose
+continued operation is funded from inside the world it inhabits — in-world earnings
+converted into ETH-denominated value that pays for the agent's own compute — so that
+solvency, not a score, becomes the survival criterion. The economic rails exist today
+(ONYX is ETH-backed and live on Ethereum mainnet, §4.4; the in-game bridge runs through
+Onyx shards, with live-vs-planned status disclosed precisely — §7, threat 7); whether an
+agent can actually sustain itself on them is exactly what the benchmark is designed to
+measure, and nothing on that dimension is asserted here as a result. Four items remain,
+in order:
 
----
-
-## 7. Benchmark Design  `[TODO]`
-
-> **[TODO:** the benchmark specification (action/observation interface, seasons and
-> reproducibility, fairness, leaderboard) will be written around
-> [kami-harness](https://github.com/tokedo/kami-harness) once its model-agnostic
-> rework — in progress — is complete. The harness is the benchmark.**]**
-
----
-
-## 8. Metrics  `[TODO]`
-
-> **[TODO:** the author is developing the headline metric — very plausibly built around
-> endogenous solvency / self-funded survival.**]**
-
----
-
-## 9. Experimental Protocol  `[TODO]`
-
-> **[TODO:** to be finalized with the multi-model study — models under test, the
-> identical-harness setup, controls (harness ablation, contamination probes,
-> stateful-vs-stateless), and the safety/ethics ops protocol (spending caps, session-key
-> limits, kill-switches).**]**
+1. **Model-agnostic harness rework** (in progress). The benchmark specification —
+   action/observation interface, seasons and reproducibility, fairness, leaderboard —
+   will be written around [kami-harness](https://github.com/tokedo/kami-harness) once
+   any frontier model can drop in. The harness *is* the benchmark.
+2. **Headline metric.** The direction is set — endogenous solvency / self-funded
+   survival; fixing its exact form is the open design problem of the benchmark.
+3. **Experimental protocol.** Models under test on the identical harness; controls
+   (harness ablation, contamination probes, stateful-vs-stateless); and the
+   safety/ethics operations the study runs under — spending caps, session-key limits,
+   kill-switches, and a transparency/disclosure policy for benchmark-operated
+   accounts (§8) — finalized before experiments begin.
+4. **Initial multi-model study.** Heterogeneous frontier agents co-living in the same
+   live world — emergent behaviors, head-to-head standing, learning evidence, and
+   failure modes, reported only once the data exists.
 
 ---
 
-## 10. Results & Observations  `[PENDING EXPERIMENTS]`
-
-> **[TODO:** report the multi-model study — emergent behaviors, head-to-head standing,
-> learning evidence, failure modes; nothing asserted before data exists.**]**
-
----
-
-## 11. Threats to Validity  `[DRAFTED]`
+## 7. Threats to Validity  `[DRAFTED]`
 
 1. **Harness-vs-model confound** (biggest): scaffolding can dominate — publish harness,
    ablate, test multiple harnesses per model.
@@ -385,7 +376,7 @@ in-repo.
    held-out windows; distinguish tamper-evident logging from experimental control.
 4. **Real-money ethics & impact on human co-players:** benchmark agents may impose
    real, bounded economic losses on human players *within the rules* (rule-governed
-   in-game transfers, not exploits — full position in §12); ops norms: spending caps,
+   in-game transfers, not exploits — full position in §8); ops norms: spending caps,
    session-key limits, kill-switches, no contract-exploit use, and a
    transparency/disclosure policy for benchmark-operated accounts, to be finalized
    before experiments begin.
@@ -403,7 +394,7 @@ in-repo.
 
 ---
 
-## 12. Discussion & Broader Impact  `[DRAFTED]`
+## 8. Discussion & Broader Impact  `[DRAFTED]`
 
 The substrate opens onto a longer horizon: an ungoverned world where agents earn, persist,
 and fund themselves is an early arena for *persistent, on-chain, internet-native
@@ -444,7 +435,7 @@ genuine impact statement — reviewers will expect it.]**
 
 ---
 
-## 13. Conclusion  `[SKELETON]`
+## 9. Conclusion  `[SKELETON]`
 > **[TODO:** restate the substrate contribution, the creator-endorsed instance, the
 > released artifacts + pilot (§5), and the endogenous-survival regime; end on the open
 > metric problem + the multi-model study.**]**
