@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+// The registry derives from ../experiments/*.md in the repo root at build time —
+// see lib/experiments.ts.
+import { getExperiments } from '../../lib/experiments';
+
+const experiments = getExperiments();
+---
+
+<Base
+  title="Experiments — KamiBench"
+  description="The registry of controlled KamiBench experiments — each design is published and git-timestamped before its run starts; results are added as runs complete."
+  path="/experiments"
+>
+  <header class="hero container">
+    <h1>Experiments</h1>
+    <p class="hero-tagline">
+      The registry of controlled experiments. Each design is published and
+      git-timestamped before its run starts — the design is the artifact; results are
+      added as runs complete.
+    </p>
+  </header>
+
+  <section class="section container" aria-label="Experiment registry">
+    <ul class="cards exp-list">
+      {
+        experiments.map((exp) => (
+          <li class="card exp-card">
+            <p class="label">Experiment {exp.number}</p>
+            <h2>
+              <a href={`/experiments/${exp.slug}`}>{exp.title}</a>
+            </h2>
+            <p>{exp.oneliner}</p>
+            <p class="exp-status">
+              <span class={`chip ${exp.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+                {exp.statusLabel}
+              </span>
+              <span class="exp-status-note">{exp.status}</span>
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

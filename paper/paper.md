@@ -5,7 +5,10 @@
 > [revision history is on GitHub](https://github.com/tokedo/KamiBench/commits/main/paper/paper.md).
 > Everything still in progress is sequenced in the Research Roadmap (§6); working notes
 > live in [`paper/NOTES.md`](../paper/NOTES.md), supporting research notes in
-> [`research/`](https://github.com/tokedo/KamiBench/tree/main/research).
+> [`research/`](https://github.com/tokedo/KamiBench/tree/main/research). Controlled
+> experiments are design-registered in the public
+> [experiment registry](../experiments/) before any run starts; this paper is the
+> synthesis layer across their results.
 
 > **Disclosure.** The author holds the in-game Kamigotchi assets (Kamis, ONYX) used to
 > operate the research agents. He has no affiliation with and receives no compensation
@@ -288,8 +291,10 @@ reading the codebase; it is the paper's machine-readable mechanics reference (§
 **5.2 Agent harness.** [kami-harness](https://github.com/tokedo/kami-harness) exposes
 60+ MCP (Model Context Protocol) tools wrapping every on-chain action, bundled with the
 mechanics documentation and calibrated catalogs, with two operating modes: supervised
-(interactive) and fully autonomous (VM + cron). The model-agnostic rework of this
-harness is the current work item and the precondition for the multi-model study (§6).
+(interactive) and fully autonomous (VM + cron). The harness's environment-interface
+refactor shipped as v1.0.0 — mechanics, not strategy: a fixed, pinnable boundary
+between agent scaffolds and the world that controlled experiments register against
+(§6).
 
 **5.3 The kami-zero pilot.** [kami-zero](https://github.com/tokedo/kami-zero) is a
 two-model agent: a Sonnet 4.6 *executor* acting on a ~5-minute tick against a prose
@@ -327,10 +332,22 @@ agent can actually sustain itself on them is exactly what the benchmark is desig
 measure, and nothing on that dimension is asserted here as a result. Four items remain,
 in order:
 
-1. **Model-agnostic harness rework** (in progress). The benchmark specification —
-   action/observation interface, seasons and reproducibility, fairness, leaderboard —
-   will be written around [kami-harness](https://github.com/tokedo/kami-harness) once
-   any frontier model can drop in. The harness *is* the benchmark.
+1. **The experiment registry and its first instrument.** Experiments are
+   design-registered publicly before they run — each design specifies its own
+   instrument, from agent architecture to measurement.
+   [Experiment 001, budget-boxed zero-prior orientation](../experiments/001-budget-boxed.md),
+   is registered, its run pending; its instrument fixes everything but the model: a
+   **model backend** (the only per-run variable) drives a **reference scaffold**
+   ([kami-agent](https://github.com/tokedo/kami-agent) — session loop, workspace-file
+   memory, self-chosen wake times; mechanism fixed, policy free), which acts through
+   the **environment interface** ([kami-harness](https://github.com/tokedo/kami-harness)
+   v1.0.0, §5.2) on the world itself (documented in
+   [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd)) — the fixed-scaffold
+   methodology of SWE-agent's agent–computer interface (arXiv:2405.15793), BALROG, and
+   Vending-Bench. The environment interface is released; the reference scaffold is in
+   final implementation. The benchmark specification — action/observation interface,
+   seasons and reproducibility, fairness, leaderboard — is written around the
+   environment interface; the harness *is* the benchmark.
 2. **Headline metric.** The direction is set — endogenous solvency / self-funded
    survival; fixing its exact form is the open design problem of the benchmark.
 3. **Experimental protocol.** Models under test on the identical harness; controls

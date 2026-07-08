@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+// One page per registered experiment, rendered at build time from the design doc
+// in ../experiments/ (single source of truth) — see lib/experiments.ts.
+import { getExperiments } from '../../lib/experiments';
+import type { Experiment } from '../../lib/experiments';
+
+export function getStaticPaths() {
+  return getExperiments().map((exp) => ({
+    params: { slug: exp.slug },
+    props: { exp },
+  }));
+}
+
+interface Props {
+  exp: Experiment;
+}
+
+const { exp } = Astro.props;
+---
+
+<Base
+  title={`${exp.fullTitle} — KamiBench`}
+  description={exp.oneliner}
+  path={`/experiments/${exp.slug}`}
+  ogType="article"
+>
+  <article class="container exp-page paper">
+    <header class="exp-header">
+      <p class="label">
+        <a href="/experiments">Experiment registry</a> · {exp.number}
+      </p>
+      <h1>{exp.title}</h1>
+      <p class="exp-status">
+        <span class={`chip ${exp.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+          {exp.statusLabel}
+        </span>
+        <span class="exp-status-note">{exp.status}</span>
+      </p>
+      <p class="exp-lede">{exp.oneliner}</p>
+    </header>
+    <Fragment set:html={exp.html} />
+  </article>
+</Base>

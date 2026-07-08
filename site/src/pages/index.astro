@@ -1,9 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import Leaderboard from '../components/Leaderboard.astro';
-// Intro paragraph and status-banner body are extracted from the repo-root README
-// at build time (between marker comments) — see lib/readme.ts.
-import { readmeSection } from '../lib/readme';
+// Intro paragraph, status banner, pilot paragraph, and the roadmap all derive
+// from the repo-root README at build time (between marker comments) — see
+// lib/readme.ts. Experiment cards derive from ../experiments/*.md — see
+// lib/experiments.ts.
+import { readmeSection, readmeRoadmap } from '../lib/readme';
+import { getExperiments } from '../lib/experiments';
 
 const github = 'https://github.com/tokedo/KamiBench';
 
@@ -12,6 +14,9 @@ const github = 'https://github.com/tokedo/KamiBench';
 
 const ideaHtml = readmeSection('IDEA');
 const statusHtml = readmeSection('STATUS', { inline: true });
+const pilotHtml = readmeSection('PILOT');
+const roadmap = readmeRoadmap();
+const experiments = getExperiments();
 
 const whyCards = [
   {
@@ -92,64 +97,24 @@ const propertyTable = [
     trajectory: 'Handover to decentralized governance, then control given up entirely (years out)',
   },
 ];
-
-// Mirrors the README's "Status & roadmap" checklist. Items with a `link` render
-// the repo link inline between `text` and `rest`.
-const roadmap = [
-  { done: true, text: 'Main thesis' },
-  { done: true, text: 'Literature review + research paper skeleton' },
-  {
-    done: true,
-    text: 'Technical Game Design Document — ',
-    link: { label: 'kamigotchi-gdd', url: 'https://github.com/tokedo/kamigotchi-gdd' },
-    rest:
-      ': every game mechanic and the complete data catalogs distilled from the game’s ' +
-      'source, so agents and researchers can understand the world without reading the ' +
-      'codebase',
-  },
-  {
-    done: true,
-    text: 'Agent harness prototype — ',
-    link: { label: 'kami-harness', url: 'https://github.com/tokedo/kami-harness' },
-    rest:
-      ': 60+ MCP tools wrapping every on-chain action, with supervised and ' +
-      'fully-autonomous operating modes',
-  },
-  {
-    done: true,
-    text: 'Autonomous self-play pilot — ',
-    link: { label: 'kami-zero', url: 'https://github.com/tokedo/kami-zero' },
-    rest:
-      ': a two-model agent (Sonnet 4.6 executor + Opus 4.7 optimizer) played unassisted ' +
-      'for ~2 months, completing 79 of the game’s 192 quests and surfacing harness ' +
-      'limitations that fed directly back into the tooling',
-  },
-  { done: false, text: 'Finalize the model-agnostic harness (drop-in for any model)' },
-  { done: false, text: 'Run the initial multi-model study' },
-  { done: false, text: 'Finalize the paper → arXiv' },
-];
-
 ---
 
 <Base
   title="KamiBench — an autonomous on-chain world as an agent benchmark"
-  description="A benchmark for long-horizon, continuously-learning AI agents in an autonomous, persistent on-chain world."
+  description="A research program benchmarking long-horizon, continuously-learning AI agents in an autonomous, persistent on-chain world."
   path="/"
 >
   <header class="hero container">
     <h1>KamiBench</h1>
     <p class="hero-sub">
-      An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents
-    </p>
-    <p class="hero-tagline">
-      A benchmark for long-horizon, continuously-learning AI agents in an autonomous,
-      persistent on-chain world.
+      A research program: long-horizon agent evaluation in an autonomous, persistent
+      on-chain world
     </p>
     <div class="btn-row">
-      <a class="btn btn-primary" href="/paper">Paper</a>
+      <a class="btn btn-primary" href="/experiments">Experiments</a>
+      <a class="btn" href="/paper">Paper</a>
       <a class="btn" href={github}>GitHub</a>
       <a class="btn" href="https://docs.asphodel.io/kamigotchi">Kamigotchi</a>
-      <a class="btn" href="https://x.com/0xTokedo">X</a>
     </div>
   </header>
 
@@ -165,6 +130,48 @@ const roadmap = [
     <div class="section-lead">
       <Fragment set:html={ideaHtml} />
     </div>
+  </section>
+
+  <section class="section container" aria-labelledby="experiments">
+    <h2 id="experiments">Experiments</h2>
+    <p class="section-lead">
+      The registry of controlled experiments. Each design is published and
+      git-timestamped before its run starts — the design is the artifact; results are
+      added as runs complete.
+    </p>
+    <ul class="cards exp-list">
+      {
+        experiments.map((exp) => (
+          <li class="card exp-card">
+            <p class="label">Experiment {exp.number}</p>
+            <h3>
+              <a href={`/experiments/${exp.slug}`}>{exp.title}</a>
+            </h3>
+            <p>{exp.oneliner}</p>
+            <p class="exp-status">
+              <span
+                class={`chip ${exp.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}
+              >
+                {exp.statusLabel}
+              </span>
+              <span class="exp-status-note">{exp.status}</span>
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="read-more"><a href="/experiments">All experiments →</a></p>
+  </section>
+
+  <section class="section container" aria-labelledby="paper">
+    <h2 id="paper">The paper</h2>
+    <p class="section-lead">
+      The paper makes the substrate argument in full — the autonomous-world
+      formalization, Kamigotchi as its best-fit instance, threats to validity — and is
+      the synthesis layer across registered experiments: results land there as runs
+      complete.
+    </p>
+    <p class="read-more"><a href="/paper">Read the paper →</a></p>
   </section>
 
   <section class="section container" aria-labelledby="why">
@@ -225,9 +232,11 @@ const roadmap = [
     </p>
   </section>
 
-  <section class="section container" aria-labelledby="leaderboard">
-    <h2 id="leaderboard">Leaderboard</h2>
-    <Leaderboard />
+  <section class="section container" aria-labelledby="feasibility">
+    <h2 id="feasibility">Feasibility: the kami-zero pilot</h2>
+    <div class="section-lead">
+      <Fragment set:html={pilotHtml} />
+    </div>
   </section>
 
   <section class="section container" aria-labelledby="roadmap">
@@ -239,15 +248,7 @@ const roadmap = [
             <span class={`chip ${item.done ? 'chip-ok' : 'chip-pending'}`}>
               {item.done ? 'Done' : 'Pending'}
             </span>
-            <span>
-              {item.text}
-              {item.link && (
-                <a href={item.link.url} target="_blank" rel="noopener">
-                  {item.link.label}
-                </a>
-              )}
-              {item.rest}
-            </span>
+            <span set:html={item.html} />
           </li>
         ))
       }

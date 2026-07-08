@@ -661,12 +661,132 @@ td:first-child {
   margin: 0;
 }
 
-/* ---------- leaderboard ---------- */
+/* ---------- experiments (registry cards + per-experiment pages) ---------- */
 
-.leaderboard-note {
-  font-size: 0.92rem;
-  margin-top: 1rem;
+.exp-list {
+  grid-template-columns: 1fr;
+}
+
+.exp-card {
+  padding: 1.15rem 1.3rem 1.25rem;
+}
+
+.exp-card .label {
+  margin: 0 0 0.35rem;
+}
+
+.exp-card h2,
+.exp-card h3 {
+  font-size: 1.15rem;
+  margin: 0 0 0.45rem;
+}
+
+.exp-card p {
   max-width: 44em;
+}
+
+.exp-status {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.6rem;
+  margin: 0.7rem 0 0;
+}
+
+.exp-status .chip {
+  flex: none;
+}
+
+.exp-status-note {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.exp-page {
+  max-width: 47rem;
+  padding-block: 2.5rem 1rem;
+}
+
+.exp-header {
+  margin-bottom: 2.5rem;
+}
+
+.exp-header .exp-status {
+  margin-top: 0;
+}
+
+.exp-lede {
+  font-size: 1.13rem;
+  line-height: 1.55;
+  margin: 1.1rem 0 0;
+}
+
+/* the inlined architecture SVG: fallback colors live in the file (for GitHub's
+   renderer); these overrides re-theme it with the site palette in both schemes.
+   On narrow screens the figure pans horizontally instead of scaling its text
+   below legibility (min-width sets the floor). */
+.arch-figure {
+  margin: 1.75rem 0 0;
+  overflow-x: auto;
+}
+
+.arch-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 34rem;
+}
+
+.arch-figure .af-bg {
+  fill: var(--bg);
+  stroke: var(--line);
+}
+
+.arch-figure .af-box {
+  fill: var(--bg-raise);
+  stroke: var(--line);
+}
+
+.arch-figure .af-box-var {
+  stroke: var(--accent);
+}
+
+.arch-figure .af-title {
+  fill: var(--text);
+}
+
+.arch-figure .af-repo {
+  fill: var(--accent);
+}
+
+.arch-figure .af-role,
+.arch-figure .af-conn-label {
+  fill: var(--muted);
+}
+
+.arch-figure .af-conn {
+  stroke: var(--muted);
+}
+
+.arch-figure .af-arrow {
+  fill: var(--muted);
+}
+
+.arch-figure .af-badge {
+  fill: var(--pend-bg);
+}
+
+.arch-figure .af-badge-text {
+  fill: var(--pend-fg);
+}
+
+.arch-figure .af-badge-var {
+  fill: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.arch-figure .af-badge-var-text {
+  fill: var(--accent);
 }
 
 .visually-hidden {
@@ -679,21 +799,6 @@ td:first-child {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-/* pending placeholder (leaderboard, future sections) */
-.placeholder {
-  border: 1px dashed var(--line);
-  border-radius: 10px;
-  padding: 2rem 1.5rem;
-  margin-top: 1.5rem;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.placeholder p {
-  margin: 0.65rem 0 0;
 }
 
 /* citation links in the paper body: quiet by default, accent on hover */

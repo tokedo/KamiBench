@@ -76,6 +76,10 @@ const github = 'https://github.com/tokedo/KamiBench';
       <div class="container">
         <a class="wordmark" href="/">KamiBench</a>
         <nav class="site-nav" aria-label="Site">
+          <a
+            href="/experiments"
+            aria-current={path.startsWith('/experiments') ? 'page' : undefined}>Experiments</a
+          >
           <a href="/paper" aria-current={path === '/paper' ? 'page' : undefined}>Paper</a>
           <a href={github}>GitHub</a>
         </nav>

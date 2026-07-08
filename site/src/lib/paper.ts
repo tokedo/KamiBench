@@ -10,8 +10,16 @@
 // map for §2 / References mentions). §N / §N.M cross-references become in-page
 // anchor links: h2 ids for sections, generated `s-N-M` ids on subsection lead-in
 // paragraphs (`**N.M …**`) — pure anchors, no client-side JS. All of this is
-// post-processing; paper.md is never edited.
+// post-processing; paper.md is never edited. Generic helpers live in lib/markdown.ts.
 import { marked } from 'marked';
+import {
+  decodeEntities,
+  linkArxivIds,
+  linkBareDomains,
+  slugify,
+  transformTextNodes,
+  wrapTables,
+} from './markdown';
 
 const GITHUB_BLOB = 'https://github.com/tokedo/KamiBench/blob/main';
 
@@ -51,24 +59,6 @@ export interface RenderedPaper {
   headings: PaperHeading[];
 }
 
-function decodeEntities(s: string): string {
-  return s
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&amp;/g, '&');
-}
-
-function slugify(s: string): string {
-  return decodeEntities(s)
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-');
-}
-
 /** Render the content of a `[…]` marker (already HTML-escaped by marked) as chips.
  *  "DRAFTED — note" → status chip + muted note; unrecognized content → muted note only. */
 function statusMarkup(content: string): string {
@@ -90,52 +80,6 @@ function badge(kind: string, label: string, content?: string): string {
   return `<span class="badge badge-${kind}"><b>${label}</b>${body}</span>`;
 }
 
-/** Apply `fn` to text nodes only, skipping anything inside <a>, <code>, or <pre>.
- *  Each linkifying pass runs separately, so anchors inserted by an earlier pass are
- *  real tags by the time the next pass walks the document — never matched again. */
-function transformTextNodes(html: string, fn: (text: string) => string): string {
-  const SKIP = new Set(['a', 'code', 'pre']);
-  let depth = 0;
-  return html
-    .split(/(<[^>]+>)/)
-    .map((part) => {
-      if (part.startsWith('<')) {
-        const tag = part.match(/^<\/?([a-zA-Z0-9]+)/)?.[1]?.toLowerCase();
-        if (tag && SKIP.has(tag)) {
-          if (part.startsWith('</')) depth = Math.max(0, depth - 1);
-          else depth += 1;
-        }
-        return part;
-      }
-      return depth > 0 || part === '' ? part : fn(part);
-    })
-    .join('');
-}
-
-function anchor(url: string, label: string): string {
-  return `<a href="${url}" rel="noopener">${label}</a>`;
-}
-
-/** arXiv:2503.14499 and bare (2503.14499) → arxiv.org/abs links. */
-function linkArxivIds(text: string): string {
-  return text
-    .replace(/\barXiv:(\d{4}\.\d{4,5})\b/g, (m, id: string) =>
-      anchor(`https://arxiv.org/abs/${id}`, m)
-    )
-    .replace(/\((\d{4}\.\d{4,5})\)/g, (_, id: string) =>
-      `(${anchor(`https://arxiv.org/abs/${id}`, id)})`
-    );
-}
-
-/** Bare domain-with-path mentions (theaidigest.org/village, …) → https:// links.
- *  A path segment is required, so plain names like webDiplomacy.net stay text. */
-function linkBareDomains(text: string): string {
-  return text.replace(
-    /(?<![\w/.@])((?:[a-z0-9-]+\.)+[a-z]{2,}\/[A-Za-z0-9\-._~%/]*[A-Za-z0-9\-_~%])/g,
-    (m: string) => anchor(`https://${m}`, m)
-  );
-}
-
 /** NAMED_LINKS, first occurrence per section, in §2 / References only. */
 function applyNamedLinks(html: string): string {
   const phrases = [...NAMED_LINKS].sort((a, b) => b[0].length - a[0].length);
@@ -155,7 +99,7 @@ function applyNamedLinks(html: string): string {
           if (done) return text;
           return text.replace(re, (m) => {
             done = true;
-            return anchor(url, m);
+            return `<a href="${url}" rel="noopener">${m}</a>`;
           });
         });
       }
@@ -168,11 +112,12 @@ export function renderPaper(src: string): RenderedPaper {
   let html = marked.parse(src, { gfm: true }) as string;
   const headings: PaperHeading[] = [];
 
-  // Relative repo links → GitHub (the site only serves / and /paper).
-  html = html.replace(
-    /href="\.\.\/((?:research|paper)\/[^"]+)"/g,
-    `href="${GITHUB_BLOB}/$1"`
-  );
+  // Relative repo links: experiment docs → the site's own experiment pages;
+  // research/paper files → GitHub (the site doesn't serve them).
+  html = html
+    .replace(/href="\.\.\/experiments\/([^"]+)\.md"/g, 'href="/experiments/$1"')
+    .replace(/href="\.\.\/experiments\/?"/g, 'href="/experiments"')
+    .replace(/href="\.\.\/((?:research|paper)\/[^"]+)"/g, `href="${GITHUB_BLOB}/$1"`);
 
   // Section headings: add slug ids (for the TOC) and convert trailing `[…]` code
   // markers into status chips.
@@ -231,10 +176,7 @@ export function renderPaper(src: string): RenderedPaper {
     )
     .replace(/<strong>\[PENDING\]<\/strong>/g, badge('pending', 'PENDING'));
 
-  // Tables scroll inside their own container on narrow screens.
-  html = html
-    .replace(/<table>/g, '<div class="table-wrap"><table>')
-    .replace(/<\/table>/g, '</table></div>');
+  html = wrapTables(html);
 
   // Clickable citations. Separate passes so each pass skips the anchors the
   // previous one inserted (see transformTextNodes).

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 648" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="af-desc">
+  <title id="af-desc">Experiment architecture: a model backend (the only element that varies per run) and its agent-built workspace memory sit above the reference scaffold kami-agent, which acts through the environment interface kami-harness on the world, Kamigotchi — live and shared by models and human players.</title>
+  <defs>
+    <marker id="af-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
+      <path class="af-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#8f8a80"/>
+    </marker>
+  </defs>
+
+  <rect class="af-bg" x="0.5" y="0.5" width="719" height="647" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
+
+  <!-- Row 1, left: model backend (the per-run variable) -->
+  <rect class="af-box af-box-var" x="48.5" y="24.5" width="294" height="132" rx="10" fill="#ffffff" stroke="#a03518"/>
+  <text class="af-title" x="72" y="56" font-size="17" font-weight="600" fill="#1c1917">Model backend</text>
+  <rect class="af-badge-var" x="198" y="40" width="128" height="22" rx="11" fill="#f3ddd5"/>
+  <text class="af-badge-var-text" x="262" y="55" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#a03518">VARIES PER RUN</text>
+  <text class="af-role" x="72" y="88" font-size="13.5" fill="#6d675f">The model under test — the only</text>
+  <text class="af-role" x="72" y="106" font-size="13.5" fill="#6d675f">element that changes between runs.</text>
+
+  <!-- Row 1, right: workspace memory (agent-built) -->
+  <rect class="af-box" x="378.5" y="24.5" width="293" height="132" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="402" y="56" font-size="17" font-weight="600" fill="#1c1917">Memory<tspan class="af-role" dx="7" font-weight="400" fill="#6d675f">—</tspan><tspan dx="7" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="15">workspace/</tspan></text>
+  <text class="af-role" x="402" y="88" font-size="13.5" fill="#6d675f">Starts empty; each model builds</text>
+  <text class="af-role" x="402" y="106" font-size="13.5" fill="#6d675f">its own persistent knowledge and</text>
+  <text class="af-role" x="402" y="124" font-size="13.5" fill="#6d675f">strategies as it explores the world.</text>
+
+  <!-- model ↔ memory -->
+  <line class="af-conn" x1="348" y1="90" x2="372" y2="90" stroke="#8f8a80" marker-start="url(#af-head)" marker-end="url(#af-head)"/>
+
+  <!-- row 1 ↔ scaffold -->
+  <line class="af-conn" x1="195.5" y1="161" x2="195.5" y2="203" stroke="#8f8a80" marker-start="url(#af-head)" marker-end="url(#af-head)"/>
+  <text class="af-conn-label" x="183" y="178" font-size="12.5" text-anchor="end" fill="#6d675f">provider API,</text>
+  <text class="af-conn-label" x="183" y="194" font-size="12.5" text-anchor="end" fill="#6d675f">native tool calling</text>
+  <line class="af-conn" x1="525.5" y1="161" x2="525.5" y2="203" stroke="#8f8a80" marker-start="url(#af-head)" marker-end="url(#af-head)"/>
+  <text class="af-conn-label" x="537" y="178" font-size="12.5" fill="#6d675f">file tools,</text>
+  <text class="af-conn-label" x="537" y="194" font-size="12.5" fill="#6d675f">read / write</text>
+
+  <!-- Layer 2: reference scaffold -->
+  <rect class="af-box" x="48.5" y="208.5" width="623" height="104" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="72" y="240" font-size="17" font-weight="600" fill="#1c1917">Reference scaffold<tspan class="af-role" dx="7" font-weight="400" fill="#6d675f">—</tspan><a href="https://github.com/tokedo/kami-agent"><tspan class="af-repo" dx="7" fill="#a03518" text-decoration="underline">kami-agent</tspan></a></text>
+  <rect class="af-badge" x="492" y="226" width="164" height="22" rx="11" fill="#e8ebef"/>
+  <text class="af-badge-text" x="574" y="241" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">FIXED ACROSS MODELS</text>
+  <text class="af-role" x="72" y="264" font-size="13.5" fill="#6d675f">Session loop, self-chosen wake times, one adapter per provider.</text>
+  <text class="af-role" x="72" y="282" font-size="13.5" fill="#6d675f">Serves and persists the workspace between sessions. Mechanism fixed, policy free.</text>
+
+  <line class="af-conn" x1="360.5" y1="317" x2="360.5" y2="359" stroke="#8f8a80" marker-start="url(#af-head)" marker-end="url(#af-head)"/>
+  <text class="af-conn-label" x="374" y="342" font-size="12.5" fill="#6d675f">Model Context Protocol (MCP)</text>
+
+  <!-- Layer 3: environment interface -->
+  <rect class="af-box" x="48.5" y="364.5" width="623" height="104" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="72" y="396" font-size="17" font-weight="600" fill="#1c1917">Environment interface<tspan class="af-role" dx="7" font-weight="400" fill="#6d675f">—</tspan><a href="https://github.com/tokedo/kami-harness"><tspan class="af-repo" dx="7" fill="#a03518" text-decoration="underline">kami-harness</tspan></a><tspan class="af-role" dx="6" font-weight="400" font-size="13" fill="#6d675f">v1.0.0</tspan></text>
+  <rect class="af-badge" x="492" y="382" width="164" height="22" rx="11" fill="#e8ebef"/>
+  <text class="af-badge-text" x="574" y="397" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">FIXED ACROSS MODELS</text>
+  <text class="af-role" x="72" y="420" font-size="13.5" fill="#6d675f">60+ MCP tools wrapping every on-chain action — mechanics, not strategy.</text>
+  <text class="af-role" x="72" y="438" font-size="13.5" fill="#6d675f">Pinned per run; identical for every model.</text>
+
+  <line class="af-conn" x1="360.5" y1="473" x2="360.5" y2="515" stroke="#8f8a80" marker-start="url(#af-head)" marker-end="url(#af-head)"/>
+  <text class="af-conn-label" x="374" y="498" font-size="12.5" fill="#6d675f">transactions · chain reads</text>
+
+  <!-- Layer 4: the world -->
+  <rect class="af-box" x="48.5" y="520.5" width="623" height="104" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="72" y="552" font-size="17" font-weight="600" fill="#1c1917">The world<tspan class="af-role" dx="7" font-weight="400" fill="#6d675f">—</tspan><tspan dx="7">Kamigotchi</tspan></text>
+  <rect class="af-badge" x="398" y="538" width="258" height="22" rx="11" fill="#e8ebef"/>
+  <text class="af-badge-text" x="527" y="553" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">LIVE · SHARED BY MODELS &amp; HUMANS</text>
+  <text class="af-role" x="72" y="576" font-size="13.5" fill="#6d675f">A persistent, fully on-chain MMORPG with a live economy and human players.</text>
+  <text class="af-role" x="72" y="594" font-size="13.5" fill="#6d675f">Machine-readable spec:<a href="https://github.com/tokedo/kamigotchi-gdd"><tspan class="af-repo" dx="6" fill="#a03518" text-decoration="underline">kamigotchi-gdd</tspan></a></text>
+</svg>
