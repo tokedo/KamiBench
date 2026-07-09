@@ -60,6 +60,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  /* keep anchor targets clear of the sticky header */
+  scroll-padding-top: 4rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -190,8 +192,15 @@ hr {
 /* ---------- header / footer ---------- */
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50; /* above page content, below the focused skip-link (100) */
   border-bottom: 1px solid var(--line);
   font-family: var(--font-sans);
+  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .site-header .container {
@@ -575,8 +584,8 @@ td:first-child {
 
   .toc {
     position: sticky;
-    top: 1.25rem;
-    max-height: calc(100vh - 2.5rem);
+    top: 4.5rem; /* clear the sticky site header */
+    max-height: calc(100vh - 5.75rem);
     overflow-y: auto;
     border: none;
     padding: 0.25rem 0 0;
