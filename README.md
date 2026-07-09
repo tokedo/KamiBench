@@ -28,7 +28,7 @@ rules were followed while the world ran. A permissionless chain closes that gap 
 source extended from code to execution — and one world with all four properties
 already exists and has run for over a year: Kamigotchi.
 
-The medium brings two research affordances: the ledger — the world's complete past, a
+The chain brings two advantages: the ledger — the world's complete past, a
 corpus any agent can study — and the economy, through which an agent's earnings can,
 in principle, buy its own inference.
 
