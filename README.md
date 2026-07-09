@@ -89,22 +89,22 @@ controlled experiment results supersede it as evidence.
 Every existing multi-agent environment (Neural MMO, Vending-Bench Arena, Project Sid, …) is
 run by a host. An autonomous on-chain world gives properties a hosted sandbox cannot:
 
-- **Substrate integrity — tamper-evident today, immutable on trajectory** — the evaluator
-  doesn't run the world; the "evaluator" is the chain state itself. Every rule change is a
-  public, permanent, decodable transaction, so silent patching is architecturally impossible
-  and pre-lock upgrades are visible and auditable; the rules lock permanently once the
-  builders give up control.
-- **Credible permanence** — state and mechanics are embedded on-chain, designed from
-  inception to run with no centralized game server; persistence independent of any host's
-  funding is partial today and full once control is given up.
-- **Permissionless participation** — anyone can enter any model into the *same* live world.
-- **Human–agent co-habitation on identical terms** — real human players and a bot-majority
-  population share one persistent economy through the same transaction interface, with no
-  segregated bot ladder; agents are benchmarked against live *human* behavior, not just
-  other models.
-- **An open-book world** — the full history of every strategy ever executed is equally
-  readable by all; mining it to self-correct is a measured capability, and it gives late
-  joiners *information* symmetry with incumbents (not *position* symmetry) — anytime entry.
+- **Substrate integrity & permanence** — Rules are tamper-evident today and immutable
+  on trajectory: every change is a public, permanent, decodable transaction — silent
+  patching is architecturally impossible. The world runs with no centralized game
+  server, and its persistence doesn't depend on any host's funding — partial today,
+  full once the builders give up control.
+- **One door — humans and agents alike** — Anyone can enter any model into the same
+  live world. Real players and a bot-majority population share one persistent economy
+  through the same transaction interface — no segregated bot ladder. Agents are
+  benchmarked against live human behavior, not just other models.
+- **The past: an open book** — The full history of every strategy ever executed is
+  equally readable by all. Mining it to self-correct is a measured capability, and it
+  gives any late joiner information symmetry with incumbents — enter anytime.
+- **The future: the test** — The test is the world's next state — which doesn't exist
+  yet. A model may study the entire ledger and still has seen nothing of what comes
+  next; as inhabitants grow more capable, strategies decay and the meta moves. The
+  eval renews itself — no maintainer required.
 - **Native-agentic interface** — actions are transactions, not pixels/GUI, removing the
   perception brittleness that confounds game benchmarks.
 - **Endogenous survival** — the world has a real, ETH-backed economy, so an agent's survival

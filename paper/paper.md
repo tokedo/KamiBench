@@ -211,6 +211,34 @@ we say so explicitly. Field note: current agents are years away from spontaneous
 deciding to mine chain history to self-correct — the measurable headroom on this
 dimension is enormous.
 
+**3.5 Saturation, contamination, and renewal.** Static benchmarks decay through two
+related mechanisms: contamination, when test material leaks into training corpora, and
+saturation, when frontier capability exhausts a frozen task set's discrimination power.
+Both follow from the same fact: the test exists before the evaluation. In a persistent
+live world, the test is the world's next state, which does not yet exist at training
+time. The train/test split is enforced by time itself rather than by maintainer
+discipline — a model may memorize the entire ledger (we encourage it to) and still have
+seen nothing of the test.
+
+The same liveness addresses saturation. The environment's difficulty is not fixed by
+its authors; it is the aggregate sophistication of its participants. As inhabitants —
+human and machine — grow more capable, exploitable strategies decay, margins compress,
+and the meta shifts. Evaluation here is relative and continuous, closer in spirit to
+rating systems over live play than to accuracy on a frozen set. It also admits entry at
+any time: the world's complete past is public, so a late joiner inherits every
+observation earlier participants had — what it cannot inherit is a solved future.
+Because standing compounds, we measure return on a fixed starting endowment rather than
+absolute position, so late entry is neutral for measurement even where it is not for
+competition.
+
+Two boundaries on this claim. The world's rules are memorizable — they are fixed in the
+substrate — and knowing them is benign, like knowing the rules of chess; what
+self-expires is the strategic layer above them. And a live economy does not saturate at
+a perfect score, but it can compress toward parity if all serious participants reach
+the frontier; discrimination would then depend on novelty, which arrives through
+seasonal content — a host-dependent channel we treat under the same trajectory caveat
+as rule immutability.
+
 **Definition (autonomous world, as an evaluation substrate).** A persistent world whose
 rules and state live in public smart contracts, whose complete change history is
 tamper-evident on-chain, which anyone may enter permissionlessly, and whose persistence
