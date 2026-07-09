@@ -31,8 +31,9 @@ Claim: whoever runs an environment can — even inadvertently — compromise the
        decodable transaction. Tamper-evident today, immutable on trajectory
        (governance renouncement).
 Best sentences: paper §3.1 ("The honest present-tense claim is
-       tamper-evident, not tamper-proof…"); README "Why a chain" substrate-
-       integrity bullet; site "Today vs. trajectory" table note.
+       tamper-evident, not tamper-proof…"); README "Why a chain" bullet
+       "Permanent world, built-in integrity"; site "Today vs. trajectory"
+       table note.
 Objections & answers: contracts remain upgradeable → tamper-evident vs.
        tamper-proof, immutability stated only as trajectory, never present
        tense; trust doesn't vanish → it reduces to the underlying chain

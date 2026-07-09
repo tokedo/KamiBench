@@ -89,7 +89,7 @@ controlled experiment results supersede it as evidence.
 Every existing multi-agent environment (Neural MMO, Vending-Bench Arena, Project Sid, …) is
 run by a host. An autonomous on-chain world gives properties a hosted sandbox cannot:
 
-- **Substrate integrity & permanence** — Not just readable rules — verifiable play.
+- **Permanent world, built-in integrity** — Not just readable rules — verifiable play.
   Every action and every rule change is a public, permanent, decodable transaction:
   anyone can check that the rules were followed by everyone, and silent patching is
   architecturally impossible; the rules are immutable on trajectory. The world runs
