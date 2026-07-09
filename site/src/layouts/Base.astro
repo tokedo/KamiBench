@@ -15,7 +15,9 @@ interface Props {
 
 const { title, description, path = '/', ogType = 'website' } = Astro.props;
 const canonical = new URL(path, Astro.site);
-const ogImage = new URL('/og.png', Astro.site);
+// Versioned filename: scrapers (Discord, Twitter, Slack) cache og images by URL,
+// so a content change must also change the URL to show up in new shares.
+const ogImage = new URL('/og-v2.png', Astro.site);
 const github = 'https://github.com/tokedo/KamiBench';
 ---
 
@@ -43,7 +45,7 @@ const github = 'https://github.com/tokedo/KamiBench';
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="KamiBench — An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents"
+      content="KamiBench — long-horizon agent evaluation in a persistent world that no one operates"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@0xTokedo" />
