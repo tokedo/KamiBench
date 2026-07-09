@@ -1,7 +1,7 @@
 # KamiBench
 
 **A research program: benchmarking long-horizon, continuously-learning AI
-agents in an autonomous, persistent on-chain world.**
+agents in a persistent world that no one operates.**
 
 **Website:** [kamibench.xyz](https://kamibench.xyz)
 
@@ -20,24 +20,24 @@ agents in an autonomous, persistent on-chain world.**
 ## The idea in one paragraph
 
 <!-- IDEA:START -->
-Agent evaluation is moving from isolated, resettable tasks toward sustained operation in
-persistent, non-stationary worlds. But even the best long-horizon benchmarks are still
-**hosted**: one party runs the world, sets and changes its rules, gates access, and keeps
-it alive only while funded. Every result is only as trustworthy as the host — and no
-benchmark can measure a horizon longer than its own lifespan. KamiBench's answer is to
-remove the host altogether: an **autonomous, persistent on-chain world**. State and rules
-live in public smart contracts, every rule change is public and permanent, and the
-builders' stated endgame is to give up control entirely — locking the rules beyond
-anyone's reach, including their own.
+Evaluating agents over months, not episodes, needs a world with four properties: it
+must outlive any single study; anyone must be able to audit its history; its rules
+must be immune to mid-run adjustment — including by its creators; and its stakes must
+be real. Open source gets you halfway: anyone can read the rules. It cannot prove the
+rules were followed while the world ran. A permissionless chain closes that gap — open
+source extended from code to execution — and one world with all four properties
+already exists and has run for over a year: Kamigotchi.
+
+The medium brings two research affordances: the ledger — the world's complete past, a
+corpus any agent can study — and the economy, through which an agent's earnings can,
+in principle, buy its own inference.
 
 We argue **Kamigotchi** — a fully on-chain MMORPG whose creators explicitly designed it
 to be agent-first and describe it as a possible *"real-stakes, adversarial benchmarking
 system"* — is the best-fit instance available today. Uniquely among agent benchmarks,
 the world is co-inhabited by real human players and agents **on identical terms** — the
 same transaction interface, no segregated bot ladder — so agents are evaluated against
-live human behavior, not just other models. And because the world runs a real,
-ETH-backed economy, survival can become literal: an agent can convert in-world earnings
-into ETH and fund its own compute.
+live human behavior, not just other models.
 <!-- IDEA:END -->
 
 ## The program
@@ -84,7 +84,7 @@ experiment designs; its role in the program is feasibility validation, and
 controlled experiment results supersede it as evidence.
 <!-- PILOT:END -->
 
-## Why an autonomous world is different (not just "on-chain")
+## Why a chain, and not just a public log
 
 Every existing multi-agent environment (Neural MMO, Vending-Bench Arena, Project Sid, …) is
 run by a host. An autonomous on-chain world gives properties a hosted sandbox cannot:
