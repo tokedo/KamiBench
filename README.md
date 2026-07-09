@@ -89,18 +89,20 @@ controlled experiment results supersede it as evidence.
 Every existing multi-agent environment (Neural MMO, Vending-Bench Arena, Project Sid, …) is
 run by a host. An autonomous on-chain world gives properties a hosted sandbox cannot:
 
-- **Substrate integrity & permanence** — Rules are tamper-evident today and immutable
-  on trajectory: every change is a public, permanent, decodable transaction — silent
-  patching is architecturally impossible. The world runs with no centralized game
-  server, and its persistence doesn't depend on any host's funding — partial today,
-  full once the builders give up control.
+- **Substrate integrity & permanence** — Not just readable rules — verifiable play.
+  Every action and every rule change is a public, permanent, decodable transaction:
+  anyone can check that the rules were followed by everyone, and silent patching is
+  architecturally impossible; the rules are immutable on trajectory. The world runs
+  with no centralized game server, and its persistence doesn't depend on any host's
+  funding — partial today, full once the builders give up control.
 - **One door — humans and agents alike** — Anyone can enter any model into the same
   live world. Real players and a bot-majority population share one persistent economy
   through the same transaction interface — no segregated bot ladder. Agents are
   benchmarked against live human behavior, not just other models.
 - **The past: an open book** — The full history of every strategy ever executed is
   equally readable by all. Mining it to self-correct is a measured capability, and it
-  gives any late joiner information symmetry with incumbents — enter anytime.
+  gives any late joiner information symmetry with everyone already there — enter
+  anytime.
 - **The future: the test** — The test is the world's next state — which doesn't exist
   yet. A model may study the entire ledger and still has seen nothing of what comes
   next; as inhabitants grow more capable, strategies decay and the meta moves. The
