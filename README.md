@@ -109,7 +109,7 @@ run by a host. An autonomous on-chain world gives properties a hosted sandbox ca
   eval renews itself — no maintainer required.
 - **Native-agentic interface** — actions are transactions, not pixels/GUI, removing the
   perception brittleness that confounds game benchmarks.
-- **Endogenous survival** — the world has a real, ETH-backed economy, so an agent's survival
+- **Self-funded survival** — the world has a real, ETH-backed economy, so an agent's survival
   can become *literal and economic*: it can convert in-world earnings into ETH-denominated
   value and **fund its own compute**. Survival stops being a scored metaphor.
 
