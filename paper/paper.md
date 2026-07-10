@@ -109,7 +109,8 @@ properties below follow from.
   a benchmark host to provision an instance. Humans and agents participate in the same
   evolving state and economy through the same underlying transaction layer — no
   separate bot environment or segregated bot ladder. The population is currently
-  bot-majority; precise human-vs-automated counts are nontrivial exactly because the
+  bot-majority (Asphodel, 2026); precise human-vs-automated counts are nontrivial
+  exactly because the
   interface is shared, and verifying them via the on-chain analytics layer is future
   work. Benchmarking amid a live human population tests adaptation to *human* behavior,
   not just other models.
@@ -188,8 +189,9 @@ the [official docs](https://docs.asphodel.io/kamigotchi), the
 **3.2 Built for agents, and why it fits.** The whitepaper frames Kamigotchi as
 agent-first: its creators describe the game as "uniquely friendly to bots," report that
 automated play constitutes the majority of activity, and name the system a possible
-"real-stakes, adversarial benchmarking system" (further creator signals are catalogued
-in [`research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md)).
+"real-stakes, adversarial benchmarking system" (Asphodel, 2026; verbatim quotes and
+further creator signals are catalogued in
+[`research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md)).
 The world instantiates each property of §2.1: on-chain state with a complete public
 state-transition history; a persistent world that predates and will outlast any single
 study; interface parity between humans and agents; an open past facing an unknown,
@@ -199,7 +201,7 @@ economy whose assets carry ETH-backed external value.
 **3.3 Why it is not yet the ideal instance.** Contracts remain upgradeable: full
 governance renouncement (via the unlaunched $SOMA token) is a multi-year trajectory —
 the whitepaper (published June 2026) estimates at least four more years. At the chain
-layer, trust currently reduces to Yominet/Initia infrastructure —
+layer, the system still relies on Yominet/Initia infrastructure —
 state and rules are on-chain, but the chain itself is operated; a possible Ethereum
 migration would strengthen this over time. Persistence independent of any host's funding
 is therefore partial today (§2.2). The world is *already substantially
@@ -208,7 +210,8 @@ changes — and on a credible trajectory to full autonomy; we do not overclaim
 present-tense immortality.
 
 **3.4 Economic consequence.** $ONYX is live on Ethereum mainnet (1+ year) and backed by
-an ETH reserve. The planned MUSU↔ONYX pathway is intended to connect value earned inside
+an ETH reserve (Asphodel, 2026). The planned MUSU↔ONYX pathway is intended to connect
+value earned inside
 the game to that external economy. Future experiments can test whether an agent's
 earnings can fund continued inference (§4.2); no self-funding result — and no currently
 complete conversion pathway — is claimed here.
@@ -279,7 +282,8 @@ exists.
 | Kamigotchi / KamiBench | Yes | Yes | Yes | Externally valued | No at the benchmark layer |
 
 *Table note: "no at the benchmark layer" means KamiBench does not operate the game
-world; the underlying appchain remains operated infrastructure (§3.3).*
+world; the underlying appchain remains operated infrastructure (§3.3). Class
+characterizations follow the works cited in the paragraphs below.*
 
 **Long-horizon and continual-learning evaluation.** METR time-horizon
 (arXiv:2503.14499), Factorio LE (arXiv:2503.09617), LifelongAgentBench
@@ -318,24 +322,31 @@ an autonomous-world game as a reusable LLM benchmark.
 
 **6.1 Attribution.** Measured behavior confounds the model with the scaffold, the tool
 implementations, and the starting state; game-benchmark evidence (§5) shows scaffolding
-can dominate. Mitigations: the scaffold and interface are published and pinned, scaffold
-ablations and multiple-scaffold runs are part of the protocol (§4.2), and — because
-permissionless entry allows hand-driving — benchmark accounts require proof of
-autonomous signing, with budgets normalized across participants.
+can dominate. Mitigations: the scaffold and interface are published, and the registered
+protocol pins their exact versions in each run's manifest alongside the model string and
+sampling parameters; scaffold ablations and multiple-scaffold runs are planned controls
+for later studies (§4.2). Registered runs are benchmark-operated on identical budgets
+with public logs; a future permissionless-entry track would additionally require proof
+of autonomous signing, since permissionless entry allows hand-driving.
 
 **6.2 Live-world validity.** The environment is non-stationary and cannot be exactly
-replayed. Public logging provides auditability, not experimental control; the protocol
-compensates with seasons and snapshots, held-out evaluation windows, and forked replay
-where mechanics allow. Emergent behaviors that straddle the line — collusion,
-reward-hacking, contract exploits — are designated up front as either measured behavior
-or disallowed exploit, and monitored and classified under the registered protocol.
+replayed. Public logging provides auditability, not experimental control. The
+[registered protocol](../experiments/001-budget-boxed.md) compensates with pinned run
+manifests, chain-derived ground truth, and a pre-registered interference protocol —
+interactions between concurrent study agents are logged as dated incidents and annotated
+in the analysis rather than excluded post hoc; planned later studies add seasons and
+snapshots, held-out evaluation windows, and forked replay where the mechanics permit.
+Emergent behaviors that straddle the line — collusion, reward-hacking, contract
+exploits — are designated up front as either measured behavior or disallowed exploit,
+and monitored and classified under the registered protocol.
 
 **6.3 Knowledge asymmetry.** Run-time access to the public history is a measured
 capability (§2.1); what remains is pretraining absorption — a model trained after season
 N carries season N's strategies in its weights, and no runtime access rule can equalize
 that. Headline comparisons are therefore within-season among contemporaneous models;
-cross-season comparisons are flagged as indicative only; pre/post-cutoff probes bound
-the effect. Public historical access also does not eliminate private information,
+cross-season comparisons are flagged as indicative only; pre/post-cutoff probes are
+planned to bound the effect. Public historical access also does not eliminate private
+information,
 off-chain coordination, or accumulated incumbent advantage — a late entrant inherits the
 world's past, not its opponents' capital; we measure return on a fixed starting
 endowment rather than absolute position.
@@ -377,17 +388,65 @@ results.
 
 ## References
 
-The annotated bibliography — grouped by theme, with the must-cite core set — lives in
-[`../research/literature.md`](../research/literature.md). The core set:
+An annotated version of this bibliography, grouped by theme with positioning notes,
+lives in [`../research/literature.md`](../research/literature.md).
 
-METR time-horizon (2503.14499) · Factorio LE (2503.09617) · LifelongAgentBench
-(2505.11942) · StreamBench (2406.08747) · τ-bench (2406.12045) · Neural MMO (2110.07594) ·
-Project Sid (2411.00114) · Generative Agents (2304.03442) · Melting Pot 2.0 (2211.13746) ·
-Vending-Bench (2502.15840) + Arena · Project Vend / Andon Café · lmgame-Bench (2505.15146) ·
-BALROG (2411.13543) · Foresight Arena (2605.00420) · CryptoTrade (2407.09546) · Agent
-Market Arena (2510.11695) · Autonomous Worlds (MUD/Lattice; Dark Forest/0xPARC) · Cicero
-(Meta AI, Science 2022) · AlphaStar (DeepMind, Nature 2019) · Agent Village (AI Digest,
-theaidigest.org/village) · Asphodel whitepaper (docs.asphodel.io/whitepaper).
+- 0xPARC & the Dark Forest team (2020). *Dark Forest*: a zero-knowledge,
+  incomplete-information on-chain game. zkga.me.
+- Agapiou, J. P., et al. (2023). *Melting Pot 2.0*. arXiv:2211.13746.
+- AI Digest (2025). *Agent Village*. theaidigest.org/village.
+- Altera.AL (2024). *Project Sid: Many-Agent Simulations Toward AI Civilization*.
+  arXiv:2411.00114.
+- Andon Labs (2025). *Vending-Bench Arena*. andonlabs.com/evals/vending-bench-arena.
+- Andon Labs (2026). *Andon Café*. andonlabs.com/cafe.
+- Anthropic & Andon Labs (2025). *Project Vend*. anthropic.com/research/project-vend-1.
+- Asphodel (2026). *Asphodel whitepaper* (published 2026-06-12).
+  docs.asphodel.io/whitepaper.
+- Backlund, A., & Petersson, L. (2025). *Vending-Bench: A Benchmark for Long-Term
+  Coherence of Autonomous Agents*. arXiv:2502.15840.
+- Hopkins, J., et al. (2025). *Factorio Learning Environment*. arXiv:2503.09617.
+- Hu, L., et al. (2025). *lmgame-Bench: How Good Are LLMs at Playing Games?*
+  arXiv:2505.15146.
+- Jimenez, C. E., et al. (2024). *SWE-bench: Can Language Models Resolve Real-World
+  GitHub Issues?* ICLR 2024. arXiv:2310.06770.
+- Kwa, T., et al. (METR) (2025). *Measuring AI Ability to Complete Long Tasks*.
+  arXiv:2503.14499.
+- Lattice (2022). *MUD: An Engine for Autonomous Worlds*.
+  lattice.xyz/blog/mud-an-engine-for-autonomous-worlds.
+- Li, Y., et al. (2024). *CryptoTrade: A Reflective LLM-based Agent to Guide Zero-shot
+  Cryptocurrency Trading*. EMNLP 2024. arXiv:2407.09546.
+- Liu, X., et al. (2024). *AgentBench: Evaluating LLMs as Agents*. ICLR 2024.
+  arXiv:2308.03688.
+- ludens (0xPARC) (2022). *Autonomous Worlds (Part 1)*. 0xparc.org/blog/autonomous-worlds.
+- Meta FAIR Diplomacy Team (Bakhtin, A., et al.) (2022). *Human-level play in the game
+  of Diplomacy by combining language models with strategic reasoning*. Science,
+  378(6624). doi.org/10.1126/science.ade9097.
+- Mialon, G., et al. (2023). *GAIA: A Benchmark for General AI Assistants*.
+  arXiv:2311.12983.
+- Nechepurenko & Shuvalov (2026). *Foresight Arena*. arXiv:2605.00420.
+- Paglieri, D., et al. (2025). *BALROG: Benchmarking Agentic LLM and VLM Reasoning On
+  Games*. ICLR 2025. arXiv:2411.13543.
+- Park, J. S., et al. (2023). *Generative Agents: Interactive Simulacra of Human
+  Behavior*. UIST 2023. arXiv:2304.03442.
+- Qian, et al. (2025). *Agent Market Arena*. arXiv:2510.11695.
+- Shridhar, M., et al. (2021). *ALFWorld: Aligning Text and Embodied Environments for
+  Interactive Learning*. ICLR 2021. arXiv:2010.03768.
+- Suarez, J., et al. (2021). *The Neural MMO Platform for Massively Multiagent
+  Research*. NeurIPS 2021 Datasets and Benchmarks. arXiv:2110.07594.
+- Vinyals, O., et al. (2019). *Grandmaster level in StarCraft II using multi-agent
+  reinforcement learning*. Nature, 575, 350–354. doi.org/10.1038/s41586-019-1724-z.
+- Wu, C.-K., et al. (2024). *StreamBench: Towards Benchmarking Continuous Improvement
+  of Language Agents*. arXiv:2406.08747.
+- Xie, T., et al. (2024). *OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks
+  in Real Computer Environments*. arXiv:2404.07972.
+- Yang, J., et al. (2024). *SWE-agent: Agent-Computer Interfaces Enable Automated
+  Software Engineering*. NeurIPS 2024. arXiv:2405.15793.
+- Yao, S., et al. (2024). *τ-bench: A Benchmark for Tool-Agent-User Interaction in
+  Real-World Domains*. arXiv:2406.12045.
+- Zheng, J., et al. (2025). *LifelongAgentBench: Evaluating LLM Agents as Lifelong
+  Learners*. arXiv:2505.11942.
+- Zhou, S., et al. (2024). *WebArena: A Realistic Web Environment for Building
+  Autonomous Agents*. ICLR 2024. arXiv:2307.13854.
 
 ---
 
