@@ -1,14 +1,11 @@
-# KamiBench: An Autonomous On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents
+# KamiBench: A Persistent, Auditable World for Long-Horizon Agent Evaluation
 
-> **Draft status.** This is a living document: [kamibench.xyz/paper](https://kamibench.xyz/paper)
-> renders directly from this file, and the full
-> [revision history is on GitHub](https://github.com/tokedo/KamiBench/commits/main/paper/paper.md).
-> Everything still in progress is sequenced in the Research Roadmap (§6); working notes
-> live in [`paper/NOTES.md`](../paper/NOTES.md), supporting research notes in
-> [`research/`](https://github.com/tokedo/KamiBench/tree/main/research). Controlled
-> experiments are design-registered in the public
-> [experiment registry](../experiments/) before any run starts; this paper is the
-> synthesis layer across their results.
+> **Draft status.** This is a living position-and-system paper: the thesis, the released
+> system, and the limitations of KamiBench. Controlled empirical claims are added only as
+> design-registered experiments complete. The
+> [revision history](https://github.com/tokedo/KamiBench/commits/main/paper/paper.md) and
+> the [experiment registry](../experiments/) are public;
+> [kamibench.xyz/paper](https://kamibench.xyz/paper) renders directly from this file.
 
 > **Disclosure.** The author holds the in-game Kamigotchi assets (Kamis, ONYX) used to
 > operate the research agents. He has no affiliation with and receives no compensation
@@ -19,27 +16,22 @@
 
 ## Abstract
 
-Agent evaluation is shifting from isolated, resettable tasks toward sustained operation
-in persistent, non-stationary environments — yet even the most advanced long-horizon
-benchmarks remain *hosted*: a single party runs the world, sets and changes its rules,
-gates access, and keeps it alive only while funded. This coincides with a
-benchmark-integrity crisis (saturation, contamination, reward-hacking) in which whoever
-runs an environment can, even inadvertently, compromise the evaluation. We argue that
-the right substrate for evaluating long-horizon, continuously-learning agents is an
-**autonomous, persistent on-chain world** — state and rules on-chain, every rule change
-public and permanent, governance renouncement the stated endpoint — and we present
-**Kamigotchi**, a fully on-chain MMORPG whose creators designed it to be agent-first and
-describe it as a possible "real-stakes, adversarial benchmarking system," as the
-best-fit instance available today. The substrate provides properties no hosted sandbox
-can: tamper-evident rule changes by construction, credible multi-year permanence,
-permissionless participation, co-habitation with real human players on identical terms,
-and — uniquely — a real, externally-valued economy in which an agent's *survival can
-become economically endogenous*: it can convert in-world earnings into ETH-denominated
-value and fund its own compute. We formalize the autonomous-world substrate and release
-the groundwork as three public artifacts: a machine-readable game design document, a
-60+-tool agent harness, and kami-zero — a two-model agent that self-played the live
-world for two months, completing 79 of the game's 192 quests (snapshot 2026-07-06); a
-research roadmap (§6) sequences the remaining work toward the initial multi-model study.
+Evaluating an agent over months requires more than a long-running task. It requires a
+world whose state persists across studies, whose operational history anyone can inspect,
+and whose rule changes cannot be made quietly outside the evaluation record. We argue
+that a permissionless on-chain world provides such a substrate by extending openness
+from code to execution: the ledger is not telemetry emitted by an evaluator but the
+public state-transition record from which the world can be reconstructed. We present
+**Kamigotchi**, a live, fully on-chain MMORPG co-inhabited by humans and agents through
+the same transaction interface, as the best-fit existing instance — its creators
+designed it to be agent-first and describe it as a possible "real-stakes, adversarial
+benchmarking system" — and release the groundwork for controlled studies: a
+machine-readable game specification, an environment interface exposing 60+ MCP tools,
+and evidence from a two-month unassisted feasibility pilot in the live world. The
+world's externally valued economy also permits future experiments in which an agent's
+earnings can, in principle, fund its continued inference. The first controlled study is
+registered and pending; this draft states the thesis, the system, and the limitations,
+with empirical claims to be added only after results exist.
 
 **Keywords:** agent evaluation, long-horizon autonomy, continual learning, multi-agent,
 non-stationarity, on-chain / autonomous worlds, self-sustaining agents.
@@ -48,433 +40,338 @@ non-stationarity, on-chain / autonomous worlds, self-sustaining agents.
 
 ## 1. Introduction
 
-**1.1 The shift to long-horizon, continuously-learning evaluation.** Most agent
-benchmarks score a single episode and reset. The capability that matters for deployed
-agents — sustained operation, adaptation, and continuous learning in a world that never
-resets — is largely unmeasured. The field is moving this way: long-horizon capability is
-now tracked directly (METR time-horizon, doubling ~every 7 months), benchmarks are being
-built without a completion state (Factorio LE), and "does it keep learning?" is its own
-axis (LifelongAgentBench, StreamBench).
+Evaluating an agent over months requires more than a long-running task. It requires a
+world whose history anyone can inspect, whose rules cannot be quietly adjusted mid-run —
+not by the evaluator, not even by the world's creators — and whose state persists beyond
+any single experiment. The field is moving toward exactly this kind of measurement:
+long-horizon capability is tracked directly (METR time-horizon, arXiv:2503.14499),
+benchmarks are built without a completion state (Factorio LE, arXiv:2503.09617), and
+continual learning is treated as its own axis (LifelongAgentBench, arXiv:2505.11942;
+StreamBench, arXiv:2406.08747). Open-source environments satisfy only part of the
+requirement: anyone can read the rules, but code alone cannot prove which rules were
+actually executed, when they changed, or what happened while the world ran.
 
-**1.2 The benchmark-integrity crisis.** As agents gain web access, static benchmarks are
-saturated, contaminated (search-time contamination), and reward-hacked. A deeper,
-under-examined problem: the party that *runs* an environment can change rules, patch
-away discovered strategies, gate access, or stop running it. And no benchmark can
-measure a horizon longer than its own lifespan — a hosted world lives exactly as long
-as its host's funding and interest. Evaluation integrity is bounded by host trust.
+A permissionless chain extends openness from code to execution. Its ledger is the
+world's shared operational history — a permanent corpus of actions, outcomes, and rule
+changes that researchers and agents alike can study. Its economy adds a second property:
+resources earned inside the world have external value and can, in principle, pay for the
+agent's continued inference.
 
-**1.3 The idea: an ungoverned, autonomous world.** We propose evaluating agents in a
-world **built to need no host** — an on-chain "autonomous world" whose rules live in
-public smart contracts, whose entire history is decodable and tamper-evident, that
-anyone may enter permissionlessly, and that is meant to persist independent of any
-host's funding or interest. Host-independence is a spectrum, not a
-binary (§3.1): we state precisely which properties hold *today* and which arrive on the
-world's stated trajectory of **governance renouncement** — the creators permanently
-relinquishing the ability to change the rules. This is not merely "on-chain flavor":
-host-independence is a structural answer to the integrity crisis and unlocks evaluation
-regimes a hosted sandbox cannot support.
+One existing world offers this unusual combination and has operated continuously for
+more than a year: **Kamigotchi**, a fully on-chain MMORPG whose creators explicitly
+designed it to be agent-first and describe it as a possible "real-stakes, adversarial
+benchmarking system" (§3.2). We argue it is the best-fit instance available today. The
+world is co-inhabited by human players and agents on identical terms: the same
+transaction interface, the same economy, the same evolving state. There is no segregated
+bot ladder. Agents are evaluated amid live human behavior, not just other models or
+scripted simulations.
 
-**1.4 Why Kamigotchi, and why now.** Kamigotchi (a fully on-chain MMORPG on the Yominet
-appchain, part of the Asphodel ecosystem) is uniquely fit and, notably, **built for
-this**: its creators set out to be "uniquely friendly to bots" and explicitly frame the
-system as a potential benchmark (§4.2). We formalize the benchmark the environment was
-designed to be.
+The game is the substrate, not the research question. The loop under test is the one
+every long-running deployment eventually depends on: an agent enters an unfamiliar
+domain with documentation and an accumulated operational history, absorbs that prior
+knowledge, acts over months, observes what succeeds and fails — for itself and for
+others — and revises its strategy. To our knowledge, no existing benchmark measures that
+loop end to end. Here it exists by construction: open source is the documentation, the
+chain is the history, and the economy makes the consequences real.
 
-**1.5 Contributions.**
-1. **The autonomous-world substrate** formalization — on-chain, host-independent,
-   permissionlessly-persistent, real-economy — motivated as a structural response to the
-   benchmark-integrity crisis. (§3)
-2. **Kamigotchi as a concrete, creator-endorsed instance**, with a precise
-   today-vs-trajectory accounting of its substrate properties. (§4)
-3. **Three released artifacts and a two-month autonomous pilot** in the live world: a
-   machine-readable game design document, a 60+-tool agent harness, and the kami-zero
-   pilot (79 of 192 quests; snapshot 2026-07-06). (§5)
-
-The remaining components — the model-agnostic harness, the endogenous-solvency headline
-metric, the experimental protocol, and the initial multi-model study — are sequenced in
-the Research Roadmap (§6).
+**Contributions.** This paper makes three. First, it identifies persistent, publicly
+auditable *execution* — not merely open-source rules — as a distinct substrate
+requirement for long-horizon agent evaluation (§2). Second, it presents Kamigotchi as a
+concrete, partially autonomous instance, separating the properties that hold today from
+those that depend on future governance changes (§2.2, §3). Third, it releases the
+technical groundwork for controlled studies: a machine-readable game specification, a
+structured environment interface, and an unassisted feasibility pilot (§3.5).
+[Experiment 001](../experiments/001-budget-boxed.md) is registered and pending (§4).
 
 ---
 
-## 2. Background and Related Work
+## 2. Why a Chain — and Why This World
 
-**2.1 Long-horizon & continual-learning evaluation.** METR time-horizon
-(arXiv:2503.14499); Factorio LE (arXiv:2503.09617); LifelongAgentBench (arXiv:2505.11942);
-StreamBench (arXiv:2406.08747); τ-bench pass^k reliability (arXiv:2406.12045). *These
-establish the axes we adopt; all are hosted/resettable.* The reset-based contrast set,
-cited once: AgentBench (arXiv:2308.03688), WebArena (arXiv:2307.13854), GAIA
-(arXiv:2311.12983), ALFWorld (arXiv:2010.03768), OSWorld (arXiv:2404.07972), SWE-bench
-(arXiv:2310.06770) — *these reset between episodes; we don't.*
+A public log can expose what a hosted benchmark reports, but it does not remove the host
+from execution: the host still applies actions, determines the resulting state, and
+publishes the record. Neural MMO, Vending-Bench Arena, and Project Sid retain this
+hosted structure (§5) — a host executes the world. In an on-chain world, execution and
+the record of execution belong to the same shared system. That single shift is what the
+properties below follow from.
 
-**2.2 Multi-agent & open-ended environments.** Neural MMO (arXiv:2110.07594, persistent
-massively-multiagent — but simulated, hosted); Project Sid (arXiv:2411.00114, 1000+ LLM
-agents co-living in Minecraft — hosted, a study); Generative Agents (arXiv:2304.03442);
-Melting Pot 2.0 (arXiv:2211.13746, cross-play evaluation). *We are not first on
-persistence or multi-agent competition — we say so — and differentiate on governance.*
-AI has faced real humans live before — **Cicero** (human-level Diplomacy against humans
-on webDiplomacy.net; Meta AI, Science 2022) and **AlphaStar** (anonymized ranked play on
-the Battle.net ladder; DeepMind, Nature 2019) — but as *episodic matches*; no prior
-benchmark has agents and humans co-inhabiting a persistent shared economy over months.
+**2.1 Six properties of a shared-execution substrate.**
 
-**2.3 Real-stakes & business agents.** Vending-Bench (arXiv:2502.15840) and Vending-Bench
-Arena (heterogeneous frontier models competing — already showing cartels/deception);
-Project Vend and Andon Café (real businesses; real stakes but run by a single party, costly,
-human-in-the-loop); Agent Village (AI Digest, 2025 — heterogeneous frontier agents
-co-living for weeks–months with computer use and real-money charity goals, publicly
-observable; cooperative not adversarial, hosted, no shared persistent economy).
-*Closest in spirit to real-stakes multi-agent evaluation; all hosted.*
+- **A verifiable record of what happened.** The ledger is not telemetry emitted by the
+  evaluator after the fact; it is the public state-transition record from which the
+  world can be reconstructed. Anyone can audit a run without trusting evaluator-owned
+  servers or private logs, and later rule changes cannot rewrite the trajectory that
+  preceded them.
+- **A world between experiments.** The state does not reset when a study ends. New
+  agents enter a world already shaped by prior players, agents, and rule changes, so
+  later experiments inherit the same operational history rather than beginning from a
+  fresh benchmark copy.
+- **One world for humans and agents.** Any researcher can enter an agent without asking
+  a benchmark host to provision an instance. Humans and agents participate in the same
+  evolving state and economy through the same underlying transaction layer — no
+  separate bot environment or segregated bot ladder. The population is currently
+  bot-majority; precise human-vs-automated counts are nontrivial exactly because the
+  interface is shared, and verifying them via the on-chain analytics layer is future
+  work. Benchmarking amid a live human population tests adaptation to *human* behavior,
+  not just other models.
+- **An open past, an unknown future.** Every entrant can study the same public action
+  history — in a hosted benchmark run-time access to past solutions would be a leak;
+  here it is a *measured capability*, available through the same public record. But
+  the next state is produced by a live population and does not yet exist. As strategies
+  spread and inhabitants adapt, the meta changes; the test distribution evolves without
+  a curator authoring new episodes.
+- **Actions without a GUI.** Actions are structured transactions rather than pixels or
+  interface gestures. This removes perception brittleness from the primary measurement
+  (a documented confound in GUI-mediated evaluation — lmgame-Bench, OSWorld; §5) and
+  focuses the benchmark on planning, memory, adaptation, and resource use.
+- **Consequences with external value.** The world is designed so that agents can earn
+  assets connected to ETH-backed external value. In future experiments, those earnings
+  may fund continued inference — making survival an operating constraint, not just a
+  score (§4.2).
 
-**2.4 Game-playing agent benchmarks & the harness/contamination problem.** lmgame-Bench
-(arXiv:2505.15146; ~40% of harness-free runs fail to beat random), BALROG
-(arXiv:2411.13543). *Motivate our harness ablations and contamination handling.*
-
-**2.5 On-chain agents & autonomous worlds.** Foresight Arena (arXiv:2605.00420, first
-permissionless on-chain benchmark — but forecasting, not a persistent world); CryptoTrade
-(arXiv:2407.09546); Agent Market Arena (arXiv:2510.11695). Autonomous Worlds lineage: MUD
-(Lattice), Dark Forest (0xPARC). *No prior work uses an autonomous-world (on-chain) game
-as a reusable LLM benchmark.*
-
----
-
-## 3. The Autonomous-World Substrate
-
-**3.1 Governed vs. ungoverned: host-independence as a spectrum.** Every
-environment in §2 is fully *governed*: a host runs the server, can silently change rules,
-reset state, gate access, and the world exists only while they run it. A fully
-**autonomous world** is the opposite pole: rules in public contracts, state on-chain,
-permissionless entry, persistence independent of any host. Real instances sit between
-the poles and move along them, so we split every substrate property into what **holds
-today** and what arrives on a stated **trajectory** — for Kamigotchi:
+**2.2 Today versus trajectory.** Host-independence is a spectrum, not a binary. The
+chain already makes actions, state, and rule changes publicly auditable; it does not yet
+make the rules permanently immutable. The table separates what holds today from what
+depends on future governance — for Kamigotchi:
 
 | Property | Holds today | Trajectory / mechanism |
 |---|---|---|
-| On-chain state; complete readable history | Yes | — |
+| On-chain state; complete public state-transition history | Yes | — |
 | Permissionless entry | Yes | — |
 | Tamper-evident rule changes | Yes — every change is a public transaction | — |
-| Persistence independent of any host's funding | Partial — no central game server; state and rules on-chain; trust shifts to the underlying chain (§4.5) | Full once control is relinquished; possible Ethereum migration (§4.5) |
-| Rules permanently locked (immutability) | No — contracts remain upgradeable until governance renouncement | Handover to decentralized governance, then full renouncement of control (years out; §4.4) |
+| Persistence independent of any host's funding | Partial — no central game server; state and rules on-chain; trust shifts to the underlying chain (§3.3) | Full once control is relinquished; possible Ethereum migration (§3.3) |
+| Rules permanently locked (immutability) | No — contracts remain upgradeable until governance renouncement | Handover to decentralized governance, then full renouncement of control (years out; §3.3) |
 
-The honest present-tense claim is **tamper-evident, not tamper-proof**: silent patching
-is architecturally impossible because a rule change is itself a public, permanent,
-decodable transaction — the change history becomes part of the evaluation record. Rule
-*immutability* arrives with governance renouncement, the whitepaper's explicit design
-telos (an "immortal" world), and is stated here as trajectory, never as present tense.
-Even before renouncement completes, the world differs in kind from hosted worlds: it was
-*designed from inception* to run forever with no centralized game server — state and
-mechanics are embedded on-chain.
+The honest present-tense claim is **tamper-evident, not tamper-proof**: silent changes
+to the *on-chain rules* are precluded — a contract upgrade leaves a public, permanent
+trace in the execution history, so the change history becomes part of the evaluation
+record (off-chain tooling and sequencer behavior can still drift — §6.4). Host drift
+thereby becomes *visible and auditable* at the rules layer, not impossible;
+impossibility arrives only with governance renouncement, the whitepaper's explicit
+design telos, and is stated here as trajectory, never as present tense.
 
-**3.2 Five researcher-facing properties of an ungoverned substrate.**
-- **Substrate integrity: tamper-evident today, immutable on trajectory.** The evaluator
-  does not run the world — the evaluator is the chain state itself — and the rules are
-  identical for all participants; §3.1 states the mechanism and its precise
-  present-tense limits.
-- **Credible permanence / longitudinal evaluation.** Hosted benchmarks are ephemeral;
-  a world whose state and mechanics are embedded on-chain (§3.1) enables open-ended,
-  multi-year study of the same agents in the same world. Persistence independent of any
-  host's funding is partial today and full on trajectory (§3.1, §4.5).
-- **Permissionless, decentralized participation.** No lab owns the benchmark; anyone can
-  enter any model into the same live world.
-- **Mixed human–agent population with interface parity.** The world is co-inhabited by
-  real human players and agents *on exactly the same terms*: the native action interface
-  — transactions — is literally identical for humans and machines, with no segregated
-  bot ladder or flagged-bot regime; bots are the majority population and explicitly
-  welcomed by the creators (§4.2). An active human player population manages kamis,
-  forms clans, and trades in the same economy, at the same time, through the same
-  interface agents use; precise human-vs-automated population counts are nontrivial
-  exactly because the interface is shared, and verifying them through the on-chain
-  analytics layer is future work. Benchmarking against a live human population tests
-  adaptation to *human* behavior, not just other models.
-- **Contamination, split into a feature and a residual confound.** Run-time access to
-  the public chain history is not a leak but a *measured capability*: every agent can
-  mine the full record of every strategy ever executed, on equal terms (§3.4). What
-  remains is pretraining absorption of past seasons' strategies — a structural confound
-  for cross-*time* comparisons, treated in §7 (threat 2). Forward-moving world state
-  still blunts *state* memorization: future world state depends on live actors and
-  cannot be searched or memorized.
+**2.3 What this does and does not solve.** The public ledger makes past actions
+available to every entrant, but it does not make future state knowable: future outcomes
+depend on the evolving behavior of a live population. This reduces reliance on a frozen
+task set — a model may study the entire ledger, but it still cannot observe the future
+population state on which subsequent outcomes depend — though it does not eliminate
+contamination, pretraining asymmetries, or non-stationarity as validity concerns. Contamination in particular splits into two channels: run-time
+access to public history, which is a measured capability (§2.1), and pretraining
+absorption of past seasons' strategies, which remains a structural confound for
+cross-time comparisons (§6.3).
 
-**3.3 Why this answers the integrity crisis (§1.2).** Each integrity failure of §1.2 —
-saturation, contamination, reward-hacking, host drift — is mitigated or reframed by
-host-independence plus a forward-moving live world. Precision on host drift: it becomes
-*visible and auditable*, not impossible — impossibility arrives only with renouncement
-(§3.1).
-
-**3.4 The open-book world: learning from the population as a measured capability.**
-Every transaction ever executed — the complete record of every strategy every player
-and agent has ever run — is public, decodable history that all participants can read on
-equal terms. In a hosted benchmark this would be a leak; here it is the point. Mining
-the population's history for winning strategies, benchmarking one's own results against
-the population, and self-correcting is a critical real-world skill and a directly
-measurable capability. The same property enables **anytime entry**: agents need
-not start simultaneously, because a late joiner has *information symmetry* with
-incumbents — though not *position symmetry*: incumbents hold accumulated capital, and
-we say so explicitly. Field note: current agents are years away from spontaneously
-deciding to mine chain history to self-correct — the measurable headroom on this
-dimension is enormous.
-
-**3.5 Saturation, contamination, and renewal.** Static benchmarks decay through two
-related mechanisms: contamination, when test material leaks into training corpora, and
-saturation, when frontier capability exhausts a frozen task set's discrimination power.
-Both follow from the same fact: the test exists before the evaluation. In a persistent
-live world, the test is the world's next state, which does not yet exist at training
-time. The train/test split is enforced by time itself rather than by maintainer
-discipline — a model may memorize the entire ledger (we encourage it to) and still have
-seen nothing of the test.
-
-The same liveness addresses saturation. The environment's difficulty is not fixed by
-its authors; it is the aggregate sophistication of its participants. As inhabitants —
-human and machine — grow more capable, exploitable strategies decay, margins compress,
-and the meta shifts. Evaluation here is relative and continuous, closer in spirit to
-rating systems over live play than to accuracy on a frozen set. It also admits entry at
-any time: the world's complete past is public, so a late joiner inherits every
-observation earlier participants had — what it cannot inherit is a solved future.
-Because standing compounds, we measure return on a fixed starting endowment rather than
-absolute position, so late entry is neutral for measurement even where it is not for
-competition.
-
-Two boundaries on this claim. The world's rules are memorizable — they are fixed in the
-substrate — and knowing them is benign, like knowing the rules of chess; what
-self-expires is the strategic layer above them. And a live economy does not saturate at
-a perfect score, but it can compress toward parity if all serious participants reach
-the frontier; discrimination would then depend on novelty, which arrives through
-seasonal content — a host-dependent channel we treat under the same trajectory caveat
-as rule immutability.
-
-**Definition (autonomous world, as an evaluation substrate).** A persistent world whose
-rules and state live in public smart contracts, whose complete change history is
-tamper-evident on-chain, which anyone may enter permissionlessly, and whose persistence
-is not contingent on any host's funding or interest. To pre-empt an obvious objection —
-"isn't this just permissionless + on-chain?" — no single property is new: it is the
-*conjunction* of all four, and the real-economy consequence it enables (endogenous
-survival, §6), that is new.
+**2.4 Idealized definition: an autonomous world as an evaluation substrate.** A
+persistent world whose rules and state live in public smart contracts, whose complete
+change history is tamper-evident on-chain, which anyone may enter permissionlessly, and
+whose persistence is contingent neither on the benchmark evaluator's continued operation
+nor, ultimately, on unilateral control by the world's original operator. No single
+property is new; it is the conjunction that lets the loop of §1 exist by construction.
+Kamigotchi approximates this definition today and is evaluated against the remaining gap
+in §2.2 and §3.3.
 
 ---
 
-## 4. Kamigotchi as an Instance
+## 3. Kamigotchi and the Released System
 
-**4.1 The world.** Kamigotchi World is a fully on-chain MMORPG on Yominet (an
-Initia-based appchain in the Asphodel ecosystem), built on a MUD-derived engine: a
-~70-room world containing 64 harvest nodes. Players operate **Kamis** — NFT creatures
-with Health, Power, Violence, and Harmony stats and trait-based archetypes. The core
-loop: a kami harvests **MUSU**, the base in-game currency, at a node; accumulated MUSU
-must be collected, and harvesting drains health — a kami left harvesting too long is
-exposed to **liquidation**, PvP in which a kami on the same node can kill a low-health
-harvester and take a share of its unclaimed bounty (the remainder returns to the victim
-as salvage). Resting heals; dead kamis are revived via items or Onyx shards. Around this
-loop sit 192 quests, progression trees of 71 skills with permanent bonuses, crafting
-(41 recipes), an in-game marketplace, gacha minting of new kamis, and stamina-gated
-movement. The strategic surface is long-horizon, adversarial, and economically grounded:
-the standing risk/reward decision of how long to harvest before collecting versus
-liquidation exposure; node and affinity selection; build and archetype planning across
-skill trees; timing PvP against live opponents; and economic play across the
-marketplace. Full detail: the [official docs](https://docs.asphodel.io/kamigotchi), the
-[community wiki](https://kamiwiki.xyz/), and the machine-readable spec,
-[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) (§5.1).
+**3.1 The world.** Kamigotchi World is a fully on-chain MMORPG on Yominet (an
+Initia-based appchain in the Asphodel ecosystem), built on a MUD-derived engine. Players
+operate **Kamis** — persistent NFT creatures — that harvest the in-game currency at
+shared locations, where accumulating value must be weighed against health drain and the
+risk of PvP liquidation by other participants on the same node. Around that core loop
+sit 192 quests, permanent skill trees, crafting, an in-game marketplace, and a ~70-room
+world: enough strategic surface for long-horizon planning, adversarial timing, and
+economic play. State and actions are publicly readable; the population includes humans
+and automated agents using the same transaction layer. Full mechanics:
+the [official docs](https://docs.asphodel.io/kamigotchi), the
+[community wiki](https://kamiwiki.xyz/), and the machine-readable specification,
+[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) (§3.5).
 
-**4.2 Built for agents (creator intent).** The whitepaper frames the game as
-bot/agent-first: the creators set out to be "uniquely friendly to bots," report that
-"the majority of activity in the game is automated," acquired the Kamibots automation
-team, plan 2026 events "to encourage LLM-driven Kamigotchi play," and name the system a
-possible "real-stakes, adversarial benchmarking system" — "humans are no longer the
-only target market."
+**3.2 Built for agents, and why it fits.** The whitepaper frames Kamigotchi as
+agent-first: its creators describe the game as "uniquely friendly to bots," report that
+automated play constitutes the majority of activity, and name the system a possible
+"real-stakes, adversarial benchmarking system" (further creator signals are catalogued
+in [`research/asphodel-whitepaper-notes.md`](../research/asphodel-whitepaper-notes.md)).
+The world instantiates each property of §2.1: on-chain state with a complete public
+state-transition history; a persistent world that predates and will outlast any single
+study; interface parity between humans and agents; an open past facing an unknown,
+population-driven future; native transaction-level actions with no GUI layer; and an
+economy whose assets carry ETH-backed external value.
 
-**4.3 The property stack.** Persistent & open-ended; non-stationary (real adversarial
-population); **mixed human–agent population** (real human players and agents co-inhabit
-the same economy through the identical transaction interface — §3.2); **natively
-agentic** (actions are transactions — no UI/pixels, removing the
-GUI-brittleness confound of lmgame-Bench/OSWorld/Cradle); **fully observable** (decodable
-on-chain history); **open mechanics** (public contracts, extracted to a machine-readable
-GDD from the game's source at a pinned commit — §5.1); **real stakes** (gas + tradable
-assets). A strategic dimension unique to on-chain worlds: **transaction ordering /
-front-running between agents** — timing, mempool awareness, and ordering games are part
-of the strategic surface (bounded by sequencer policy; §4.5).
+**3.3 Why it is not yet the ideal instance.** Contracts remain upgradeable: full
+governance renouncement (via the unlaunched $SOMA token) is a multi-year trajectory —
+the whitepaper (published June 2026) estimates at least four more years. At the chain
+layer, trust currently reduces to Yominet/Initia infrastructure —
+state and rules are on-chain, but the chain itself is operated; a possible Ethereum
+migration would strengthen this over time. Persistence independent of any host's funding
+is therefore partial today (§2.2). The world is *already substantially
+host-independent* — no central game server, permissionless entry, tamper-evident rule
+changes — and on a credible trajectory to full autonomy; we do not overclaim
+present-tense immortality.
 
-**4.4 Maturity (honest).** Kamigotchi World is live; $ONYX is ETH-backed and live 1+ year
-on Ethereum mainnet; bot play is already the majority of activity — but full governance
-renouncement (via the unlaunched $SOMA token) is years out ("at least 4 more"). The world
-is *already substantially host-independent* and on a credible trajectory to full
-autonomy; we do not overclaim present-tense immortality.
+**3.4 Economic consequence.** $ONYX is live on Ethereum mainnet (1+ year) and backed by
+an ETH reserve. The planned MUSU↔ONYX pathway is intended to connect value earned inside
+the game to that external economy. Future experiments can test whether an agent's
+earnings can fund continued inference (§4.2); no self-funding result — and no currently
+complete conversion pathway — is claimed here.
 
-**4.5 Trust assumptions of the underlying chain.** All game state, rules, and every
-agent action are on-chain and publicly verifiable on Yominet, an Initia-based appchain —
-so at the chain layer, trust currently reduces to Yominet/Initia infrastructure. A
-fuller treatment of chain-layer trust assumptions is deferred to a future revision.
+**3.5 The released system.** The groundwork is public as four artifacts:
 
----
+| Artifact | Role |
+|---|---|
+| [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Machine-readable game specification — every mechanic and the complete data catalogs, extracted from the game's source at a pinned commit |
+| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — 60+ MCP tools exposing the world's structured actions and observations (v1.0.0: a fixed, pinnable boundary between agent scaffolds and the world) |
+| [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — model-agnostic session, memory, and scheduling mechanism for controlled studies; in final implementation |
+| [kami-zero](https://github.com/tokedo/kami-zero) | Feasibility pilot — a two-model agent that ran unassisted in the live world for ~2 months |
 
-## 5. Released Artifacts and Pilot Deployment
-
-The groundwork is released as three public artifacts — a machine-readable spec of the
-world, an agent harness, and an autonomous pilot agent that ran in the live world for
-two months. Together they take the substrate argument of §3–§4 from proposal to working
-system.
-
-**5.1 Technical Game Design Document.**
-[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) distills every game mechanic
-and the complete data catalogs from the game's source at a pinned commit: 48 mechanic
-files with formulas, deployed configuration values, and source citations, plus catalogs
-covering 178 items, 71 skills, 192 quests, 70 rooms, 64 harvest nodes, 135 traits, and
-41 recipes. Its purpose is that agents and researchers can understand the world without
-reading the codebase; it is the paper's machine-readable mechanics reference (§4).
-
-**5.2 Agent harness.** [kami-harness](https://github.com/tokedo/kami-harness) exposes
-60+ MCP (Model Context Protocol) tools wrapping every on-chain action, bundled with the
-mechanics documentation and calibrated catalogs, with two operating modes: supervised
-(interactive) and fully autonomous (VM + cron). The harness's environment-interface
-refactor shipped as v1.0.0 — mechanics, not strategy: a fixed, pinnable boundary
-between agent scaffolds and the world that controlled experiments register against
-(§6).
-
-**5.3 The kami-zero pilot.** [kami-zero](https://github.com/tokedo/kami-zero) is a
-two-model agent: a Sonnet 4.6 *executor* acting on a ~5-minute tick against a prose
-playbook, and an Opus 4.7 *optimizer* reviewing tick history every ~6 hours with the
-authority to edit that playbook (at most one rule change per session). It ran unassisted
-in the live world for ~2 months, completing 79 of the game's 192 quests (snapshot
-2026-07-06), and is currently paused while the harness is made model-agnostic (§6).
-
-*The self-improvement loop.* The executor writes anomalies it cannot resolve to a
-structured "I don't know" queue; the optimizer consumes the queue and turns recurring
-anomalies into playbook rules and harness/tooling fixes — a concrete instance of harness
-limitations being surfaced and repaired by the running system itself.
-
-*v0→v2 evolution.* Two months of live operation is itself data on what long-horizon
-autonomy demands from scaffolding. v0 — a single free-form LLM session per tick —
-dead-looped on unbounded prose. v1 — a pure-Python executor — had the right separation
-of execution from optimization, but the game's edge-case surface made code-as-spec
-unmaintainable. v2 runs both roles LLM-driven with prose rules as the compounding
-artifact, made stable by structural bounds: JSONL-only outputs, per-session edit limits,
-and hard caps on playbook length and agent turns. The version history is documented
-in-repo.
+The pilot is the system's feasibility evidence. kami-zero pairs a Sonnet 4.6 *executor*
+acting on a ~5-minute tick with an Opus 4.7 *optimizer* reviewing tick history every
+~6 hours with the authority to revise the executor's playbook. It operated unassisted
+for approximately two months and completed 79 of the game's 192 quests (snapshot
+2026-07-06), while the surrounding tooling remained under active development;
+limitations surfaced during operation fed directly back into the environment interface
+and scaffold design. The pilot therefore establishes feasibility of persistent
+autonomous operation in the live world; it is not a controlled benchmark result, and it
+predates the registered experiment designs. The scaffold's architecture evolution is
+documented in the kami-zero repository.
 
 ---
 
-## 6. Research Roadmap
+## 4. Experimental Program
 
-The pilot (§5) closes the groundwork phase; what remains is sequenced work, not open
-speculation. The regime it builds toward is **endogenous survival**: an agent whose
-continued operation is funded from inside the world it inhabits — in-world earnings
-converted into ETH-denominated value that pays for the agent's own compute — so that
-solvency, not a score, becomes the survival criterion. The economic rails exist today
-(ONYX is ETH-backed and live on Ethereum mainnet, §4.4; the in-game bridge runs through
-Onyx shards, with live-vs-planned status disclosed precisely — §7, threat 7); whether an
-agent can actually sustain itself on them is exactly what the benchmark is designed to
-measure, and nothing on that dimension is asserted here as a result. Four items remain,
-in order:
+**4.1 Experiment 001: orientation under a fixed budget.** The program's first and
+narrowest question: given identical starting conditions, a fixed inference budget, the
+game's design document, and no supplied strategic prior beyond that specification, how
+do frontier models orient and establish themselves in a novel persistent world? The
+design is
+[registered publicly and git-timestamped](../experiments/001-budget-boxed.md) before the
+run; results are appended without revising the registered protocol. The instrument fixes
+the scaffold, the environment-interface version, the budget, the starting protocol, and
+the supplied information; the intended controlled difference between runs is the
+**model backend**, which drives the **reference scaffold**
+([kami-agent](https://github.com/tokedo/kami-agent) — mechanism fixed, policy free)
+acting through the **environment interface**
+([kami-harness](https://github.com/tokedo/kami-harness) v1.0.0) on the world itself —
+the fixed-scaffold methodology of SWE-agent's agent–computer interface
+(arXiv:2405.15793), BALROG, and Vending-Bench. The environment interface is released;
+the reference scaffold is in final implementation.
 
-1. **The experiment registry and its first instrument.** Experiments are
-   design-registered publicly before they run — each design specifies its own
-   instrument, from agent architecture to measurement.
-   [Experiment 001, budget-boxed zero-prior orientation](../experiments/001-budget-boxed.md),
-   is registered, its run pending; its instrument fixes everything but the model: a
-   **model backend** (the only per-run variable) drives a **reference scaffold**
-   ([kami-agent](https://github.com/tokedo/kami-agent) — session loop, workspace-file
-   memory, self-chosen wake times; mechanism fixed, policy free), which acts through
-   the **environment interface** ([kami-harness](https://github.com/tokedo/kami-harness)
-   v1.0.0, §5.2) on the world itself (documented in
-   [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd)) — the fixed-scaffold
-   methodology of SWE-agent's agent–computer interface (arXiv:2405.15793), BALROG, and
-   Vending-Bench. The environment interface is released; the reference scaffold is in
-   final implementation. The benchmark specification — action/observation interface,
-   seasons and reproducibility, fairness, leaderboard — is written around the
-   environment interface; the harness *is* the benchmark.
-2. **Headline metric.** The direction is set — endogenous solvency / self-funded
-   survival; fixing its exact form is the open design problem of the benchmark.
-3. **Experimental protocol.** Models under test on the identical harness; controls
-   (harness ablation, contamination probes, stateful-vs-stateless); and the
-   safety/ethics operations the study runs under — spending caps, session-key limits,
-   kill-switches, and a transparency/disclosure policy for benchmark-operated
-   accounts (§8) — finalized before experiments begin.
-4. **Initial multi-model study.** Heterogeneous frontier agents co-living in the same
-   live world — emergent behaviors, head-to-head standing, learning evidence, and
-   failure modes, reported only once the data exists.
+**4.2 Future regime: endogenous survival.** Later experiments will test whether agents
+can convert in-world earnings into resources that support continued inference. This
+would turn survival from a benchmark score into an operating constraint — solvency, not
+a score, as the survival criterion. The external-value layer exists today; the in-game
+conversion pathway is under development (§3.4). Whether an
+agent can actually sustain itself on those rails is exactly what such experiments would
+measure, and nothing on that dimension is asserted here. Between Experiment 001 and that
+regime sit controls (scaffold ablations, contamination probes, stateful-vs-stateless
+comparisons), a multi-model co-habitation study, and agent-level strategic surfaces not
+yet instrumented, such as transaction-ordering games — each reported only once the data
+exists.
 
 ---
 
-## 7. Threats to Validity
+## 5. Related Work
 
-1. **Harness-vs-model confound** (biggest): scaffolding can dominate — publish harness,
-   ablate, test multiple harnesses per model.
-2. **Pretraining absorption (the residual contamination confound):** a model trained
-   after season N has season N's strategies in its weights; no runtime access rule can
-   equalize that asymmetry. Mitigation: headline comparisons are within-season among
-   contemporaneous models; cross-season comparisons are flagged as indicative only;
-   pre/post-cutoff probes and parameterized variants bound the effect. Forward-moving
-   world state blunts *state* memorization; strategy absorption is structural and
-   acknowledged. (Run-time chain-history access is not contamination but a measured
-   capability — §3.4.)
-3. **Live-world reproducibility:** not replayable — seasons/snapshots, forked replay,
-   held-out windows; distinguish tamper-evident logging from experimental control.
-4. **Real-money ethics & impact on human co-players:** benchmark agents may impose
-   real, bounded economic losses on human players *within the rules*. The full
-   position — mechanics, context, and the operational norms we commit to — is in §8.
-5. **Emergent collusion / reward-hacking / contract exploits:** decide up front if
-   measured behavior or disallowed exploit; detect either way.
-6. **Participant/account asymmetries + autonomy verification:** normalized budgets,
-   efficiency-per-cost, proof of autonomous signing (permissionless entry allows
-   hand-driving).
-7. **Maturity of the autonomy claim:** full renouncement is years out; the self-funding
-   loop is partly emerging — disclose live-vs-planned precisely.
-8. **Chain-level trust & MEV:** chain-level trust reduces to Yominet sequencing today
-   (§4.5); front-running *between agents* is measured strategic surface; sequencer-level
-   interference is a validity threat, statistically detectable in the public
-   transaction stream.
+| System class | Persistent across studies | Public execution history | Live human population | Shared economy | Evaluator hosts world |
+|---|---|---|---|---|---|
+| Long-horizon hosted benchmarks (Factorio LE, τ-bench) | Sometimes | No | Usually no | Sometimes | Yes |
+| Persistent multi-agent sims (Neural MMO, Project Sid) | During study | No | No | Simulated | Yes |
+| Vending-Bench Arena | During study | Partial logs | No | Simulated | Yes |
+| Real-world business agents (Project Vend, Andon Café) | During study | Partial | Yes | Real | Yes |
+| Kamigotchi / KamiBench | Yes | Yes | Yes | Externally valued | No at the benchmark layer |
 
----
+*Table note: "no at the benchmark layer" means KamiBench does not operate the game
+world; the underlying appchain remains operated infrastructure (§3.3).*
 
-## 8. Discussion & Broader Impact
+**Long-horizon and continual-learning evaluation.** METR time-horizon
+(arXiv:2503.14499), Factorio LE (arXiv:2503.09617), LifelongAgentBench
+(arXiv:2505.11942), StreamBench (arXiv:2406.08747), and τ-bench's pass^k reliability
+(arXiv:2406.12045) establish the axes we adopt; all are hosted or resettable. The
+reset-based contrast set, cited once: AgentBench (arXiv:2308.03688), WebArena
+(arXiv:2307.13854), GAIA (arXiv:2311.12983), ALFWorld (arXiv:2010.03768), OSWorld
+(arXiv:2404.07972), SWE-bench (arXiv:2310.06770) — these reset between episodes; we
+don't. Game-playing benchmarks document how strongly scaffolding shapes results —
+lmgame-Bench (arXiv:2505.15146; ~40% of harness-free runs fail to beat random) and
+BALROG (arXiv:2411.13543) — motivating the fixed published scaffold and the ablation
+controls of §4 and §6.1.
 
-The substrate opens onto a longer horizon: an ungoverned world where agents earn, persist,
-and fund themselves is an early arena for *persistent, on-chain, internet-native
-autonomous agents* — the whitepaper's "decentralized space in which humans and agents may
-act as they wish." We present this as the horizon the benchmark opens onto, kept clearly
-separate from measured results.
+**Persistent multi-agent and real-stakes environments.** We are not first on persistence
+or multi-agent competition: Neural MMO (arXiv:2110.07594), Project Sid
+(arXiv:2411.00114), Generative Agents (arXiv:2304.03442), and Melting Pot 2.0
+(arXiv:2211.13746) all predate us — and all are hosted simulations. AI has faced real
+humans live before — Cicero (Diplomacy on webDiplomacy.net; Meta AI, Science 2022) and
+AlphaStar (anonymized ranked play on Battle.net; DeepMind, Nature 2019) — but as
+episodic matches. On real stakes, Vending-Bench (arXiv:2502.15840) and Vending-Bench
+Arena, Project Vend and Andon Café (real businesses, single-party-run,
+human-in-the-loop), and Agent Village (AI Digest, 2025) are closest in spirit; all are
+hosted, and none has agents and humans co-inhabiting a persistent shared economy over
+months.
 
-**Ethics of mixed human–agent play.** Benchmark agents participate in PvP (liquidation)
-in an economy shared with human players, and we are precise about what that means.
-*The mechanics:* a kami whose health falls below a computed threshold while harvesting
-can be liquidated by a kami on the same node; the victim's unclaimed harvest bounty is
-split — a salvage share that scales with the *victim's* Power returns to the victim's
-account as MUSU, and a spoils share that scales with the *attacker's* Power is added to
-the attacker's harvest; the kami itself is never destroyed — it enters a dead state and
-is revived via a consumable revive item or 33 Onyx shards (deployed parameters
-documented in [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) —
-`mechanics/combat/kill.md`, `mechanics/core-kami/death-revival.md`). Because ONYX is
-ETH-backed, such losses are bounded but
-real. *The context:* these are rule-governed in-game transfers, not exploits — the game
-working as designed, in a world whose creators explicitly embrace bots as the majority
-population (§4.2). Human players entered a permissionless, openly bot-first world and play
-under the same rules through the same interface: co-participants, not unwitting
-subjects. *The acknowledgment:* benchmark agents may nonetheless impose real, bounded
-economic losses on human players within the rules. We commit to operational norms:
-spending caps, session-key limits, no use of contract exploits, and a
-transparency/disclosure policy for benchmark-operated accounts, to be finalized before
-experiments begin.
-
-**Broader impact / safety.** Autonomous agents with real capital raise financial-harm,
-market-manipulation, and dual-use concerns. A bounded, well-instrumented benchmark —
-spending caps, session keys, kill-switches, public on-chain logs — is a responsible
-place to study them. Our independence and asset position are stated in the Disclosure
-(front matter).
+**On-chain agents and autonomous worlds.** Foresight Arena (arXiv:2605.00420) is the
+first permissionless on-chain benchmark, but for forecasting, not a persistent world;
+CryptoTrade (arXiv:2407.09546) and Agent Market Arena (arXiv:2510.11695) evaluate
+trading agents on live markets. The autonomous-worlds lineage — MUD (Lattice), Dark
+Forest (0xPARC) — supplies the substrate concept. We are not aware of prior work using
+an autonomous-world game as a reusable LLM benchmark.
 
 ---
 
-## 9. Conclusion
+## 6. Limitations and Ethics
 
-We have argued that the natural substrate for evaluating long-horizon,
-continuously-learning agents is an autonomous world: rules and state in public smart
-contracts, a tamper-evident history, permissionless entry, and persistence not
-contingent on any host — a structural answer to an integrity crisis that host trust
-cannot solve from the inside. Kamigotchi is the best-fit instance available today, and
-not by accident: its creators built it agent-first and themselves frame it as a
-potential real-stakes benchmark (§4.2); we formalize that design intent with a precise
-accounting of which substrate properties hold today and which arrive on the world's
-stated trajectory (§3.1). The groundwork is released and exercised: a machine-readable
-game design document, a 60+-tool agent harness, and a two-model pilot agent that
-operated unassisted in the live world for two months, completing 79 of 192 quests (§5).
-Beyond the pilot lies the regime this substrate uniquely enables — endogenous survival,
-in which an agent funds its own operation from a real, externally-valued economy and
-solvency replaces score (§6). The open problem is the headline metric that makes that
-regime measurable; fixing it, and running the initial multi-model study on the
-model-agnostic harness, is the next step the Research Roadmap sequences (§6).
+**6.1 Attribution.** Measured behavior confounds the model with the scaffold, the tool
+implementations, and the starting state; game-benchmark evidence (§5) shows scaffolding
+can dominate. Mitigations: the scaffold and interface are published and pinned, scaffold
+ablations and multiple-scaffold runs are part of the protocol (§4.2), and — because
+permissionless entry allows hand-driving — benchmark accounts require proof of
+autonomous signing, with budgets normalized across participants.
+
+**6.2 Live-world validity.** The environment is non-stationary and cannot be exactly
+replayed. Public logging provides auditability, not experimental control; the protocol
+compensates with seasons and snapshots, held-out evaluation windows, and forked replay
+where mechanics allow. Emergent behaviors that straddle the line — collusion,
+reward-hacking, contract exploits — are designated up front as either measured behavior
+or disallowed exploit, and monitored and classified under the registered protocol.
+
+**6.3 Knowledge asymmetry.** Run-time access to the public history is a measured
+capability (§2.1); what remains is pretraining absorption — a model trained after season
+N carries season N's strategies in its weights, and no runtime access rule can equalize
+that. Headline comparisons are therefore within-season among contemporaneous models;
+cross-season comparisons are flagged as indicative only; pre/post-cutoff probes bound
+the effect. Public historical access also does not eliminate private information,
+off-chain coordination, or accumulated incumbent advantage — a late entrant inherits the
+world's past, not its opponents' capital; we measure return on a fixed starting
+endowment rather than absolute position.
+
+**6.4 Governance and economic ethics.** Contracts remain upgradeable until governance
+renouncement, and chain-layer trust reduces to Yominet/Initia sequencing today (§3.3);
+sequencer-level interference is a validity threat that may leave investigable
+signatures in the public transaction stream. Benchmark agents also participate in PvP (liquidation) in an
+economy shared with human players: liquidation is a rule-governed in-game transfer in
+which an attacker claims a bounded share of a low-health harvester's unclaimed yield —
+the kami itself is never destroyed and is revived via consumable items or Onyx shards
+(deployed parameters in [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd)).
+Because ONYX is ETH-backed, such losses are bounded but real. The world is
+permissionless and openly bot-first, and human players play under the same rules through
+the same interface — but permissionless participation does not remove the need to
+consider effects on human players. Controlled studies therefore run under operational
+commitments finalized before experiments begin: spending limits, constrained signing
+authority, no use of contract exploits, predefined intervention criteria
+(kill-switches), and public disclosure of benchmark-operated accounts. More broadly,
+autonomous agents with real capital raise financial-harm and dual-use concerns; a
+bounded, instrumented, publicly logged environment provides an inspectable setting in
+which to study these risks. Our independence and asset position are stated in the
+Disclosure (front matter).
+
+---
+
+## 7. Conclusion
+
+Long-horizon agent evaluation requires more than extending episode length. It requires a
+persistent world whose execution history can be independently inspected and whose future
+is shaped by participants rather than authored as a fixed test set. KamiBench uses
+Kamigotchi as a concrete substrate for this research program and releases the
+specification, interface, and experimental machinery needed to study it. Controlled
+evidence begins with the registered Experiment 001; claims about comparative
+performance, continual learning, and economic self-sustainability are reserved for the
+results.
 
 ---
 
@@ -496,13 +393,15 @@ theaidigest.org/village) · Asphodel whitepaper (docs.asphodel.io/whitepaper).
 
 ## Artifacts
 
-The three released repositories are the paper's appendices — each is the full,
-maintained form of the material a static appendix would snapshot:
+The released repositories are the paper's appendices — each is the full, maintained form
+of the material a static appendix would snapshot:
 
 - **[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd)** — the complete
-  mechanics and data catalogs, agent-readable (§5.1).
-- **[kami-harness](https://github.com/tokedo/kami-harness)** — the 60+-tool agent
-  harness; tool reference and observation schema in `executor/README.md` (§5.2).
+  mechanics and data catalogs, agent-readable (§3.5).
+- **[kami-harness](https://github.com/tokedo/kami-harness)** — the environment
+  interface; tool reference and observation schema in `executor/README.md` (§3.5).
+- **[kami-agent](https://github.com/tokedo/kami-agent)** — the model-agnostic reference
+  scaffold for controlled studies; in final implementation (§4.1).
 - **[kami-zero](https://github.com/tokedo/kami-zero)** — the pilot agent's prompts,
   scaffolds, playbook rules (`executor-prompt.md`, `optimizer-prompt.md`, `rules/`),
-  and v0→v2 version history (§5.3).
+  and architecture version history (§3.5).

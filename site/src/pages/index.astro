@@ -19,12 +19,12 @@ const why = readmeWhy();
 const roadmap = readmeRoadmap();
 const experiments = getExperiments();
 
-// The §3.1 today-vs-trajectory table from paper/paper.md — same rows, but the
+// The §2.2 today-vs-trajectory table from paper/paper.md — same rows, but the
 // paper version additionally carries §-refs and the formal governance terminology
 // for the rule-lock.
 const propertyTable = [
   {
-    property: 'On-chain state; complete readable history',
+    property: 'On-chain state; complete public state-transition history',
     today: 'Yes',
     trajectory: '—',
   },
@@ -137,8 +137,8 @@ const propertyTable = [
     </div>
     <p class="table-note">
       The honest present-tense claim is <strong>tamper-evident, not tamper-proof</strong>:
-      silent patching is architecturally impossible because a rule change is itself a
-      public, permanent transaction — the change history becomes part of the evaluation
+      silent changes to the on-chain rules are precluded — a contract upgrade leaves a
+      public, permanent trace, and the change history becomes part of the evaluation
       record. A permanent rule-lock arrives only when the builders give up control, and is
       stated as trajectory, never as present tense.
     </p>

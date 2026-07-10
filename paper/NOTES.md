@@ -1,5 +1,107 @@
 # Working notes for paper.md
 
+## 2026-07-10 restructure — position-and-system paper
+
+The paper was rebuilt around the landing-page thesis (openness extended from code to
+execution; the end-to-end orientation loop) and cut from nine sections to seven:
+Introduction → Why a chain → Kamigotchi and the released system → Experimental program →
+Related work → Limitations and ethics → Conclusion. Title changed from "An Autonomous
+On-Chain World as a Benchmark for Long-Horizon, Self-Sustaining Agents" to "A
+Persistent, Auditable World for Long-Horizon Agent Evaluation" (the old title promised
+governance trajectory and a future experimental regime as if demonstrated). The full
+pre-restructure text is at git commit `782d7f5` (`paper/paper.md`). Notable removals,
+preserved here because they may return in the empirical revision:
+
+**Rhetorical lines removed deliberately (do not reintroduce without cause):**
+
+> the evaluator
+> does not run the world — the evaluator is the chain state itself
+
+(The evaluator is still the research protocol and analysis; the chain supplies the
+execution substrate and public record.)
+
+> co-participants, not unwitting
+> subjects
+
+(Tried to settle an ethical question through classification; the replacement
+acknowledges that permissionless participation does not remove the need to consider
+effects on human players.)
+
+**Old §3.4/§3.5 claims trimmed as stronger than the evidence** (the restrained core
+moved to §2.3; these formulations should only return with supporting results):
+
+> a late joiner has *information symmetry* with incumbents
+
+> The train/test split is enforced by time itself rather than by maintainer
+> discipline
+
+> late entry is neutral for measurement even where it is not for
+> competition
+
+> Field note: current agents are years away from spontaneously
+> deciding to mine chain history to self-correct — the measurable headroom on this
+> dimension is enormous.
+
+Also cut from old §3.5, possibly worth reviving in a discussion section once results
+exist: the chess analogy (world rules are memorizable and benign; the strategic layer
+above them self-expires) and the parity-compression caveat (a live economy does not
+saturate at a perfect score but can compress toward parity, with novelty then arriving
+through seasonal content — a host-dependent channel under the same trajectory caveat as
+rule immutability).
+
+**Old §5.3 v0→v2 scaffold evolution** (verbatim; also documented in the kami-zero repo;
+candidate appendix if Experiment 001 shows scaffold design materially affects outcomes):
+
+> *v0→v2 evolution.* Two months of live operation is itself data on what long-horizon
+> autonomy demands from scaffolding. v0 — a single free-form LLM session per tick —
+> dead-looped on unbounded prose. v1 — a pure-Python executor — had the right separation
+> of execution from optimization, but the game's edge-case surface made code-as-spec
+> unmaintainable. v2 runs both roles LLM-driven with prose rules as the compounding
+> artifact, made stable by structural bounds: JSONL-only outputs, per-session edit
+> limits, and hard caps on playbook length and agent turns. The version history is
+> documented in-repo.
+
+Same section, the self-improvement loop (the "I don't know" queue: executor writes
+unresolved anomalies to a structured queue; optimizer turns recurring anomalies into
+playbook rules and tooling fixes) — cut for length, lives in the kami-zero repo docs.
+
+**Old §7 eight-threat list** — merged into four grouped limitations (attribution;
+live-world validity; knowledge asymmetry; governance and economic ethics). The
+eight original headings, in case the empirical paper wants the finer grain back:
+harness-vs-model confound; pretraining absorption; live-world reproducibility;
+real-money ethics; emergent collusion/reward-hacking/exploits; participant asymmetries +
+autonomy verification; maturity of the autonomy claim; chain-level trust & MEV.
+
+**Old §8 horizon paragraph** (the whitepaper's "decentralized space in which humans and
+agents may act as they wish" as the arena for persistent internet-native agents) — cut
+as futurism outside the roadmap; candidate for an empirical-paper discussion section.
+
+Detailed liquidation/revival mechanics (salvage/spoils Power scaling, 33 Onyx shards,
+GDD file paths `mechanics/combat/kill.md`, `mechanics/core-kami/death-revival.md`) —
+compressed to one sentence in §6.4; full parameters remain in kamigotchi-gdd.
+
+**Same-day precision pass (do not reintroduce the stronger forms):** "the economic
+rails exist today" → external-value layer live, MUSU↔ONYX conversion pathway under
+development, not yet complete; "zero strategic priors" → "no supplied strategic prior
+beyond the game specification" (weights can't be assumed prior-free; the registered
+experiment 001 keeps its "zero-prior" title — paper wording is the scoped one); "fixes
+everything but the model" / "the only per-run variable" → "the intended controlled
+difference between runs is the model backend"; §2.4 renamed *idealized* definition,
+persistence clause narrowed from "any host's funding or interest" (metaphysical
+independence) to evaluator-operation + original-operator control; "available on equal
+terms" → "through the same public record"; "studied the entire ledger and still seen
+nothing of the test" → "cannot observe the future population state"; "silent patching
+architecturally impossible" → scoped to on-chain rules (mirrored in the landing
+table-note); "statistically detectable" → "may leave investigable signatures";
+"detected either way" → "monitored and classified under the registered protocol";
+"a responsible place to study them" → "an inspectable setting"; "at least 4 more" →
+dated to the whitepaper (published 2026-06-12); "no flagged-bot regime" → "no separate
+bot environment"; "complete readable history" → "complete public state-transition
+history" (table row mirrored in index.astro); §3.2 creator signals compressed to three
+(Kamibots acquisition + 2026 events moved to the whitepaper-notes pointer).
+
+---
+
 Draft scaffolding relocated out of [`paper.md`](paper.md) on 2026-07-07, when the paper
 was restructured from a benchmark-paper skeleton into a position paper + pilot report.
 Everything below is preserved **verbatim**, organized by the section it was removed from

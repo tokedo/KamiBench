@@ -47,7 +47,7 @@ const NAMED_LINKS: Array<[phrase: string, url: string]> = [
   ['0xPARC', 'https://0xparc.org/blog/autonomous-worlds'],
 ];
 
-const NAMED_LINK_SECTIONS = new Set(['2-background-and-related-work', 'references']);
+const NAMED_LINK_SECTIONS = new Set(['5-related-work', 'references']);
 
 export interface PaperHeading {
   id: string;

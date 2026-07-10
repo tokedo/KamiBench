@@ -146,7 +146,7 @@ best-fit instance available today, and the associated threats to validity — se
 | Path | What it is |
 |---|---|
 | [`experiments/`](experiments/) | The experiment registry — one public, git-timestamped design per controlled experiment; [001 — budget-boxed, zero-prior orientation](experiments/001-budget-boxed.md) is the first. |
-| [`paper/paper.md`](paper/paper.md) | The paper — the position argument and the synthesis layer across experiments; everything still in progress is sequenced in its Research Roadmap section. |
+| [`paper/paper.md`](paper/paper.md) | The paper — the position argument and the synthesis layer across experiments; everything still in progress is sequenced in its Experimental Program section. |
 | [`paper/NOTES.md`](paper/NOTES.md) | Working notes — the draft scaffolding (status tags, TODO/VERIFY markers, stub sections) relocated out of the paper, preserved verbatim. |
 | [`research/literature.md`](research/literature.md) | Annotated bibliography grouped by theme (the related-work foundation), with a must-cite core set. |
 | [`research/asphodel-whitepaper-notes.md`](research/asphodel-whitepaper-notes.md) | Full reading notes on the Asphodel/Kamigotchi whitepaper, incl. the creators' own "benchmarking system" framing and the token economy. |
@@ -154,7 +154,7 @@ best-fit instance available today, and the associated threats to validity — se
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Technical Game Design Document — all mechanics and data catalogs extracted from source, the agent-readable spec of the world. |
 | [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — 60+ MCP tools wrapping every on-chain action (v1.0.0). |
 | [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — turns a stateless model API into a persistent actor; model-agnostic by construction, in final implementation. |
-| [kami-zero](https://github.com/tokedo/kami-zero) | The feasibility pilot — a two-model agent that self-played the live world for ~2 months. |
+| [kami-zero](https://github.com/tokedo/kami-zero) | The feasibility pilot — a two-model agent that ran unassisted in the live world for ~2 months. |
 
 ## What this is *not* (yet)
 
