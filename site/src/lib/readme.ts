@@ -1,6 +1,7 @@
 // Build-time extraction of README.md copy sections — single source of truth: the
-// landing-page intro, the status banner, and the footer disclosure all render from
-// the repo-root README, so every push re-syncs them with no manual step.
+// landing-page intro, the status banner, the why-cards, the pilot section, and the
+// footer disclosure all render from the repo-root README, so every push re-syncs
+// them with no manual step.
 import { marked } from 'marked';
 import readmeSource from '../../../README.md?raw';
 
@@ -34,6 +35,51 @@ export function readmeSection(name: string, opts: { inline?: boolean } = {}): st
   return rewriteRepoLinks(
     (opts.inline ? marked.parseInline(src) : marked.parse(src, { gfm: true })) as string
   );
+}
+
+export interface WhyCard {
+  title: string;
+  html: string;
+}
+
+export interface WhyContent {
+  leadHtml: string;
+  cards: WhyCard[];
+}
+
+/** Parse the README's WHY marker block — lead paragraph(s) followed by a bullet
+ *  list of `- **Title** — body` items — into the landing page's card grid. */
+export function readmeWhy(): WhyContent {
+  const match = readmeSource.match(/<!-- WHY:START -->([\s\S]*?)<!-- WHY:END -->/);
+  if (!match) {
+    throw new Error(
+      'README.md is missing the <!-- WHY:START --> / <!-- WHY:END --> markers.'
+    );
+  }
+  const lines = match[1]!.trim().split('\n');
+  const leadLines: string[] = [];
+  const items: string[] = [];
+  for (const raw of lines) {
+    if (/^- \*\*/.test(raw)) items.push(raw.replace(/^- /, ''));
+    else if (items.length) items[items.length - 1] += ` ${raw.trim()}`;
+    else leadLines.push(raw);
+  }
+  const cards = items.map((item) => {
+    const parsed = item.match(/^\*\*(.+?)\*\* — ([\s\S]*)$/);
+    if (!parsed) {
+      throw new Error(`README.md WHY block: cannot parse card item "${item.slice(0, 60)}…"`);
+    }
+    return {
+      title: parsed[1]!,
+      html: rewriteRepoLinks(marked.parseInline(parsed[2]!) as string),
+    };
+  });
+  return {
+    leadHtml: rewriteRepoLinks(
+      marked.parse(leadLines.join('\n').trim(), { gfm: true }) as string
+    ),
+    cards,
+  };
 }
 
 export interface RoadmapItem {

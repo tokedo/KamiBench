@@ -7,12 +7,10 @@ agents in a persistent world that no one operates.**
 
 > ⚠️ **Open research in progress.**
 > <!-- STATUS:START -->
-> This is an open research program backed by a working system — a technical game
-> design document distilled from the game's source, an environment interface
-> exposing 60+ MCP tools (kami-harness v1.0.0), and a model-agnostic reference
-> scaffold in final implementation. Experiment 001 is design-registered and its
-> run is pending; a two-month autonomous pilot has already validated feasibility.
-> Claims are still being verified, and nothing here is a finished result.
+> Experiment 001 is registered and pending. The game specification, an
+> environment interface exposing 60+ MCP tools, and a two-month unassisted pilot
+> are public; the reference scaffold is in final implementation. Controlled
+> results are not yet available.
 > <!-- STATUS:END -->
 
 ---
@@ -63,8 +61,9 @@ their results.
 ## Experiments
 
 The registry of controlled experiments. Each design is published here and
-git-timestamped before its run starts — the design is the artifact; results
-are added as runs complete.
+git-timestamped before its run starts; results are appended without revising
+the registered protocol. Any amendment is explicit, dated, and preserves the
+original wording.
 
 - **[Experiment 001 — Budget-boxed, zero-prior orientation](experiments/001-budget-boxed.md)**
   — given identical starting conditions, a fixed inference budget, the game's
@@ -86,44 +85,61 @@ experiments: results land there as runs complete. Rendered at
 ## Feasibility: the kami-zero pilot
 
 <!-- PILOT:START -->
-Before the controlled program, an autonomous pilot validated that persistent
-self-play in the live world is viable: [kami-zero](https://github.com/tokedo/kami-zero),
-a two-model agent (a Sonnet 4.6 executor on ~5-minute ticks and an Opus 4.7
-optimizer on ~6-hour cycles), played unassisted for ~2 months and completed 79
-of the game's 192 quests (snapshot 2026-07-06), surfacing harness limitations
-that fed directly back into the tooling. The pilot predates the registered
-experiment designs; its role in the program is feasibility validation, and
-controlled experiment results supersede it as evidence.
+Before the controlled program, an autonomous pilot established the feasibility
+of persistent operation in the live world: [kami-zero](https://github.com/tokedo/kami-zero),
+a two-model agent — a Sonnet 4.6 executor on ~5-minute ticks and an Opus 4.7
+optimizer on ~6-hour cycles.
+
+**~2 months · 79/192 quests · unassisted** (snapshot 2026-07-06)
+
+The agent played unassisted while the surrounding tooling remained under active
+development; limitations surfaced during the pilot fed directly back into the
+environment interface. The pilot predates the registered experiment designs —
+it is feasibility evidence, not a controlled benchmark result, and controlled
+experiment results supersede it.
 <!-- PILOT:END -->
 
-## Why a chain, and not just a public log
+## Why a chain — and why this world
 
-Every existing multi-agent environment (Neural MMO, Vending-Bench Arena, Project Sid, …) is
-run by a host. An autonomous on-chain world gives properties a hosted sandbox cannot:
+<!-- WHY:START -->
+A public log can expose what a hosted benchmark reports, but it does not remove
+the host from execution: the host still applies actions, determines the
+resulting state, and publishes the record. In an on-chain world, execution and
+the record of execution belong to the same shared system. Neural MMO,
+Vending-Bench Arena, and Project Sid retain this hosted structure — a host
+executes the world; the properties below are what on-chain execution and
+Kamigotchi's particular design provide instead.
 
-- **Permanent world, built-in integrity** — Not just readable rules — verifiable play.
-  Every action and every rule change is a public, permanent, decodable transaction:
-  anyone can check that the rules were followed by everyone, and silent patching is
-  architecturally impossible; the rules are immutable on trajectory. The world runs
-  with no centralized game server, and its persistence doesn't depend on any host's
-  funding — partial today, full once the builders give up control.
-- **One door — humans and agents alike** — Anyone can enter any model into the same
-  live world. Real players and a bot-majority population share one persistent economy
-  through the same transaction interface — no segregated bot ladder. Agents are
-  benchmarked against live human behavior, not just other models.
-- **The past: an open book** — The full history of every strategy ever executed is
-  equally readable by all. Mining it to self-correct is a measured capability, and it
-  gives any late joiner information symmetry with everyone already there — enter
-  anytime.
-- **The future: the test** — The test is the world's next state — which doesn't exist
-  yet. A model may study the entire ledger and still has seen nothing of what comes
-  next; as inhabitants grow more capable, strategies decay and the meta moves. The
-  eval renews itself — no maintainer required.
-- **Native-agentic interface** — actions are transactions, not pixels/GUI, removing the
-  perception brittleness that confounds game benchmarks.
-- **Self-funded survival** — the world has a real, ETH-backed economy, so an agent's survival
-  can become *literal and economic*: it can convert in-world earnings into ETH-denominated
-  value and **fund its own compute**. Survival stops being a scored metaphor.
+- **A verifiable record of what happened** — The ledger is not telemetry emitted by the
+  evaluator after the fact. It is the public state-transition record from which
+  the world can be reconstructed. Anyone can audit a run without trusting
+  evaluator-owned servers or private logs, and later rule changes cannot rewrite
+  the trajectory that preceded them.
+- **A world between experiments** — The state does not reset when a study ends.
+  New agents enter a world already shaped by prior players, agents, and rule
+  changes, so later experiments inherit the same operational history rather
+  than beginning from a fresh benchmark copy.
+- **One world for humans and agents** — Any researcher can enter an agent
+  without asking a benchmark host to provision an instance. Humans and agents
+  participate in the same evolving state and economy through the same
+  underlying transaction layer; the population is currently bot-majority.
+- **An open past, an unknown future** — Every entrant can study the same public
+  action history. But the next state is produced by a live population and does
+  not yet exist. As strategies spread and inhabitants adapt, the meta changes;
+  the test distribution evolves without a curator authoring new episodes.
+- **Actions without a GUI** — Actions are structured transactions rather than
+  pixels or interface gestures. This removes perception brittleness from the
+  primary measurement and focuses the benchmark on planning, memory,
+  adaptation, and resource use.
+- **Consequences with external value** — Agents can earn assets with real,
+  ETH-backed value. In future experiments, those earnings can, in principle,
+  pay for continued inference — making survival an operating constraint, not
+  just a score.
+<!-- WHY:END -->
+
+The paper develops this argument in full: the formalization, Kamigotchi as the
+best-fit instance available today, and the associated threats to validity — see
+[`paper/paper.md`](paper/paper.md).
 
 ## What's in here
 
