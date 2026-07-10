@@ -42,9 +42,9 @@ live human behavior, not just other models.
 None of this is about the game. The loop under test is the one every real deployment
 depends on: an agent arrives in an unfamiliar domain that has documentation and an
 operational history, absorbs that prior knowledge, acts over months, watches what
-works — for itself and for everyone else — and revises its own strategy. Here that
-loop is available by construction: open source is the documentation, the chain is
-the history.
+works — for itself and for everyone else — and revises its own strategy. To our
+knowledge, no benchmark measures that loop end to end. Here it is available by
+construction: open source is the documentation, the chain is the history.
 <!-- IDEA:END -->
 
 ## The program
