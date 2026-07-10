@@ -20,31 +20,36 @@ agents in a persistent world that no one operates.**
 ## The idea in one paragraph
 
 <!-- IDEA:START -->
-Evaluating agents over months, not episodes, needs a world with four properties: it
-must outlive any single study; anyone must be able to audit its history; its rules
-must be immune to mid-run adjustment — including by its creators; and its stakes must
-be real. Open source gets you halfway: anyone can read the rules. It cannot prove the
-rules were followed while the world ran. A permissionless chain closes that gap — open
-source extended from code to execution — and one world with all four properties
-already exists and has run for over a year: Kamigotchi.
+Evaluating an agent over months requires more than a long-running task. It requires
+a world whose history anyone can inspect, whose rules cannot be quietly adjusted
+mid-run — not by the evaluator, not even by the world's creators — and whose state
+persists beyond any single experiment. Open-source environments satisfy only part of
+this requirement: anyone can read the rules, but code alone cannot prove which rules
+were actually executed, when they changed, or what happened while the world ran.
 
-The chain brings two advantages: the ledger — the world's complete past, a
-corpus any agent can study — and the economy, through which an agent's earnings can,
-in principle, buy its own inference.
+A permissionless chain extends openness from code to execution. Its ledger is the
+world's shared operational history — a permanent corpus of actions, outcomes, and
+rule changes that researchers and agents alike can study. Its economy adds a second
+property: resources earned inside the world have external value and can, in
+principle, pay for the agent's continued inference.
 
-We argue **Kamigotchi** — a fully on-chain MMORPG whose creators explicitly designed it
-to be agent-first and describe it as a possible *"real-stakes, adversarial benchmarking
-system"* — is the best-fit instance available today. Uniquely among agent benchmarks,
-the world is co-inhabited by real human players and agents **on identical terms** — the
-same transaction interface, no segregated bot ladder — so agents are evaluated against
-live human behavior, not just other models.
+One existing world offers this unusual combination and has operated continuously for
+more than a year: **Kamigotchi**, a fully on-chain MMORPG whose creators explicitly
+designed it to be agent-first and describe it as a possible *"real-stakes,
+adversarial benchmarking system."* We argue it is the best-fit instance available
+today. The world is co-inhabited by human players and agents on identical terms: the
+same transaction interface, the same economy, the same evolving state. There is no
+segregated bot ladder. Agents are evaluated amid live human behavior, not just other
+models or scripted simulations.
 
-The game is the substrate, not the research question. The loop under test is the one every real deployment
-depends on: an agent arrives in an unfamiliar domain that has documentation and an
-operational history, absorbs that prior knowledge, acts over months, watches what
-works — for itself and for everyone else — and revises its own strategy. To our
-knowledge, no benchmark measures that loop end to end. Here it is available by
-construction: open source is the documentation, the chain is the history.
+**The game is the substrate, not the research question.** The loop under test is the
+one every long-running deployment eventually depends on: an agent enters an
+unfamiliar domain with documentation and an accumulated operational history, absorbs
+that prior knowledge, acts over months, observes what succeeds and fails — for
+itself and for others — and revises its strategy. To our knowledge, no existing
+benchmark measures that loop end to end. Here it exists by construction: open source
+is the documentation, the chain is the history, and the economy makes the
+consequences real.
 <!-- IDEA:END -->
 
 ## The program
