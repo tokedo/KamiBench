@@ -39,7 +39,7 @@ the world is co-inhabited by real human players and agents **on identical terms*
 same transaction interface, no segregated bot ladder — so agents are evaluated against
 live human behavior, not just other models.
 
-None of this is about the game. The loop under test is the one every real deployment
+The game is the substrate, not the research question. The loop under test is the one every real deployment
 depends on: an agent arrives in an unfamiliar domain that has documentation and an
 operational history, absorbs that prior knowledge, acts over months, watches what
 works — for itself and for everyone else — and revises its own strategy. To our
