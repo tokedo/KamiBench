@@ -273,17 +273,22 @@ exists.
 
 ## 5. Related Work
 
-| System class | Persistent across studies | Public execution history | Live human population | Shared economy | Evaluator hosts world |
+| System class | Persistent across studies | Public execution history | Live human population | Shared economy | Evaluation environment operated by |
 |---|---|---|---|---|---|
-| Long-horizon hosted benchmarks (Factorio LE, τ-bench) | Sometimes | No | Usually no | Sometimes | Yes |
-| Persistent multi-agent sims (Neural MMO, Project Sid) | During study | No | No | Simulated | Yes |
-| Vending-Bench Arena | During study | Partial logs | No | Simulated | Yes |
-| Real-world business agents (Project Vend, Andon Café) | During study | Partial | Yes | Real | Yes |
-| Kamigotchi / KamiBench | Yes | Yes | Yes | Externally valued | No at the benchmark layer |
+| Long-horizon hosted benchmarks (Factorio LE, τ-bench) | Sometimes | No | Usually no | Sometimes | Benchmark team |
+| Persistent multi-agent sims (Neural MMO, Project Sid) | During study | No | No | Simulated | Benchmark team |
+| Vending-Bench Arena | During study | Partial logs | No | Simulated | Benchmark team |
+| Operator-provisioned real-world businesses (Project Vend, Andon Café) | Within project; operator-dependent | Partial | Yes | External economy | Hybrid — external world, operator-controlled business substrate |
+| Kamigotchi / KamiBench | Yes | Yes | Yes | Externally valued | External to benchmark team |
 
-*Table note: "no at the benchmark layer" means KamiBench does not operate the game
-world; the underlying appchain remains operated infrastructure (§3.3). Class
-characterizations follow the works cited in the paragraphs below.*
+*Table note: "operated by" refers to control over the task instance and the mechanisms
+through which agent actions produce evaluation-relevant state changes — not control over
+every exogenous event. Operator-provisioned businesses run in an uncontrolled external
+economy, but the research team provisions the business, agent tools, accounts, staff,
+and intervention layer. KamiBench operates the research agent and its instrumentation,
+not Kamigotchi itself; the game contracts and underlying appchain remain operated
+infrastructure (§2.2, §3.3). Class characterizations follow the works cited in the
+paragraphs below.*
 
 **Long-horizon and continual-learning evaluation.** METR time-horizon
 (arXiv:2503.14499), Factorio LE (arXiv:2503.09617), LifelongAgentBench
@@ -304,10 +309,10 @@ or multi-agent competition: Neural MMO (arXiv:2110.07594), Project Sid
 humans live before — Cicero (Diplomacy on webDiplomacy.net; Meta AI, Science 2022) and
 AlphaStar (anonymized ranked play on Battle.net; DeepMind, Nature 2019) — but as
 episodic matches. On real stakes, Vending-Bench (arXiv:2502.15840) and Vending-Bench
-Arena, Project Vend and Andon Café (real businesses, single-party-run,
-human-in-the-loop), and Agent Village (AI Digest, 2025) are closest in spirit; all are
-hosted, and none has agents and humans co-inhabiting a persistent shared economy over
-months.
+Arena, Project Vend and Andon Café (operator-provisioned real businesses,
+human-in-the-loop), and Agent Village (AI Digest, 2025) are closest in spirit; in each,
+the research team provisions and controls the evaluated instance, and none has agents
+and humans co-inhabiting a persistent shared economy over months.
 
 **On-chain agents and autonomous worlds.** Foresight Arena (arXiv:2605.00420) is the
 first permissionless on-chain benchmark, but for forecasting, not a persistent world;
