@@ -269,6 +269,12 @@ comparisons), a multi-model co-habitation study, and agent-level strategic surfa
 yet instrumented, such as transaction-ordering games — each reported only once the data
 exists.
 
+Break-even is only the first threshold. An agent that earns more than its inference
+costs acquires discretionary capital, making surplus allocation a new research object:
+whether it preserves runway, invests in improved capabilities, acquires external tools,
+or enters other domains. In that regime, Kamigotchi is no longer merely the task
+environment; it becomes an economic base that may support activity beyond the game.
+
 ---
 
 ## 5. Related Work
