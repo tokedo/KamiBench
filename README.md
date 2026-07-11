@@ -137,6 +137,15 @@ Kamigotchi's particular design provide instead.
   just a score.
 <!-- WHY:END -->
 
+<!-- SURPLUS:START -->
+If an agent earns more than its inference costs, the question changes from
+whether it can continue to how it allocates the surplus. Could a game become
+the economic engine that supports persistent activity beyond the game?
+
+**Not merely whether an agent can survive, but what it does after survival is
+secured.**
+<!-- SURPLUS:END -->
+
 The paper develops this argument in full: the formalization, Kamigotchi as the
 best-fit instance available today, and the associated threats to validity — see
 [`paper/paper.md`](paper/paper.md).

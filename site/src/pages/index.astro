@@ -14,6 +14,7 @@ const github = 'https://github.com/tokedo/KamiBench';
 
 const ideaHtml = readmeSection('IDEA');
 const statusHtml = readmeSection('STATUS', { inline: true });
+const surplusHtml = readmeSection('SURPLUS');
 const pilotHtml = readmeSection('PILOT');
 const why = readmeWhy();
 const roadmap = readmeRoadmap();
@@ -99,11 +100,14 @@ const propertyTable = [
         ))
       }
     </ul>
-    <p class="read-more">
-      The paper develops this argument in full — the formalization, Kamigotchi as the
-      best-fit instance available today, and the associated threats to validity.
-      <a href="/paper">Read the paper →</a>
-    </p>
+    <div class="why-coda">
+      <Fragment set:html={surplusHtml} />
+      <p>
+        The paper develops this argument in full — the formalization, Kamigotchi as the
+        best-fit instance available today, and the associated threats to validity.{' '}
+        <a href="/paper">Read the paper →</a>
+      </p>
+    </div>
   </section>
 
   <section class="section container" aria-labelledby="today-vs-trajectory">

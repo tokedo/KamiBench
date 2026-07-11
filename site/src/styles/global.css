@@ -441,6 +441,12 @@ hr {
   font-size: 0.9rem;
 }
 
+/* closing beat under the why-cards: a question paragraph, then a bold one-line refrain */
+.why-coda {
+  max-width: 44em;
+  margin-top: 2.25rem;
+}
+
 /* why-cards */
 .cards {
   list-style: none;
