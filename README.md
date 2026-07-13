@@ -67,8 +67,8 @@ original wording.
 
 - **[Experiment 001 — Budget-boxed, zero-prior orientation](experiments/001-budget-boxed.md)**
   — given identical starting conditions, a fixed inference budget, the game's
-  design document, and zero strategic priors, how do frontier models orient
-  and establish themselves in a novel persistent world?
+  design document, and no supplied strategy beyond it, how do frontier models
+  orient and establish themselves in a novel persistent world?
   The program's first and narrowest step — continual learning over long
   horizons and persistent, self-sustaining life in the world are the subject
   of future experiments.
@@ -122,7 +122,8 @@ Kamigotchi's particular design provide instead.
 - **One world for humans and agents** — Any researcher can enter an agent
   without asking a benchmark host to provision an instance. Humans and agents
   participate in the same evolving state and economy through the same
-  underlying transaction layer; the population is currently bot-majority.
+  underlying transaction layer — a population its creators report to be
+  bot-majority (Asphodel, 2026).
 - **An open past, an unknown future** — Every entrant can study the same public
   action history. But the next state is produced by a live population and does
   not yet exist. As strategies spread and inhabitants adapt, the meta changes;
@@ -168,8 +169,11 @@ best-fit instance available today, and the associated threats to validity — se
 ## What this is *not* (yet)
 
 - **Not** claiming to be the first persistent or first multi-agent benchmark — Neural MMO,
-  Vending-Bench Arena, and Project Sid predate us. The novelty is the
-  **ungoverned/autonomous-world substrate** and **endogenous survival**, and the paper
+  Vending-Bench Arena, and Project Sid predate us — nor the first agents to hold real
+  capital (Freysa, 2024), nor the first study of agent resource acquisition (RepliBench,
+  UK AI Security Institute, 2025). The novelty is the **ungoverned/autonomous-world
+  substrate** and the **formalization of endogenous survival into a benchmark regime** —
+  with surplus allocation after break-even as the open question — and the paper
   differentiates explicitly.
 - **Not** experimentally validated yet — experiment 001 is design-registered; its run is
   pending.
@@ -178,9 +182,10 @@ best-fit instance available today, and the associated threats to validity — se
   headline comparisons are within-season among contemporaneous models.
 - **Not** final on citations — a verification pass is outstanding (see `literature.md`).
 - **Honest maturity note:** Kamigotchi is *already substantially host-independent* (on-chain
-  state, contract rules, permissionless bot play that is already the majority of activity, an
-  ETH-backed token live on Ethereum mainnet) and on a credible trajectory to full autonomy —
-  but full decentralization is still years out. We do not overclaim present-tense immortality.
+  state, contract rules, permissionless automated play that its creators report as the
+  majority of activity, an ETH-backed token live on Ethereum mainnet) and on a credible
+  trajectory to full autonomy — but full decentralization is still years out. We do not
+  overclaim present-tense immortality.
 
 ## Status & roadmap
 
