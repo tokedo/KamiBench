@@ -122,8 +122,7 @@ Kamigotchi's particular design provide instead.
 - **One world for humans and agents** — Any researcher can enter an agent
   without asking a benchmark host to provision an instance. Humans and agents
   participate in the same evolving state and economy through the same
-  underlying transaction layer — a population its creators report to be
-  bot-majority (Asphodel, 2026).
+  underlying transaction layer.
 - **An open past, an unknown future** — Every entrant can study the same public
   action history. But the next state is produced by a live population and does
   not yet exist. As strategies spread and inhabitants adapt, the meta changes;
