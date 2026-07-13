@@ -6,8 +6,8 @@ Design registered; infrastructure in final implementation; run pending.
 
 <!-- ONELINER:START -->
 Given identical starting conditions, a fixed inference budget, the game's
-design document, and zero strategic priors — how do frontier models orient and
-establish themselves in a novel persistent world?
+design document, and no supplied strategy beyond it — how do frontier models
+orient and establish themselves in a novel persistent world?
 <!-- ONELINER:END -->
 
 > **Scope note.** This is the program's first experiment and deliberately its
@@ -157,3 +157,21 @@ Everything needed to reproduce the setup is public:
 [kami-agent](https://github.com/tokedo/kami-agent) ·
 [kami-harness](https://github.com/tokedo/kami-harness) ·
 [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd).
+
+## Amendments
+
+> **Amendment 1 — 2026-07-13** (wording and manifest clarifications; no change to
+> design, conditions, budget, or analysis)
+>
+> 1. *Terminology:* the condition previously labeled "zero strategic priors" is
+>    renamed "documentation-only prior." The bundled design document is itself a
+>    substantial informational prior; "zero" referred to supplied *strategy*, not
+>    supplied *information*. Original wording preserved above per registry rules
+>    (the registered title and method text are unchanged; only the one-line summary
+>    block, which feeds derived surfaces, carries the reworded framing).
+> 2. *Run manifests* will additionally record each model's provider-stated
+>    training/knowledge cutoff.
+> 3. *Measurement provenance:* chain-derived quest completions are the
+>    tamper-evident component of the primary curve; inference-spend accounting is
+>    scaffold-reported and therefore host-trusted. Both were described in the
+>    registered design; this clarifies their differing evidentiary status.
