@@ -9,6 +9,8 @@
 > corroborated the themes. **Still do one final independent citation check before
 > camera-ready** — a few IDs/claims were flagged unverified (noted inline).
 > Lower-confidence items surfaced by only one pass are quarantined in section H.
+> 2026-07-13: seven audit-mandated entries added (post-audit surgical pass); their
+> links and author lists were verified against arXiv/the live sites that day.
 
 ---
 
@@ -107,7 +109,9 @@
   anonymized ranked matches against humans on the Battle.net ladder. *Differ:* episodic
   ladder games; RL not LLM; no persistence or economy — vs. our persistent shared
   economy co-inhabited by humans and agents over months.
-- **Agent Village** — AI Digest, launched April 2025 (theaidigest.org/village). Multiple
+- **AI Village** — AI Digest, launched April 2025 (theaidigest.org/village — canonical
+  name; "Agent Village" appeared only in early materials; best citable artifact: the
+  2025 recap, theaidigest.org/village/blog/what-we-learned-2025). Multiple
   heterogeneous frontier agents (Anthropic/OpenAI/Google models) co-existing for
   weeks–months with computer use, publicly observable, pursuing real-money goals
   (charity fundraising). `[VERIFY: exact agent lineup, duration, amounts from
@@ -139,6 +143,13 @@
 - **τ-bench / τ²-bench** — Yao et al. (Sierra), 2024, arXiv:2406.12045. Tool-agent-user
   interaction; **pass^k** reliability metric; SOTA <50%, inconsistent. Model for
   reliability-over-trials.
+- **AI Agents That Matter** — Kapoor, Stroebl, Siegel, Nadgir & Narayanan, TMLR 2025,
+  arXiv:2407.01502. Cost-controlled evaluation: report accuracy jointly with dollar
+  cost. *Relates:* grounds Experiment 001's fixed, budget-blind inference budget
+  (capability per unit of inference).
+- **Preregistration for Experiments with AI Agents** — Vaccaro, ICML 2026 position
+  paper, arXiv:2606.11217. *Relates:* the methodological anchor for our registered,
+  git-timestamped experiment designs (results appended without revising the protocol).
 - **Reset-based contrast set** ("these reset; we don't"): AgentBench (Liu et al., 2023,
   arXiv:2308.03688), WebArena (arXiv:2307.13854), GAIA (Mialon et al., 2023,
   arXiv:2311.12983), ALFWorld (arXiv:2010.03768), OSWorld (arXiv:2404.07972), SWE-bench
@@ -156,9 +167,26 @@
 - **Empirical/security studies** (agents as *subjects*): "Paper Agents, Paper Gains"
   (arXiv:2605.29174, DeFi agents trade poorly without human insight); "SoK: Security and
   Privacy of AI Agents for Blockchain" (arXiv:2509.07131).
+- **Verifiable evaluations of ML models using zkSNARKs** — South et al., 2024,
+  arXiv:2402.02675. zk-attestation of a single model's evaluated outputs without
+  trusting the provider. *Differ:* attests isolated evaluations; our requirement is
+  auditable execution of a shared, persistent world.
 - **Named on-chain agent projects with NO rigorous benchmark paper** (press/whitepaper
   only): Freysa (adversarial treasury game, Base, 2024), ElizaOS/ai16z, Virtuals
   Protocol, Olas/Autonolas. Mention to show the *gap*.
+- **Freysa** — freysa.ai, Base, 2024 (gray literature; URL verified 2026-07-13).
+  Adversarial agent game — a capital-holding on-chain agent as a public demonstration.
+  *Differ:* one-off game, no benchmark protocol; cited so "agents holding real capital"
+  is never claimed as our first.
+- **Virtual Agent Economies** — Tomašev, Franklin, Leibo, et al., 2025,
+  arXiv:2509.10147. Sandbox-economy analysis of how agent economies interpenetrate the
+  human economy. *Relates:* maps the neighborhood of the endogenous-survival regime;
+  position/analysis, not a benchmark.
+- **RepliBench** — Black et al. (UK AI Security Institute), 2025, arXiv:2504.18565.
+  Safety evaluation operationalizing resource acquisition and self-replication as
+  threat models. *Differ:* staged capability eval; ours formalizes survival as a
+  registered benchmark regime in a live economy — also grounds the paper's §6.4
+  dual-use clause.
 - **Autonomous Worlds substrate:** MUD engine (Lattice,
   lattice.xyz/blog/mud-an-engine-for-autonomous-worlds); Dark Forest (0xPARC — first zk
   incomplete-info on-chain game, attracted bot players; an ungoverned on-chain world,

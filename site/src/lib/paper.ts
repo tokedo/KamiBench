@@ -32,9 +32,9 @@ const STATUS_CLASS: Record<string, string> = {
 };
 
 // Cited-work → landing page, applied to §2 and References only (first occurrence
-// per section, longest phrase first). Every URL verified 2xx on 2026-07-05; the
-// Cicero DOI is registered and doi.org 302s correctly (science.org bot-walls curl
-// with 403, harmless to readers).
+// per section, longest phrase first). Every URL verified 2xx on 2026-07-05
+// (freysa.ai on 2026-07-13); the Cicero DOI is registered and doi.org 302s
+// correctly (science.org bot-walls curl with 403, harmless to readers).
 const NAMED_LINKS: Array<[phrase: string, url: string]> = [
   ['Vending-Bench Arena', 'https://andonlabs.com/evals/vending-bench-arena'],
   ['Project Vend', 'https://www.anthropic.com/research/project-vend-1'],
@@ -45,6 +45,9 @@ const NAMED_LINKS: Array<[phrase: string, url: string]> = [
   ['Lattice', 'https://lattice.xyz/blog/mud-an-engine-for-autonomous-worlds'],
   ['Dark Forest', 'https://zkga.me'],
   ['0xPARC', 'https://0xparc.org/blog/autonomous-worlds'],
+  // freysa.ai has no path segment, so linkBareDomains leaves it as text (same
+  // situation as Dark Forest / zkga.me) — link the work name instead.
+  ['Freysa', 'https://freysa.ai'],
 ];
 
 const NAMED_LINK_SECTIONS = new Set(['5-related-work', 'references']);

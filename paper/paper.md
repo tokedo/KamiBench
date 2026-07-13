@@ -75,8 +75,10 @@ loop end to end. Here it exists by construction: open source is the documentatio
 chain is the history, and the economy makes the consequences real.
 
 **Contributions.** This paper makes three. First, it identifies persistent, publicly
-auditable *execution* — not merely open-source rules — as a distinct substrate
-requirement for long-horizon agent evaluation (§2). Second, it presents Kamigotchi as a
+auditable *execution of a shared world* — not merely open-source rules,
+evaluator-published logs, or cryptographic attestation of individual model
+evaluations — as a distinct substrate requirement for long-horizon agent evaluation
+(§2). Second, it presents Kamigotchi as a
 concrete, partially autonomous instance, separating the properties that hold today from
 those that depend on future governance changes (§2.2, §3). Third, it releases the
 technical groundwork for controlled studies: a machine-readable game specification, a
@@ -246,16 +248,20 @@ game's design document, and no supplied strategic prior beyond that specificatio
 do frontier models orient and establish themselves in a novel persistent world? The
 design is
 [registered publicly and git-timestamped](../experiments/001-budget-boxed.md) before the
-run; results are appended without revising the registered protocol. The instrument fixes
-the scaffold, the environment-interface version, the budget, the starting protocol, and
+run (following preregistration practice for AI-agent experiments — Vaccaro,
+arXiv:2606.11217); results are appended without revising the registered protocol. The
+instrument fixes the scaffold, the environment-interface version, the budget, the
+starting protocol, and
 the supplied information; the intended controlled difference between runs is the
 **model backend**, which drives the **reference scaffold**
 ([kami-agent](https://github.com/tokedo/kami-agent) — mechanism fixed, policy free)
 acting through the **environment interface**
 ([kami-harness](https://github.com/tokedo/kami-harness) v1.0.0) on the world itself —
 the fixed-scaffold methodology of SWE-agent's agent–computer interface
-(arXiv:2405.15793), BALROG, and Vending-Bench. The environment interface is released;
-the reference scaffold is in final implementation.
+(arXiv:2405.15793), BALROG, and Vending-Bench. The fixed, budget-blind inference budget
+follows the cost-controlled-evaluation argument of Kapoor et al.'s *AI Agents That
+Matter* (arXiv:2407.01502). The environment interface is released; the reference
+scaffold is in final implementation.
 
 **4.2 Future regime: endogenous survival.** Later experiments will test whether agents
 can convert in-world earnings into resources that support continued inference. This
@@ -274,6 +280,14 @@ costs acquires discretionary capital, making surplus allocation a new research o
 whether it preserves runway, invests in improved capabilities, acquires external tools,
 or enters other domains. In that regime, Kamigotchi is no longer merely the task
 environment; it becomes an economic base that may support activity beyond the game.
+
+This regime has an emerging neighborhood: sandbox-economy analyses map how agent
+economies interpenetrate the human economy (Tomašev et al., arXiv:2509.10147); safety
+evaluations operationalize resource acquisition and self-replication as threat models
+(RepliBench, arXiv:2504.18565); and capital-holding on-chain agents exist as public
+demonstrations (Freysa, 2024). What this program adds is survival formalized as a
+registered, measurable benchmark regime — and surplus allocation after break-even,
+which to our knowledge remains unstudied.
 
 ---
 
@@ -311,19 +325,27 @@ controls of §4 and §6.1.
 **Persistent multi-agent and real-stakes environments.** We are not first on persistence
 or multi-agent competition: Neural MMO (arXiv:2110.07594), Project Sid
 (arXiv:2411.00114), Generative Agents (arXiv:2304.03442), and Melting Pot 2.0
-(arXiv:2211.13746) all predate us — and all are hosted simulations. AI has faced real
-humans live before — Cicero (Diplomacy on webDiplomacy.net; Meta AI, Science 2022) and
+(arXiv:2211.13746) all predate us — and all are hosted simulations. Voyager belongs in
+the same lineage — skill accumulation and open-ended discovery in a persistent game
+world through a growing, inspectable skill library (arXiv:2305.16291) — as a single
+model in a private world, with no shared public history, no economy, and no other
+entrants. AI has faced real humans live before — Cicero (Diplomacy on
+webDiplomacy.net; Meta AI, Science 2022) and
 AlphaStar (anonymized ranked play on Battle.net; DeepMind, Nature 2019) — but as
 episodic matches. On real stakes, Vending-Bench (arXiv:2502.15840) and Vending-Bench
 Arena, Project Vend and Andon Café (operator-provisioned real businesses,
-human-in-the-loop), and Agent Village (AI Digest, 2025) are closest in spirit; in each,
+human-in-the-loop), and AI Village (AI Digest, 2025–2026) are closest in spirit; in each,
 the research team provisions and controls the evaluated instance, and none has agents
 and humans co-inhabiting a persistent shared economy over months.
 
 **On-chain agents and autonomous worlds.** Foresight Arena (arXiv:2605.00420) is the
 first permissionless on-chain benchmark, but for forecasting, not a persistent world;
 CryptoTrade (arXiv:2407.09546) and Agent Market Arena (arXiv:2510.11695) evaluate
-trading agents on live markets. The autonomous-worlds lineage — MUD (Lattice), Dark
+trading agents on live markets. Verifiable evaluation has also been articulated at the
+single-model level: South et al. use zkSNARKs to attest a model's evaluated outputs
+without trusting the provider (arXiv:2402.02675); our requirement concerns auditable
+execution of a shared, persistent world rather than attestation of isolated
+evaluations. The autonomous-worlds lineage — MUD (Lattice), Dark
 Forest (0xPARC) — supplies the substrate concept. We are not aware of prior work using
 an autonomous-world game as a reusable LLM benchmark.
 
@@ -377,7 +399,8 @@ consider effects on human players. Controlled studies therefore run under operat
 commitments finalized before experiments begin: spending limits, constrained signing
 authority, no use of contract exploits, predefined intervention criteria
 (kill-switches), and public disclosure of benchmark-operated accounts. More broadly,
-autonomous agents with real capital raise financial-harm and dual-use concerns; a
+autonomous agents with real capital raise financial-harm and dual-use concerns — now
+operationalized by autonomous-replication evaluations (RepliBench, arXiv:2504.18565); a
 bounded, instrumented, publicly logged environment provides an inspectable setting in
 which to study these risks. Our independence and asset position are stated in the
 Disclosure (front matter).
@@ -405,7 +428,8 @@ lives in [`../research/literature.md`](../research/literature.md).
 - 0xPARC & the Dark Forest team (2020). *Dark Forest*: a zero-knowledge,
   incomplete-information on-chain game. zkga.me.
 - Agapiou, J. P., et al. (2023). *Melting Pot 2.0*. arXiv:2211.13746.
-- AI Digest (2025). *Agent Village*. theaidigest.org/village.
+- AI Digest (2025–2026). *AI Village*. theaidigest.org/village; 2025 recap:
+  theaidigest.org/village/blog/what-we-learned-2025.
 - Altera.AL (2024). *Project Sid: Many-Agent Simulations Toward AI Civilization*.
   arXiv:2411.00114.
 - Andon Labs (2025). *Vending-Bench Arena*. andonlabs.com/evals/vending-bench-arena.
@@ -415,11 +439,16 @@ lives in [`../research/literature.md`](../research/literature.md).
   docs.asphodel.io/whitepaper.
 - Backlund, A., & Petersson, L. (2025). *Vending-Bench: A Benchmark for Long-Term
   Coherence of Autonomous Agents*. arXiv:2502.15840.
+- Black, S., et al. (UK AI Security Institute) (2025). *RepliBench: Evaluating the
+  Autonomous Replication Capabilities of Language Model Agents*. arXiv:2504.18565.
+- Freysa (2024). *Freysa: an adversarial agent game*. freysa.ai.
 - Hopkins, J., et al. (2025). *Factorio Learning Environment*. arXiv:2503.09617.
 - Hu, L., et al. (2025). *lmgame-Bench: How Good Are LLMs at Playing Games?*
   arXiv:2505.15146.
 - Jimenez, C. E., et al. (2024). *SWE-bench: Can Language Models Resolve Real-World
   GitHub Issues?* ICLR 2024. arXiv:2310.06770.
+- Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., & Narayanan, A. (2024). *AI
+  Agents That Matter*. TMLR 2025. arXiv:2407.01502.
 - Kwa, T., et al. (METR) (2025). *Measuring AI Ability to Complete Long Tasks*.
   arXiv:2503.14499.
 - Lattice (2022). *MUD: An Engine for Autonomous Worlds*.
@@ -442,10 +471,18 @@ lives in [`../research/literature.md`](../research/literature.md).
 - Qian, et al. (2025). *Agent Market Arena*. arXiv:2510.11695.
 - Shridhar, M., et al. (2021). *ALFWorld: Aligning Text and Embodied Environments for
   Interactive Learning*. ICLR 2021. arXiv:2010.03768.
+- South, T., et al. (2024). *Verifiable evaluations of machine learning models using
+  zkSNARKs*. arXiv:2402.02675.
 - Suarez, J., et al. (2021). *The Neural MMO Platform for Massively Multiagent
   Research*. NeurIPS 2021 Datasets and Benchmarks. arXiv:2110.07594.
+- Tomašev, N., Franklin, M., Leibo, J. Z., et al. (2025). *Virtual Agent Economies*.
+  arXiv:2509.10147.
+- Vaccaro, M. (2026). *Preregistration for Experiments with AI Agents*. ICML 2026.
+  arXiv:2606.11217.
 - Vinyals, O., et al. (2019). *Grandmaster level in StarCraft II using multi-agent
   reinforcement learning*. Nature, 575, 350–354. doi.org/10.1038/s41586-019-1724-z.
+- Wang, G., et al. (2023). *Voyager: An Open-Ended Embodied Agent with Large Language
+  Models*. arXiv:2305.16291.
 - Wu, C.-K., et al. (2024). *StreamBench: Towards Benchmarking Continuous Improvement
   of Language Agents*. arXiv:2406.08747.
 - Xie, T., et al. (2024). *OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks

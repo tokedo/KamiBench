@@ -1,5 +1,28 @@
 # Working notes for paper.md
 
+## 2026-07-13 post-audit surgical pass
+
+Three independent deep-research audits were aggregated; only the cross-validated
+subset was implemented — the thesis holds as a combination claim, the fixes close
+"doesn't know the field" attack surface. Scoped C1 (auditable *execution of a shared
+world* — vs. open-source rules, evaluator-published logs, or per-evaluation
+cryptographic attestation) and the §4.2 survival claim (neighborhood credited:
+Virtual Agent Economies 2509.10147, RepliBench 2504.18565, Freysa 2024; ours is the
+registered benchmark regime plus post-break-even surplus allocation). Added exactly
+seven audit-mandated citations (Kapoor 2407.01502, South 2402.02675, Tomašev
+2509.10147, Vaccaro 2606.11217, Voyager 2305.16291, RepliBench 2504.18565, Freysa) —
+all links and author lists verified against arXiv/live sites on 2026-07-13; no other
+related-work expansion. "Agent Village" renamed to the canonical "AI Village"
+(AI Digest). Bot-majority attribution sweep: every instance outside paper §2.1/§3.2
+(README, landing why-card) now carries creator attribution — no third party has
+corroborated that claim. Experiment 001 Amendment 1 (dated, original wording
+preserved per registry rules): "zero strategic priors" → "documentation-only prior",
+run manifests additionally record provider-stated knowledge cutoffs, and the
+differing evidentiary status of chain-derived vs. scaffold-reported measurement is
+made explicit. The §5 sentence "We are not aware of prior work using an
+autonomous-world game as a reusable LLM benchmark" was re-verified by the audits and
+left byte-identical.
+
 ## 2026-07-10 restructure — position-and-system paper
 
 The paper was rebuilt around the landing-page thesis (openness extended from code to
