@@ -13,6 +13,7 @@ const github = 'https://github.com/tokedo/KamiBench';
 // lightly rephrase; never escalate claims.
 
 const ideaHtml = readmeSection('IDEA');
+const worldHtml = readmeSection('WORLD');
 const statusHtml = readmeSection('STATUS', { inline: true });
 const surplusHtml = readmeSection('SURPLUS');
 const pilotHtml = readmeSection('PILOT');
@@ -82,6 +83,13 @@ const propertyTable = [
     <h2 id="idea">The idea</h2>
     <div class="section-lead">
       <Fragment set:html={ideaHtml} />
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="world">
+    <h2 id="world">The world</h2>
+    <div class="section-lead">
+      <Fragment set:html={worldHtml} />
     </div>
   </section>
 

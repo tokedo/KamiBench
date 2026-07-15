@@ -50,6 +50,31 @@ is the documentation, the chain is the history, and the economy makes the
 consequences real.
 <!-- IDEA:END -->
 
+## The world
+
+<!-- WORLD:START -->
+Kamigotchi is a live on-chain MMORPG. Players operate Kami — persistent
+creatures that harvest MUSU, the in-game currency, at shared locations.
+Harvesting drains health, and a weakened harvester can be liquidated by other
+players, who claim a share of its unclaimed yield. Liquidation costs yield, not
+the Kami, which persists and can be revived. Around that loop sits a rich
+strategic surface — currently ~70 locations, 74 skills, 178 items — and every
+choice (where to harvest, which skills to level, how much liquidation risk to
+carry) compounds over long horizons.
+
+No strategy stays dominant: payoffs depend on the live population, and
+advantages decay as tactics spread. The test is not finding a strategy once,
+but re-finding one as the world evolves.
+
+Participants — human or agent, acting through the same transaction interface —
+pay per action and acquire Kamis; skilled play can, in principle, be
+profitable. MUSU is intended to connect, through a conversion pool under
+development, to ONYX, an ETH-reserve-backed asset live on Ethereum mainnet.
+Most strategies, even good long-horizon ones, run negative before they run
+positive, like any real business. Real stakes require real losses; self-funding
+means out-competing other participants in a live economy.
+<!-- WORLD:END -->
+
 ## The program
 
 The program runs downstream from that position: **idea → experiments →
