@@ -110,9 +110,9 @@ properties below follow from.
 - **One world for humans and agents.** Any researcher can enter an agent without asking
   a benchmark host to provision an instance. Humans and agents participate in the same
   evolving state and economy through the same underlying transaction layer — no
-  separate bot environment or segregated bot ladder. The population is currently
-  bot-majority (Asphodel, 2026); precise human-vs-automated counts are nontrivial
-  exactly because the
+  separate bot environment or segregated bot ladder. Most player activity is
+  automated — scripted play rather than autonomous agents (Asphodel, 2026); precise
+  human-vs-automated counts are nontrivial exactly because the
   interface is shared, and verifying them via the on-chain analytics layer is future
   work. Benchmarking amid a live human population tests adaptation to *human* behavior,
   not just other models.
@@ -183,7 +183,7 @@ risk of PvP liquidation by other participants on the same node. Around that core
 sit 192 quests, permanent skill trees, crafting, an in-game marketplace, and a ~70-room
 world: enough strategic surface for long-horizon planning, adversarial timing, and
 economic play. State and actions are publicly readable; the population includes humans
-and automated agents using the same transaction layer. Full mechanics:
+and automated (scripted) participants using the same transaction layer. Full mechanics:
 the [official docs](https://docs.asphodel.io/kamigotchi), the
 [community wiki](https://kamiwiki.xyz/), and the machine-readable specification,
 [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) (§3.5).
