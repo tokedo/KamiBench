@@ -15,7 +15,7 @@ agents in a persistent world that no one operates.**
 
 ---
 
-## The idea in one paragraph
+## The idea
 
 <!-- IDEA:START -->
 Evaluating an agent over months requires more than a long-running task. It requires
@@ -53,13 +53,12 @@ consequences real.
 Kamigotchi is a live on-chain MMORPG — in effect, a never-ending board game in
 which every move is recorded on a public ledger. Players operate Kami —
 persistent creatures that harvest MUSU, the in-game currency, at shared
-locations.
-Harvesting drains health, and a weakened harvester can be liquidated by other
-players, who claim a share of its unclaimed yield. Liquidation costs yield, not
-the Kami, which persists and can be revived. Around that loop sits a rich
-strategic surface — currently ~70 locations, 74 skills, 178 items — and every
-choice (where to harvest, which skills to level, how much liquidation risk to
-carry) compounds over long horizons.
+locations. Harvesting drains health, and a weakened harvester can be liquidated
+by other players, who claim a share of its unclaimed yield. Liquidation costs
+yield, not the Kami, which persists and can be revived. Around that loop sits a
+rich strategic surface — currently ~70 locations, 74 skills, 178 items — and
+every choice (where to harvest, which skills to level, how much liquidation
+risk to carry) compounds over long horizons.
 
 No strategy stays dominant: payoffs depend on the live population, and
 advantages decay as tactics spread. The test is not finding a strategy once,
@@ -73,6 +72,57 @@ Most strategies, even good long-horizon ones, run negative before they run
 positive, like any real business. Real stakes require real losses; self-funding
 means out-competing other participants in a live economy.
 <!-- WORLD:END -->
+
+## Why a chain — and why this world
+
+<!-- WHY:START -->
+That world runs on a permissionless chain — and the chain is doing more than
+record-keeping. A public log can expose what a hosted benchmark reports, but it
+does not remove the host from execution: the host still applies actions,
+determines the resulting state, and publishes the record. In an on-chain world,
+execution and the record of execution belong to the same shared system. Neural
+MMO, Vending-Bench Arena, and Project Sid retain this hosted structure — a host
+executes the world; the properties below are what on-chain execution and
+Kamigotchi's particular design provide instead.
+
+- **A verifiable record of what happened** — The ledger is not telemetry emitted by the
+  evaluator after the fact. It is the public state-transition record from which
+  the world can be reconstructed. Anyone can audit a run without trusting
+  evaluator-owned servers or private logs, and later rule changes cannot rewrite
+  the trajectory that preceded them.
+- **A world between experiments** — The state does not reset when a study ends.
+  New agents enter a world already shaped by prior players, agents, and rule
+  changes, so later experiments inherit the same operational history rather
+  than beginning from a fresh benchmark copy.
+- **One world for humans and agents** — Any researcher can enter an agent
+  without asking a benchmark host to provision an instance. Humans and agents
+  participate in the same evolving state and economy through the same
+  underlying transaction layer — no segregated bot ladder.
+- **An open past, an unknown future** — Every entrant can study the same public
+  action history. But the next state is produced by a live population and does
+  not yet exist. As strategies spread and inhabitants adapt, the meta changes;
+  the test distribution evolves without a curator authoring new episodes.
+- **Actions without a GUI** — Actions are structured transactions rather than
+  pixels or interface gestures. This removes perception brittleness from the
+  primary measurement and focuses the benchmark on planning, memory,
+  adaptation, and resource use.
+- **Consequences with external value** — Agents can earn assets with real,
+  ETH-backed value. In future experiments, those earnings can, in principle,
+  pay for continued inference — making survival an operating constraint, not
+  just a score.
+<!-- WHY:END -->
+
+<!-- SURPLUS:START -->
+If an agent earns more than its inference costs, the question changes from
+whether it can continue to how it allocates the surplus. Could a game become
+the economic engine that supports persistent activity beyond the game? Not
+merely whether an agent can survive, but what it does after survival is
+secured.
+<!-- SURPLUS:END -->
+
+The paper develops this argument in full: the formalization, Kamigotchi as the
+best-fit instance available today, and the associated threats to validity — see
+[`paper/paper.md`](paper/paper.md).
 
 ## The program
 
@@ -122,58 +172,6 @@ environment interface. The pilot predates the registered experiment designs —
 it is feasibility evidence, not a controlled benchmark result, and controlled
 experiment results supersede it.
 <!-- PILOT:END -->
-
-## Why a chain — and why this world
-
-<!-- WHY:START -->
-That world runs on a permissionless chain — and the chain is doing more than
-record-keeping. A public log can expose what a hosted benchmark reports, but it
-does not remove the host from execution: the host still applies actions,
-determines the
-resulting state, and publishes the record. In an on-chain world, execution and
-the record of execution belong to the same shared system. Neural MMO,
-Vending-Bench Arena, and Project Sid retain this hosted structure — a host
-executes the world; the properties below are what on-chain execution and
-Kamigotchi's particular design provide instead.
-
-- **A verifiable record of what happened** — The ledger is not telemetry emitted by the
-  evaluator after the fact. It is the public state-transition record from which
-  the world can be reconstructed. Anyone can audit a run without trusting
-  evaluator-owned servers or private logs, and later rule changes cannot rewrite
-  the trajectory that preceded them.
-- **A world between experiments** — The state does not reset when a study ends.
-  New agents enter a world already shaped by prior players, agents, and rule
-  changes, so later experiments inherit the same operational history rather
-  than beginning from a fresh benchmark copy.
-- **One world for humans and agents** — Any researcher can enter an agent
-  without asking a benchmark host to provision an instance. Humans and agents
-  participate in the same evolving state and economy through the same
-  underlying transaction layer — no segregated bot ladder.
-- **An open past, an unknown future** — Every entrant can study the same public
-  action history. But the next state is produced by a live population and does
-  not yet exist. As strategies spread and inhabitants adapt, the meta changes;
-  the test distribution evolves without a curator authoring new episodes.
-- **Actions without a GUI** — Actions are structured transactions rather than
-  pixels or interface gestures. This removes perception brittleness from the
-  primary measurement and focuses the benchmark on planning, memory,
-  adaptation, and resource use.
-- **Consequences with external value** — Agents can earn assets with real,
-  ETH-backed value. In future experiments, those earnings can, in principle,
-  pay for continued inference — making survival an operating constraint, not
-  just a score.
-<!-- WHY:END -->
-
-<!-- SURPLUS:START -->
-If an agent earns more than its inference costs, the question changes from
-whether it can continue to how it allocates the surplus. Could a game become
-the economic engine that supports persistent activity beyond the game? Not
-merely whether an agent can survive, but what it does after survival is
-secured.
-<!-- SURPLUS:END -->
-
-The paper develops this argument in full: the formalization, Kamigotchi as the
-best-fit instance available today, and the associated threats to validity — see
-[`paper/paper.md`](paper/paper.md).
 
 ## What's in here
 
