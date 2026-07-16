@@ -112,9 +112,11 @@ Kamigotchi's particular design provide instead.
   just a score.
 <!-- WHY:END -->
 
-The paper develops this argument in full: the formalization, Kamigotchi as the
-best-fit instance available today, and the associated threats to validity — see
-[`paper/paper.md`](paper/paper.md).
+The definition is general and the program is portable: Kamigotchi is the
+best-fit instance we know of today, and if a more autonomous world emerges, the
+same experiments transfer. The paper develops the argument in full — the
+formalization, the instance analysis, and the associated threats to validity.
+See [`paper/paper.md`](paper/paper.md).
 
 ## The program
 
