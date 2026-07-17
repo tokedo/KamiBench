@@ -3,7 +3,7 @@
 **A research program: benchmarking long-horizon, continuously-learning AI
 agents in a persistent world that no one operates.**
 
-**Website:** [kamibench.xyz](https://kamibench.xyz)
+**Website:** [kamibench.ai](https://kamibench.ai)
 
 > ⚠️ **Open research in progress.**
 > <!-- STATUS:START -->
@@ -148,7 +148,7 @@ original wording.
 autonomous, persistent on-chain world is the right place to evaluate
 long-horizon agents — and is the synthesis layer across registered
 experiments: results land there as runs complete. Rendered at
-[kamibench.xyz/paper](https://kamibench.xyz/paper).
+[kamibench.ai/paper](https://kamibench.ai/paper).
 
 ## Feasibility: the kami-zero pilot
 

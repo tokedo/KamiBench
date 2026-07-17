@@ -5,7 +5,7 @@
 > design-registered experiments complete. The
 > [revision history](https://github.com/tokedo/KamiBench/commits/main/paper/paper.md) and
 > the [experiment registry](../experiments/) are public;
-> [kamibench.xyz/paper](https://kamibench.xyz/paper) renders directly from this file.
+> [kamibench.ai/paper](https://kamibench.ai/paper) renders directly from this file.
 
 > **Disclosure.** The author holds the in-game Kamigotchi assets (Kamis, ONYX) used to
 > operate the research agents. He has no affiliation with and receives no compensation

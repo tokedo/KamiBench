@@ -2,15 +2,15 @@
 <!-- Hand-maintained. One entry per page: /, /experiments, one per experiment, /paper. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://kamibench.xyz/</loc>
+    <loc>https://kamibench.ai/</loc>
   </url>
   <url>
-    <loc>https://kamibench.xyz/experiments</loc>
+    <loc>https://kamibench.ai/experiments</loc>
   </url>
   <url>
-    <loc>https://kamibench.xyz/experiments/001-budget-boxed</loc>
+    <loc>https://kamibench.ai/experiments/001-budget-boxed</loc>
   </url>
   <url>
-    <loc>https://kamibench.xyz/paper</loc>
+    <loc>https://kamibench.ai/paper</loc>
   </url>
 </urlset>
