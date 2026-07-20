@@ -7,10 +7,12 @@ agents in a persistent world that no one operates.**
 
 > ⚠️ **Open research in progress.**
 > <!-- STATUS:START -->
-> Experiment 001 is registered and pending. The game specification, an
-> environment interface exposing 60+ MCP tools, and a two-month unassisted pilot
-> are public; the reference scaffold is in final implementation. Controlled
-> results are not yet available.
+> The first controlled run is complete and its full dataset is public:
+> [Experiment 001](experiments/001-budget-boxed.md) dropped three fast-tier
+> models into the live world with $10 of inference each.
+> [Experiment 002](experiments/002-stack-delta.md) — the same protocol on the
+> iterated scaffold/harness stack — is in progress. The paper's results
+> synthesis is next.
 > <!-- STATUS:END -->
 
 ---
@@ -128,19 +130,26 @@ their results.
 
 ## Experiments
 
-The registry of controlled experiments. Each design is published here and
-git-timestamped before its run starts; results are appended without revising
-the registered protocol. Any amendment is explicit, dated, and preserves the
-original wording.
+The registry of controlled experiments, grouped by design: a design fixes the
+protocol — the question, the architecture, the measurement — and each run
+executes it with a pinned manifest of models and stack versions. Designs are
+published and git-timestamped before their first run; run pages record what
+ran and what came out. Internally, runs keep the program's linear experiment
+numbering.
 
-- **[Experiment 001 — Budget-boxed, zero-prior orientation](experiments/001-budget-boxed.md)**
-  — given identical starting conditions, a fixed inference budget, the game's
-  design document, and no supplied strategy beyond it, how do frontier models
-  orient and establish themselves in a novel persistent world?
-  The program's first and narrowest step — continual learning over long
-  horizons and persistent, self-sustaining life in the world are the subject
-  of future experiments.
-  *Design registered; infrastructure in final implementation; run pending.*
+- **[Budget-boxed](experiments/budget-boxed.md)** — drop a language model into
+  the live world with a fixed inference budget, the game's documentation, and
+  no supplied strategy: how does it orient, what does it learn to do, and
+  where does it get stuck? The program's first and narrowest design —
+  continual learning over long horizons and persistent, self-sustaining life
+  in the world are the subject of future designs.
+  - **[Run 1 — baseline stack (Experiment 001)](experiments/001-budget-boxed.md)**
+    — *complete*: three fast-tier arms ($10 each, 7 days) on the v0 stack;
+    haiku-4.5 completed the full onboarding chain on day one; the full dataset
+    is [public](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed).
+  - **[Run 2 — iterated stack (Experiment 002)](experiments/002-stack-delta.md)**
+    — *in progress*: the same arms and budget on scaffold v0.2.0 + harness
+    v1.5.1, measuring the stack effect against Run 1's frozen baseline.
 
 ## The paper
 
@@ -150,37 +159,20 @@ long-horizon agents — and is the synthesis layer across registered
 experiments: results land there as runs complete. Rendered at
 [kamibench.ai/paper](https://kamibench.ai/paper).
 
-## Feasibility: the kami-zero pilot
-
-<!-- PILOT:START -->
-Before the controlled program, an autonomous pilot established the feasibility
-of persistent operation in the live world: [kami-zero](https://github.com/tokedo/kami-zero),
-a two-model agent — a Sonnet 4.6 executor on ~5-minute ticks and an Opus 4.7
-optimizer on ~6-hour cycles.
-
-**~2 months · 79/192 quests · unassisted** (snapshot 2026-07-06)
-
-The agent played unassisted while the surrounding tooling remained under active
-development; limitations surfaced during the pilot fed directly back into the
-environment interface. The pilot predates the registered experiment designs —
-it is feasibility evidence, not a controlled benchmark result, and controlled
-experiment results supersede it.
-<!-- PILOT:END -->
-
 ## What's in here
 
 | Path | What it is |
 |---|---|
-| [`experiments/`](experiments/) | The experiment registry — one public, git-timestamped design per controlled experiment; [001 — budget-boxed, zero-prior orientation](experiments/001-budget-boxed.md) is the first. |
+| [`experiments/`](experiments/) | The experiment registry — one public, git-timestamped doc per design and per run; [Budget-boxed](experiments/budget-boxed.md) is the first design, with [Run 1](experiments/001-budget-boxed.md) complete and [Run 2](experiments/002-stack-delta.md) in progress. |
 | [`paper/paper.md`](paper/paper.md) | The paper — the position argument and the synthesis layer across experiments; everything still in progress is sequenced in its Experimental Program section. |
 | [`paper/NOTES.md`](paper/NOTES.md) | Working notes — the draft scaffolding (status tags, TODO/VERIFY markers, stub sections) relocated out of the paper, preserved verbatim. |
 | [`research/literature.md`](research/literature.md) | Annotated bibliography grouped by theme (the related-work foundation), with a must-cite core set. |
 | [`research/asphodel-whitepaper-notes.md`](research/asphodel-whitepaper-notes.md) | Full reading notes on the Asphodel/Kamigotchi whitepaper, incl. the creators' own "benchmarking system" framing and the token economy. |
 | [`site/`](site/) | The project website — landing page + build-time renders of the paper and the experiment registry (updates on every push). Astro, deployed on Vercel; see [`site/README.md`](site/README.md). |
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Technical Game Design Document — all mechanics and data catalogs extracted from source, the agent-readable spec of the world. |
-| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — 60+ MCP tools wrapping every on-chain action (v1.0.0). |
-| [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — turns a stateless model API into a persistent actor; model-agnostic by construction, in final implementation. |
-| [kami-zero](https://github.com/tokedo/kami-zero) | The feasibility pilot — a two-model agent that ran unassisted in the live world for ~2 months. |
+| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — 84 MCP tools wrapping every on-chain action; version pinned per run. |
+| [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — turns a stateless model API into a persistent actor; model-agnostic by construction (v0.2.x). |
+| [kami-zero](https://github.com/tokedo/kami-zero) | The exploratory pilot that preceded the controlled program — ~2 months in the live world while the stack was built and rebuilt around it; superseded by the experiment registry. |
 
 ## What this is *not* (yet)
 
@@ -191,8 +183,10 @@ experiment results supersede it.
   substrate** and the **formalization of endogenous survival into a benchmark regime** —
   with surplus allocation after break-even as the open question — and the paper
   differentiates explicitly.
-- **Not** experimentally validated yet — experiment 001 is design-registered; its run is
-  pending.
+- **Not** a statistical claim — Experiment 001 ran one seed per arm: a case-study
+  behavioral comparison with full public logs. Stack iteration against its frozen
+  baseline (Experiment 002, in progress) and replication come before any
+  statistical claim.
 - **Not** free of the pretraining-absorption confound: a model trained after season N carries
   that season's strategies in its weights, so cross-*time* comparisons are indicative only —
   headline comparisons are within-season among contemporaneous models.
@@ -209,11 +203,11 @@ experiment results supersede it.
 - [x] Main thesis
 - [x] Literature review + research paper skeleton
 - [x] **Technical Game Design Document** — [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd): every game mechanic and the complete data catalogs distilled from the game's source, so agents and researchers can understand the world without reading the codebase
-- [x] **Environment interface** — [kami-harness](https://github.com/tokedo/kami-harness) v1.0.0: 60+ MCP tools wrapping every on-chain action
-- [x] **Feasibility pilot** — [kami-zero](https://github.com/tokedo/kami-zero): a two-model agent played the live world unassisted for ~2 months, completing 79 of the game's 192 quests
-- [x] **Experiment 001 design registered** — [budget-boxed, zero-prior orientation](experiments/001-budget-boxed.md)
-- [ ] **Reference scaffold** — [kami-agent](https://github.com/tokedo/kami-agent): the model-agnostic scaffold for controlled studies, in final implementation
-- [ ] Run experiment 001
+- [x] **Environment interface** — [kami-harness](https://github.com/tokedo/kami-harness): 84 MCP tools wrapping every on-chain action, version pinned per run
+- [x] **Exploratory pilot** — [kami-zero](https://github.com/tokedo/kami-zero): an agent played the live world for ~2 months (79/192 quests) while the harness, tools, and agent were reworked around it mid-run — not a clean result, and superseded by the controlled experiments
+- [x] **Reference scaffold** — [kami-agent](https://github.com/tokedo/kami-agent): the model-agnostic scaffold for controlled studies (v0.2.x)
+- [x] **Experiment 001 — run and published** — [Budget-boxed, Run 1](experiments/001-budget-boxed.md): three fast-tier arms, $10 each; full dataset public ([`v0-baseline`](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed/tree/v0-baseline))
+- [ ] **Experiment 002 — in progress** — [Budget-boxed, Run 2](experiments/002-stack-delta.md): the iterated stack against Run 1's frozen baseline
 - [ ] Paper synthesis of experiment results → arXiv
 <!-- ROADMAP:END -->
 
