@@ -1,8 +1,9 @@
 # KamiBench: A Persistent, Auditable World for Long-Horizon Agent Evaluation
 
 > **Draft status.** This is a living position-and-system paper: the thesis, the released
-> system, and the limitations of KamiBench. Controlled empirical claims are added only as
-> design-registered experiments complete. The
+> system, the first controlled results, and the limitations of KamiBench. Empirical
+> claims enter only as design-registered experiments complete — Experiment 001's results
+> are in (§4.1). The
 > [revision history](https://github.com/tokedo/KamiBench/commits/main/paper/paper.md) and
 > the [experiment registry](../experiments/) are public;
 > [kamibench.ai/paper](https://kamibench.ai/paper) renders directly from this file.
@@ -25,13 +26,18 @@ public state-transition record from which the world can be reconstructed. We pre
 **Kamigotchi**, a live, fully on-chain MMORPG co-inhabited by humans and agents through
 the same transaction interface, as the best-fit existing instance — its creators
 designed it to be agent-first and describe it as a possible "real-stakes, adversarial
-benchmarking system" — and release the groundwork for controlled studies: a
-machine-readable game specification, an environment interface exposing 60+ MCP tools,
-and evidence from a two-month unassisted feasibility pilot in the live world. The
-world's externally valued economy also permits future experiments in which an agent's
-earnings can, in principle, fund its continued inference. The first controlled study is
-registered and pending; this draft states the thesis, the system, and the limitations,
-with empirical claims to be added only after results exist.
+benchmarking system" — and release the groundwork and first results of its controlled
+program: a machine-readable game specification, an environment interface exposing 84
+MCP tools, a model-agnostic reference scaffold, and Experiment 001 — three fast-tier
+models (claude-haiku-4-5, gpt-4o-mini, gemini-2.5-flash-lite), each given $10 of
+inference and seven days in the live world with a documentation-only prior. Outcomes
+diverged sharply — five, zero, and three quests completed — and error legibility, not
+model capability, was the sharpest differentiator; the complete dataset (transcripts,
+per-event telemetry, chain-verifiable extracts) is public. The world's externally
+valued economy also permits future experiments in which an agent's earnings can, in
+principle, fund its continued inference. This draft states the thesis, the system, the
+first results, and the limitations; further empirical claims are added only as
+registered experiments complete.
 
 **Keywords:** agent evaluation, long-horizon autonomy, continual learning, multi-agent,
 non-stationarity, on-chain / autonomous worlds, self-sustaining agents.
@@ -81,9 +87,12 @@ evaluations — as a distinct substrate requirement for long-horizon agent evalu
 (§2). Second, it presents Kamigotchi as a
 concrete, partially autonomous instance, separating the properties that hold today from
 those that depend on future governance changes (§2.2, §3). Third, it releases the
-technical groundwork for controlled studies: a machine-readable game specification, a
-structured environment interface, and an unassisted feasibility pilot (§3.5).
-[Experiment 001](../experiments/001-budget-boxed.md) is registered and pending (§4).
+technical groundwork for controlled studies — a machine-readable game specification, a
+structured environment interface, and a model-agnostic reference scaffold (§3.5) — and
+the program's first controlled results:
+[Experiment 001](../experiments/001-budget-boxed.md), a budget-boxed comparison of
+three fast-tier models in the live world, published as a complete public dataset
+(§4.1).
 
 ---
 
@@ -223,45 +232,79 @@ complete conversion pathway — is claimed here.
 | Artifact | Role |
 |---|---|
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Machine-readable game specification — every mechanic and the complete data catalogs, extracted from the game's source at a pinned commit |
-| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — 60+ MCP tools exposing the world's structured actions and observations (v1.0.0: a fixed, pinnable boundary between agent scaffolds and the world) |
-| [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — model-agnostic session, memory, and scheduling mechanism for controlled studies; in final implementation |
-| [kami-zero](https://github.com/tokedo/kami-zero) | Feasibility pilot — a two-model agent that ran unassisted in the live world for ~2 months |
+| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — 84 MCP tools exposing the world's structured actions and observations: a fixed, pinnable boundary between agent scaffolds and the world, version pinned per run |
+| [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — model-agnostic session, memory, and scheduling mechanism for controlled studies; mechanism fixed, policy free |
+| [kami-zero](https://github.com/tokedo/kami-zero) | Exploratory pilot — the pre-program agent whose ~2 months in the live world shaped the interface and scaffold; superseded by the controlled experiments |
 
-The pilot is the system's feasibility evidence. kami-zero pairs a Sonnet 4.6 *executor*
-acting on a ~5-minute tick with an Opus 4.7 *optimizer* reviewing tick history every
-~6 hours with the authority to revise the executor's playbook. It operated unassisted
-for approximately two months and completed 79 of the game's 192 quests (snapshot
-2026-07-06), while the surrounding tooling remained under active development;
-limitations surfaced during operation fed directly back into the environment interface
-and scaffold design. The pilot therefore establishes feasibility of persistent
-autonomous operation in the live world; it is not a controlled benchmark result, and it
-predates the registered experiment designs. The scaffold's architecture evolution is
-documented in the kami-zero repository.
+kami-zero is the exploratory pilot that preceded the controlled program: an agent
+operated in the live world for roughly two months (79 of the game's 192 quests at the
+2026-07-06 snapshot) while the surrounding harness, tools, and agent logic were
+repeatedly reworked mid-run. It is not a clean result and carries no evidential weight
+here; its value was formative — the friction it surfaced shaped the environment
+interface and the reference scaffold — and the controlled experiments of §4 supersede
+it.
 
 ---
 
 ## 4. Experimental Program
 
-**4.1 Experiment 001: orientation under a fixed budget.** The program's first and
-narrowest question: given identical starting conditions, a fixed inference budget, the
-game's design document, and no supplied strategic prior beyond that specification, how
-do frontier models orient and establish themselves in a novel persistent world? The
-design is
-[registered publicly and git-timestamped](../experiments/001-budget-boxed.md) before the
-run (following preregistration practice for AI-agent experiments — Vaccaro,
-arXiv:2606.11217); results are appended without revising the registered protocol. The
-instrument fixes the scaffold, the environment-interface version, the budget, the
-starting protocol, and
-the supplied information; the intended controlled difference between runs is the
-**model backend**, which drives the **reference scaffold**
+**4.1 The budget-boxed design: orientation under a fixed budget.** The program's first
+and narrowest question: dropped into a live, persistent world with a fixed, invisible
+inference budget, the game's design document, and no supplied strategy, how does a
+model orient, and what does it learn to do? The
+[design](../experiments/budget-boxed.md) fixes the protocol — identical fresh-wallet
+starts, a documentation-only prior, a closed world, discrete sessions with self-chosen
+wake times, cross-session memory only as agent-written files, quest completions derived
+from chain state — and each run executes it under a pinned manifest of model set and
+stack versions, published and git-timestamped before launch (following preregistration
+practice for AI-agent experiments — Vaccaro, arXiv:2606.11217). Within a run, the only
+per-arm variable is the **model backend**, which drives the **reference scaffold**
 ([kami-agent](https://github.com/tokedo/kami-agent) — mechanism fixed, policy free)
-acting through the **environment interface**
-([kami-harness](https://github.com/tokedo/kami-harness) v1.0.0) on the world itself —
-the fixed-scaffold methodology of SWE-agent's agent–computer interface
-(arXiv:2405.15793), BALROG, and Vending-Bench. The fixed, budget-blind inference budget
-follows the cost-controlled-evaluation argument of Kapoor et al.'s *AI Agents That
-Matter* (arXiv:2407.01502). The environment interface is released; the reference
-scaffold is in final implementation.
+through the **environment interface**
+([kami-harness](https://github.com/tokedo/kami-harness)) — the fixed-scaffold
+methodology of SWE-agent's agent–computer interface (arXiv:2405.15793), BALROG, and
+Vending-Bench; the fixed, budget-blind inference budget follows the
+cost-controlled-evaluation argument of Kapoor et al.'s *AI Agents That Matter*
+(arXiv:2407.01502). Quests are counted not
+as the point of play but as a clean, chain-verifiable proxy for a basic working
+understanding of the world.
+
+**Run 1 (Experiment 001) — the baseline.** Three fast-tier models — claude-haiku-4-5,
+gpt-4o-mini, gemini-2.5-flash-lite — each received $10 of inference, a 7-day wall
+clock, an identical 84-tool surface, and a fresh Ethereum mainnet wallet holding
+0.02 ETH; everything from bridging to registration to questing had to be discovered
+from documentation and on-chain trial and error. Fast-tier arms were a deliberate
+instrument-first choice: a result in a live world is only as trustworthy as the stack
+that produced it, and inexpensive models stress-test that stack in ways capable models
+route around; frontier arms enter once stack iteration plateaus. The
+[arms diverged sharply](../experiments/001-budget-boxed.md): haiku completed the full
+onboarding chain on day one — registration, operator funding, two kamis, five quests —
+and exhausted its budget in 17 hours; gpt-4o-mini ran the full week without ever
+calling the registration action (zero quests; all 24 of its game transactions
+reverted); gemini-2.5-flash-lite was stuck pre-registration for six days, was unblocked
+by a single legible validation error, then completed three quests. Cost per quest:
+$2.15 (haiku), $3.00 (gemini), unbounded (gpt-4o-mini). Three learnings carry forward.
+Error *legibility*, not model capability, was the sharpest differentiator: the same
+model that ignored opaque chain reverts for four days corrected a human-readable
+validation error in one turn. A single missing step was the cleanest capability
+discriminator: two arms completed every onboarding step *except* registration, and
+neither ever identified it as the blocker. And cost structure dominated spend: the
+84-tool surface re-billed on every call, and prompt caching was never engaged. The
+complete dataset — full transcripts, per-event telemetry, independently verifiable
+on-chain extracts, and exact run manifests — is public under CC-BY-4.0 (KamiBench,
+2026; citable pinned revision
+[`v0-baseline`](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed/tree/v0-baseline)),
+with its caveats stated on the dataset card: one seed per arm, a live shared world, and
+a session-1 infrastructure gap on all arms.
+
+**Run 2 (Experiment 002) — the stack effect.** Run 1's learnings became scaffold and
+interface changes — prompt caching, legible pre-transaction validation, repetition
+breaking. Run 2, [registered](../experiments/002-stack-delta.md) and in progress,
+re-runs the exact protocol with the same three arms on the iterated stack: at fixed
+model and budget, the run-over-run delta measures the scaffold/harness effect against
+Run 1's frozen baseline — reported as a cross-epoch observation rather than a
+controlled comparison, since the live world and provider model strings can drift
+between runs.
 
 **4.2 Future regime: endogenous survival.** Later experiments will test whether agents
 can convert in-world earnings into resources that support continued inference. This
@@ -269,8 +312,8 @@ would turn survival from a benchmark score into an operating constraint — solv
 a score, as the survival criterion. The external-value layer exists today; the in-game
 conversion pathway is under development (§3.4). Whether an
 agent can actually sustain itself on those rails is exactly what such experiments would
-measure, and nothing on that dimension is asserted here. Between Experiment 001 and that
-regime sit controls (scaffold ablations, contamination probes, stateful-vs-stateless
+measure, and nothing on that dimension is asserted here. Between the budget-boxed runs
+and that regime sit controls (scaffold ablations, contamination probes, stateful-vs-stateless
 comparisons), a multi-model co-habitation study, and agent-level strategic surfaces not
 yet instrumented, such as transaction-ordering games — each reported only once the data
 exists.
@@ -364,7 +407,7 @@ of autonomous signing, since permissionless entry allows hand-driving.
 
 **6.2 Live-world validity.** The environment is non-stationary and cannot be exactly
 replayed. Public logging provides auditability, not experimental control. The
-[registered protocol](../experiments/001-budget-boxed.md) compensates with pinned run
+[registered protocol](../experiments/budget-boxed.md) compensates with pinned run
 manifests, chain-derived ground truth, and a pre-registered interference protocol —
 interactions between concurrent study agents are logged as dated incidents and annotated
 in the analysis rather than excluded post hoc; planned later studies add seasons and
@@ -414,9 +457,10 @@ persistent world whose execution history can be independently inspected and whos
 is shaped by participants rather than authored as a fixed test set. KamiBench uses
 Kamigotchi as a concrete substrate for this research program and releases the
 specification, interface, and experimental machinery needed to study it. Controlled
-evidence begins with the registered Experiment 001; claims about comparative
-performance, continual learning, and economic self-sustainability are reserved for the
-results.
+evidence has begun: Experiment 001 set the program's baseline in the live world and its
+dataset is public, and the stack iteration it motivated is running against that frozen
+baseline (§4.1). Claims about frontier-model comparisons, continual learning, and
+economic self-sustainability remain reserved for results as they arrive.
 
 ---
 
@@ -447,6 +491,9 @@ lives in [`../research/literature.md`](../research/literature.md).
   arXiv:2505.15146.
 - Jimenez, C. E., et al. (2024). *SWE-bench: Can Language Models Resolve Real-World
   GitHub Issues?* ICLR 2024. arXiv:2310.06770.
+- KamiBench (2026). *Experiment 001 — budget-boxed* (dataset; citable pinned revision
+  `v0-baseline`). CC-BY-4.0.
+  huggingface.co/datasets/KamiBench/experiment-001-budget-boxed.
 - Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., & Narayanan, A. (2024). *AI
   Agents That Matter*. TMLR 2025. arXiv:2407.01502.
 - Kwa, T., et al. (METR) (2025). *Measuring AI Ability to Complete Long Tasks*.
@@ -500,15 +547,17 @@ lives in [`../research/literature.md`](../research/literature.md).
 
 ## Artifacts
 
-The released repositories are the paper's appendices — each is the full, maintained form
-of the material a static appendix would snapshot:
+The released repositories and datasets are the paper's appendices — each is the full,
+maintained form of the material a static appendix would snapshot:
 
 - **[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd)** — the complete
   mechanics and data catalogs, agent-readable (§3.5).
 - **[kami-harness](https://github.com/tokedo/kami-harness)** — the environment
   interface; tool reference and observation schema in `executor/README.md` (§3.5).
 - **[kami-agent](https://github.com/tokedo/kami-agent)** — the model-agnostic reference
-  scaffold for controlled studies; in final implementation (§4.1).
-- **[kami-zero](https://github.com/tokedo/kami-zero)** — the pilot agent's prompts,
-  scaffolds, playbook rules (`executor-prompt.md`, `optimizer-prompt.md`, `rules/`),
-  and architecture version history (§3.5).
+  scaffold for controlled studies (§4.1).
+- **[experiment-001-budget-boxed](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed)**
+  — the complete Run 1 dataset: transcripts, per-event telemetry, on-chain extracts,
+  and run manifests (CC-BY-4.0; citable pinned revision `v0-baseline`) (§4.1).
+- **[kami-zero](https://github.com/tokedo/kami-zero)** — the exploratory pilot that
+  preceded the controlled program; prompts, scaffolds, and version history (§3.5).
