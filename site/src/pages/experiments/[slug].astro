@@ -48,6 +48,13 @@ const { design, run } = Astro.props;
             </span>
             <span class="exp-status-note">{run.status}</span>
           </p>
+          {run.dataset && (
+            <p class="exp-links">
+              <a class="btn" href={run.dataset} rel="noopener">
+                Full dataset on Hugging Face ↗
+              </a>
+            </p>
+          )}
           <p class="exp-lede">{run.oneliner}</p>
         </header>
         <Fragment set:html={run.html} />

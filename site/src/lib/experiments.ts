@@ -10,6 +10,8 @@
 //   run docs:     <!-- DESIGN:START/END -->     parent design slug
 //                 <!-- STATUS:START/END -->     one-sentence run status
 //                 <!-- ONELINER:START/END -->   run summary (cards, OG)
+//                 <!-- DATASET:START/END -->    optional: published-dataset URL,
+//                                               surfaced in the run-page header
 // Marker blocks and the H1 are stripped from rendered bodies — the page templates
 // present them as styled headers instead. Figures referenced as `figures/*.svg`
 // are inlined at build time so their embedded links stay clickable and the site
@@ -53,6 +55,8 @@ export interface ExperimentRun {
   html: string;
   /** Slug of the design this run executes. */
   designSlug: string;
+  /** Published-dataset URL (absent until a run's data is released). */
+  dataset?: string;
 }
 
 export interface ExperimentDesign {
@@ -69,15 +73,20 @@ export interface ExperimentDesign {
 }
 
 function markerBlock(src: string, file: string, name: string): string {
-  const match = src.match(
-    new RegExp(`<!-- ${name}:START -->([\\s\\S]*?)<!-- ${name}:END -->`)
-  );
-  if (!match) {
+  const block = optionalMarkerBlock(src, name);
+  if (block === undefined) {
     throw new Error(
       `${file} is missing the <!-- ${name}:START --> / <!-- ${name}:END --> markers.`
     );
   }
-  return match[1]!.replace(/\s+/g, ' ').trim();
+  return block;
+}
+
+function optionalMarkerBlock(src: string, name: string): string | undefined {
+  const match = src.match(
+    new RegExp(`<!-- ${name}:START -->([\\s\\S]*?)<!-- ${name}:END -->`)
+  );
+  return match?.[1]!.replace(/\s+/g, ' ').trim();
 }
 
 function renderBody(src: string): string {
@@ -86,6 +95,7 @@ function renderBody(src: string): string {
     .replace(/<!-- STATUS:START -->[\s\S]*?<!-- STATUS:END -->\n?/, '')
     .replace(/<!-- ONELINER:START -->[\s\S]*?<!-- ONELINER:END -->\n?/, '')
     .replace(/<!-- DESIGN:START -->[\s\S]*?<!-- DESIGN:END -->\n?/, '')
+    .replace(/<!-- DATASET:START -->[\s\S]*?<!-- DATASET:END -->\n?/, '')
     .trim();
 
   let html = marked.parse(body, { gfm: true }) as string;
@@ -170,6 +180,7 @@ export function getDesigns(): ExperimentDesign[] {
         statusLabel: complete ? ('Complete' as const) : ('In progress' as const),
         html: renderBody(src),
         designSlug: markerBlock(src, file, 'DESIGN'),
+        dataset: optionalMarkerBlock(src, 'DATASET'),
       };
     })
     .sort((a, b) => a.number.localeCompare(b.number));

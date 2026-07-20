@@ -737,6 +737,16 @@ td:first-child {
   margin: 1.1rem 0 0;
 }
 
+/* header resource links (e.g. a run's published dataset) */
+.exp-links {
+  margin: 1rem 0 0;
+}
+
+.exp-links .btn {
+  font-size: 0.85rem;
+  padding: 0.38rem 0.85rem;
+}
+
 /* run rows — inside registry/homepage design cards, on design pages (the run
    index under the header), and in the cross-run nav at the foot of run pages */
 .run-list {

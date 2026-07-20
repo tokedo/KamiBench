@@ -13,6 +13,8 @@ wallet, on the v0 baseline stack: the program's calibration run, and the frozen
 baseline every stack iteration after it is measured against.
 <!-- ONELINER:END -->
 
+<!-- DATASET:START -->https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed<!-- DATASET:END -->
+
 > Part of the [Budget-boxed](budget-boxed.md) design — the question, the
 > protocol, the architecture, and the measurement live there. This page records
 > what ran and what came out. Numbers are frozen from the published dataset;
