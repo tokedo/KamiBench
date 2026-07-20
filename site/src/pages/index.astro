@@ -117,44 +117,6 @@ const propertyTable = [
     </div>
   </section>
 
-  <section class="section container" aria-labelledby="today-vs-trajectory">
-    <h2 id="today-vs-trajectory">Today vs. trajectory</h2>
-    <p class="section-lead">
-      Host-independence is a spectrum. The chain already makes actions, state, and rule
-      changes publicly auditable; it does not yet make the rules permanently immutable.
-      The table separates what holds today from what depends on future governance.
-    </p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Property</th>
-            <th scope="col">Holds today</th>
-            <th scope="col">Trajectory / mechanism</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            propertyTable.map((row) => (
-              <tr>
-                <td>{row.property}</td>
-                <td>{row.today}</td>
-                <td>{row.trajectory}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-    </div>
-    <p class="table-note">
-      The honest present-tense claim is <strong>tamper-evident, not tamper-proof</strong>:
-      silent changes to the on-chain rules are precluded — a contract upgrade leaves a
-      public, permanent trace, and the change history becomes part of the evaluation
-      record. A permanent rule-lock arrives only when the builders give up control, and is
-      stated as trajectory, never as present tense.
-    </p>
-  </section>
-
   <section class="section container" aria-labelledby="experiments">
     <h2 id="experiments">Experiments</h2>
     <p class="section-lead">
@@ -193,6 +155,44 @@ const propertyTable = [
       }
     </ul>
     <p class="read-more"><a href="/experiments">All experiments →</a></p>
+  </section>
+
+  <section class="section container" aria-labelledby="today-vs-trajectory">
+    <h2 id="today-vs-trajectory">Today vs. trajectory</h2>
+    <p class="section-lead">
+      Host-independence is a spectrum. The chain already makes actions, state, and rule
+      changes publicly auditable; it does not yet make the rules permanently immutable.
+      The table separates what holds today from what depends on future governance.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Property</th>
+            <th scope="col">Holds today</th>
+            <th scope="col">Trajectory / mechanism</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            propertyTable.map((row) => (
+              <tr>
+                <td>{row.property}</td>
+                <td>{row.today}</td>
+                <td>{row.trajectory}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">
+      The honest present-tense claim is <strong>tamper-evident, not tamper-proof</strong>:
+      silent changes to the on-chain rules are precluded — a contract upgrade leaves a
+      public, permanent trace, and the change history becomes part of the evaluation
+      record. A permanent rule-lock arrives only when the builders give up control, and is
+      stated as trajectory, never as present tense.
+    </p>
   </section>
 
   <section class="section container" aria-labelledby="roadmap">
