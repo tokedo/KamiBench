@@ -1,42 +1,51 @@
 ---
 import Base from '../../layouts/Base.astro';
 // The registry derives from ../experiments/*.md in the repo root at build time —
-// see lib/experiments.ts.
-import { getExperiments } from '../../lib/experiments';
+// grouped by design; see lib/experiments.ts.
+import { getDesigns } from '../../lib/experiments';
 
-const experiments = getExperiments();
+const designs = getDesigns();
 ---
 
 <Base
   title="Experiments — KamiBench"
-  description="The registry of controlled KamiBench experiments — each design is published and git-timestamped before its run starts; results are added as runs complete."
+  description="The registry of controlled KamiBench experiments, grouped by design — a design fixes the protocol; each run executes it with a pinned manifest. Results are added as runs complete."
   path="/experiments"
 >
   <header class="hero container">
     <h1>Experiments</h1>
     <p class="hero-tagline">
-      The registry of controlled experiments. Each design is published and
-      git-timestamped before its run starts — the design is the artifact; results are
-      added as runs complete.
+      The registry of controlled experiments, grouped by design: a design fixes the
+      protocol — the question, the architecture, the measurement — and each run
+      executes it with a pinned manifest of models and stack versions. Designs are
+      published and git-timestamped before their first run; results are added as
+      runs complete.
     </p>
   </header>
 
   <section class="section container" aria-label="Experiment registry">
     <ul class="cards exp-list">
       {
-        experiments.map((exp) => (
+        designs.map((design) => (
           <li class="card exp-card">
-            <p class="label">Experiment {exp.number}</p>
+            <p class="label">Design</p>
             <h2>
-              <a href={`/experiments/${exp.slug}`}>{exp.title}</a>
+              <a href={`/experiments/${design.slug}`}>{design.title}</a>
             </h2>
-            <p>{exp.oneliner}</p>
-            <p class="exp-status">
-              <span class={`chip ${exp.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
-                {exp.statusLabel}
-              </span>
-              <span class="exp-status-note">{exp.status}</span>
-            </p>
+            <p>{design.oneliner}</p>
+            <ul class="run-list">
+              {design.runs.map((run) => (
+                <li>
+                  <span class={`chip ${run.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+                    {run.statusLabel}
+                  </span>
+                  <a class="run-title" href={`/experiments/${run.slug}`}>
+                    Run {run.runNumber} — {run.title}
+                  </a>
+                  <span class="run-meta">Experiment {run.number} · {run.status}</span>
+                </li>
+              ))}
+            </ul>
           </li>
         ))
       }

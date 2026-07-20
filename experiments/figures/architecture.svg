@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 648" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="af-desc">
-  <title id="af-desc">Experiment architecture: a model backend (the only element that varies per run) and its agent-built workspace memory sit above the reference scaffold kami-agent, which acts through the environment interface kami-harness on the world, Kamigotchi — live and shared by models and human players.</title>
+  <title id="af-desc">Experiment architecture: a model backend (the only element that varies between arms) and its agent-built workspace memory sit above the reference scaffold kami-agent, which acts through the environment interface kami-harness on the world, Kamigotchi — live and shared by models and human players.</title>
   <defs>
     <marker id="af-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
       <path class="af-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#8f8a80"/>
@@ -12,9 +12,9 @@
   <rect class="af-box af-box-var" x="48.5" y="24.5" width="294" height="132" rx="10" fill="#ffffff" stroke="#a03518"/>
   <text class="af-title" x="72" y="56" font-size="17" font-weight="600" fill="#1c1917">Model backend</text>
   <rect class="af-badge-var" x="198" y="40" width="128" height="22" rx="11" fill="#f3ddd5"/>
-  <text class="af-badge-var-text" x="262" y="55" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#a03518">VARIES PER RUN</text>
+  <text class="af-badge-var-text" x="262" y="55" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#a03518">VARIES PER ARM</text>
   <text class="af-role" x="72" y="88" font-size="13.5" fill="#6d675f">The model under test — the only</text>
-  <text class="af-role" x="72" y="106" font-size="13.5" fill="#6d675f">element that changes between runs.</text>
+  <text class="af-role" x="72" y="106" font-size="13.5" fill="#6d675f">element that changes between arms.</text>
 
   <!-- Row 1, right: workspace memory (agent-built) -->
   <rect class="af-box" x="378.5" y="24.5" width="293" height="132" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
@@ -47,11 +47,11 @@
 
   <!-- Layer 3: environment interface -->
   <rect class="af-box" x="48.5" y="364.5" width="623" height="104" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
-  <text class="af-title" x="72" y="396" font-size="17" font-weight="600" fill="#1c1917">Environment interface<tspan class="af-role" dx="7" font-weight="400" fill="#6d675f">—</tspan><a href="https://github.com/tokedo/kami-harness"><tspan class="af-repo" dx="7" fill="#a03518" text-decoration="underline">kami-harness</tspan></a><tspan class="af-role" dx="6" font-weight="400" font-size="13" fill="#6d675f">v1.0.0</tspan></text>
+  <text class="af-title" x="72" y="396" font-size="17" font-weight="600" fill="#1c1917">Environment interface<tspan class="af-role" dx="7" font-weight="400" fill="#6d675f">—</tspan><a href="https://github.com/tokedo/kami-harness"><tspan class="af-repo" dx="7" fill="#a03518" text-decoration="underline">kami-harness</tspan></a></text>
   <rect class="af-badge" x="492" y="382" width="164" height="22" rx="11" fill="#e8ebef"/>
   <text class="af-badge-text" x="574" y="397" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">FIXED ACROSS MODELS</text>
-  <text class="af-role" x="72" y="420" font-size="13.5" fill="#6d675f">60+ MCP tools wrapping every on-chain action — mechanics, not strategy.</text>
-  <text class="af-role" x="72" y="438" font-size="13.5" fill="#6d675f">Pinned per run; identical for every model.</text>
+  <text class="af-role" x="72" y="420" font-size="13.5" fill="#6d675f">84 MCP tools wrapping every on-chain action — mechanics, not strategy.</text>
+  <text class="af-role" x="72" y="438" font-size="13.5" fill="#6d675f">Version pinned per run; identical for every model.</text>
 
   <line class="af-conn" x1="360.5" y1="473" x2="360.5" y2="515" stroke="#8f8a80" marker-start="url(#af-head)" marker-end="url(#af-head)"/>
   <text class="af-conn-label" x="374" y="498" font-size="12.5" fill="#6d675f">transactions · chain reads</text>

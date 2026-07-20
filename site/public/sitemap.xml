@@ -8,7 +8,13 @@
     <loc>https://kamibench.ai/experiments</loc>
   </url>
   <url>
+    <loc>https://kamibench.ai/experiments/budget-boxed</loc>
+  </url>
+  <url>
     <loc>https://kamibench.ai/experiments/001-budget-boxed</loc>
+  </url>
+  <url>
+    <loc>https://kamibench.ai/experiments/002-stack-delta</loc>
   </url>
   <url>
     <loc>https://kamibench.ai/paper</loc>

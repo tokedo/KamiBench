@@ -1,44 +1,116 @@
 ---
 import Base from '../../layouts/Base.astro';
-// One page per registered experiment, rendered at build time from the design doc
-// in ../experiments/ (single source of truth) — see lib/experiments.ts.
-import { getExperiments } from '../../lib/experiments';
-import type { Experiment } from '../../lib/experiments';
+// One page per registry doc, rendered at build time from ../experiments/
+// (single source of truth) — see lib/experiments.ts. Design docs and run docs
+// share this route: `run` is null on a design page.
+import { getDesigns } from '../../lib/experiments';
+import type { ExperimentDesign, ExperimentRun } from '../../lib/experiments';
 
 export function getStaticPaths() {
-  return getExperiments().map((exp) => ({
-    params: { slug: exp.slug },
-    props: { exp },
-  }));
+  return getDesigns().flatMap((design) => [
+    { params: { slug: design.slug }, props: { design, run: null } },
+    ...design.runs.map((run) => ({
+      params: { slug: run.slug },
+      props: { design, run },
+    })),
+  ]);
 }
 
 interface Props {
-  exp: Experiment;
+  design: ExperimentDesign;
+  run: ExperimentRun | null;
 }
 
-const { exp } = Astro.props;
+const { design, run } = Astro.props;
 ---
 
-<Base
-  title={`${exp.fullTitle} — KamiBench`}
-  description={exp.oneliner}
-  path={`/experiments/${exp.slug}`}
-  ogType="article"
->
-  <article class="container exp-page paper">
-    <header class="exp-header">
-      <p class="label">
-        <a href="/experiments">Experiment registry</a> · {exp.number}
-      </p>
-      <h1>{exp.title}</h1>
-      <p class="exp-status">
-        <span class={`chip ${exp.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
-          {exp.statusLabel}
-        </span>
-        <span class="exp-status-note">{exp.status}</span>
-      </p>
-      <p class="exp-lede">{exp.oneliner}</p>
-    </header>
-    <Fragment set:html={exp.html} />
-  </article>
-</Base>
+{
+  run ? (
+    <Base
+      title={`${design.title} · ${run.fullTitle} — KamiBench`}
+      description={run.oneliner}
+      path={`/experiments/${run.slug}`}
+      ogType="article"
+    >
+      <article class="container exp-page paper">
+        <header class="exp-header">
+          <p class="label">
+            <a href="/experiments">Experiment registry</a> ·{' '}
+            <a href={`/experiments/${design.slug}`}>{design.title}</a> · Experiment{' '}
+            {run.number}
+          </p>
+          <h1>
+            Run {run.runNumber} — {run.title}
+          </h1>
+          <p class="exp-status">
+            <span class={`chip ${run.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+              {run.statusLabel}
+            </span>
+            <span class="exp-status-note">{run.status}</span>
+          </p>
+          <p class="exp-lede">{run.oneliner}</p>
+        </header>
+        <Fragment set:html={run.html} />
+        {design.runs.length > 1 && (
+          <nav class="run-nav" aria-label="Runs of this design">
+            <h2>Runs of this design</h2>
+            <ul class="run-list">
+              {design.runs.map((r) => (
+                <li class:list={{ 'run-current': r.slug === run.slug }}>
+                  <span class={`chip ${r.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+                    {r.statusLabel}
+                  </span>
+                  {r.slug === run.slug ? (
+                    <span class="run-title">
+                      Run {r.runNumber} — {r.title} <span class="run-meta">(this page)</span>
+                    </span>
+                  ) : (
+                    <a class="run-title" href={`/experiments/${r.slug}`}>
+                      Run {r.runNumber} — {r.title}
+                    </a>
+                  )}
+                  <span class="run-meta">Experiment {r.number}</span>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+      </article>
+    </Base>
+  ) : (
+    <Base
+      title={`${design.title} — KamiBench`}
+      description={design.oneliner}
+      path={`/experiments/${design.slug}`}
+      ogType="article"
+    >
+      <article class="container exp-page paper">
+        <header class="exp-header">
+          <p class="label">
+            <a href="/experiments">Experiment registry</a> · Design
+          </p>
+          <h1>{design.title}</h1>
+          <p class="exp-lede">{design.oneliner}</p>
+        </header>
+        {design.runs.length > 0 && (
+          <nav class="design-runs" aria-label="Runs of this design">
+            <ul class="run-list">
+              {design.runs.map((r) => (
+                <li>
+                  <span class={`chip ${r.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+                    {r.statusLabel}
+                  </span>
+                  <a class="run-title" href={`/experiments/${r.slug}`}>
+                    Run {r.runNumber} — {r.title}
+                  </a>
+                  <span class="run-meta">Experiment {r.number} · {r.status}</span>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+        <Fragment set:html={design.html} />
+      </article>
+    </Base>
+  )
+}

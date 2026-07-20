@@ -1,11 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-// Intro paragraph, status banner, why-cards, pilot section, and the roadmap all
-// derive from the repo-root README at build time (between marker comments) — see
+// Intro paragraph, status banner, why-cards, and the roadmap all derive from
+// the repo-root README at build time (between marker comments) — see
 // lib/readme.ts. Experiment cards derive from ../experiments/*.md — see
 // lib/experiments.ts.
 import { readmeSection, readmeRoadmap, readmeWhy } from '../lib/readme';
-import { getExperiments } from '../lib/experiments';
+import { getDesigns } from '../lib/experiments';
 
 const github = 'https://github.com/tokedo/KamiBench';
 
@@ -15,10 +15,9 @@ const github = 'https://github.com/tokedo/KamiBench';
 const ideaHtml = readmeSection('IDEA');
 const worldHtml = readmeSection('WORLD');
 const statusHtml = readmeSection('STATUS', { inline: true });
-const pilotHtml = readmeSection('PILOT');
 const why = readmeWhy();
 const roadmap = readmeRoadmap();
-const experiments = getExperiments();
+const designs = getDesigns();
 
 // The §2.2 today-vs-trajectory table from paper/paper.md — same rows, but the
 // paper version additionally carries §-refs and the formal governance terminology
@@ -159,40 +158,41 @@ const propertyTable = [
   <section class="section container" aria-labelledby="experiments">
     <h2 id="experiments">Experiments</h2>
     <p class="section-lead">
-      The registry of controlled experiments. Each design is published and
-      git-timestamped before the run; results are appended without revising the
-      registered protocol. Any amendment is explicit, dated, and preserves the
-      original wording.
+      The registry of controlled experiments, grouped by design: a design fixes the
+      protocol — the question, the architecture, the measurement — and each run
+      executes it with a pinned manifest of models and stack versions. Designs are
+      published and git-timestamped before their first run; results are added as
+      runs complete.
     </p>
     <ul class="cards exp-list">
       {
-        experiments.map((exp) => (
+        designs.map((design) => (
           <li class="card exp-card">
-            <p class="label">Experiment {exp.number}</p>
+            <p class="label">Design</p>
             <h3>
-              <a href={`/experiments/${exp.slug}`}>{exp.title}</a>
+              <a href={`/experiments/${design.slug}`}>{design.title}</a>
             </h3>
-            <p>{exp.oneliner}</p>
-            <p class="exp-status">
-              <span
-                class={`chip ${exp.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}
-              >
-                {exp.statusLabel}
-              </span>
-              <span class="exp-status-note">{exp.status}</span>
-            </p>
+            <p>{design.oneliner}</p>
+            <ul class="run-list">
+              {design.runs.map((run) => (
+                <li>
+                  <span
+                    class={`chip ${run.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}
+                  >
+                    {run.statusLabel}
+                  </span>
+                  <a class="run-title" href={`/experiments/${run.slug}`}>
+                    Run {run.runNumber} — {run.title}
+                  </a>
+                  <span class="run-meta">Experiment {run.number}</span>
+                </li>
+              ))}
+            </ul>
           </li>
         ))
       }
     </ul>
     <p class="read-more"><a href="/experiments">All experiments →</a></p>
-  </section>
-
-  <section class="section container" aria-labelledby="feasibility">
-    <h2 id="feasibility">Feasibility pilot</h2>
-    <div class="section-lead">
-      <Fragment set:html={pilotHtml} />
-    </div>
   </section>
 
   <section class="section container" aria-labelledby="roadmap">

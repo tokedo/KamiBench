@@ -1,177 +1,123 @@
-# Experiment 001 — Budget-boxed, zero-prior orientation
+# Run 1 — baseline stack (Experiment 001)
+
+<!-- DESIGN:START -->budget-boxed<!-- DESIGN:END -->
 
 <!-- STATUS:START -->
-Design registered; infrastructure in final implementation; run pending.
+Complete — ran 2026-07-10 → 2026-07-17; the full dataset is public.
 <!-- STATUS:END -->
 
 <!-- ONELINER:START -->
-Given identical starting conditions, a fixed inference budget, the game's
-design document, and no supplied strategy beyond it — how do frontier models
-orient and establish themselves in a novel persistent world?
+Three fast-tier models — claude-haiku-4-5, gpt-4o-mini, gemini-2.5-flash-lite —
+each dropped into the live world with $10 of inference, seven days, and a fresh
+wallet, on the v0 baseline stack: the program's calibration run, and the frozen
+baseline every stack iteration after it is measured against.
 <!-- ONELINER:END -->
 
-> **Scope note.** This is the program's first experiment and deliberately its
-> narrowest: it measures *orientation* — how a model gets its footing in a
-> world it has never seen. The program's larger questions — continual learning
-> over long horizons and persistent, economically self-sustaining life in the
-> world — are the subject of future experiments
-> ([scope and limitations](#scope-and-limitations)).
+> Part of the [Budget-boxed](budget-boxed.md) design — the question, the
+> protocol, the architecture, and the measurement live there. This page records
+> what ran and what came out. Numbers are frozen from the published dataset;
+> schemas, run manifests, provenance, and the full caveat list live on the
+> [dataset card](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed).
 
-## Motivation
+## What ran
 
-A behavioral study of models dropped into a novel, persistent, live on-chain
-world under a hard resource constraint. Unlike resettable benchmarks, each
-agent must discover the world's mechanics from documentation and interaction
-alone, persist what it learns across sessions in memory it structures itself,
-and schedule its own activity against a world that advances in real time. The
-inference budget bounds the observation window but is invisible to the agent:
-what is measured is a finite sample of open-ended play, not a race against a
-known clock.
+| | |
+|---|---|
+| **Arms** | `claude-haiku-4-5` (Anthropic) · `gpt-4o-mini` (OpenAI) · `gemini-2.5-flash-lite` (Google) |
+| **Budget** | $10 of inference per arm — invisible to the agent |
+| **Wall clock** | 7 days |
+| **Start** | a fresh Ethereum mainnet wallet holding 0.02 ETH — and nothing else |
+| **Objective** | "complete as many quests as possible" |
+| **Scaffold** | [kami-agent](https://github.com/tokedo/kami-agent) @ `3ebd5b8` — the v0 baseline |
+| **Environment interface** | [kami-harness](https://github.com/tokedo/kami-harness) v1.3.1 — 84 tools |
+| **Window** | launched 2026-07-10; walls closed 2026-07-17 |
 
-## Research questions
+Everything — bridging to the game chain, creating an operator wallet,
+registering an account, buying a team, questing — had to be discovered from the
+game's documentation and on-chain trial and error. No resets, no human contact,
+and every action a real transaction in an economy shared with human players.
+The agents scheduled their own wake-ups and kept their own notes; the budget
+was invisible to them.
 
-1. **Progress.** Quests completed as a function of cumulative inference spend,
-   per model — the shape of the curve, not just its endpoint: early jumps,
-   plateaus, walls.
-2. **Discovery.** What does each model learn about the world, and what does it
-   write down? Post-hoc comparison of workspace contents — what was recorded,
-   how it was organized, what was never discovered — and whether the model
-   finds and uses the game's design document at all.
-3. **Natural pacing.** Activity rhythm in the absence of scarcity signals:
-   wake-scheduling patterns, spend rate over time, session cadence; whether a
-   stable operating rhythm emerges and what drives it.
-4. **Failure modes.** Where each model gets stuck and what stuck states cost;
-   whether fast-tier models can complete any quest at all.
+## What happened
 
-## Architecture
+The three arms diverged sharply. Haiku completed the entire onboarding chain on
+day one — registered, funded its operator, bought two kamis, finished five
+quests — and exhausted its budget in 17 hours. GPT-4o-mini ran the full week
+and never once called `register_account`: 166 sessions, all 24 of its game
+transactions reverted, zero quests. Gemini spent six days stuck
+pre-registration, was unblocked by a single legible validation error, then
+completed three quests and bought a level-31 kami 90 minutes before the wall.
+Cost per quest: haiku $2.15, gemini $3.00, gpt-4o-mini ∞.
 
-![Experiment architecture: a model backend (varies per run) and its agent-built workspace memory over reference scaffold (kami-agent), environment interface (kami-harness), and the world (Kamigotchi)](figures/architecture.svg)
+| | haiku-4.5 | gpt-4o-mini | gemini-2.5-flash-lite |
+|---|---|---|---|
+| stopped | budget, hour 17 | 7-day wall | 7-day wall |
+| quests | **5** | 0 | 3 |
+| kamis bought | 2 (level 1) | 0 | 1 (level 31) |
+| successful on-chain actions | 45 | 0 | 11 |
+| chain revert rate | 0.58 | 0.97 | 0.94 |
 
-Four layers plus the agent-built workspace; the model backend is the only
-per-run variable.
+## Milestones
 
-- **Model backend** — the model under test, driven through its provider's
-  native tool-calling API. Swapping this layer is the entire experimental
-  manipulation.
-- **Memory — `workspace/`.** The agent's only cross-session memory: a file
-  tree that starts empty and is built by each model as it explores — its
-  accumulated knowledge of the world and its strategies, persisted by the
-  scaffold between sessions. What gets written, and how it is organized, is a
-  primary measurement (RQ2).
-- **Reference scaffold — [kami-agent](https://github.com/tokedo/kami-agent).**
-  Turns a stateless model API into a persistent actor: a session loop, the
-  workspace file tools, self-chosen wake times, one adapter per provider.
-  Mechanism fixed, policy free: the scaffold fixes *how* the agent can act,
-  remember, and schedule — never *what* to do, *what* to write down, or *when*
-  to act. Cross-model divergence in those choices is a primary measurement.
-- **Environment interface — [kami-harness](https://github.com/tokedo/kami-harness) (v1.0.0).**
-  60+ MCP tools wrapping every on-chain action — mechanics, not strategy —
-  identical across arms.
-- **The world — Kamigotchi**, a persistent, fully on-chain MMORPG with a live
-  economy and human players. Its machine-readable specification,
-  [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd), is the design
-  document bundled with each agent.
+First success per onboarding/economy milestone, against cumulative inference.
+These rows are the frozen baseline that stack iterations
+([Run 2](002-stack-delta.md) onward) are compared against at fixed milestones.
 
-The fixed-scaffold methodology follows SWE-agent's agent–computer interface
-(arXiv:2405.15793), BALROG (arXiv:2411.13543), and Vending-Bench
-(arXiv:2502.15840): hold the scaffold constant, swap the model, and attribute
-outcome differences to the model backend.
+![Milestone trajectories: first success per onboarding milestone vs cumulative tokens, per model](figures/001-milestones.svg)
 
-## Method
+| milestone | haiku-4.5 | gpt-4o-mini | gemini-2.5-flash-lite |
+|---|---|---|---|
+| bridge ETH mainnet→Yominet landed | 07-10 23:10 · h1.4 · s2 · 0.14M tok · $0.14 | 07-12 04:45 · h31.0 · s32 · 10.33M tok · $1.56 | 07-11 03:35 · h5.8 · s6 · 0.62M tok · $0.06 |
+| operator wallet funded | 07-10 23:30 · h1.7 · s4 · 0.65M tok · $0.67 | 07-12 22:40 · h48.9 · s49 · 17.58M tok · $2.65 | 07-11 15:30 · h17.7 · s17 · 5.84M tok · $0.59 |
+| account registered in game | 07-10 23:30 · h1.7 · s4 · 0.68M tok · $0.70 | — | 07-16 15:15 · h137.5 · s129 · 62.57M tok · $6.30 |
+| first quest completed | 07-10 23:30 · h1.8 · s4 · 0.87M tok · $0.89 | — | 07-16 15:16 · h137.5 · s129 · 63.01M tok · $6.35 |
+| first kami bought | 07-11 00:35 · h2.8 · s5 · 2.30M tok · $2.34 | — | 07-17 20:30 · h166.7 · s156 · 87.83M tok · $8.84 |
+| first MUSU harvest started | 07-11 01:40 · h3.9 · s6 · 3.14M tok · $3.20 | — | — |
+| first MUSU banked (harvest stop/collect) | 07-11 01:50 · h4.1 · s7 · 3.51M tok · $3.57 | — | — |
 
-- **Budget-blind observation window.** Each run gets a fixed inference budget,
-  identical across runs, with accounting entirely scaffold-side (a pinned
-  price table × provider-reported tokens, caching-neutral). No budget, spend,
-  or duration information reaches the agent through any channel — a visible
-  budget would induce finite-horizon behavior (sprinting, hoarding, end-game
-  effects) and contaminate exactly the trajectory under study.
-- **Zero strategic priors.** The system prompt states the situation, the
-  objective (complete as many quests as possible), and the tool surface — no
-  strategy hints, no memory-structure suggestions, no vendor idioms. The only
-  documentation is the bundled design document.
-- **Closed world.** The agent's total information channels are the
-  environment-interface tools, a read-only bundled snapshot of the design
-  document, and its own workspace. No web access — open web access would
-  contaminate the discovery measurement and change the measured capability.
-- **Sessions, not a daemon.** The agent acts in discrete sessions and chooses
-  its own wake time within bounds; the world advances between sessions.
-  Whether and how a model checks the time, re-orients, and paces itself is
-  measured behavior.
-- **Memory as artifact.** Cross-session memory is exclusively what the agent
-  writes to its workspace — no compaction, no scaffold-side summarization.
-  Memory is fully inspectable and directly comparable across models.
-- **Tamper-evident measurement.** Quest completions are derived from chain
-  state — public, tamper-evident ground truth — joined to scaffold telemetry.
-  The primary analysis artifact is the quests vs. cumulative-spend curve,
-  readable at any budget level; token-denominated curves are reported
-  alongside to decouple capability from pricing.
+Cell = first success: UTC time · hours since run start · session number ·
+cumulative tokens (in+out) · cumulative USD at that moment; "—" = never
+happened.
 
-## Conditions
+## What we learned
 
-- **Models:** frontier and fast tiers per provider, pinned in run manifests at
-  launch. All arms get the same budget — capability per unit of inference is
-  the point.
-- **Resources:** a fixed inference budget and a pre-set wall-clock ceiling per
-  run. Wall-clock is a hidden second resource (real-time regeneration and
-  cooldowns reward frugality with more elapsed game time); the ceiling bounds
-  it, and wall-clock-per-quest telemetry lets analysis separate "smarter" from
-  "slower."
-- **Starting position:** identical seeded in-game capital and gas allowance
-  per agent, provisioned outside the inference budget and tracked on-chain.
-- **Shared live world:** all runs are concurrent in the same world epoch.
-  Study agents may encounter one another — including PvP liquidation — and no
-  interaction constraint is imposed. A pre-registered interference protocol
-  governs analysis: study-pair interactions are logged as dated incidents,
-  progress curves are annotated with them rather than runs excluded, no run is
-  excluded post hoc, and agent–agent interactions are reported as a distinct
-  exploratory multi-agent subsection.
+- **Error legibility, not model capability, was the sharpest differentiator.**
+  The same model that ignored opaque chain reverts for four days corrected a
+  human-readable validation error in one turn.
+- **A single missing step was the cleanest capability discriminator.** Two arms
+  completed every onboarding step *except* registration, and neither ever
+  identified it as the blocker.
+- **Cost structure dominated spend.** The 84-tool surface re-billed on every
+  call dominated token spend, prompt caching was never engaged, and un-broken
+  poll loops reached $0.55 per session — making repetition detection a budget
+  control, not just hygiene.
+- **Orientation speed and decision quality are different axes.** Haiku moved
+  fast and bought level-1 kamis; gemini moved slowly and bought a level-31 kami
+  near floor price.
 
-## Scope and limitations
+Most of what this run taught us was about the stack, not the models — which is
+what a calibration run is for. These findings became scaffold v0.2.0 and
+harness v1.4.0; [Run 2](002-stack-delta.md) measures those stack improvements
+against this frozen baseline, one step along the path to the plateau where
+frontier models come in.
 
-Deliberately bounded: this experiment measures **orientation and discovery** —
-how a model establishes itself in a world it has never seen — not
-self-sustainability. Persistent economic life (earning to keep running) is the
-subject of future experiments, as are: a knowledge-pack arm (calibrated priors
-vs. zero priors), a budget-visible arm (does horizon awareness induce end-game
-behavior?), an open-world arm (web access — realistic persistent-life
-conditions), multi-seed replication, and a BYO-agent permissionless track.
+## Data
 
-Known limitations, stated up front: one run per model — a case-study
-behavioral comparison with full public logs, not a statistical one; a live,
-non-stationary world shared with human players, reported as-lived under the
-interference protocol; dollar-denominated curves entangle capability with
-provider pricing, mitigated by the token-denominated view; and seeded starting
-kamis are matched as closely as the gacha mechanic permits, with residual
-variance disclosed.
+The complete dataset is public under CC-BY-4.0: full session transcripts,
+per-event telemetry, and independently verifiable on-chain extracts (including
+every revert), plus the exact run manifests — model strings, sampling
+parameters, pinned commits of the scaffold and environment interface, API
+price tables, wallet addresses.
 
-## Pre-registration and reproducibility
+- **Dataset:**
+  [KamiBench/experiment-001-budget-boxed](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed)
+- **Citable pinned revision:**
+  [`v0-baseline`](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed/tree/v0-baseline)
+  — the revision as published; later corrections are new commits and cannot
+  move this tag.
 
-This design was finalized and git-timestamped before the run — the revision
-history of this document is public. At launch, each run's manifest pins exact
-commit SHAs of the reference scaffold, the environment interface, and the
-design-document snapshot, plus the model string, sampling parameters, price
-table, and every scaffold cap. Chain state is the public ground-truth action
-log.
-
-Everything needed to reproduce the setup is public:
-[kami-agent](https://github.com/tokedo/kami-agent) ·
-[kami-harness](https://github.com/tokedo/kami-harness) ·
-[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd).
-
-## Amendments
-
-> **Amendment 1 — 2026-07-13** (wording and manifest clarifications; no change to
-> design, conditions, budget, or analysis)
->
-> 1. *Terminology:* the condition previously labeled "zero strategic priors" is
->    renamed "documentation-only prior." The bundled design document is itself a
->    substantial informational prior; "zero" referred to supplied *strategy*, not
->    supplied *information*. Original wording preserved above per registry rules
->    (the registered title and method text are unchanged; only the one-line summary
->    block, which feeds derived surfaces, carries the reworded framing).
-> 2. *Run manifests* will additionally record each model's provider-stated
->    training/knowledge cutoff.
-> 3. *Measurement provenance:* chain-derived quest completions are the
->    tamper-evident component of the primary curve; inference-spend accounting is
->    scaffold-reported and therefore host-trusted. Both were described in the
->    registered design; this clarifies their differing evidentiary status.
+Caveats travel with the claims (detailed on the dataset card): one seed per
+arm, a live shared world, a session-1 infrastructure gap in the transcripts of
+all arms, and the level-31 attribute of gemini's kami is verified against a
+static oracle table.

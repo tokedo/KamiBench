@@ -737,6 +737,66 @@ td:first-child {
   margin: 1.1rem 0 0;
 }
 
+/* run rows — inside registry/homepage design cards, on design pages (the run
+   index under the header), and in the cross-run nav at the foot of run pages */
+.run-list {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.run-list li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.6rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.run-list .chip {
+  flex: none;
+}
+
+.run-list .run-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.run-list .run-meta {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.run-list .run-current .run-title,
+.run-current .run-title {
+  color: var(--muted);
+}
+
+.design-runs {
+  margin: 0 0 2.25rem;
+}
+
+.design-runs .run-list {
+  margin-top: 0;
+}
+
+.run-nav {
+  margin-top: 2.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.run-nav h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.75rem;
+}
+
 /* the inlined architecture SVG: fallback colors live in the file (for GitHub's
    renderer); these overrides re-theme it with the site palette in both schemes.
    On narrow screens the figure pans horizontally instead of scaling its text
@@ -802,6 +862,81 @@ td:first-child {
 
 .arch-figure .af-badge-var-text {
   fill: var(--accent);
+}
+
+/* the inlined milestone figures (mf-*): same convention as af-* — fallback
+   colors live in the file for GitHub's renderer; these re-theme chrome with
+   the site palette. Series colors are a fixed, CVD-validated categorical
+   mapping (arm 1 blue, arm 2 green, arm 3 magenta) with mode-specific steps,
+   kept identical across run figures so cross-run comparison never repaints. */
+.arch-figure .mf-bg {
+  fill: var(--bg);
+  stroke: var(--line);
+}
+
+.arch-figure .mf-grid,
+.arch-figure .mf-rowline {
+  stroke: var(--line);
+}
+
+.arch-figure .mf-rowlabel,
+.arch-figure .mf-legend-label {
+  fill: var(--text);
+}
+
+.arch-figure .mf-label,
+.arch-figure .mf-tick,
+.arch-figure .mf-caption {
+  fill: var(--muted);
+}
+
+.arch-figure .mf-dot {
+  stroke: var(--bg);
+}
+
+.arch-figure .mf-s1 {
+  fill: #2a78d6;
+}
+
+.arch-figure .mf-s2 {
+  fill: #008300;
+}
+
+.arch-figure .mf-s3 {
+  fill: #e87ba4;
+}
+
+.arch-figure .mf-s1-o {
+  fill: none;
+  stroke: #2a78d6;
+}
+
+.arch-figure .mf-s2-o {
+  fill: none;
+  stroke: #008300;
+}
+
+.arch-figure .mf-s3-o {
+  fill: none;
+  stroke: #e87ba4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .arch-figure .mf-s1 {
+    fill: #3987e5;
+  }
+
+  .arch-figure .mf-s3 {
+    fill: #d55181;
+  }
+
+  .arch-figure .mf-s1-o {
+    stroke: #3987e5;
+  }
+
+  .arch-figure .mf-s3-o {
+    stroke: #d55181;
+  }
 }
 
 .visually-hidden {

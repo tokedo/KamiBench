@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 412" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="mf-desc">
+  <title id="mf-desc">First success per onboarding milestone, per model, against cumulative tokens on a log scale. haiku-4.5 reached all seven milestones within 3.51M tokens; gpt-4o-mini reached only the bridge and operator funding; gemini-2.5-flash-lite registered at 62.57M tokens and bought its first kami at 87.83M, shortly before its wall.</title>
+
+  <rect class="mf-bg" x="0.5" y="0.5" width="719" height="411" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
+
+  <!-- legend (fixed series order: arm 1 haiku, arm 2 gpt-4o-mini, arm 3 gemini) -->
+  <g>
+    <circle class="mf-s1" cx="206" cy="27" r="5.5" fill="#2a78d6"/>
+    <text class="mf-legend-label" x="218" y="31.5" font-size="12.5" fill="#1c1917">haiku-4.5</text>
+    <circle class="mf-s2" cx="330" cy="27" r="5.5" fill="#008300"/>
+    <text class="mf-legend-label" x="342" y="31.5" font-size="12.5" fill="#1c1917">gpt-4o-mini</text>
+    <circle class="mf-s3" cx="470" cy="27" r="5.5" fill="#e87ba4"/>
+    <text class="mf-legend-label" x="482" y="31.5" font-size="12.5" fill="#1c1917">gemini-2.5-flash-lite</text>
+  </g>
+
+  <!-- decade grid: 0.1M, 1M, 10M, 100M tokens -->
+  <line class="mf-grid" x1="200" y1="52" x2="200" y2="340" stroke="#e5e1da"/>
+  <line class="mf-grid" x1="346.7" y1="52" x2="346.7" y2="340" stroke="#e5e1da"/>
+  <line class="mf-grid" x1="493.3" y1="52" x2="493.3" y2="340" stroke="#e5e1da"/>
+  <line class="mf-grid" x1="640" y1="52" x2="640" y2="340" stroke="#e5e1da"/>
+  <line class="mf-grid" x1="196" y1="340" x2="644" y2="340" stroke="#e5e1da"/>
+
+  <!-- not-reached gutter -->
+  <line class="mf-grid" x1="650" y1="52" x2="650" y2="340" stroke="#e5e1da" stroke-dasharray="3 3"/>
+  <text class="mf-tick" x="678" y="46" font-size="10" text-anchor="middle" fill="#6d675f">not reached</text>
+
+  <!-- row guides + labels -->
+  <g stroke="#e5e1da" stroke-dasharray="1.5 4">
+    <line class="mf-rowline" x1="200" y1="70" x2="640" y2="70"/>
+    <line class="mf-rowline" x1="200" y1="112" x2="640" y2="112"/>
+    <line class="mf-rowline" x1="200" y1="154" x2="640" y2="154"/>
+    <line class="mf-rowline" x1="200" y1="196" x2="640" y2="196"/>
+    <line class="mf-rowline" x1="200" y1="238" x2="640" y2="238"/>
+    <line class="mf-rowline" x1="200" y1="280" x2="640" y2="280"/>
+    <line class="mf-rowline" x1="200" y1="322" x2="640" y2="322"/>
+  </g>
+  <g font-size="13" text-anchor="end" fill="#1c1917">
+    <text class="mf-rowlabel" x="186" y="74.5">bridge to Yominet</text>
+    <text class="mf-rowlabel" x="186" y="116.5">operator funded</text>
+    <text class="mf-rowlabel" x="186" y="158.5">account registered</text>
+    <text class="mf-rowlabel" x="186" y="200.5">first quest</text>
+    <text class="mf-rowlabel" x="186" y="242.5">first kami</text>
+    <text class="mf-rowlabel" x="186" y="284.5">harvest started</text>
+    <text class="mf-rowlabel" x="186" y="326.5">MUSU banked</text>
+  </g>
+
+  <!-- haiku-4.5 (series 1) -->
+  <g class="mf-s1" fill="#2a78d6" stroke="#faf9f7" stroke-width="2">
+    <circle class="mf-dot" cx="221.4" cy="70" r="5.5"><title>haiku-4.5 — bridge ETH mainnet→Yominet landed: 07-10 23:10 UTC · h1.4 · session 2 · 0.14M tok · $0.14</title></circle>
+    <circle class="mf-dot" cx="319.2" cy="112" r="5.5"><title>haiku-4.5 — operator wallet funded: 07-10 23:30 UTC · h1.7 · session 4 · 0.65M tok · $0.67</title></circle>
+    <circle class="mf-dot" cx="322.1" cy="154" r="5.5"><title>haiku-4.5 — account registered: 07-10 23:30 UTC · h1.7 · session 4 · 0.68M tok · $0.70</title></circle>
+    <circle class="mf-dot" cx="337.8" cy="196" r="5.5"><title>haiku-4.5 — first quest completed: 07-10 23:30 UTC · h1.8 · session 4 · 0.87M tok · $0.89</title></circle>
+    <circle class="mf-dot" cx="399.7" cy="238" r="5.5"><title>haiku-4.5 — first kami bought: 07-11 00:35 UTC · h2.8 · session 5 · 2.30M tok · $2.34</title></circle>
+    <circle class="mf-dot" cx="419.5" cy="280" r="5.5"><title>haiku-4.5 — first MUSU harvest started: 07-11 01:40 UTC · h3.9 · session 6 · 3.14M tok · $3.20</title></circle>
+    <circle class="mf-dot" cx="426.6" cy="322" r="5.5"><title>haiku-4.5 — first MUSU banked: 07-11 01:50 UTC · h4.1 · session 7 · 3.51M tok · $3.57</title></circle>
+  </g>
+
+  <!-- gpt-4o-mini (series 2) -->
+  <g class="mf-s2" fill="#008300" stroke="#faf9f7" stroke-width="2">
+    <circle class="mf-dot" cx="495.4" cy="70" r="5.5"><title>gpt-4o-mini — bridge ETH mainnet→Yominet landed: 07-12 04:45 UTC · h31.0 · session 32 · 10.33M tok · $1.56</title></circle>
+    <circle class="mf-dot" cx="529.3" cy="112" r="5.5"><title>gpt-4o-mini — operator wallet funded: 07-12 22:40 UTC · h48.9 · session 49 · 17.58M tok · $2.65</title></circle>
+  </g>
+  <g class="mf-s2-o" fill="none" stroke="#008300" stroke-width="1.8">
+    <circle cx="668" cy="154" r="4.5"><title>gpt-4o-mini — account registered: never happened</title></circle>
+    <circle cx="668" cy="196" r="4.5"><title>gpt-4o-mini — first quest completed: never happened</title></circle>
+    <circle cx="668" cy="238" r="4.5"><title>gpt-4o-mini — first kami bought: never happened</title></circle>
+    <circle cx="668" cy="280" r="4.5"><title>gpt-4o-mini — first MUSU harvest started: never happened</title></circle>
+    <circle cx="668" cy="322" r="4.5"><title>gpt-4o-mini — first MUSU banked: never happened</title></circle>
+  </g>
+
+  <!-- gemini-2.5-flash-lite (series 3) -->
+  <g class="mf-s3" fill="#e87ba4" stroke="#faf9f7" stroke-width="2">
+    <circle class="mf-dot" cx="316.2" cy="70" r="5.5"><title>gemini-2.5-flash-lite — bridge ETH mainnet→Yominet landed: 07-11 03:35 UTC · h5.8 · session 6 · 0.62M tok · $0.06</title></circle>
+    <circle class="mf-dot" cx="459.1" cy="112" r="5.5"><title>gemini-2.5-flash-lite — operator wallet funded: 07-11 15:30 UTC · h17.7 · session 17 · 5.84M tok · $0.59</title></circle>
+    <circle class="mf-dot" cx="610.1" cy="154" r="5.5"><title>gemini-2.5-flash-lite — account registered: 07-16 15:15 UTC · h137.5 · session 129 · 62.57M tok · $6.30</title></circle>
+    <circle class="mf-dot" cx="610.6" cy="196" r="5.5"><title>gemini-2.5-flash-lite — first quest completed: 07-16 15:16 UTC · h137.5 · session 129 · 63.01M tok · $6.35</title></circle>
+    <circle class="mf-dot" cx="631.7" cy="238" r="5.5"><title>gemini-2.5-flash-lite — first kami bought: 07-17 20:30 UTC · h166.7 · session 156 · 87.83M tok · $8.84</title></circle>
+  </g>
+  <g class="mf-s3-o" fill="none" stroke="#e87ba4" stroke-width="1.8">
+    <circle cx="690" cy="280" r="4.5"><title>gemini-2.5-flash-lite — first MUSU harvest started: never happened</title></circle>
+    <circle cx="690" cy="322" r="4.5"><title>gemini-2.5-flash-lite — first MUSU banked: never happened</title></circle>
+  </g>
+
+  <!-- direct series labels on the first row -->
+  <g font-size="11" fill="#6d675f">
+    <text class="mf-label" x="231" y="74">haiku-4.5</text>
+    <text class="mf-label" x="326" y="60">gemini-2.5-flash-lite</text>
+    <text class="mf-label" x="505" y="74">gpt-4o-mini</text>
+  </g>
+
+  <!-- axis -->
+  <g class="mf-tick" font-size="11.5" text-anchor="middle" fill="#6d675f">
+    <text x="200" y="358">0.1M</text>
+    <text x="346.7" y="358">1M</text>
+    <text x="493.3" y="358">10M</text>
+    <text x="640" y="358">100M</text>
+  </g>
+  <text class="mf-caption" x="420" y="379" font-size="12" text-anchor="middle" fill="#6d675f">Cumulative tokens at first success (input + output, log scale).</text>
+  <text class="mf-caption" x="420" y="397" font-size="12" text-anchor="middle" fill="#6d675f">Hover a point for date, session number, and cumulative $.</text>
+</svg>
