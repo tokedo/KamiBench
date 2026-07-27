@@ -174,14 +174,14 @@ experiments: results land there as runs complete. Rendered at
 
 | Path | What it is |
 |---|---|
-| [`experiments/`](experiments/) | The experiment registry — one public, git-timestamped doc per design and per run; [Budget-boxed](experiments/budget-boxed.md) is the first design, with [Run 1](experiments/001-budget-boxed.md) and [Run 2](experiments/002-stack-delta.md) complete and public, and [Sustainability](experiments/sustainability.md) registered as pending. |
+| [`experiments/`](experiments/) | The experiment registry — one public, git-timestamped doc per design and per run; [Budget-boxed](experiments/budget-boxed.md) is the first design, with [Run 1](experiments/001-budget-boxed.md) and [Run 2](experiments/002-stack-delta.md) complete and public, [Run 3](experiments/003-perception-parity.md) registered and running, and [Sustainability](experiments/sustainability.md) registered as pending. |
 | [`paper/paper.md`](paper/paper.md) | The paper — the position argument and the synthesis layer across experiments; everything still in progress is sequenced in its Experimental Program section. |
 | [`paper/NOTES.md`](paper/NOTES.md) | Working notes — the draft scaffolding (status tags, TODO/VERIFY markers, stub sections) relocated out of the paper, preserved verbatim. |
 | [`research/literature.md`](research/literature.md) | Annotated bibliography grouped by theme (the related-work foundation), with a must-cite core set. |
 | [`research/asphodel-whitepaper-notes.md`](research/asphodel-whitepaper-notes.md) | Full reading notes on the Asphodel/Kamigotchi whitepaper, incl. the creators' own "benchmarking system" framing and the token economy. |
 | [`site/`](site/) | The project website — landing page + build-time renders of the paper and the experiment registry (updates on every push). Astro, deployed on Vercel; see [`site/README.md`](site/README.md). |
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Technical Game Design Document — all mechanics and data catalogs extracted from source, the agent-readable spec of the world. |
-| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — 84 MCP tools wrapping every on-chain action; version pinned per run. |
+| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — MCP tools wrapping every on-chain action; version pinned per run. Current v2 surface: 99 tools with lens-backed world-state reads; the 84-tool v1.x surface ran Experiments 001–002. |
 | [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — turns a stateless model API into a persistent actor; model-agnostic by construction (v0.2.x). |
 | [kami-zero](https://github.com/tokedo/kami-zero) | The exploratory pilot that preceded the controlled program — ~2 months in the live world while the stack was built and rebuilt around it; superseded by the experiment registry. |
 
@@ -217,11 +217,12 @@ experiments: results land there as runs complete. Rendered at
 - [x] Main thesis
 - [x] Literature review + research paper skeleton
 - [x] **Technical Game Design Document** — [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd): every game mechanic and the complete data catalogs distilled from the game's source, so agents and researchers can understand the world without reading the codebase
-- [x] **Environment interface** — [kami-harness](https://github.com/tokedo/kami-harness): 84 MCP tools wrapping every on-chain action, version pinned per run
+- [x] **Environment interface** — [kami-harness](https://github.com/tokedo/kami-harness): MCP tools wrapping every on-chain action, version pinned per run — 99 tools on the current v2 surface, 84 on the v1.x surface that ran Experiments 001–002
 - [x] **Exploratory pilot** — [kami-zero](https://github.com/tokedo/kami-zero): an agent played the live world for ~2 months (79/192 quests) while the harness, tools, and agent were reworked around it mid-run — not a clean result, and superseded by the controlled experiments
 - [x] **Reference scaffold** — [kami-agent](https://github.com/tokedo/kami-agent): the model-agnostic scaffold for controlled studies (v0.2.x)
 - [x] **Experiment 001 — run and published** — [Budget-boxed, Run 1](experiments/001-budget-boxed.md): three fast-tier arms, $10 each; full dataset public ([`v0-baseline`](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed/tree/v0-baseline))
 - [x] **Experiment 002 — run and published** — [Budget-boxed, Run 2](experiments/002-stack-delta.md): the hardened stack measured against Run 1's frozen baseline; full dataset public ([`v0-final`](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed/tree/v0-final))
+- [ ] **Experiment 003 — registered and running** — [Budget-boxed, Run 3](experiments/003-perception-parity.md): the same three arms and the same box on the perception-parity stack (v2 interface, lens-backed reads); pre-registration public, dataset at close-out
 - [ ] **Sustainability design** — [registered as pending](experiments/sustainability.md): agents playing for longevity and accumulation, paying their own way; design pre-registration to be published before launch
 - [ ] Paper synthesis of experiment results → arXiv
 <!-- ROADMAP:END -->

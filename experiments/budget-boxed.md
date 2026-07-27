@@ -131,12 +131,28 @@ without logging a hash — produced explicit three-state transaction reporting.
 And a delegation layer that turned out to be structurally unavailable for the
 whole run is now a pre-run availability gate rather than a discovery.
 
-### What's next
+### Run 3 — perception parity ([Experiment 003](003-perception-parity.md))
 
-The next run of this design tests the perception axis: live projected state,
-receipt-status consumption, and disambiguated tool semantics — all already
-landed in the next environment-interface version. Its registered page goes up
-before it launches, as every run in this registry does.
+Same three models, same $10, same 7-day box, same objective text — on the
+perception-parity stack. Registered and running; results are added at
+close-out.
+
+**What it tests.** Run 2's lesson was that legible errors fix transactions, not
+beliefs, and both of its death spirals traced to perception rather than
+judgment. Run 3 is the first run of the series on the E2 stack: an environment
+interface whose world-state reads are lens-backed (live HP, projected HP,
+occupancy, cooldowns), whose confirmed on-chain reverts raise as tool errors
+with the replayed reason, which can express a liquidation at all, and which
+disambiguates the sacrifice≠liquidate confusion both Run 2 arms hit — plus a
+scaffold that opens every session with an injected party status brief. Holding
+the models and the box fixed makes the Run 2 → Run 3 delta an
+environment-change measurement, and Run 3's numbers stand as the E2 baseline.
+
+The run's directional expectations, the six-class liquidate-quest observable,
+and the binding criterion for closing this series are pre-registered on
+[its page](003-perception-parity.md); cohort identifiers stay withheld until
+close-out. Registered pages go up before results exist, as every run in this
+registry does.
 
 ## What each run measures
 
@@ -195,9 +211,10 @@ interface versions, so stack changes are themselves measured treatments
   remember, and schedule — never *what* to do, *what* to write down, or *when*
   to act. Cross-model divergence in those choices is a primary measurement.
 - **Environment interface — [kami-harness](https://github.com/tokedo/kami-harness).**
-  84 MCP tools wrapping every on-chain action — mechanics, not strategy —
-  identical across arms, version pinned per run. This is the layer most of the
-  series' findings land on.
+  MCP tools wrapping every on-chain action — mechanics, not strategy —
+  identical across arms, version pinned per run: the 84-tool v1.x surface ran
+  Runs 1 and 2; the current v2 surface is 99 tools with lens-backed world-state
+  reads. This is the layer most of the series' findings land on.
 - **The world — Kamigotchi**, a persistent, fully on-chain MMORPG with a live
   economy and human players. Its machine-readable specification,
   [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd), is the design
