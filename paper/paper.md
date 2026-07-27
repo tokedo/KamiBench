@@ -2,7 +2,7 @@
 
 > **Draft status.** This is a living position-and-system paper: the thesis, the released
 > system, the first controlled results, and the limitations of KamiBench. Empirical
-> claims enter only as design-registered experiments complete — Experiment 001's results
+> claims enter only as design-registered experiments complete — Experiments 001 and 002
 > are in (§4.1). The
 > [revision history](https://github.com/tokedo/KamiBench/commits/main/paper/paper.md) and
 > the [experiment registry](../experiments/) are public;
@@ -28,12 +28,18 @@ the same transaction interface, as the best-fit existing instance — its creato
 designed it to be agent-first and describe it as a possible "real-stakes, adversarial
 benchmarking system" — and release the groundwork and first results of its controlled
 program: a machine-readable game specification, an environment interface exposing 84
-MCP tools, a model-agnostic reference scaffold, and Experiment 001 — three fast-tier
-models (claude-haiku-4-5, gpt-4o-mini, gemini-2.5-flash-lite), each given $10 of
-inference and seven days in the live world with a documentation-only prior. Outcomes
-diverged sharply — five, zero, and three quests completed — and error legibility, not
-model capability, was the sharpest differentiator; the complete dataset (transcripts,
-per-event telemetry, chain-verifiable extracts) is public. The world's externally
+MCP tools, a model-agnostic reference scaffold, and the first two runs of its
+budget-boxed series — bounded stack stress-tests, not model rankings, whose stated job
+is to prove that instrumentation before anything open-ended runs on it. In Experiment
+001, three fast-tier models (claude-haiku-4-5, gpt-4o-mini, gemini-2.5-flash-lite) each
+received $10 of inference and seven days in the live world with a documentation-only
+prior; outcomes diverged sharply — five, zero, and three quests completed — and error
+legibility, not model capability, was the sharpest differentiator. Experiment 002 re-ran
+the identical protocol at fixed models on the hardened stack: chain revert rates fell
+from 0.58 / 0.97 / 0.94 to 0.048 / 0.000 / 0.011, all three arms registered in-game, and
+the binding constraint moved from transaction wastage to perception. Both complete
+datasets (transcripts, per-event telemetry, chain-verifiable extracts) are public. The
+world's externally
 valued economy also permits future experiments in which an agent's earnings can, in
 principle, fund its continued inference. This draft states the thesis, the system, the
 first results, and the limitations; further empirical claims are added only as
@@ -90,9 +96,10 @@ those that depend on future governance changes (§2.2, §3). Third, it releases 
 technical groundwork for controlled studies — a machine-readable game specification, a
 structured environment interface, and a model-agnostic reference scaffold (§3.5) — and
 the program's first controlled results:
-[Experiment 001](../experiments/001-budget-boxed.md), a budget-boxed comparison of
-three fast-tier models in the live world, published as a complete public dataset
-(§4.1).
+[Experiments 001](../experiments/001-budget-boxed.md) and
+[002](../experiments/002-stack-delta.md), two budget-boxed runs of three fast-tier
+models in the live world — the second a fixed-model re-run that measures what the
+stack changes bought — each published as a complete public dataset (§4.1).
 
 ---
 
@@ -248,10 +255,20 @@ it.
 
 ## 4. Experimental Program
 
-**4.1 The budget-boxed design: orientation under a fixed budget.** The program's first
-and narrowest question: dropped into a live, persistent world with a fixed, invisible
-inference budget, the game's design document, and no supplied strategy, how does a
-model orient, and what does it learn to do? The
+**4.1 The budget-boxed design: stack stress-testing under a fixed budget.** The
+program's first and narrowest question: dropped into a live, persistent world with a
+fixed, invisible inference budget, the game's design document, and no supplied strategy,
+how does a model orient, and what does it learn to do? The series exists to harden the
+instrument, not to rank models: bounded runs whose stated goal is to establish that the
+environment interface, the scaffold, the telemetry, and the cost accounting hold up
+under real autonomous use before the open-ended, self-sustaining regime (§4.2) runs on
+them. That goal fixes the shape of the runs — fast-tier arms because a surface a cheap
+model can use correctly is one a capable model can, and because cheap models fail in
+ways capable models route around; three heterogeneous arms for coverage rather than
+comparison, since a single-model run risks a tool surface silently overfitted to one
+model's habits. Each run's failures become concrete stack changes, and the next run
+re-runs the identical protocol at fixed models and budget, so the run-over-run delta is
+the stack effect. The
 [design](../experiments/budget-boxed.md) fixes the protocol — identical fresh-wallet
 starts, a documentation-only prior, a closed world, discrete sessions with self-chosen
 wake times, cross-session memory only as agent-written files, quest completions derived
@@ -273,10 +290,9 @@ understanding of the world.
 gpt-4o-mini, gemini-2.5-flash-lite — each received $10 of inference, a 7-day wall
 clock, an identical 84-tool surface, and a fresh Ethereum mainnet wallet holding
 0.02 ETH; everything from bridging to registration to questing had to be discovered
-from documentation and on-chain trial and error. Fast-tier arms were a deliberate
-instrument-first choice: a result in a live world is only as trustworthy as the stack
-that produced it, and inexpensive models stress-test that stack in ways capable models
-route around; frontier arms enter once stack iteration plateaus. The
+from documentation and on-chain trial and error. A result in a live world is only as
+trustworthy as the stack that produced it, and this run measured that stack for the
+first time; frontier arms enter once stack iteration plateaus. The
 [arms diverged sharply](../experiments/001-budget-boxed.md): haiku completed the full
 onboarding chain on day one — registration, operator funding, two kamis, five quests —
 and exhausted its budget in 17 hours; gpt-4o-mini ran the full week without ever
@@ -292,22 +308,40 @@ neither ever identified it as the blocker. And cost structure dominated spend: t
 84-tool surface re-billed on every call, and prompt caching was never engaged. The
 complete dataset — full transcripts, per-event telemetry, independently verifiable
 on-chain extracts, and exact run manifests — is public under CC-BY-4.0 (KamiBench,
-2026; citable pinned revision
+2026a; citable pinned revision
 [`v0-baseline`](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed/tree/v0-baseline)),
 with its caveats stated on the dataset card: one seed per arm, a live shared world, and
 a session-1 infrastructure gap on all arms.
 
 **Run 2 (Experiment 002) — the stack effect.** Run 1's learnings became scaffold and
-interface changes — prompt caching, legible pre-transaction validation, repetition
-breaking. Run 2, [registered](../experiments/002-stack-delta.md) and in progress,
-re-runs the exact protocol with the same three arms on the iterated stack: at fixed
-model and budget, the run-over-run delta measures the scaffold/harness effect against
-Run 1's frozen baseline — reported as a cross-epoch observation rather than a
-controlled comparison, since the live world and provider model strings can drift
-between runs.
+interface changes: legible pre-transaction validation in the environment interface
+(v1.5.1), and a repetition breaker, session caps, agent-chosen wake scheduling, and
+cache-aware budget accounting in the scaffold (v0.2.0).
+[Run 2](../experiments/002-stack-delta.md) re-ran the exact protocol with the same three
+arms, the same $10, and the same seven days on that stack. Chain revert rates fell from
+0.58 / 0.97 / 0.94 to 0.048 / 0.000 / 0.011 — the validation gates convert almost every
+doomed transaction into a free, named error before gas is spent. All three arms
+registered in-game, where gpt-4o-mini never had (h0.4 / h8.4 / h2.3 against
+h1.7 / never / h137.5), quests rose at fixed budget (haiku 5→8, gemini 3→5), and for two
+arms the wall clock, not the budget, became the binding stop. With transaction wastage
+largely removed, the binding constraint moved up a level: a run-lifetime outage of the
+game's inventory endpoint hit all three arms and produced three disjoint failure
+phenotypes — a false world model (an agent believing it held no currency while holding
+~820 MUSU, its kamis liquidated by other players while parked), no world model (95+
+read-only sessions before any transaction), and a wrong world model (an agent
+sacrificing its own kamis on a verb→mechanic confusion that four legible "objective not
+met" errors never corrected). The lesson that orders the next run is that legible errors
+fix transactions, not beliefs; perception parity is the next axis. Both runs are
+reported as cross-epoch observations rather than controlled comparisons, since the live
+world and provider model strings can drift between runs, and the complete Run 2 dataset
+is public (KamiBench, 2026b; citable pinned revision
+[`v0-final`](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed/tree/v0-final)).
 
 **4.2 Future regime: endogenous survival.** Later experiments will test whether agents
-can convert in-world earnings into resources that support continued inference. This
+can convert in-world earnings into resources that support continued inference — the
+first such design, agents playing for longevity and accumulation while paying their own
+way, is [registered as pending](../experiments/sustainability.md), with its
+pre-registration to be published before launch. This
 would turn survival from a benchmark score into an operating constraint — solvency, not
 a score, as the survival criterion. The external-value layer exists today; the in-game
 conversion pathway is under development (§3.4). Whether an
@@ -457,9 +491,9 @@ persistent world whose execution history can be independently inspected and whos
 is shaped by participants rather than authored as a fixed test set. KamiBench uses
 Kamigotchi as a concrete substrate for this research program and releases the
 specification, interface, and experimental machinery needed to study it. Controlled
-evidence has begun: Experiment 001 set the program's baseline in the live world and its
-dataset is public, and the stack iteration it motivated is running against that frozen
-baseline (§4.1). Claims about frontier-model comparisons, continual learning, and
+evidence has begun: Experiment 001 set the program's baseline in the live world, and
+Experiment 002 measured the stack iteration it motivated against that frozen baseline;
+both datasets are public (§4.1). Claims about frontier-model comparisons, continual learning, and
 economic self-sustainability remain reserved for results as they arrive.
 
 ---
@@ -491,9 +525,12 @@ lives in [`../research/literature.md`](../research/literature.md).
   arXiv:2505.15146.
 - Jimenez, C. E., et al. (2024). *SWE-bench: Can Language Models Resolve Real-World
   GitHub Issues?* ICLR 2024. arXiv:2310.06770.
-- KamiBench (2026). *Experiment 001 — budget-boxed* (dataset; citable pinned revision
+- KamiBench (2026a). *Experiment 001 — budget-boxed* (dataset; citable pinned revision
   `v0-baseline`). CC-BY-4.0.
   huggingface.co/datasets/KamiBench/experiment-001-budget-boxed.
+- KamiBench (2026b). *Experiment 002 — budget-boxed, iterated stack* (dataset; citable
+  pinned revision `v0-final`). CC-BY-4.0.
+  huggingface.co/datasets/KamiBench/experiment-002-budget-boxed.
 - Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., & Narayanan, A. (2024). *AI
   Agents That Matter*. TMLR 2025. arXiv:2407.01502.
 - Kwa, T., et al. (METR) (2025). *Measuring AI Ability to Complete Long Tasks*.
@@ -559,5 +596,9 @@ maintained form of the material a static appendix would snapshot:
 - **[experiment-001-budget-boxed](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed)**
   — the complete Run 1 dataset: transcripts, per-event telemetry, on-chain extracts,
   and run manifests (CC-BY-4.0; citable pinned revision `v0-baseline`) (§4.1).
+- **[experiment-002-budget-boxed](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed)**
+  — the complete Run 2 dataset: transcripts, per-event telemetry, on-chain extracts for
+  both wallets per arm, and run manifests (CC-BY-4.0; citable pinned revision
+  `v0-final`) (§4.1).
 - **[kami-zero](https://github.com/tokedo/kami-zero)** — the exploratory pilot that
   preceded the controlled program; prompts, scaffolds, and version history (§3.5).

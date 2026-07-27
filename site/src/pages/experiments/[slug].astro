@@ -97,6 +97,12 @@ const { design, run } = Astro.props;
             <a href="/experiments">Experiment registry</a> · Design
           </p>
           <h1>{design.title}</h1>
+          {design.status && (
+            <p class="exp-status">
+              <span class="chip chip-pending">Pending</span>
+              <span class="exp-status-note">{design.status}</span>
+            </p>
+          )}
           <p class="exp-lede">{design.oneliner}</p>
         </header>
         {design.runs.length > 0 && (

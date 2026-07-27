@@ -7,11 +7,13 @@ agents in a persistent world that no one operates.**
 
 > ⚠️ **Open research in progress.**
 > <!-- STATUS:START -->
-> The first controlled run is complete and its full dataset is public:
+> Two controlled runs are complete and both datasets are public.
 > [Experiment 001](experiments/001-budget-boxed.md) dropped three fast-tier
-> models into the live world with $10 of inference each.
-> [Experiment 002](experiments/002-stack-delta.md) — the same protocol on the
-> iterated scaffold/harness stack — is in progress. The paper's results
+> models into the live world with $10 of inference each;
+> [Experiment 002](experiments/002-stack-delta.md) re-ran the identical
+> protocol on the hardened stack, and the run-over-run delta is what the stack
+> changes bought — chain revert rates fell from 0.58 / 0.97 / 0.94 to
+> 0.048 / 0.000 / 0.011, and every arm registered in-game. The paper's results
 > synthesis is next.
 > <!-- STATUS:END -->
 
@@ -137,19 +139,28 @@ published and git-timestamped before their first run; run pages record what
 ran and what came out. Internally, runs keep the program's linear experiment
 numbering.
 
-- **[Budget-boxed](experiments/budget-boxed.md)** — drop a language model into
-  the live world with a fixed inference budget, the game's documentation, and
-  no supplied strategy: how does it orient, what does it learn to do, and
-  where does it get stuck? The program's first and narrowest design —
-  continual learning over long horizons and persistent, self-sustaining life
-  in the world are the subject of future designs.
+- **[Budget-boxed](experiments/budget-boxed.md)** — stack stress-testing, not
+  model benchmarking: controlled, deliberately bounded runs — fixed inference
+  budget, fixed wall clock, fast-tier models — that drop agents into the live
+  world to prove the environment interface, the scaffold, the telemetry, and
+  the accounting before anything open-ended runs on them. Each run's findings
+  become concrete stack changes, and the next run measures them at fixed
+  models and budget.
   - **[Run 1 — baseline stack (Experiment 001)](experiments/001-budget-boxed.md)**
     — *complete*: three fast-tier arms ($10 each, 7 days) on the v0 stack;
     haiku-4.5 completed the full onboarding chain on day one; the full dataset
     is [public](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed).
+    Its findings became pre-transaction validation, a repetition breaker,
+    session caps, agentic scheduling, and cache-aware accounting.
   - **[Run 2 — iterated stack (Experiment 002)](experiments/002-stack-delta.md)**
-    — *in progress*: the same arms and budget on scaffold v0.2.0 + harness
-    v1.5.1, measuring the stack effect against Run 1's frozen baseline.
+    — *complete*: the same arms and budget on scaffold v0.2.0 + harness v1.5.1.
+    Chain reverts collapsed (0.048 / 0.000 / 0.011), all three arms registered
+    in-game, quests rose at fixed budget — and the binding constraint moved to
+    perception; the full dataset is
+    [public](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed).
+- **[Sustainability](experiments/sustainability.md)** — *pending*: agents
+  playing for longevity and accumulation, paying their own way. Design
+  pre-registration to be published before launch.
 
 ## The paper
 
@@ -163,7 +174,7 @@ experiments: results land there as runs complete. Rendered at
 
 | Path | What it is |
 |---|---|
-| [`experiments/`](experiments/) | The experiment registry — one public, git-timestamped doc per design and per run; [Budget-boxed](experiments/budget-boxed.md) is the first design, with [Run 1](experiments/001-budget-boxed.md) complete and [Run 2](experiments/002-stack-delta.md) in progress. |
+| [`experiments/`](experiments/) | The experiment registry — one public, git-timestamped doc per design and per run; [Budget-boxed](experiments/budget-boxed.md) is the first design, with [Run 1](experiments/001-budget-boxed.md) and [Run 2](experiments/002-stack-delta.md) complete and public, and [Sustainability](experiments/sustainability.md) registered as pending. |
 | [`paper/paper.md`](paper/paper.md) | The paper — the position argument and the synthesis layer across experiments; everything still in progress is sequenced in its Experimental Program section. |
 | [`paper/NOTES.md`](paper/NOTES.md) | Working notes — the draft scaffolding (status tags, TODO/VERIFY markers, stub sections) relocated out of the paper, preserved verbatim. |
 | [`research/literature.md`](research/literature.md) | Annotated bibliography grouped by theme (the related-work foundation), with a must-cite core set. |
@@ -183,10 +194,13 @@ experiments: results land there as runs complete. Rendered at
   substrate** and the **formalization of endogenous survival into a benchmark regime** —
   with surplus allocation after break-even as the open question — and the paper
   differentiates explicitly.
-- **Not** a statistical claim — Experiment 001 ran one seed per arm: a case-study
-  behavioral comparison with full public logs. Stack iteration against its frozen
-  baseline (Experiment 002, in progress) and replication come before any
-  statistical claim.
+- **Not** a statistical claim — Experiments 001 and 002 each ran one seed per arm: a
+  case-study behavioral comparison with full public logs, and the run-over-run delta
+  is a cross-epoch observation, not a controlled comparison. Replication comes before
+  any statistical claim.
+- **Not** a model ranking — the budget-boxed runs are stack stress-tests: fast-tier
+  arms under a $10 cap, chosen for coverage of the tool surface, say nothing about
+  frontier capability.
 - **Not** free of the pretraining-absorption confound: a model trained after season N carries
   that season's strategies in its weights, so cross-*time* comparisons are indicative only —
   headline comparisons are within-season among contemporaneous models.
@@ -207,7 +221,8 @@ experiments: results land there as runs complete. Rendered at
 - [x] **Exploratory pilot** — [kami-zero](https://github.com/tokedo/kami-zero): an agent played the live world for ~2 months (79/192 quests) while the harness, tools, and agent were reworked around it mid-run — not a clean result, and superseded by the controlled experiments
 - [x] **Reference scaffold** — [kami-agent](https://github.com/tokedo/kami-agent): the model-agnostic scaffold for controlled studies (v0.2.x)
 - [x] **Experiment 001 — run and published** — [Budget-boxed, Run 1](experiments/001-budget-boxed.md): three fast-tier arms, $10 each; full dataset public ([`v0-baseline`](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed/tree/v0-baseline))
-- [ ] **Experiment 002 — in progress** — [Budget-boxed, Run 2](experiments/002-stack-delta.md): the iterated stack against Run 1's frozen baseline
+- [x] **Experiment 002 — run and published** — [Budget-boxed, Run 2](experiments/002-stack-delta.md): the hardened stack measured against Run 1's frozen baseline; full dataset public ([`v0-final`](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed/tree/v0-final))
+- [ ] **Sustainability design** — [registered as pending](experiments/sustainability.md): agents playing for longevity and accumulation, paying their own way; design pre-registration to be published before launch
 - [ ] Paper synthesis of experiment results → arXiv
 <!-- ROADMAP:END -->
 

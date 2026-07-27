@@ -135,6 +135,12 @@ const propertyTable = [
               <a href={`/experiments/${design.slug}`}>{design.title}</a>
             </h3>
             <p>{design.oneliner}</p>
+            {design.status && (
+              <p class="exp-status">
+                <span class="chip chip-pending">Pending</span>
+                <span class="exp-status-note">{design.status}</span>
+              </p>
+            )}
             <ul class="run-list">
               {design.runs.map((run) => (
                 <li>

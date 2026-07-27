@@ -9,17 +9,28 @@ Complete — ran 2026-07-10 → 2026-07-17; the full dataset is public.
 <!-- ONELINER:START -->
 Three fast-tier models — claude-haiku-4-5, gpt-4o-mini, gemini-2.5-flash-lite —
 each dropped into the live world with $10 of inference, seven days, and a fresh
-wallet, on the v0 baseline stack: the program's calibration run, and the frozen
-baseline every stack iteration after it is measured against.
+wallet, on the v0 baseline stack: the first entry in the stack stress-test
+series, and the frozen baseline every iteration after it is measured against.
 <!-- ONELINER:END -->
 
 <!-- DATASET:START -->https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed<!-- DATASET:END -->
 
-> Part of the [Budget-boxed](budget-boxed.md) design — the question, the
-> protocol, the architecture, and the measurement live there. This page records
-> what ran and what came out. Numbers are frozen from the published dataset;
-> schemas, run manifests, provenance, and the full caveat list live on the
-> [dataset card](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed).
+> Part of the [Budget-boxed](budget-boxed.md) design — the goal, the protocol,
+> the architecture, and the measurement live there, and the series story reads
+> end to end on that page. This is the optional deep-dive: what ran, what came
+> out, and the full milestone rows. Numbers are frozen from the published
+> dataset; schemas, run manifests, provenance, and the full caveat list live on
+> the [dataset card](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed).
+
+## Where this run sits
+
+Budget-boxed is stack stress-testing, not model benchmarking: bounded runs
+whose job is to prove the environment interface, the scaffold, the telemetry,
+and the accounting before anything open-ended runs on them. This is entry #1 —
+the v0 stack, measured for the first time under real autonomous use in a live
+world. It is the reference the whole series is compared against, and, as the
+[what we learned](#what-we-learned) section records, most of what it found was
+in our own stack.
 
 ## What ran
 
@@ -99,10 +110,31 @@ happened.
   near floor price.
 
 Most of what this run taught us was about the stack, not the models — which is
-what a calibration run is for. These findings became scaffold v0.2.0 and
-harness v1.4.0; [Run 2](002-stack-delta.md) measures those stack improvements
-against this frozen baseline, one step along the path to the plateau where
-frontier models come in.
+what a stress test is for.
+
+## What it changed in the stack
+
+Each learning above became a concrete change, and the whole bundle was pinned
+and re-measured by the next run:
+
+- **Legible pre-transaction validation** — environment interface v1.4.0 →
+  v1.5.1. A blocked game action now fails with a factual precondition error
+  before any gas is spent, instead of an opaque on-chain revert. Directly from
+  the legibility finding and the registration blocker.
+- **A repetition breaker** — scaffold v0.2.0. Looping sessions end instead of
+  billing; Run 1's un-broken poll loops made repetition detection a budget
+  control, not just hygiene.
+- **Session caps and agent-chosen wake scheduling** — scaffold v0.2.0. Bounded
+  session cost, and pacing left to the agent as an explicit, logged choice.
+- **Cache-aware budget accounting** — scaffold v0.2.0. Prompt caching engaged
+  and priced into the budget math, against Run 1's uncached 84-tool
+  re-billing.
+
+[Run 2 (Experiment 002)](002-stack-delta.md) re-ran this exact protocol with
+the same three models and the same $10 on that stack. Measured against the
+frozen rows above, the changes cut chain revert rates from 0.58 / 0.97 / 0.94
+to 0.048 / 0.000 / 0.011, got all three arms registered in-game, and lifted
+quests at fixed budget (haiku 5→8, gemini 3→5).
 
 ## Data
 

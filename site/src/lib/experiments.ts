@@ -7,6 +7,9 @@
 //
 // Marker blocks (same convention as README.md, see readme.ts):
 //   design docs:  <!-- ONELINER:START/END -->   the framing question (cards, OG)
+//                 <!-- STATUS:START/END -->     optional: pre-registration
+//                                               status, before a protocol and
+//                                               its first run are published
 //   run docs:     <!-- DESIGN:START/END -->     parent design slug
 //                 <!-- STATUS:START/END -->     one-sentence run status
 //                 <!-- ONELINER:START/END -->   run summary (cards, OG)
@@ -70,6 +73,9 @@ export interface ExperimentDesign {
   html: string;
   /** This design's runs, sorted by global registry number. */
   runs: ExperimentRun[];
+  /** One-sentence status — present only on designs registered ahead of their
+   *  protocol, i.e. pre-registration stubs with no runs yet. */
+  status?: string;
 }
 
 function markerBlock(src: string, file: string, name: string): string {
@@ -187,15 +193,23 @@ export function getDesigns(): ExperimentDesign[] {
 
   const designs = entries
     .filter((e) => !/^\d{3}-/.test(e.slug))
-    .map(
-      ({ file, slug, src }): ExperimentDesign => ({
+    .map(({ file, slug, src }): ExperimentDesign => {
+      // Optional on designs: a pre-registration stub carries a status sentence
+      // until its protocol is published. The chip carries the "Pending" label,
+      // so drop a leading "Pending — " from the sentence.
+      const status = optionalMarkerBlock(src, 'STATUS')?.replace(
+        /^pending\s*—\s*/i,
+        ''
+      );
+      return {
         slug,
         title: requireH1(src, file),
         oneliner: markerBlock(src, file, 'ONELINER'),
         html: renderBody(src),
         runs: runs.filter((run) => run.designSlug === slug),
-      })
-    )
+        ...(status ? { status } : {}),
+      };
+    })
     // Designs in the order their first runs entered the registry.
     .sort((a, b) =>
       (a.runs[0]?.number ?? '999').localeCompare(b.runs[0]?.number ?? '999')
