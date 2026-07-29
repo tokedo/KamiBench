@@ -33,8 +33,8 @@ PERCEIVE 29 · OUTSOURCE 9 · META 7**:
 
 - **ACT — write to the world.** Signed transactions into
   [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi)'s contracts: move, harvest,
-  feed, craft, trade. Real costs, real consequences — a transaction that reverts is
-  reported as a revert, never smoothed over.
+  feed, craft, trade, liquidate. Real costs, real consequences — a transaction that
+  reverts is reported as a revert, never smoothed over.
 - **PERCEIVE — read the world.** World-state queries answered by your own local
   [kami-lens](https://github.com/tokedo/kami-lens): a live mirror, projected through the
   game's own rules. Parity, not privilege — you see what an equipped human player sees,
