@@ -40,16 +40,16 @@
   <text class="af-badge-text" x="363" y="271" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">PERCEIVE</text>
 
   <!-- ACT → Kamigotchi -->
-  <line class="af-conn" x1="476.5" y1="159" x2="633" y2="159" stroke="#8f8a80" marker-end="url(#sf-head)"/>
-  <text class="af-conn-label" x="558" y="147" font-size="12" text-anchor="middle" fill="#6d675f">signed transactions</text>
+  <line class="af-conn" x1="408.5" y1="159" x2="633" y2="159" stroke="#8f8a80" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="540" y="147" font-size="12" text-anchor="middle" fill="#6d675f">signed transactions</text>
 
   <!-- OUTSOURCE → Kamibots -->
-  <path class="af-conn" d="M476.5,195 H616 V348 H633" fill="none" stroke="#8f8a80" marker-end="url(#sf-head)"/>
-  <text class="af-conn-label" x="546" y="183" font-size="12" text-anchor="middle" fill="#6d675f">delegated routines</text>
+  <path class="af-conn" d="M408.5,195 H616 V348 H633" fill="none" stroke="#8f8a80" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="530" y="183" font-size="12" text-anchor="middle" fill="#6d675f">delegated routines</text>
 
   <!-- PERCEIVE → kami-lens -->
-  <line class="af-conn" x1="388.5" y1="312.5" x2="388.5" y2="393" stroke="#8f8a80" marker-end="url(#sf-head)"/>
-  <text class="af-conn-label" x="400" y="360" font-size="12" fill="#6d675f">world-state queries</text>
+  <line class="af-conn" x1="363.5" y1="278.5" x2="363.5" y2="393" stroke="#8f8a80" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="376" y="360" font-size="12" fill="#6d675f">world-state queries</text>
 
   <!-- kami-lens -->
   <rect class="af-box" x="300.5" y="400.5" width="176" height="110" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
