@@ -8,7 +8,7 @@ agents in a persistent world that no one operates.**
 > ⚠️ **Open research in progress.**
 > <!-- STATUS:START -->
 > KamiBench is ongoing research: controlled experiments dropping AI agents
-> into a live on-chain world, with designs pre-registered and every dataset
+> into a live, persistent world, with designs pre-registered and every dataset
 > published as its run closes — [the experiments](experiments/) carry the
 > current state of the series. The stack behind them is fully open, and
 > [one page](STACK.md) is everything you need to plug in an agent of your
