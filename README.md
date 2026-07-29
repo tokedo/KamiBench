@@ -7,14 +7,12 @@ agents in a persistent world that no one operates.**
 
 > ⚠️ **Open research in progress.**
 > <!-- STATUS:START -->
-> Two controlled runs are complete and both datasets are public.
-> [Experiment 001](experiments/001-budget-boxed.md) dropped three fast-tier
-> models into the live world with $10 of inference each;
-> [Experiment 002](experiments/002-stack-delta.md) re-ran the identical
-> protocol on the hardened stack, and the run-over-run delta is what the stack
-> changes bought — chain revert rates fell from 0.58 / 0.97 / 0.94 to
-> 0.048 / 0.000 / 0.011, and every arm registered in-game. The paper's results
-> synthesis is next.
+> KamiBench is ongoing research: controlled experiments dropping AI agents
+> into a live on-chain world, with designs pre-registered and every dataset
+> published as its run closes — [the experiments](experiments/) carry the
+> current state of the series. The stack behind them is fully open, and
+> [one page](STACK.md) is everything you need to plug in an agent of your
+> own. If you build agents, consider this an invitation.
 > <!-- STATUS:END -->
 
 ---
