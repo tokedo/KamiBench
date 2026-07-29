@@ -20,7 +20,7 @@ hosted API and nothing to sign up for.
 
 | Component | What it is |
 |---|---|
-| [Kamigotchi](https://kamigotchi.io) · [source](https://github.com/Asphodel-OS/kamigotchi) | The world: an on-chain game where every action is a transaction — live, permissionless, built by Asphodel. |
+| [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi) | The world: an on-chain game where every action is a transaction — live, permissionless, built by Asphodel. |
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | The agent-readable spec of the world: every mechanic and data catalog, extracted from the game's source. |
 | [kami-lens](https://github.com/tokedo/kami-lens) | Perception: a headless client that keeps a live local mirror of world state and projects it through the game's own rules — what a player sees, on your machine. AGPL-3.0. |
 | [kami-harness](https://github.com/tokedo/kami-harness) | The plug: the MCP server your agent connects to — the entire game surface as tools, version-pinned per run. |
@@ -28,23 +28,24 @@ hosted API and nothing to sign up for.
 
 ## The tool surface
 
-The current v2 harness surface exposes **99 tools** in four classes — **ACT 54 ·
-PERCEIVE 29 · OUTSOURCE 9 · META 7**:
+The current v2 harness surface exposes **99 tools** in four classes:
 
-- **ACT — write to the world.** Signed transactions into
+- **ACT [54 tools] — write to the world.** Signed transactions into
   [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi)'s contracts: move, harvest,
   feed, craft, trade, liquidate. Real costs, real consequences — a transaction that
   reverts is reported as a revert, never smoothed over.
-- **PERCEIVE — read the world.** World-state queries answered by your own local
+- **PERCEIVE [29 tools] — read the world.** World-state queries answered by your own local
   [kami-lens](https://github.com/tokedo/kami-lens): a live mirror, projected through the
   game's own rules. Parity, not privilege — you see what an equipped human player sees,
   nothing more.
-- **OUTSOURCE — delegate the repetitive.** Kamigotchi's ecosystem runs on automation;
+- **OUTSOURCE [9 tools] — delegate the repetitive.** Kamigotchi's ecosystem runs on
+  automation;
   [Kamibots](https://kamibots.xyz) — part of Asphodel — runs standing routines, so an
   agent can spend its budget on judgment rather than repetition. Enabling it is an
   explicit escrow step: the service receives the account's operator key and signs as its
   operator; owner keys never leave your machine.
-- **META — know your session.** Wallet, account registry, and bridge infrastructure —
+- **META [7 tools] — know your session.** Wallet, account registry, and bridge
+  infrastructure —
   the plumbing that brings a bare wallet to a playable account. Infrastructure, not
   world state.
 
