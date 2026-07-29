@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="stack-desc">
+  <title id="stack-desc">The KamiBench stack. On your machine: your agent — any framework, any model, with kami-agent as an optional reference implementation — speaks MCP to kami-harness, the MCP server whose tools fall into four classes: ACT, PERCEIVE, OUTSOURCE, and META. ACT sends signed transactions to Kamigotchi, the on-chain world running on its own chain, Yominet. PERCEIVE world-state queries are answered by kami-lens, a local mirror and projection, which reads the chain over RPC. OUTSOURCE delegates standing routines to Kamibots (part of Asphodel), which acts as your operator on the world. kamigotchi-gdd is the machine-readable world spec your agent can read.</title>
+  <defs>
+    <marker id="sf-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
+      <path class="af-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#8f8a80"/>
+    </marker>
+  </defs>
+
+  <rect class="af-bg" x="0.5" y="0.5" width="939" height="599" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
+
+  <!-- boundary: everything an operator runs themselves -->
+  <rect class="af-bound" x="24.5" y="48.5" width="500" height="520" rx="14" fill="none" stroke="#d9d4cc" stroke-dasharray="7 6"/>
+  <text class="af-conn-label" x="48" y="78" font-size="10.5" font-weight="700" letter-spacing="0.1em" fill="#6d675f">YOUR MACHINE</text>
+
+  <!-- your agent (black box) with the optional reference scaffold ghosted inside -->
+  <rect class="af-box" x="48.5" y="96.5" width="200" height="168" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="66" y="126" font-size="16" font-weight="600" fill="#1c1917">Your agent</text>
+  <text class="af-role" x="66" y="148" font-size="12.5" fill="#6d675f">any framework, any</text>
+  <text class="af-role" x="66" y="166" font-size="12.5" fill="#6d675f">model — yours</text>
+  <rect class="af-bound" x="60.5" y="186.5" width="176" height="58" rx="8" fill="none" stroke="#d9d4cc" stroke-dasharray="5 5"/>
+  <text x="72" y="210" font-size="13"><a href="https://github.com/tokedo/kami-agent"><tspan class="af-repo" fill="#a03518" text-decoration="underline">kami-agent</tspan></a></text>
+  <text class="af-role" x="72" y="228" font-size="11" fill="#6d675f">reference implementation, optional</text>
+
+  <!-- your agent ↔ kami-harness -->
+  <line class="af-conn" x1="254" y1="150" x2="294" y2="150" stroke="#8f8a80" marker-start="url(#sf-head)" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="274" y="138" font-size="12" text-anchor="middle" fill="#6d675f">MCP</text>
+
+  <!-- kami-harness with its four tool-class ports -->
+  <rect class="af-box" x="300.5" y="76.5" width="176" height="236" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="318" y="106" font-size="16" font-weight="600" fill="#1c1917"><a href="https://github.com/tokedo/kami-harness"><tspan class="af-repo" fill="#a03518" text-decoration="underline">kami-harness</tspan></a></text>
+  <text class="af-role" x="318" y="128" font-size="12.5" fill="#6d675f">the MCP server</text>
+  <rect class="af-badge" x="380" y="148" width="90" height="22" rx="11" fill="#e8ebef"/>
+  <text class="af-badge-text" x="425" y="163" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">ACT</text>
+  <rect class="af-badge" x="380" y="184" width="90" height="22" rx="11" fill="#e8ebef"/>
+  <text class="af-badge-text" x="425" y="199" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">OUTSOURCE</text>
+  <rect class="af-badge" x="380" y="220" width="90" height="22" rx="11" fill="#e8ebef"/>
+  <text class="af-badge-text" x="425" y="235" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">META</text>
+  <rect class="af-badge" x="337" y="276" width="104" height="22" rx="11" fill="#e8ebef"/>
+  <text class="af-badge-text" x="389" y="291" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">PERCEIVE</text>
+
+  <!-- ACT → Kamigotchi -->
+  <line class="af-conn" x1="476.5" y1="159" x2="633" y2="159" stroke="#8f8a80" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="558" y="147" font-size="12" text-anchor="middle" fill="#6d675f">signed transactions</text>
+
+  <!-- OUTSOURCE → Kamibots -->
+  <path class="af-conn" d="M476.5,195 H616 V348 H633" fill="none" stroke="#8f8a80" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="546" y="183" font-size="12" text-anchor="middle" fill="#6d675f">delegated routines</text>
+
+  <!-- PERCEIVE → kami-lens -->
+  <line class="af-conn" x1="388.5" y1="312.5" x2="388.5" y2="393" stroke="#8f8a80" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="400" y="360" font-size="12" fill="#6d675f">world-state queries</text>
+
+  <!-- kami-lens -->
+  <rect class="af-box" x="300.5" y="400.5" width="176" height="110" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="318" y="430" font-size="16" font-weight="600" fill="#1c1917"><a href="https://github.com/tokedo/kami-lens"><tspan class="af-repo" fill="#a03518" text-decoration="underline">kami-lens</tspan></a></text>
+  <text class="af-role" x="318" y="452" font-size="12.5" fill="#6d675f">local mirror + projection,</text>
+  <text class="af-role" x="318" y="470" font-size="12.5" fill="#6d675f">the game's own rules</text>
+
+  <!-- kami-lens → the chain -->
+  <path class="af-conn" d="M476.5,455 H586 V246 H621" fill="none" stroke="#8f8a80" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="531" y="443" font-size="12" text-anchor="middle" fill="#6d675f">chain RPC (reads)</text>
+
+  <!-- kamigotchi-gdd: docs artifact the agent reads -->
+  <rect class="af-bound" x="48.5" y="430.5" width="200" height="80" rx="10" fill="none" stroke="#d9d4cc" stroke-dasharray="5 5"/>
+  <text x="66" y="458" font-size="14" font-weight="600"><a href="https://github.com/tokedo/kamigotchi-gdd"><tspan class="af-repo" fill="#a03518" text-decoration="underline">kamigotchi-gdd</tspan></a></text>
+  <text class="af-role" x="66" y="478" font-size="12" fill="#6d675f">the world spec, extracted</text>
+  <text class="af-role" x="66" y="494" font-size="12" fill="#6d675f">from the game's source</text>
+  <line class="af-conn" x1="148.5" y1="430" x2="148.5" y2="272" stroke="#8f8a80" stroke-dasharray="4 5" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="160" y="353" font-size="12" fill="#6d675f">world spec</text>
+
+  <!-- Kamigotchi on its chain -->
+  <rect class="af-box" x="640.5" y="96.5" width="252" height="130" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="658" y="126" font-size="16" font-weight="600" fill="#1c1917"><a href="https://kamigotchi.io"><tspan class="af-repo" fill="#a03518" text-decoration="underline">Kamigotchi</tspan></a></text>
+  <text class="af-role" x="658" y="152" font-size="12.5" fill="#6d675f">the on-chain world — live,</text>
+  <text class="af-role" x="658" y="170" font-size="12.5" fill="#6d675f">permissionless, built by Asphodel;</text>
+  <text class="af-role" x="658" y="188" font-size="12.5" fill="#6d675f">every action is a transaction</text>
+  <rect class="af-badge" x="628.5" y="226.5" width="276" height="40" rx="6" fill="#e8ebef"/>
+  <text class="af-badge-text" x="766" y="251" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">YOMINET — KAMIGOTCHI'S OWN CHAIN</text>
+
+  <!-- Kamibots → the world -->
+  <line class="af-conn" x1="766.5" y1="330" x2="766.5" y2="274" stroke="#8f8a80" marker-end="url(#sf-head)"/>
+  <text class="af-conn-label" x="778" y="305" font-size="12" fill="#6d675f">acts as your operator</text>
+
+  <!-- Kamibots -->
+  <rect class="af-box" x="640.5" y="330.5" width="252" height="84" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="658" y="360" font-size="16" font-weight="600" fill="#1c1917"><a href="https://kamibots.xyz"><tspan class="af-repo" fill="#a03518" text-decoration="underline">Kamibots</tspan></a></text>
+  <rect class="af-badge" x="748" y="344" width="132" height="22" rx="11" fill="#e8ebef"/>
+  <text class="af-badge-text" x="814" y="359" font-size="9.5" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#4a5568">PART OF ASPHODEL</text>
+  <text class="af-role" x="658" y="386" font-size="12.5" fill="#6d675f">automation service —</text>
+  <text class="af-role" x="658" y="404" font-size="12.5" fill="#6d675f">runs standing routines</text>
+</svg>
