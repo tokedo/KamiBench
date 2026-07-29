@@ -74,6 +74,16 @@ every action a real transaction in an economy shared with human players.
 
 ## The series so far
 
+The stack-delta story at a glance — one row per run: what that run's findings
+changed in the stack for the next.
+
+| run | status | stack under test | what its findings changed |
+|---|---|---|---|
+| [Run 1](001-budget-boxed.md) | complete | v0 baseline — scaffold @ `3ebd5b8` · interface v1.3.1, 84 tools | legible pre-transaction validation (interface → v1.5.1); repetition breaker, session caps, wake scheduling, cache-aware accounting (scaffold → v0.2.0) |
+| [Run 2](002-stack-delta.md) | complete | the hardened v1.x stack — scaffold v0.2.0 · interface v1.5.1, same 84 tools | perception parity as a first-class surface requirement, the sacrifice≠liquidate disambiguation, three-state transaction reporting, a pre-run delegation gate (interface → v2.0.0; scaffold → v0.3.2) |
+| [Run 3](003-perception-parity.md) | aborted | perception-parity E2 — scaffold v0.3.2 · interface v2.0.0, 99 tools | two pre-launch gates on our own run tooling; the design itself carried over to Run 4 unchanged |
+| [Run 4](004-perception-parity-rerun.md) | running | identical pins to Run 3, fresh cohort | results are added at close-out |
+
 ### Run 1 — baseline stack ([Experiment 001](001-budget-boxed.md))
 
 The v0 stack, three fast-tier arms, complete and public. The arms diverged
@@ -131,28 +141,40 @@ without logging a hash — produced explicit three-state transaction reporting.
 And a delegation layer that turned out to be structurally unavailable for the
 whole run is now a pre-run availability gate rather than a discovery.
 
-### Run 3 — perception parity ([Experiment 003](003-perception-parity.md))
+### Run 3 — perception parity ([Experiment 003](003-perception-parity.md)) — aborted
 
-Same three models, same $10, same 7-day box, same objective text — on the
-perception-parity stack. Registered and running; results are added at
-close-out.
+Registered as the first run on the perception-parity (E2) stack and retired at
+the first scheduled monitor pass, about 17 hours in: a defect in our own run
+tooling, outside the published stack, had degraded the run's instructions from
+the first session, so every answer the run could give would have been
+confounded. The environment stack itself — interface and scaffold, at their
+pinned versions — verified clean, and the design carried over unchanged.
+Series results exclude this run; what it changed is operational — two new
+pre-launch gates on the run tooling. An aborted pre-registered run reported
+plainly is the methodology working, and the monitoring protocol caught the
+defect within one pass.
+
+### Run 4 — perception parity re-run ([Experiment 004](004-perception-parity-rerun.md))
+
+The clean re-run: Run 3's pre-registered design verbatim, on the identical E2
+pins, with a fresh cohort. Running; results are added at close-out.
 
 **What it tests.** Run 2's lesson was that legible errors fix transactions, not
 beliefs, and both of its death spirals traced to perception rather than
-judgment. Run 3 is the first run of the series on the E2 stack: an environment
-interface whose world-state reads are lens-backed (live HP, projected HP,
-occupancy, cooldowns), whose confirmed on-chain reverts raise as tool errors
-with the replayed reason, which can express a liquidation at all, and which
-disambiguates the sacrifice≠liquidate confusion both Run 2 arms hit — plus a
-scaffold that opens every session with an injected party status brief. Holding
-the models and the box fixed makes the Run 2 → Run 3 delta an
-environment-change measurement, and Run 3's numbers stand as the E2 baseline.
+judgment. Run 4 is the series' first completed-run attempt on the E2 stack: an
+environment interface whose world-state reads are lens-backed (live HP,
+projected HP, occupancy, cooldowns), whose confirmed on-chain reverts raise as
+tool errors with the replayed reason, which can express a liquidation at all,
+and which disambiguates the sacrifice≠liquidate confusion both Run 2 arms hit
+— plus a scaffold that opens every session with an injected party status
+brief. Holding the models and the box fixed makes the Run 2 → Run 4 delta an
+environment-change measurement, and Run 4's numbers stand as the E2 baseline.
 
 The run's directional expectations, the six-class liquidate-quest observable,
 and the binding criterion for closing this series are pre-registered on
-[its page](003-perception-parity.md); cohort identifiers stay withheld until
-close-out. Registered pages go up before results exist, as every run in this
-registry does.
+[its page](004-perception-parity-rerun.md); cohort identifiers stay withheld
+until close-out. Registered pages go up before results exist, as every run in
+this registry does.
 
 ## What each run measures
 
