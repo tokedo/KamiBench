@@ -51,9 +51,11 @@ export interface ExperimentRun {
   /** One-sentence status from the doc's STATUS block. */
   status: string;
   /** Coarse status for chip styling; 'complete' only once results are in. */
-  statusKind: 'pending' | 'complete';
+  statusKind: 'pending' | 'complete' | 'aborted';
   /** Chip label shown next to the status sentence. */
-  statusLabel: 'In progress' | 'Complete';
+  statusLabel: 'In progress' | 'Complete' | 'Aborted';
+  /** Chip class matching statusKind (see .chip-* in global.css). */
+  statusChip: 'chip-pending' | 'chip-ok' | 'chip-warn';
   /** Rendered body HTML (H1 and marker blocks stripped). */
   html: string;
   /** Slug of the design this run executes. */
@@ -171,7 +173,8 @@ export function getDesigns(): ExperimentDesign[] {
         );
       }
       const status = markerBlock(src, file, 'STATUS');
-      const complete = /complete/i.test(status);
+      const aborted = /^aborted/i.test(status);
+      const complete = !aborted && /complete/i.test(status);
       return {
         slug,
         number: slug.slice(0, 3),
@@ -180,10 +183,24 @@ export function getDesigns(): ExperimentDesign[] {
         fullTitle,
         oneliner: markerBlock(src, file, 'ONELINER'),
         // The chip carries the coarse label; drop a leading "Complete — " /
-        // "In progress — " from the sentence so the two never read twice.
-        status: status.replace(/^(complete|in progress)\s*—\s*/i, ''),
-        statusKind: complete ? ('complete' as const) : ('pending' as const),
-        statusLabel: complete ? ('Complete' as const) : ('In progress' as const),
+        // "In progress — " / "Aborted — " from the sentence so the two never
+        // read twice.
+        status: status.replace(/^(complete|in progress|aborted)\s*—\s*/i, ''),
+        statusKind: aborted
+          ? ('aborted' as const)
+          : complete
+            ? ('complete' as const)
+            : ('pending' as const),
+        statusLabel: aborted
+          ? ('Aborted' as const)
+          : complete
+            ? ('Complete' as const)
+            : ('In progress' as const),
+        statusChip: aborted
+          ? ('chip-warn' as const)
+          : complete
+            ? ('chip-ok' as const)
+            : ('chip-pending' as const),
         html: renderBody(src),
         designSlug: markerBlock(src, file, 'DESIGN'),
         dataset: optionalMarkerBlock(src, 'DATASET'),

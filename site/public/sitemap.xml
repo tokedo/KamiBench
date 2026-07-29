@@ -17,6 +17,12 @@
     <loc>https://kamibench.ai/experiments/002-stack-delta</loc>
   </url>
   <url>
+    <loc>https://kamibench.ai/experiments/003-perception-parity</loc>
+  </url>
+  <url>
+    <loc>https://kamibench.ai/experiments/004-perception-parity-rerun</loc>
+  </url>
+  <url>
     <loc>https://kamibench.ai/paper</loc>
   </url>
   <url>

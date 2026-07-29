@@ -42,7 +42,7 @@ const designs = getDesigns();
             <ul class="run-list">
               {design.runs.map((run) => (
                 <li>
-                  <span class={`chip ${run.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+                  <span class={`chip ${run.statusChip}`}>
                     {run.statusLabel}
                   </span>
                   <a class="run-title" href={`/experiments/${run.slug}`}>

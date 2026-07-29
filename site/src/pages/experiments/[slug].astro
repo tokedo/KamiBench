@@ -43,7 +43,7 @@ const { design, run } = Astro.props;
             Run {run.runNumber} — {run.title}
           </h1>
           <p class="exp-status">
-            <span class={`chip ${run.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+            <span class={`chip ${run.statusChip}`}>
               {run.statusLabel}
             </span>
             <span class="exp-status-note">{run.status}</span>
@@ -64,7 +64,7 @@ const { design, run } = Astro.props;
             <ul class="run-list">
               {design.runs.map((r) => (
                 <li class:list={{ 'run-current': r.slug === run.slug }}>
-                  <span class={`chip ${r.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+                  <span class={`chip ${r.statusChip}`}>
                     {r.statusLabel}
                   </span>
                   {r.slug === run.slug ? (
@@ -110,7 +110,7 @@ const { design, run } = Astro.props;
             <ul class="run-list">
               {design.runs.map((r) => (
                 <li>
-                  <span class={`chip ${r.statusKind === 'complete' ? 'chip-ok' : 'chip-pending'}`}>
+                  <span class={`chip ${r.statusChip}`}>
                     {r.statusLabel}
                   </span>
                   <a class="run-title" href={`/experiments/${r.slug}`}>
