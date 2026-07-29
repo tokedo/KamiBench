@@ -3,7 +3,7 @@
 <!-- ONELINER:START -->
 Stack stress-testing, not model benchmarking: a series of controlled,
 deliberately bounded runs — fixed inference budget, fixed wall clock, fast-tier
-models — that drop agents into the live on-chain world to find out whether the
+models — that drop agents into the live world to find out whether the
 stack holds up before anything open-ended runs on it.
 <!-- ONELINER:END -->
 
