@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Hand-maintained. One entry per page: /, /experiments, one per experiment, /paper. -->
+<!-- Hand-maintained. One entry per page: /, /experiments, one per experiment, /paper, /stack. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kamibench.ai/</loc>
@@ -18,5 +18,8 @@
   </url>
   <url>
     <loc>https://kamibench.ai/paper</loc>
+  </url>
+  <url>
+    <loc>https://kamibench.ai/stack</loc>
   </url>
 </urlset>

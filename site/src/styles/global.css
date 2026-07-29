@@ -874,6 +874,13 @@ td:first-child {
   fill: var(--accent);
 }
 
+/* dashed elements of the stack figure — the "your machine" boundary and the
+   optional/ghost boxes; the dash pattern lives in the file. */
+.arch-figure .af-bound {
+  fill: none;
+  stroke: var(--line);
+}
+
 /* the inlined milestone figures (mf-*): same convention as af-* — fallback
    colors live in the file for GitHub's renderer; these re-theme chrome with
    the site palette. Series colors are a fixed, CVD-validated categorical

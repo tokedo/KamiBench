@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+// Single source of truth: the page renders from the repo-root STACK.md at
+// build time — see lib/stack.ts. Edit the source doc, never this shell.
+import { renderStack } from '../lib/stack';
+
+const { html, oneliner } = renderStack();
+---
+
+<Base title="The KamiBench Stack — KamiBench" description={oneliner} path="/stack">
+  <article class="container exp-page paper">
+    <header class="exp-header">
+      <h1>The KamiBench Stack</h1>
+    </header>
+    <Fragment set:html={html} />
+  </article>
+</Base>
