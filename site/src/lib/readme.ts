@@ -15,6 +15,7 @@ function rewriteRepoLinks(html: string): string {
     .replace(/href="experiments\/([^"]+)\.md"/g, 'href="/experiments/$1"')
     .replace(/href="experiments\/?"/g, 'href="/experiments"')
     .replace(/href="paper\/paper\.md"/g, 'href="/paper"')
+    .replace(/href="STACK\.md"/g, 'href="/stack"')
     .replace(/href="((?:paper|research|site)\/[^"]+)"/g, `href="${GITHUB_BLOB}/$1"`);
 }
 
