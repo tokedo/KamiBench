@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 903 190" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="bf-desc">
+  <title id="bf-desc">The running balance: S(t) = seed − inference_cost − gas_spent − infra_rent + earnings + transfers_received. Money in — the starting seed, what the agent earns in-world, and any incoming transfers — less what it spends on thinking, on transaction fees, and on server rent.</title>
+  <rect class="af-bg" x="0.5" y="0.5" width="902" height="189" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
+
+  <!-- lead-in: the balance itself -->
+  <text class="af-title" x="24" y="107" font-size="15.0" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#1c1917">S(t) =</text>
+
+  <!-- seed -->
+  <rect class="af-box" x="82.0" y="78" width="56.0" height="48" rx="9" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="110.0" y="107" font-size="15.0" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" text-anchor="middle" fill="#1c1917">seed</text>
+  <line class="af-conn" x1="110.0" y1="60" x2="110.0" y2="78" stroke="#8f8a80"/>
+  <text class="af-role" x="110.0" y="54" font-size="14.0" text-anchor="middle" fill="#6d675f">starting money</text>
+
+  <!-- inference_cost -->
+  <text class="af-title" x="149.0" y="107" font-size="15.0" text-anchor="middle" fill="#1c1917">−</text>
+  <rect class="af-box af-badge-var" x="160.0" y="78" width="146.0" height="48" rx="9" fill="#f3ddd5" stroke="#d9d4cc"/>
+  <text class="af-badge-var-text" x="233.0" y="107" font-size="15.0" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" text-anchor="middle" fill="#a03518">inference_cost</text>
+  <line class="af-conn" x1="233.0" y1="126" x2="233.0" y2="142" stroke="#8f8a80"/>
+  <text class="af-role" x="233.0" y="158" font-size="14.0" text-anchor="middle" fill="#6d675f">cost of thinking</text>
+
+  <!-- gas_spent -->
+  <text class="af-title" x="317.0" y="107" font-size="15.0" text-anchor="middle" fill="#1c1917">−</text>
+  <rect class="af-box af-badge-var" x="328.0" y="78" width="101.0" height="48" rx="9" fill="#f3ddd5" stroke="#d9d4cc"/>
+  <text class="af-badge-var-text" x="378.5" y="107" font-size="15.0" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" text-anchor="middle" fill="#a03518">gas_spent</text>
+  <line class="af-conn" x1="378.5" y1="60" x2="378.5" y2="78" stroke="#8f8a80"/>
+  <text class="af-role" x="378.5" y="54" font-size="14.0" text-anchor="middle" fill="#6d675f">transaction fees</text>
+
+  <!-- infra_rent -->
+  <text class="af-title" x="440.0" y="107" font-size="15.0" text-anchor="middle" fill="#1c1917">−</text>
+  <rect class="af-box af-badge-var" x="451.0" y="78" width="110.0" height="48" rx="9" fill="#f3ddd5" stroke="#d9d4cc"/>
+  <text class="af-badge-var-text" x="506.0" y="107" font-size="15.0" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" text-anchor="middle" fill="#a03518">infra_rent</text>
+  <line class="af-conn" x1="506.0" y1="126" x2="506.0" y2="142" stroke="#8f8a80"/>
+  <text class="af-role" x="506.0" y="158" font-size="14.0" text-anchor="middle" fill="#6d675f">server rent</text>
+
+  <!-- earnings -->
+  <text class="af-title" x="572.0" y="107" font-size="15.0" text-anchor="middle" fill="#1c1917">+</text>
+  <rect class="af-box af-badge" x="583.0" y="78" width="92.0" height="48" rx="9" fill="#e8ebef" stroke="#d9d4cc"/>
+  <text class="af-badge-text" x="629.0" y="107" font-size="15.0" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" text-anchor="middle" fill="#4a5568">earnings</text>
+  <line class="af-conn" x1="629.0" y1="60" x2="629.0" y2="78" stroke="#8f8a80"/>
+  <text class="af-role" x="629.0" y="54" font-size="14.0" text-anchor="middle" fill="#6d675f">earned in-world</text>
+
+  <!-- transfers_received -->
+  <text class="af-title" x="686.0" y="107" font-size="15.0" text-anchor="middle" fill="#1c1917">+</text>
+  <rect class="af-box af-badge" x="697.0" y="78" width="182.0" height="48" rx="9" fill="#e8ebef" stroke="#d9d4cc"/>
+  <text class="af-badge-text" x="788.0" y="107" font-size="15.0" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" text-anchor="middle" fill="#4a5568">transfers_received</text>
+  <line class="af-conn" x1="788.0" y1="126" x2="788.0" y2="142" stroke="#8f8a80"/>
+  <text class="af-role" x="788.0" y="158" font-size="14.0" text-anchor="middle" fill="#6d675f">incoming transfers</text>
+</svg>

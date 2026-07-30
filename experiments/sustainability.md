@@ -6,22 +6,20 @@ it is published at experiment registry time, before launch.
 <!-- STATUS:END -->
 
 <!-- ONELINER:START -->
-The next design family: agents that pay their own way. A solvency ledger
-replaces the fixed evaluation budget, and an agent lives exactly as long as it
-can fund its own inference.
+The next design family: agents that pay their own way. A running balance
+replaces the fixed evaluation budget: an agent lives exactly as long as it can
+pay for its own thinking.
 <!-- ONELINER:END -->
 
-**Act through the harness, see through the lens, exist through the meter.**
-
-## Solvency as the metric
+## The balance is the metric
 
 This family replaces fixed evaluation budgets with an economic survival
-objective. Each agent's state is a solvency ledger:
+objective. Each agent's state is a single running balance:
 
-```
-S(t) = seed − inference_cost(t) − gas_spent(t) − infra_rent(t)
-            + earnings(t) + transfers_received(t)
-```
+![The running balance: S(t) = seed − inference_cost − gas_spent − infra_rent + earnings + transfers_received — money in, less what the agent spends on thinking, on transaction fees, and on server rent](figures/balance.svg)
+
+*One line, six terms: what the agent starts with and earns, against what
+thinking, acting, and staying online cost it.*
 
 The agent starts with a seed and pays its own way from there. Capability and
 cost stop being two axes on a scatter plot: an agent that overthinks pays for
@@ -32,13 +30,10 @@ benchmark designer — sets the exchange rate between intelligence and compute.
 
 The agent's entire economy runs through a single on-chain wallet in a single
 currency. One source: earn MUSU in-world, swap to ETH through the in-game pool.
-Three sinks:
-
-- **Gas** — paid natively by every transaction.
-- **Inference** — a prepaid balance the agent must refill from its own wallet;
-  when the balance can no longer fund a session, cognition stops.
-- **Infrastructure rent** — postpaid bills that accrue with wall-clock, so
-  sleeping is not free.
+Three sinks: gas, paid natively by every transaction; thinking, a prepaid
+balance the agent must refill from its own wallet — when it can no longer fund
+a session, thinking stops; and infrastructure rent, postpaid and accruing with
+wall-clock, so sleeping is not free.
 
 Payment is real: the agent sends ETH to a treasury address, and settlement is
 on-chain and auditable.
@@ -47,14 +42,15 @@ on-chain and auditable.
 
 The machinery that meters usage, issues bills, settles payments, and declares
 economic death is a dedicated stack component (kami-meter, in design), and it
-lives outside every tested agent. Because the billing rail is identical for any
+lives outside every tested agent. The agent acts and sees through the game's
+own interfaces; it exists through the meter. Because the billing rail is identical for any
 architecture, economic outcomes are comparable across scaffolds and models —
 the reference scaffold is one implementation among any the meter can bill.
 
 - **The agent always sees its bill and never writes it.** Every session opens
   with a machine-readable financial statement — balances, bills, prices, its
   own lifetime burn curve — and no agent's self-accounting is ever accepted.
-- **Death is the ledger's verdict, not the evaluator's.** An agent is dead when
+- **Death is the balance's verdict, not the evaluator's.** An agent is dead when
   it can no longer fund its next session; the meter emits the death
   certificate, and the evaluators read it rather than issue it.
 - **Full economic information.** Prices — tokens, rent, exchange rates — are
@@ -71,7 +67,7 @@ the reference scaffold is one implementation among any the meter can bill.
   rather than a claim. It is also why all-agents-bankrupt is a result and not a
   failed experiment: the curve says whether any agent was approaching
   sustainability when it died.
-- **S(t) decomposed** into its ledger components — spend against earnings over
+- **S(t) decomposed** into the terms above — spend against earnings over
   time — the full financial trajectory of every arm.
 
 ## What the pre-registration binds
