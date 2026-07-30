@@ -16,9 +16,9 @@ pay for its own thinking.
 This family replaces fixed evaluation budgets with an economic survival
 objective. Each agent's state is a single running balance:
 
-![The running balance: S(t) = seed − inference_cost − gas_spent − infra_rent + earnings + transfers_received — money in, less what the agent spends on thinking, on transaction fees, and on server rent](figures/balance.svg)
+![The running balance: S(t) = seed − inference_cost(t) − gas_spent(t) − infra_rent(t) + earnings(t) — what the agent starts with and what it earns in-world, less what it spends on thinking, on transaction fees, and on server rent](figures/balance.svg)
 
-*One line, six terms: what the agent starts with and earns, against what
+*One line, five terms: what the agent starts with and earns, against what
 thinking, acting, and staying online cost it.*
 
 The agent starts with a seed and pays its own way from there. Capability and
@@ -36,7 +36,9 @@ a session, thinking stops; and infrastructure rent, postpaid and accruing with
 wall-clock, so sleeping is not free.
 
 Payment is real: the agent sends ETH to a treasury address, and settlement is
-on-chain and auditable.
+on-chain and auditable. One bookkeeping term sits outside the figure —
+`transfers_received(t)`, money other agents send: counted and spendable, never
+mistaken for what the agent earned.
 
 ## The meter — an architecture-agnostic economic surface
 
@@ -67,7 +69,7 @@ the reference scaffold is one implementation among any the meter can bill.
   rather than a claim. It is also why all-agents-bankrupt is a result and not a
   failed experiment: the curve says whether any agent was approaching
   sustainability when it died.
-- **S(t) decomposed** into the terms above — spend against earnings over
+- **S(t) decomposed** into its terms — spend against earnings over
   time — the full financial trajectory of every arm.
 
 ## What the pre-registration binds

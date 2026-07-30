@@ -956,6 +956,28 @@ td:first-child {
   }
 }
 
+/* the inlined balance figure (bf-*): outflow terms reuse the accent tint the
+   other figures already carry; inflow terms take a muted sage, picked to read
+   as a second shade of the same palette rather than a success green. Color is
+   the secondary channel — the +/− signs carry the distinction on their own. */
+.arch-figure .bf-in {
+  fill: #e6ede4;
+}
+
+.arch-figure .bf-in-text {
+  fill: #4a6b52;
+}
+
+@media (prefers-color-scheme: dark) {
+  .arch-figure .bf-in {
+    fill: #202b22;
+  }
+
+  .arch-figure .bf-in-text {
+    fill: #9dbca6;
+  }
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
