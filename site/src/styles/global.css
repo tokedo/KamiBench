@@ -212,6 +212,9 @@ hr {
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
   font-family: var(--font-serif);
   font-weight: 700;
   font-size: 1.05rem;
@@ -222,6 +225,22 @@ hr {
 
 .wordmark:hover {
   color: var(--accent);
+}
+
+/* The mark accompanies the wordmark rather than competing with it: 0.75em of the
+   wordmark's own font-size, so it tracks any change to that size instead of being
+   pinned to px. The viewBox is cropped to the ink, so that height is all glyph —
+   the path lands just inside the cap height and only the diamond's tip clears it.
+   The 1px nudge is optical: flex centering measures against the text's full line
+   box, so the descender space below the baseline drags the mark low — lifting it
+   1px puts the path's foot back on the baseline.
+   The stroke is currentColor, so it inverts with the theme and warms on hover;
+   the diamond stays terracotta per the brand spec. */
+.wordmark-mark {
+  height: 0.75em;
+  width: auto;
+  flex: none;
+  transform: translateY(-1px);
 }
 
 .site-nav {

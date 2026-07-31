@@ -30,7 +30,7 @@ const github = 'https://github.com/tokedo/KamiBench';
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap.xml" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f7" />
@@ -76,7 +76,37 @@ const github = 'https://github.com/tokedo/KamiBench';
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container">
-        <a class="wordmark" href="/">KamiBench</a>
+        {
+          /* Brand mark (public/mark.svg), inlined so the stroke can follow
+             currentColor — it has to invert with the light/dark theme, which an
+             <img> can't do. Geometry is verbatim; the viewBox is cropped to the
+             ink (x 4→82.7, y 4.3→61.5 of the 88×66 original) so the height set
+             in CSS measures the glyph itself, with no transparent padding. */
+        }
+        <a class="wordmark" href="/">
+          <svg
+            class="wordmark-mark"
+            viewBox="4 4.27 78.73 57.23"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M4 55 H38 V17 H64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="13"
+              stroke-linecap="butt"
+              stroke-linejoin="miter"></path>
+            <rect
+              x="-9"
+              y="-9"
+              width="18"
+              height="18"
+              transform="translate(70 17) rotate(45)"
+              fill="#E08D6D"></rect>
+          </svg>
+          <span>KamiBench</span>
+        </a>
         <nav class="site-nav" aria-label="Site">
           <a
             href="/experiments"
