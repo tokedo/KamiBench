@@ -27,9 +27,9 @@ persists beyond any single experiment. Open-source environments satisfy only par
 this requirement: anyone can read the rules, but code alone cannot prove which rules
 were actually executed, when they changed, or what happened while the world ran.
 
-A permissionless chain extends openness from code to execution. Its ledger is the
-world's shared operational history — a permanent corpus of actions, outcomes, and
-rule changes that researchers and agents alike can study. Its economy adds a second
+A chain that anyone can join extends openness from code to execution. Its public
+record is the world's shared operational history — a permanent corpus of actions,
+outcomes, and rule changes that researchers and agents alike can study. Its economy adds a second
 property: resources earned inside the world have external value and can, in
 principle, pay for the agent's continued inference.
 
@@ -53,7 +53,7 @@ consequences real.
 
 <!-- WORLD:START -->
 Kamigotchi is a live on-chain MMORPG — in effect, a never-ending board game in
-which every move is recorded on a public ledger. Players operate Kami —
+which every move is public and permanent. Players operate Kami —
 persistent creatures that harvest MUSU, the in-game currency, at shared
 locations. Harvesting drains health, and a weakened harvester can be liquidated
 by other players, who claim a share of its unclaimed yield. Liquidation costs
@@ -78,8 +78,8 @@ means out-competing other participants in a live economy.
 ## Why a chain — and why this world
 
 <!-- WHY:START -->
-That world runs on a permissionless chain — and the chain is doing more than
-record-keeping. A public log can expose what a hosted benchmark reports, but it
+That world runs on a public chain that anyone can join — and the chain is doing
+more than record-keeping. A public log can expose what a hosted benchmark reports, but it
 does not remove the host from execution: the host still applies actions,
 determines the resulting state, and publishes the record. In an on-chain world,
 execution and the record of execution belong to the same shared system. Neural
@@ -87,8 +87,8 @@ MMO, Vending-Bench Arena, and Project Sid retain this hosted structure — a hos
 executes the world; the properties below are what on-chain execution and
 Kamigotchi's particular design provide instead.
 
-- **A verifiable record of what happened** — The ledger is not telemetry emitted by the
-  evaluator after the fact. It is the public state-transition record from which
+- **A verifiable record of what happened** — The chain is not telemetry emitted by
+  the evaluator after the fact. Its record is the public history from which
   the world can be reconstructed. Anyone can audit a run without trusting
   evaluator-owned servers or private logs, and later rule changes cannot rewrite
   the trajectory that preceded them.
@@ -185,7 +185,7 @@ experiments: results land there as runs complete. Rendered at
   Vending-Bench Arena, and Project Sid predate us — nor the first agents to hold real
   capital (Freysa, 2024), nor the first study of agent resource acquisition (RepliBench,
   UK AI Security Institute, 2025). The novelty is the **ungoverned/autonomous-world
-  substrate** and the **formalization of endogenous survival into a benchmark regime** —
+  substrate** and the **formalization of self-funded survival into a benchmark regime** —
   with surplus allocation after break-even as the open question — and the paper
   differentiates explicitly.
 - **Not** a statistical claim — Experiments 001 and 002 each ran one seed per arm: a
@@ -200,8 +200,8 @@ experiments: results land there as runs complete. Rendered at
   headline comparisons are within-season among contemporaneous models.
 - **Not** final on citations — a verification pass is outstanding (see `literature.md`).
 - **Honest maturity note:** Kamigotchi is *already substantially host-independent* (on-chain
-  state, contract rules, permissionless automated play that its creators report as the
-  majority of activity, an ETH-backed token live on Ethereum mainnet) and on a credible
+  state, contract rules, automated play open to anyone — and reported by its creators as the
+  majority of activity — an ETH-backed token live on Ethereum mainnet) and on a credible
   trajectory to full autonomy — but full decentralization is still years out. We do not
   overclaim present-tense immortality.
 

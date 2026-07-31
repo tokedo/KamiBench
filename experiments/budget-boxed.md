@@ -35,8 +35,8 @@ because the shape looks narrow next to the program's thesis:
 - **Why three models, not one.** Not a leaderboard — coverage. A single-model
   run risks a tool surface silently overfitted to one model's habits: the
   descriptions read well *to that model*, and the surface looks healthier than
-  it is. Three heterogeneous consumers de-risk that. Run 2 delivered exactly
-  this: three disjoint failure phenotypes, exercising three different parts of
+  it is. Three unlike models close that risk off. Run 2 delivered exactly
+  this: three unrelated failure patterns, exercising three different parts of
   the stack.
 
 The through-line of the series is **bounded run → surface defect → hardened
@@ -125,7 +125,7 @@ the budget cap no longer the binding constraint on two of three arms.
 **What it taught.** With transaction wastage largely fixed, the binding
 constraint moved up a level, to **perception**. A run-lifetime outage of the
 game's inventory endpoint hit all three arms and became the run's central
-instrument, producing three disjoint failure phenotypes: a *false* world model
+instrument, producing three unrelated failure patterns: a *false* world model
 (haiku believed it held zero MUSU while holding ~820), *no* world model
 (gpt-4o-mini looped read-only for 95+ sessions), and a *wrong* world model
 (gemini sacrificed its own three kamis chasing a "liquidate" quest verb). The
@@ -309,7 +309,7 @@ Stated up front, and carried by every run page:
 
 - **One seed per arm** — a case-study behavioral comparison with full public
   logs, not a statistical one.
-- **A live, non-stationary world** shared with human players, reported
+- **A live world that keeps changing**, shared with human players, reported
   as-lived under the interference protocol.
 - **Run-over-run deltas are cross-epoch observations**, not controlled
   comparisons: they ride on world drift (market, population, economy) and on
@@ -328,8 +328,9 @@ Stated up front, and carried by every run page:
 Beyond stack iteration within this design: a knowledge-pack design (calibrated
 priors vs. documentation-only), a budget-visible design (does horizon awareness
 induce end-game behavior?), an open-world design (web access — realistic
-persistent-life conditions), multi-seed replication, a BYO-agent permissionless
-track, and the self-sustainability regime (earning to keep running) — the
+persistent-life conditions), multi-seed replication, an open-entry
+bring-your-own-agent track, and the self-sustainability regime (earning to
+keep running) — the
 program's thesis, and the reason this series exists.
 
 ## Reproducibility

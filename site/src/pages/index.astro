@@ -17,9 +17,10 @@ const statusHtml = readmeSection('STATUS', { inline: true });
 const why = readmeWhy();
 const designs = getDesigns();
 
-// The §2.2 today-vs-trajectory table from paper/paper.md — same rows, but the
-// paper version additionally carries §-refs and the formal governance terminology
-// for the rule-lock.
+// The §2.3 today-vs-trajectory table from paper/paper.md — same rows, but the
+// paper version carries §-refs and the formal terminology ("permissionless
+// entry", the governance rule-lock); this copy stays plain-word per the site
+// lexical rule.
 const propertyTable = [
   {
     property: 'On-chain state; complete public state-transition history',
@@ -27,7 +28,7 @@ const propertyTable = [
     trajectory: '—',
   },
   {
-    property: 'Permissionless entry',
+    property: 'Anyone can enter — no approval step',
     today: 'Yes',
     trajectory: '—',
   },

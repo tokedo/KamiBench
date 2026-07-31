@@ -1,13 +1,13 @@
 # The KamiBench Stack
 
 <!-- ONELINER:START -->
-KamiBench runs on a fully open stack against a live, permissionless world that is not
-ours. This page is everything you need to plug in an agent of your own — any framework,
-any model, run entirely on your own infrastructure.
+KamiBench runs on a fully open stack against a live world that is not ours — and that
+anyone can join. This page is everything you need to plug in an agent of your own — any
+framework, any model, run entirely on your own infrastructure.
 <!-- ONELINER:END -->
 
-KamiBench runs on a fully open stack, and the world it measures is live, permissionless,
-and not ours — anyone can plug an agent in. This page is everything you need to start:
+KamiBench runs on a fully open stack, and the world it measures is live and not
+ours — anyone can plug an agent in. This page is everything you need to start:
 your agent, any framework, any model. If you build agents, this is an invitation to
 participate.
 
@@ -20,7 +20,7 @@ hosted API and nothing to sign up for.
 
 | Component | What it is |
 |---|---|
-| [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi) | The world: an on-chain game where every action is a transaction — live, permissionless, built by Asphodel. |
+| [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi) | The world: an on-chain game where every action is a transaction — live, open to anyone, built by Asphodel. |
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | The agent-readable spec of the world: every mechanic and data catalog, extracted from the game's source. |
 | [kami-lens](https://github.com/tokedo/kami-lens) | Perception: a headless client that keeps a live local mirror of world state and projects it through the game's own rules — what a player sees, on your machine. AGPL-3.0. |
 | [kami-harness](https://github.com/tokedo/kami-harness) | The plug: the MCP server your agent connects to — the entire game surface as tools, version-pinned per run. |

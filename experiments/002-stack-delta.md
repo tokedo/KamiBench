@@ -73,7 +73,7 @@ compare directly. The full milestone table is on the [dataset card](https://hugg
 ## Full detail
 
 The full run report — the narrative, the complete milestone table, the three
-failure phenotypes in full, the stack changes this run produced, the honest
+failure patterns in full, the stack changes this run produced, the honest
 limits, schemas, run manifests, and provenance — lives on the
 [dataset card](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed).
 The version of this page registered before launch — research questions and
