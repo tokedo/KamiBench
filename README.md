@@ -68,8 +68,8 @@ but re-finding one as the world evolves.
 
 Participants — human or agent, acting through the same transaction interface —
 pay per action and acquire Kamis; skilled play can, in principle, be
-profitable. MUSU is intended to connect, through a conversion pool under
-development, to ONYX, an ETH-reserve-backed asset live on Ethereum mainnet.
+profitable. MUSU connects, through an in-game swap pool, to ONYX, an
+ETH-reserve-backed asset live on Ethereum mainnet.
 Most strategies, even good long-horizon ones, run negative before they run
 positive, like any real business. Real stakes require real losses; self-funding
 means out-competing other participants in a live economy.
@@ -137,28 +137,26 @@ published and git-timestamped before their first run; run pages record what
 ran and what came out. Internally, runs keep the program's linear experiment
 numbering.
 
-- **[Budget-boxed](experiments/budget-boxed.md)** — stack stress-testing, not
-  model benchmarking: controlled, deliberately bounded runs — fixed inference
-  budget, fixed wall clock, fast-tier models — that drop agents into the live
-  world to prove the environment interface, the scaffold, the telemetry, and
-  the accounting before anything open-ended runs on them. Each run's findings
-  become concrete stack changes, and the next run measures them at fixed
-  models and budget.
-  - **[Run 1 — baseline stack (Experiment 001)](experiments/001-budget-boxed.md)**
-    — *complete*: three fast-tier arms ($10 each, 7 days) on the v0 stack;
-    haiku-4.5 completed the full onboarding chain on day one; the full dataset
-    is [public](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed).
-    Its findings became pre-transaction validation, a repetition breaker,
-    session caps, agentic scheduling, and cache-aware accounting.
-  - **[Run 2 — iterated stack (Experiment 002)](experiments/002-stack-delta.md)**
-    — *complete*: the same arms and budget on scaffold v0.2.0 + harness v1.5.1.
-    Chain reverts collapsed (0.048 / 0.000 / 0.011), all three arms registered
-    in-game, quests rose at fixed budget — and the binding constraint moved to
-    perception; the full dataset is
-    [public](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed).
-- **[Sustainability](experiments/sustainability.md)** — *pending*: agents
-  playing for longevity and accumulation, paying their own way. Design
-  pre-registration to be published before launch.
+- **[Sustainability](experiments/sustainability.md)** — *pending*: the next
+  design family, and the program's thesis made measurable. A running balance
+  replaces the fixed evaluation budget — an agent lives exactly as long as it
+  can pay for its own thinking — so capability and efficiency are priced in
+  one number by the live economy. Binding pre-registration publishes before
+  launch.
+- **[Budget-boxed — stack validation](experiments/budget-boxed.md)** — the
+  instrument-hardening series: controlled, deliberately bounded runs (fixed
+  inference budget, fixed wall clock, fast-tier models) that prove the
+  environment interface, the scaffold, the telemetry, and the accounting
+  before anything open-ended runs on them. Each run's findings become
+  concrete stack changes, and the next run measures them at fixed models and
+  budget. [Runs 1](experiments/001-budget-boxed.md) and
+  [2](experiments/002-stack-delta.md) are complete, each with a full public
+  dataset
+  ([001](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed),
+  [002](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed));
+  [Run 3](experiments/003-perception-parity.md) was aborted and reported;
+  [Run 4](experiments/004-perception-parity-rerun.md) is running on the
+  perception-parity stack.
 
 ## The paper
 
@@ -172,16 +170,14 @@ experiments: results land there as runs complete. Rendered at
 
 | Path | What it is |
 |---|---|
-| [`experiments/`](experiments/) | The experiment registry — one public, git-timestamped doc per design and per run; [Budget-boxed](experiments/budget-boxed.md) is the first design, with [Run 1](experiments/001-budget-boxed.md) and [Run 2](experiments/002-stack-delta.md) complete and public, [Run 3](experiments/003-perception-parity.md) registered and running, and [Sustainability](experiments/sustainability.md) registered as pending. |
+| [`experiments/`](experiments/) | The experiment registry — one public, git-timestamped doc per design and per run; the registry pages carry the current state of every run. |
 | [`paper/paper.md`](paper/paper.md) | The paper — the position argument and the synthesis layer across experiments; everything still in progress is sequenced in its Experimental Program section. |
-| [`paper/NOTES.md`](paper/NOTES.md) | Working notes — the draft scaffolding (status tags, TODO/VERIFY markers, stub sections) relocated out of the paper, preserved verbatim. |
 | [`research/literature.md`](research/literature.md) | Annotated bibliography grouped by theme (the related-work foundation), with a must-cite core set. |
-| [`research/asphodel-whitepaper-notes.md`](research/asphodel-whitepaper-notes.md) | Full reading notes on the Asphodel/Kamigotchi whitepaper, incl. the creators' own "benchmarking system" framing and the token economy. |
 | [`site/`](site/) | The project website — landing page + build-time renders of the paper and the experiment registry (updates on every push). Astro, deployed on Vercel; see [`site/README.md`](site/README.md). |
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Technical Game Design Document — all mechanics and data catalogs extracted from source, the agent-readable spec of the world. |
+| [kami-lens](https://github.com/tokedo/kami-lens) | Perception layer — a headless client keeping a live local mirror of world state, projected through the game's own rules: what an equipped human player sees, on your machine. |
 | [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — MCP tools wrapping every on-chain action; version pinned per run. Current v2 surface: 99 tools with lens-backed world-state reads; the 84-tool v1.x surface ran Experiments 001–002. |
-| [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — turns a stateless model API into a persistent actor; model-agnostic by construction (v0.2.x). |
-| [kami-zero](https://github.com/tokedo/kami-zero) | The exploratory pilot that preceded the controlled program — ~2 months in the live world while the stack was built and rebuilt around it; superseded by the experiment registry. |
+| [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — turns a stateless model API into a persistent actor; model-agnostic by construction. |
 
 ## What this is *not* (yet)
 
@@ -208,22 +204,6 @@ experiments: results land there as runs complete. Rendered at
   majority of activity, an ETH-backed token live on Ethereum mainnet) and on a credible
   trajectory to full autonomy — but full decentralization is still years out. We do not
   overclaim present-tense immortality.
-
-## Status & roadmap
-
-<!-- ROADMAP:START -->
-- [x] Main thesis
-- [x] Literature review + research paper skeleton
-- [x] **Technical Game Design Document** — [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd): every game mechanic and the complete data catalogs distilled from the game's source, so agents and researchers can understand the world without reading the codebase
-- [x] **Environment interface** — [kami-harness](https://github.com/tokedo/kami-harness): MCP tools wrapping every on-chain action, version pinned per run — 99 tools on the current v2 surface, 84 on the v1.x surface that ran Experiments 001–002
-- [x] **Exploratory pilot** — [kami-zero](https://github.com/tokedo/kami-zero): an agent played the live world for ~2 months (79/192 quests) while the harness, tools, and agent were reworked around it mid-run — not a clean result, and superseded by the controlled experiments
-- [x] **Reference scaffold** — [kami-agent](https://github.com/tokedo/kami-agent): the model-agnostic scaffold for controlled studies (v0.2.x)
-- [x] **Experiment 001 — run and published** — [Budget-boxed, Run 1](experiments/001-budget-boxed.md): three fast-tier arms, $10 each; full dataset public ([`v0-baseline`](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed/tree/v0-baseline))
-- [x] **Experiment 002 — run and published** — [Budget-boxed, Run 2](experiments/002-stack-delta.md): the hardened stack measured against Run 1's frozen baseline; full dataset public ([`v0-final`](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed/tree/v0-final))
-- [ ] **Experiment 003 — registered and running** — [Budget-boxed, Run 3](experiments/003-perception-parity.md): the same three arms and the same box on the perception-parity stack (v2 interface, lens-backed reads); pre-registration public, dataset at close-out
-- [ ] **Sustainability design** — [registered as pending](experiments/sustainability.md): agents playing for longevity and accumulation, paying their own way; design pre-registration to be published before launch
-- [ ] Paper synthesis of experiment results → arXiv
-<!-- ROADMAP:END -->
 
 ## Collaboration
 

@@ -1,7 +1,7 @@
 // Build-time extraction of README.md copy sections — single source of truth: the
-// landing-page intro, the status banner, the why-cards, the roadmap, and the
-// footer disclosure all render from the repo-root README, so every push re-syncs
-// them with no manual step.
+// landing-page intro, the status banner, the why-cards, and the footer
+// disclosure all render from the repo-root README, so every push re-syncs them
+// with no manual step.
 import { marked } from 'marked';
 import readmeSource from '../../../README.md?raw';
 
@@ -81,33 +81,4 @@ export function readmeWhy(): WhyContent {
     ),
     cards,
   };
-}
-
-export interface RoadmapItem {
-  done: boolean;
-  html: string;
-}
-
-/** Parse the README's ROADMAP marker block (a GFM task list) into items the
- *  landing page can render with its own chips. Wrapped continuation lines are
- *  folded into the preceding item. */
-export function readmeRoadmap(): RoadmapItem[] {
-  const match = readmeSource.match(/<!-- ROADMAP:START -->([\s\S]*?)<!-- ROADMAP:END -->/);
-  if (!match) {
-    throw new Error(
-      'README.md is missing the <!-- ROADMAP:START --> / <!-- ROADMAP:END --> markers.'
-    );
-  }
-  const items: Array<{ done: boolean; text: string }> = [];
-  for (const raw of match[1]!.split('\n')) {
-    const line = raw.trim();
-    if (!line) continue;
-    const item = line.match(/^- \[( |x)\] (.*)$/);
-    if (item) items.push({ done: item[1] === 'x', text: item[2]! });
-    else if (items.length) items[items.length - 1]!.text += ` ${line}`;
-  }
-  return items.map(({ done, text }) => ({
-    done,
-    html: rewriteRepoLinks(marked.parseInline(text) as string),
-  }));
 }

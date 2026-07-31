@@ -1,4 +1,4 @@
-# Budget-boxed
+# Budget-boxed — stack validation
 
 <!-- ONELINER:START -->
 Stack stress-testing, not model benchmarking: a series of controlled,

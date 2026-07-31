@@ -227,9 +227,10 @@ export function getDesigns(): ExperimentDesign[] {
         ...(status ? { status } : {}),
       };
     })
-    // Designs in the order their first runs entered the registry.
+    // Newest design first — the program's current frontier leads the registry;
+    // a design with no runs yet is the newest by definition and tops the list.
     .sort((a, b) =>
-      (a.runs[0]?.number ?? '999').localeCompare(b.runs[0]?.number ?? '999')
+      (b.runs[0]?.number ?? '999').localeCompare(a.runs[0]?.number ?? '999')
     );
 
   const known = new Set(designs.map((d) => d.slug));

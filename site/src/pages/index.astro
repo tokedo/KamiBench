@@ -1,10 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-// Intro paragraph, status banner, why-cards, and the roadmap all derive from
-// the repo-root README at build time (between marker comments) — see
-// lib/readme.ts. Experiment cards derive from ../experiments/*.md — see
-// lib/experiments.ts.
-import { readmeSection, readmeRoadmap, readmeWhy } from '../lib/readme';
+// Intro paragraph, status banner, and why-cards all derive from the repo-root
+// README at build time (between marker comments) — see lib/readme.ts.
+// Experiment cards derive from ../experiments/*.md — see lib/experiments.ts.
+import { readmeSection, readmeWhy } from '../lib/readme';
 import { getDesigns } from '../lib/experiments';
 
 const github = 'https://github.com/tokedo/KamiBench';
@@ -16,7 +15,6 @@ const ideaHtml = readmeSection('IDEA');
 const worldHtml = readmeSection('WORLD');
 const statusHtml = readmeSection('STATUS', { inline: true });
 const why = readmeWhy();
-const roadmap = readmeRoadmap();
 const designs = getDesigns();
 
 // The §2.2 today-vs-trajectory table from paper/paper.md — same rows, but the
@@ -198,22 +196,6 @@ const propertyTable = [
       record. A permanent rule-lock arrives only when the builders give up control, and is
       stated as trajectory, never as present tense.
     </p>
-  </section>
-
-  <section class="section container" aria-labelledby="roadmap">
-    <h2 id="roadmap">Status &amp; roadmap</h2>
-    <ul class="roadmap">
-      {
-        roadmap.map((item) => (
-          <li>
-            <span class={`chip ${item.done ? 'chip-ok' : 'chip-pending'}`}>
-              {item.done ? 'Done' : 'Pending'}
-            </span>
-            <span set:html={item.html} />
-          </li>
-        ))
-      }
-    </ul>
   </section>
 
 </Base>
