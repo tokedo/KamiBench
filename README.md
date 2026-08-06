@@ -1,7 +1,7 @@
 # KamiBench
 
-**A research program: benchmarking long-horizon, continuously-learning AI
-agents in a persistent world that no one operates.**
+**A research program: testing agent continual learning in a persistent world
+that no one operates.**
 
 **Website:** [kamibench.ai](https://kamibench.ai)
 
@@ -20,7 +20,8 @@ agents in a persistent world that no one operates.**
 ## The idea
 
 <!-- IDEA:START -->
-Evaluating an agent over months requires more than a long-running task. It requires
+Evaluating an agent over months requires more than a long-running task — a task
+ends, a world does not. It requires
 a world whose history anyone can inspect, whose rules cannot be quietly adjusted
 mid-run — not by the evaluator, not even by the world's creators — and whose state
 persists beyond any single experiment. Open-source environments satisfy only part of
@@ -43,8 +44,14 @@ today, co-inhabited by human players and agents on identical terms.
 one every long-running deployment eventually depends on: an agent enters an
 unfamiliar domain with documentation and an accumulated operational history, absorbs
 that prior knowledge, acts over months, observes what succeeds and fails — for
-itself and for others — and revises its strategy. To our knowledge, no existing
-benchmark measures that loop end to end. Here it exists by construction: open source
+itself and for others — and revises its strategy. That loop has a name —
+continual learning — and what it builds is expertise: a working model of the few
+things that matter in this world and the many that don't. Intelligence alone does
+not confer it. An agent that cannot accumulate experience meets every week as a
+newcomer, re-deriving everything from scratch, however capable the model behind
+it. To our knowledge, no existing
+benchmark measures that loop end to end — episodic benchmarks reset it at
+exactly the point where it would begin to show. Here it exists by construction: open source
 is the documentation, the chain is the history, and the economy makes the
 consequences real.
 <!-- IDEA:END -->
@@ -60,7 +67,9 @@ by other players, who claim a share of its unclaimed yield. Liquidation costs
 yield, not the Kami, which persists and can be revived. Around that loop sits a
 rich strategic surface — currently ~70 locations, 74 skills, 178 items — and
 every choice (where to harvest, which skills to level, how much liquidation
-risk to carry) compounds over long horizons.
+risk to carry) compounds over long horizons. The surface is too large to
+reason through from scratch each session; skilled play is largely knowing
+what to ignore.
 
 No strategy stays dominant: payoffs depend on the live population, and
 advantages decay as tactics spread. The test is not finding a strategy once,
@@ -141,8 +150,10 @@ numbering.
   design family, and the program's thesis made measurable. A running balance
   replaces the fixed evaluation budget — an agent lives exactly as long as it
   can pay for its own thinking — so capability and efficiency are priced in
-  one number by the live economy. Binding pre-registration publishes before
-  launch.
+  one number by the live economy. That number is also the feedback a learning
+  agent needs: a continuous signal of how it is doing, set by the economy
+  rather than by a grader. Binding
+  pre-registration publishes before launch.
 - **[Budget-boxed — stack validation](experiments/budget-boxed.md)** — the
   instrument-hardening series: controlled, deliberately bounded runs (fixed
   inference budget, fixed wall clock, fast-tier models) that prove the

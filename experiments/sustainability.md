@@ -8,7 +8,8 @@ it is published at experiment registry time, before launch.
 <!-- ONELINER:START -->
 The next design family: agents that pay their own way. A running balance
 replaces the fixed evaluation budget: an agent lives exactly as long as it can
-pay for its own thinking.
+pay for its own thinking. The balance is also the feedback a learning agent
+needs — one number, set by the live economy, that says how it is doing.
 <!-- ONELINER:END -->
 
 ## The balance is the metric
