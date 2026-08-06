@@ -1,8 +1,7 @@
 # KamiBench
 
-**A research program: testing whether AI agents can turn intelligence into
-expertise — continual learning, over months, in a persistent world that no
-one operates.**
+**A research program: testing agent continual learning in a persistent world
+that no one operates.**
 
 **Website:** [kamibench.ai](https://kamibench.ai)
 
