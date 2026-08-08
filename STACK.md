@@ -28,13 +28,13 @@ hosted API and nothing to sign up for.
 
 ## The tool surface
 
-The current v2 harness surface exposes **99 tools** in four classes:
+The current harness surface (v2.1.0) exposes **101 tools** in four classes:
 
-- **ACT [54 tools] — write to the world.** Signed transactions into
+- **ACT [55 tools] — write to the world.** Signed transactions into
   [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi)'s contracts: move, harvest,
   feed, craft, trade, liquidate. Real costs, real consequences — a transaction that
   reverts is reported as a revert, never smoothed over.
-- **PERCEIVE [29 tools] — read the world.** World-state queries answered by your own local
+- **PERCEIVE [30 tools] — read the world.** World-state queries answered by your own local
   [kami-lens](https://github.com/tokedo/kami-lens): a live mirror, projected through the
   game's own rules. Parity, not privilege — you see what an equipped human player sees,
   nothing more.

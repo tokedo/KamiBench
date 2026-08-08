@@ -74,40 +74,86 @@ every action a real transaction in an economy shared with human players.
 
 ## The series so far
 
-The stack-delta story at a glance — one row per run: what that run's findings
-changed in the stack for the next.
+The stack-delta story at a glance — one row per run, newest first: what that
+run's findings changed in the stack for the next.
 
 | run | status | stack under test | what its findings changed |
 |---|---|---|---|
-| [Run 1](001-budget-boxed.md) | complete | v0 baseline — scaffold @ `3ebd5b8` · interface v1.3.1, 84 tools | legible pre-transaction validation (interface → v1.5.1); repetition breaker, session caps, wake scheduling, cache-aware accounting (scaffold → v0.2.0) |
-| [Run 2](002-stack-delta.md) | complete | the hardened v1.x stack — scaffold v0.2.0 · interface v1.5.1, same 84 tools | perception parity as a first-class surface requirement, the sacrifice≠liquidate disambiguation, three-state transaction reporting, a pre-run delegation gate (interface → v2.0.0; scaffold → v0.3.2) |
+| [Run 5](005-verification-run.md) | running | E3 verification — scaffold v0.4.0 · interface v2.1.0, 101 tools · lens v0.3.0 · cost meter in shadow | results at close-out |
+| [Run 4](004-perception-parity-rerun.md) | complete | identical pins to Run 3, fresh cohort | root-caused + fixed the never-succeeding collect action and four sibling tools (interface → v2.1.0); per-objective progress and per-account quest state (lens → v0.3.0); revert-reason channel rebuilt (v2.1.0) |
 | [Run 3](003-perception-parity.md) | aborted | perception-parity E2 — scaffold v0.3.2 · interface v2.0.0, 99 tools | two pre-launch gates on our own run tooling; the design itself carried over to Run 4 unchanged |
-| [Run 4](004-perception-parity-rerun.md) | running | identical pins to Run 3, fresh cohort | results are added at close-out |
+| [Run 2](002-stack-delta.md) | complete | the hardened v1.x stack — scaffold v0.2.0 · interface v1.5.1, same 84 tools | perception parity as a first-class surface requirement, the sacrifice≠liquidate disambiguation, three-state transaction reporting, a pre-run delegation gate (interface → v2.0.0; scaffold → v0.3.2) |
+| [Run 1](001-budget-boxed.md) | complete | v0 baseline — scaffold @ `3ebd5b8` · interface v1.3.1, 84 tools | legible pre-transaction validation (interface → v1.5.1); repetition breaker, session caps, wake scheduling, cache-aware accounting (scaffold → v0.2.0) |
 
-### Run 1 — baseline stack ([Experiment 001](001-budget-boxed.md))
+### Run 5 — verification run ([Experiment 005](005-verification-run.md))
 
-The v0 stack, three fast-tier arms, complete and public. The arms diverged
-sharply — haiku finished the onboarding chain and five quests on day one and
-exhausted its budget in 17 hours; gpt-4o-mini ran the full week without ever
-calling the registration action; gemini sat stuck pre-registration for six days
-until one legible validation error unblocked it. Chain revert rates ran
-0.58 / 0.97 / 0.94.
+Same three models, same box, on the E3 stack — scaffold v0.4.0, environment
+interface v2.1.0 (101 tools), lens v0.3.0 — with a cost meter riding in
+shadow. Running; results are added at close-out.
 
-**What it taught (the stack, mostly).** Error legibility beat model capability
-as the sharpest differentiator: the same model that ignored opaque chain
-reverts for days corrected one human-readable validation error in a single
-turn. A single missing onboarding step was the cleanest capability
-discriminator, and no arm that missed it ever diagnosed it. Cost structure
-dominated spend — an 84-tool surface re-billed on every call, prompt caching
-never engaged, un-broken poll loops reaching $0.55 a session.
+**What it tests.** Run 4 met every check of the pre-registered series-exit
+criterion and still produced three concrete defects: an action that never once
+succeeded on-chain across two runs, a surface omission that cost an arm most of
+a week, and a revert-reason channel that was unusable in every instance it was
+raised. All three have fixes in the pinned stack; none has been demonstrated by
+an agent that does not know it exists. Run 5 asks the one question that
+matters before this series closes — **did the fixes land in agent hands?** — and
+carries its own binding pre-registered exit test on
+[its page](005-verification-run.md).
 
-**What it changed.** The environment interface gained **legible
-pre-transaction validation** (v1.5.1): a blocked game action now fails with a
-factual precondition error before any gas is spent, instead of an opaque
-on-chain revert. The scaffold gained **behavioral controls and cache-aware
-accounting** (v0.2.0): a repetition breaker that ends looping sessions, session
-caps, agent-chosen wake scheduling, and prompt caching engaged in the budget
-math. That is precisely the stack Run 2 then measured.
+Alongside it, the run gives the program's cost meter its first live test. The
+meter independently observes what each arm consumes — inference, on-chain gas,
+infrastructure rent — and issues per-arm statements, but it runs in *shadow*:
+it never binds. No budget enforcement, no death rule, nothing agent-visible;
+the budget envelope is enforced by the scaffold exactly as in Runs 1–4. Its
+output is the per-arm financial curve the sustainability family needs to size
+its seeds.
+
+### Run 4 — perception parity re-run ([Experiment 004](004-perception-parity-rerun.md))
+
+The clean re-run: Run 3's pre-registered design verbatim, on the identical E2
+pins, with a fresh cohort. Complete and public.
+
+**What the changes bought.** All three arms ran to the 7-day wall with money
+left — no budget stop, no kami lost, $16.97 spent of the $30 envelope. The
+legible gates stopped **638 doomed write attempts** against **6 landed
+reverts** run-total (Run 2: 331 blocked, 9 landed), every arm registered
+in-game inside 3.5 hours, and lens-backed reads served every world-state query
+with zero unavailability across 7 d 19 h. Run 2's spectator phenotype did not
+recur: gpt-4o-mini completed 7 quests (0 in Run 2), bought a kami, and landed
+317 on-chain transactions.
+
+**What it taught.** With write waste at the floor and perception holding, the
+binding constraint moved again — to **omission and belief**. One arm spent 5.4
+days and $1.05 dormant on a false belief whose discriminating read the game
+client renders but the pinned surface omitted, re-reading its own conclusion
+20+ times and never re-testing it. And the dominant failure mode across the run
+was **stopping, not deciding wrongly**: no arm had a fallback objective while
+the economy stayed open — the motivation for the program's solvency-objective
+family.
+
+**What it changed.** The one tool that never once succeeded on-chain —
+`harvest_collect`, 12 reverts in 12 attempts across two runs — was root-caused
+to a gas ceiling set below the action's real cost and fixed, along with four
+sibling tools, in interface v2.1.0, which also rebuilt the revert-reason
+channel. The omission class produced per-objective progress and per-account
+quest state in the perception layer (lens v0.3.0). The series-exit criterion
+pre-registered on Run 4's page held on all five checks — and
+[Run 5](005-verification-run.md) was registered anyway, to prove those fixes in
+an agent's hands.
+
+### Run 3 — perception parity ([Experiment 003](003-perception-parity.md)) — aborted
+
+Registered as the first run on the perception-parity (E2) stack and retired at
+the first scheduled monitor pass, about 17 hours in: a defect in our own run
+tooling, outside the published stack, had degraded the run's instructions from
+the first session, so every answer the run could give would have been
+confounded. The environment stack itself — interface and scaffold, at their
+pinned versions — verified clean, and the design carried over unchanged.
+Series results exclude this run; what it changed is operational — two new
+pre-launch gates on the run tooling. An aborted pre-registered run reported
+plainly is the methodology working, and the monitoring protocol caught the
+defect within one pass.
 
 ### Run 2 — iterated stack ([Experiment 002](002-stack-delta.md))
 
@@ -141,40 +187,30 @@ without logging a hash — produced explicit three-state transaction reporting.
 And a delegation layer that turned out to be structurally unavailable for the
 whole run is now a pre-run availability gate rather than a discovery.
 
-### Run 3 — perception parity ([Experiment 003](003-perception-parity.md)) — aborted
+### Run 1 — baseline stack ([Experiment 001](001-budget-boxed.md))
 
-Registered as the first run on the perception-parity (E2) stack and retired at
-the first scheduled monitor pass, about 17 hours in: a defect in our own run
-tooling, outside the published stack, had degraded the run's instructions from
-the first session, so every answer the run could give would have been
-confounded. The environment stack itself — interface and scaffold, at their
-pinned versions — verified clean, and the design carried over unchanged.
-Series results exclude this run; what it changed is operational — two new
-pre-launch gates on the run tooling. An aborted pre-registered run reported
-plainly is the methodology working, and the monitoring protocol caught the
-defect within one pass.
+The v0 stack, three fast-tier arms, complete and public. The arms diverged
+sharply — haiku finished the onboarding chain and five quests on day one and
+exhausted its budget in 17 hours; gpt-4o-mini ran the full week without ever
+calling the registration action; gemini sat stuck pre-registration for six days
+until one legible validation error unblocked it. Chain revert rates ran
+0.58 / 0.97 / 0.94.
 
-### Run 4 — perception parity re-run ([Experiment 004](004-perception-parity-rerun.md))
+**What it taught (the stack, mostly).** Error legibility beat model capability
+as the sharpest differentiator: the same model that ignored opaque chain
+reverts for days corrected one human-readable validation error in a single
+turn. A single missing onboarding step was the cleanest capability
+discriminator, and no arm that missed it ever diagnosed it. Cost structure
+dominated spend — an 84-tool surface re-billed on every call, prompt caching
+never engaged, un-broken poll loops reaching $0.55 a session.
 
-The clean re-run: Run 3's pre-registered design verbatim, on the identical E2
-pins, with a fresh cohort. Running; results are added at close-out.
-
-**What it tests.** Run 2's lesson was that legible errors fix transactions, not
-beliefs, and both of its death spirals traced to perception rather than
-judgment. Run 4 is the series' first completed-run attempt on the E2 stack: an
-environment interface whose world-state reads are lens-backed (live HP,
-projected HP, occupancy, cooldowns), whose confirmed on-chain reverts raise as
-tool errors with the replayed reason, which can express a liquidation at all,
-and which disambiguates the sacrifice≠liquidate confusion both Run 2 arms hit
-— plus a scaffold that opens every session with an injected party status
-brief. Holding the models and the box fixed makes the Run 2 → Run 4 delta an
-environment-change measurement, and Run 4's numbers stand as the E2 baseline.
-
-The run's directional expectations, the six-class liquidate-quest observable,
-and the binding criterion for closing this series are pre-registered on
-[its page](004-perception-parity-rerun.md); cohort identifiers stay withheld
-until close-out. Registered pages go up before results exist, as every run in
-this registry does.
+**What it changed.** The environment interface gained **legible
+pre-transaction validation** (v1.5.1): a blocked game action now fails with a
+factual precondition error before any gas is spent, instead of an opaque
+on-chain revert. The scaffold gained **behavioral controls and cache-aware
+accounting** (v0.2.0): a repetition breaker that ends looping sessions, session
+caps, agent-chosen wake scheduling, and prompt caching engaged in the budget
+math. That is precisely the stack Run 2 then measured.
 
 ## What each run measures
 
@@ -235,8 +271,8 @@ interface versions, so stack changes are themselves measured treatments
 - **Environment interface — [kami-harness](https://github.com/tokedo/kami-harness).**
   MCP tools wrapping every on-chain action — mechanics, not strategy —
   identical across arms, version pinned per run: the 84-tool v1.x surface ran
-  Runs 1 and 2; the current v2 surface is 99 tools with lens-backed world-state
-  reads. This is the layer most of the series' findings land on.
+  Runs 1 and 2; the current surface is 101 tools (v2.1.0) with lens-backed
+  world-state reads. This is the layer most of the series' findings land on.
 - **The world — Kamigotchi**, a persistent, fully on-chain MMORPG with a live
   economy and human players. Its machine-readable specification,
   [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd), is the design

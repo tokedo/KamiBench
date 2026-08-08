@@ -166,8 +166,9 @@ numbering.
   ([001](https://huggingface.co/datasets/KamiBench/experiment-001-budget-boxed),
   [002](https://huggingface.co/datasets/KamiBench/experiment-002-budget-boxed));
   [Run 3](experiments/003-perception-parity.md) was aborted and reported;
-  [Run 4](experiments/004-perception-parity-rerun.md) is running on the
-  perception-parity stack.
+  [Run 4](experiments/004-perception-parity-rerun.md) completed on the
+  perception-parity stack; [Run 5](experiments/005-verification-run.md) —
+  the verification run, with the cost meter in shadow — is in progress.
 
 ## The paper
 
@@ -187,7 +188,7 @@ experiments: results land there as runs complete. Rendered at
 | [`site/`](site/) | The project website — landing page + build-time renders of the paper and the experiment registry (updates on every push). Astro, deployed on Vercel; see [`site/README.md`](site/README.md). |
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Technical Game Design Document — all mechanics and data catalogs extracted from source, the agent-readable spec of the world. |
 | [kami-lens](https://github.com/tokedo/kami-lens) | Perception layer — a headless client keeping a live local mirror of world state, projected through the game's own rules: what an equipped human player sees, on your machine. |
-| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — MCP tools wrapping every on-chain action; version pinned per run. Current v2 surface: 99 tools with lens-backed world-state reads; the 84-tool v1.x surface ran Experiments 001–002. |
+| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — MCP tools wrapping every on-chain action; version pinned per run. Current surface (v2.1.0): 101 tools with lens-backed world-state reads; the 84-tool v1.x surface ran Experiments 001–002. |
 | [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — turns a stateless model API into a persistent actor; model-agnostic by construction. |
 
 ## What this is *not* (yet)

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 700" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="sm-desc">
+  <title id="sm-desc">The shadow meter, Run 5: an agent loop acts and perceives through the reference scaffold, the environment interface, and the world, on a metered host. kami-meter sits to the side and receives one-way dashed observation arrows — provider usage records from the agent loop, on-chain gas from the world, rent from the infrastructure — and emits per-arm statements. Nothing flows from the meter back into the loop: it observes and bills, it never binds.</title>
+  <defs>
+    <marker id="sm-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
+      <path class="af-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#8f8a80"/>
+    </marker>
+  </defs>
+
+  <rect class="af-bg" x="0.5" y="0.5" width="719" height="699" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
+
+  <!-- ============ the run: the acting/perceiving stack (left column) ============ -->
+
+  <!-- Agent loop -->
+  <rect class="af-box" x="32.5" y="32.5" width="299" height="99" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="52" y="62" font-size="16" font-weight="600" fill="#1c1917">Agent loop</text>
+  <text class="af-role" x="52" y="88" font-size="12.5" fill="#6d675f">One arm: the model backend and its</text>
+  <text class="af-role" x="52" y="106" font-size="12.5" fill="#6d675f">workspace memory, acting and</text>
+  <text class="af-role" x="52" y="124" font-size="12.5" fill="#6d675f">perceiving in sessions.</text>
+
+  <line class="af-conn" x1="182" y1="137" x2="182" y2="155" stroke="#8f8a80" marker-start="url(#sm-head)" marker-end="url(#sm-head)"/>
+  <text class="af-conn-label" x="196" y="150" font-size="12" fill="#6d675f">acts · perceives</text>
+
+  <!-- Reference scaffold -->
+  <rect class="af-box" x="32.5" y="160.5" width="299" height="103" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="52" y="190" font-size="16" font-weight="600" fill="#1c1917">Reference scaffold</text>
+  <a href="https://github.com/tokedo/kami-agent"><text class="af-repo" x="52" y="210" font-size="13" fill="#a03518" text-decoration="underline">kami-agent</text></a>
+  <text class="af-role" x="52" y="234" font-size="12.5" fill="#6d675f">Session loop, workspace, wake times.</text>
+  <text class="af-role" x="52" y="252" font-size="12.5" fill="#6d675f">The run's budget envelope lives here.</text>
+
+  <line class="af-conn" x1="182" y1="269" x2="182" y2="287" stroke="#8f8a80" marker-start="url(#sm-head)" marker-end="url(#sm-head)"/>
+  <text class="af-conn-label" x="196" y="282" font-size="12" fill="#6d675f">MCP</text>
+
+  <!-- Environment interface -->
+  <rect class="af-box" x="32.5" y="292.5" width="299" height="103" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="52" y="322" font-size="16" font-weight="600" fill="#1c1917">Environment interface</text>
+  <a href="https://github.com/tokedo/kami-harness"><text class="af-repo" x="52" y="342" font-size="13" fill="#a03518" text-decoration="underline">kami-harness</text></a>
+  <text class="af-role" x="52" y="366" font-size="12.5" fill="#6d675f">MCP tools wrapping every on-chain</text>
+  <text class="af-role" x="52" y="384" font-size="12.5" fill="#6d675f">action — mechanics, not strategy.</text>
+
+  <line class="af-conn" x1="182" y1="401" x2="182" y2="419" stroke="#8f8a80" marker-start="url(#sm-head)" marker-end="url(#sm-head)"/>
+  <text class="af-conn-label" x="196" y="414" font-size="12" fill="#6d675f">transactions · reads</text>
+
+  <!-- The world -->
+  <rect class="af-box" x="32.5" y="424.5" width="299" height="103" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="52" y="454" font-size="16" font-weight="600" fill="#1c1917">The world</text>
+  <text class="af-role" x="52" y="474" font-size="13" fill="#6d675f">Kamigotchi</text>
+  <text class="af-role" x="52" y="498" font-size="12.5" fill="#6d675f">A persistent on-chain economy; every</text>
+  <text class="af-role" x="52" y="516" font-size="12.5" fill="#6d675f">action it takes costs gas.</text>
+
+  <!-- Infrastructure -->
+  <rect class="af-box" x="32.5" y="556.5" width="299" height="63" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="52" y="586" font-size="16" font-weight="600" fill="#1c1917">Infrastructure</text>
+  <text class="af-role" x="52" y="608" font-size="12.5" fill="#6d675f">The host each arm runs on.</text>
+
+  <!-- ============ one-way observation: the run → the meter ============ -->
+
+  <g class="af-conn" fill="none" stroke="#8f8a80" stroke-dasharray="5 4">
+    <path d="M332,82 H348 V250 H432" marker-end="url(#sm-head)"><title>Inference spend is read from provider usage records — one-way, into the meter.</title></path>
+    <path d="M332,476 H362 V288 H432" marker-end="url(#sm-head)"><title>On-chain gas is read from the chain — one-way, into the meter.</title></path>
+    <path d="M332,588 H376 V326 H432" marker-end="url(#sm-head)"><title>Infrastructure rent is read from the host — one-way, into the meter.</title></path>
+  </g>
+  <g font-size="11" text-anchor="end" fill="#6d675f">
+    <text class="af-conn-label" x="430" y="242">usage records</text>
+    <text class="af-conn-label" x="430" y="282">on-chain gas</text>
+    <text class="af-conn-label" x="430" y="320">host rent</text>
+  </g>
+
+  <!-- ============ the meter ============ -->
+
+  <rect class="af-box af-box-var" x="436.5" y="170.5" width="251" height="209" rx="10" fill="#ffffff" stroke="#a03518"/>
+  <text class="af-title" x="456" y="200" font-size="16" font-weight="600" fill="#1c1917">Economic surface</text>
+  <rect class="af-badge-var" x="576" y="204" width="92" height="22" rx="11" fill="#f3ddd5"/>
+  <text class="af-badge-var-text" x="622" y="219" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#a03518">SHADOW</text>
+  <a href="https://github.com/tokedo/kami-meter"><text class="af-repo" x="456" y="220" font-size="13" fill="#a03518" text-decoration="underline">kami-meter</text></a>
+  <text class="af-role" x="456" y="244" font-size="12.5" fill="#6d675f">Independently observes what each</text>
+  <text class="af-role" x="456" y="262" font-size="12.5" fill="#6d675f">arm consumes — usage records,</text>
+  <text class="af-role" x="456" y="280" font-size="12.5" fill="#6d675f">on-chain gas, infrastructure rent</text>
+  <text class="af-role" x="456" y="298" font-size="12.5" fill="#6d675f">— and issues per-arm statements.</text>
+  <rect class="af-badge-var" x="456" y="312" width="212" height="56" rx="9" fill="#f3ddd5"/>
+  <text class="af-badge-var-text" x="562" y="335" font-size="11" font-weight="700" letter-spacing="0.06em" text-anchor="middle" fill="#a03518">OBSERVES AND BILLS</text>
+  <text class="af-badge-var-text" x="562" y="355" font-size="11" font-weight="700" letter-spacing="0.06em" text-anchor="middle" fill="#a03518">NEVER BINDS</text>
+
+  <!-- ============ what the meter emits ============ -->
+
+  <line class="af-conn" x1="562" y1="384" x2="562" y2="438" stroke="#8f8a80" marker-end="url(#sm-head)"/>
+  <rect class="af-box" x="436.5" y="444.5" width="251" height="99" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="456" y="474" font-size="16" font-weight="600" fill="#1c1917">Per-arm statements</text>
+  <text class="af-role" x="456" y="500" font-size="12.5" fill="#6d675f">Inference · gas · rent · earnings,</text>
+  <text class="af-role" x="456" y="518" font-size="12.5" fill="#6d675f">broken out, per arm, over the run.</text>
+
+  <!-- ============ caption ============ -->
+
+  <text class="af-conn-label" x="360" y="654" font-size="12" text-anchor="middle" fill="#6d675f">Every arrow into the meter is one-way: it observes the run and bills it, and it issues statements.</text>
+  <text class="af-conn-label" x="360" y="674" font-size="12" text-anchor="middle" fill="#6d675f">Nothing flows back into the loop — no enforcement, no death rule, nothing the agent can see.</text>
+</svg>
