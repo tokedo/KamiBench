@@ -115,6 +115,7 @@ criterion, reported plainly, is the methodology working.
 The full run report — the narrative, the complete milestone table, the schemas,
 the run manifests, and the provenance — lives on the
 [dataset card](https://huggingface.co/datasets/KamiBench/experiment-004-budget-boxed).
-The version of this page registered before launch — the pre-registered
-expectations and the series-exit criterion, git-timestamped 2026-07-28 — is
-preserved in this repository's history.
+The expectations and the series-exit criterion were pre-registered at
+[Run 3](003-perception-parity.md)'s registration — git-timestamped 2026-07-27,
+before either attempt launched — and carried verbatim; the running-card version
+of this page is preserved in this repository's history.
