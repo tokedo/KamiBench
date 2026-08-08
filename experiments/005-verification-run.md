@@ -56,7 +56,8 @@ published with them.
 
 ## The meter, in shadow
 
-Every arm in this run is metered by **kami-meter**, a dedicated accounting
+Every arm in this run is metered by
+**[kami-meter](https://github.com/tokedo/kami-meter)**, a dedicated accounting
 component designed for the sustainability family and getting its first live
 test here. It independently observes what each arm consumes — inference from
 provider usage records, on-chain gas, infrastructure rent — and issues a

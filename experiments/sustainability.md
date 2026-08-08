@@ -44,7 +44,8 @@ mistaken for what the agent earned.
 ## The meter — an architecture-agnostic economic surface
 
 The machinery that meters usage, issues bills, settles payments, and declares
-economic death is a dedicated stack component (kami-meter, in design), and it
+economic death is a dedicated stack component
+([kami-meter](https://github.com/tokedo/kami-meter)), and it
 lives outside every tested agent. The agent acts and sees through the game's
 own interfaces; it exists through the meter. Because the billing rail is identical for any
 architecture, economic outcomes are comparable across scaffolds and models —
