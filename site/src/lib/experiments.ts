@@ -73,7 +73,7 @@ export interface ExperimentDesign {
   oneliner: string;
   /** Rendered body HTML (H1 and marker blocks stripped). */
   html: string;
-  /** This design's runs, sorted by global registry number. */
+  /** This design's runs, newest global registry number first. */
   runs: ExperimentRun[];
   /** One-sentence status — present only on designs registered ahead of their
    *  protocol, i.e. pre-registration stubs with no runs yet. */
@@ -206,7 +206,9 @@ export function getDesigns(): ExperimentDesign[] {
         dataset: optionalMarkerBlock(src, 'DATASET'),
       };
     })
-    .sort((a, b) => a.number.localeCompare(b.number));
+    // Newest run first — the registry reads front-to-back as current state,
+    // and every design's run list leads with the run under way.
+    .sort((a, b) => b.number.localeCompare(a.number));
 
   const designs = entries
     .filter((e) => !/^\d{3}-/.test(e.slug))
@@ -229,6 +231,7 @@ export function getDesigns(): ExperimentDesign[] {
     })
     // Newest design first — the program's current frontier leads the registry;
     // a design with no runs yet is the newest by definition and tops the list.
+    // runs[0] is the design's newest run (run lists are newest-first above).
     .sort((a, b) =>
       (b.runs[0]?.number ?? '999').localeCompare(a.runs[0]?.number ?? '999')
     );
