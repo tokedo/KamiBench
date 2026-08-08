@@ -950,6 +950,16 @@ td:first-child {
   }
 }
 
+/* the shadow-meter figure (sm-*): the accented "no path back" cue — the one
+   element that must read as a prohibition rather than a connection. */
+.arch-figure .sm-block {
+  stroke: var(--accent);
+}
+
+.arch-figure .sm-block-fill {
+  fill: var(--accent);
+}
+
 /* the inlined balance figure (bf-*): outflow terms reuse the accent tint the
    other figures already carry; inflow terms take a muted sage, picked to read
    as a second shade of the same palette rather than a success green. Color is
