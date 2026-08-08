@@ -4,9 +4,6 @@
     <marker id="sm-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
       <path class="af-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#8f8a80"/>
     </marker>
-    <marker id="sm-head-block" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
-      <path class="sm-block-fill" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#a03518"/>
-    </marker>
   </defs>
 
   <rect class="af-bg" x="0.5" y="0.5" width="719" height="699" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
@@ -81,16 +78,6 @@
   <rect class="af-badge-var" x="456" y="300" width="212" height="56" rx="9" fill="#f3ddd5"/>
   <text class="af-badge-var-text" x="562" y="323" font-size="11" font-weight="700" letter-spacing="0.06em" text-anchor="middle" fill="#a03518">OBSERVES AND BILLS</text>
   <text class="af-badge-var-text" x="562" y="343" font-size="11" font-weight="700" letter-spacing="0.06em" text-anchor="middle" fill="#a03518">NEVER BINDS</text>
-
-  <!-- the one-way cue: the return path does not exist -->
-  <g>
-    <line class="sm-block" x1="432" y1="362" x2="394" y2="362" stroke="#a03518" stroke-dasharray="4 4" marker-end="url(#sm-head-block)"/>
-    <g class="sm-block" stroke="#a03518" stroke-width="2">
-      <line x1="407" y1="356" x2="419" y2="368"/>
-      <line x1="419" y1="356" x2="407" y2="368"/>
-    </g>
-    <text class="af-repo" x="413" y="346" font-size="11" font-weight="600" text-anchor="middle" fill="#a03518">no path back</text>
-  </g>
 
   <!-- ============ what the meter emits ============ -->
 
