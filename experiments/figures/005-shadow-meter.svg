@@ -68,16 +68,17 @@
   <!-- ============ the meter ============ -->
 
   <rect class="af-box af-box-var" x="436.5" y="170.5" width="251" height="209" rx="10" fill="#ffffff" stroke="#a03518"/>
-  <a href="https://github.com/tokedo/kami-meter"><text class="af-repo" x="456" y="200" font-size="16" font-weight="600" fill="#a03518" text-decoration="underline">kami-meter</text></a>
-  <rect class="af-badge-var" x="576" y="184" width="92" height="22" rx="11" fill="#f3ddd5"/>
-  <text class="af-badge-var-text" x="622" y="199" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#a03518">SHADOW</text>
-  <text class="af-role" x="456" y="228" font-size="12.5" fill="#6d675f">Independently observes what each</text>
-  <text class="af-role" x="456" y="246" font-size="12.5" fill="#6d675f">arm consumes — usage records,</text>
-  <text class="af-role" x="456" y="264" font-size="12.5" fill="#6d675f">on-chain gas, infrastructure rent</text>
-  <text class="af-role" x="456" y="282" font-size="12.5" fill="#6d675f">— and issues per-arm statements.</text>
-  <rect class="af-badge-var" x="456" y="300" width="212" height="56" rx="9" fill="#f3ddd5"/>
-  <text class="af-badge-var-text" x="562" y="323" font-size="11" font-weight="700" letter-spacing="0.06em" text-anchor="middle" fill="#a03518">OBSERVES AND BILLS</text>
-  <text class="af-badge-var-text" x="562" y="343" font-size="11" font-weight="700" letter-spacing="0.06em" text-anchor="middle" fill="#a03518">NEVER BINDS</text>
+  <text class="af-title" x="456" y="200" font-size="16" font-weight="600" fill="#1c1917">Economic surface</text>
+  <rect class="af-badge-var" x="576" y="204" width="92" height="22" rx="11" fill="#f3ddd5"/>
+  <text class="af-badge-var-text" x="622" y="219" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle" fill="#a03518">SHADOW</text>
+  <a href="https://github.com/tokedo/kami-meter"><text class="af-repo" x="456" y="220" font-size="13" fill="#a03518" text-decoration="underline">kami-meter</text></a>
+  <text class="af-role" x="456" y="244" font-size="12.5" fill="#6d675f">Independently observes what each</text>
+  <text class="af-role" x="456" y="262" font-size="12.5" fill="#6d675f">arm consumes — usage records,</text>
+  <text class="af-role" x="456" y="280" font-size="12.5" fill="#6d675f">on-chain gas, infrastructure rent</text>
+  <text class="af-role" x="456" y="298" font-size="12.5" fill="#6d675f">— and issues per-arm statements.</text>
+  <rect class="af-badge-var" x="456" y="312" width="212" height="56" rx="9" fill="#f3ddd5"/>
+  <text class="af-badge-var-text" x="562" y="335" font-size="11" font-weight="700" letter-spacing="0.06em" text-anchor="middle" fill="#a03518">OBSERVES AND BILLS</text>
+  <text class="af-badge-var-text" x="562" y="355" font-size="11" font-weight="700" letter-spacing="0.06em" text-anchor="middle" fill="#a03518">NEVER BINDS</text>
 
   <!-- ============ what the meter emits ============ -->
 
