@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/paper",
+      "destination": "/blog/why-kamibench-for-continual-learning",
+      "permanent": true
+    }
+  ]
+}

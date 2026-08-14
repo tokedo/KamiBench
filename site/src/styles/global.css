@@ -997,3 +997,187 @@ td:first-child {
   color: var(--accent);
   text-decoration-color: currentColor;
 }
+
+/* ---------- blog ---------- */
+
+.post {
+  padding-block: 3rem 1rem;
+  max-width: 47rem;
+}
+
+.post-header .label {
+  margin-bottom: 0.2rem;
+}
+
+.post h1 {
+  font-size: clamp(1.7rem, 4.5vw, 2.25rem);
+  line-height: 1.2;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.post-body h2 {
+  font-size: 1.4rem;
+  margin: 2.5rem 0 1rem;
+  scroll-margin-top: 1.5rem;
+}
+
+.post-body li {
+  margin-block: 0.3rem;
+}
+
+/* links in post bodies read as links at a glance: accent color, not inherit */
+.post-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.post-body a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.post .read-more {
+  margin-top: 2.5rem;
+}
+
+/* the evidence-tier chip sits inline mid-sentence in post bodies */
+.post-body .chip,
+.hero-tagline .chip {
+  vertical-align: 0.1em;
+}
+
+/* landing bullets (the README-derived idea/world lists) */
+.section-lead ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.section-lead li {
+  margin-block: 0.55rem;
+}
+
+/* ---------- stack schematic (landing) ---------- */
+
+.stack-figure {
+  margin: 1.75rem 0 0;
+  overflow-x: auto;
+}
+
+.stack-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 30rem;
+  font-family: var(--font-sans);
+}
+
+.stack-figure .sf-box {
+  fill: var(--bg-raise);
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.stack-figure .sf-box-agent {
+  stroke: var(--accent);
+}
+
+.stack-figure .sf-ghost {
+  fill: var(--bg-raise);
+  stroke: var(--line);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.stack-figure .sf-title {
+  fill: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.stack-figure .sf-sub {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.stack-figure .sf-link {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.stack-figure .sf-tap {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.25;
+}
+
+.stack-figure .sf-out {
+  fill: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stack-figure .sf-arrow {
+  fill: var(--muted);
+}
+
+/* the metric note under the landing stack schematic */
+.stack-metric {
+  margin-top: 1.5rem;
+}
+
+/* GitHub mark in the nav: icon-only link, aligned to the text row */
+.nav-github svg {
+  display: block;
+  transform: translateY(2px);
+}
+
+.nav-github:hover {
+  color: var(--accent);
+}
+
+/* narrow screens: the nav shares one row with the wordmark — tighten it */
+@media (max-width: 430px) {
+  .site-header .container {
+    gap: 0.75rem;
+  }
+
+  .site-nav {
+    gap: 0.85rem;
+    font-size: 0.86rem;
+  }
+}
+
+/* the Kamigotchi environment figure gets a tinted ground so it stands out
+   from the page background (its inner world panel stays page-colored) */
+.arch-figure .kg-bg {
+  fill: #f2f0ec;
+}
+
+@media (prefers-color-scheme: dark) {
+  .arch-figure .kg-bg {
+    fill: #1f1b18;
+  }
+}
+
+/* raster figures in posts (game screenshots): framed, rounded, responsive */
+.post-shot {
+  margin: 1.75rem 0;
+}
+
+.post-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+/* highlighted key statement in a post */
+.post-highlight {
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 0.85rem 1.1rem;
+  margin: 1.5rem 0;
+}

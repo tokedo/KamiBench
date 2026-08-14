@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 660" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="kg-env-desc">
+  <title id="kg-env-desc">Kamigotchi as a persistent evaluation environment. Top: publicly inspectable rules and execution history — an open-source specification (readable rules, mechanics, data catalogs) and an on-chain execution record (public, immutable history of actions, state transitions, rule changes). Left: participants — humans and agents — act through an identical interface, and an external economy of transaction fees, asset purchases, compute costs, and potential gains or losses connects to the world. Inside the world: harvesting earns MUSU, the in-game currency, drains health, and carries liquidation risk from other players; MUSU is spent in-world on items and efficiency or converted out through the in-game pool to ONYX, which converts to ETH back in the external economy. And a lot more under the surface: quests, leveling, skill trees (74 skills), crafting, equipment and items with stat effects, item pools for in-game swaps, and kami–node affinities that change yields.</title>
+  <defs>
+    <marker id="kg-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
+      <path class="af-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#8f8a80"/>
+    </marker>
+  </defs>
+
+  <rect class="af-bg kg-bg" x="0.5" y="0.5" width="939" height="659" rx="14" fill="#f2f0ec" stroke="#e5e1da"/>
+
+  <!-- top band: what is publicly inspectable -->
+  <rect class="af-bg" x="300.5" y="24.5" width="615" height="150" rx="10" fill="#faf9f7" stroke="#d9d4cc"/>
+  <text class="af-title" x="320" y="54" font-size="15" font-weight="600" fill="#1c1917">Publicly inspectable rules and execution history</text>
+  <!-- open-source spec: document glyph -->
+  <g class="af-conn" fill="none" stroke="#8f8a80" stroke-width="1.5">
+    <path d="M322,78 h30 v40 h-30 z"/>
+    <path d="M328,88 h18 M328,96 h18 M328,104 h12"/>
+  </g>
+  <text class="af-role" x="322" y="140" font-size="12.5" fill="#6d675f"><tspan font-weight="600">Open-source specification:</tspan></text>
+  <text class="af-role" x="322" y="157" font-size="12.5" fill="#6d675f">readable rules, mechanics, data catalogs</text>
+  <!-- on-chain record: linked blocks glyph -->
+  <g class="af-conn" fill="none" stroke="#8f8a80" stroke-width="1.5">
+    <rect x="620" y="86" width="24" height="24"/>
+    <rect x="662" y="86" width="24" height="24"/>
+    <rect x="704" y="86" width="24" height="24"/>
+    <path d="M644,98 h12" marker-end="url(#kg-head)"/>
+    <path d="M686,98 h12" marker-end="url(#kg-head)"/>
+  </g>
+  <text class="af-role" x="620" y="140" font-size="12.5" fill="#6d675f"><tspan font-weight="600">On-chain execution record:</tspan></text>
+  <text class="af-role" x="620" y="157" font-size="12.5" fill="#6d675f">public, immutable history of actions, rule changes</text>
+
+  <!-- participants -->
+  <rect class="af-bg" x="24.5" y="206.5" width="170" height="140" rx="10" fill="#faf9f7" stroke="#d9d4cc"/>
+  <text class="af-title" x="44" y="236" font-size="15" font-weight="600" fill="#1c1917">Participants</text>
+  <g class="af-conn" fill="none" stroke="#8f8a80" stroke-width="1.5">
+    <circle cx="60" cy="262" r="7"/>
+    <path d="M48,286 a12 12 0 0 1 24 0"/>
+  </g>
+  <text class="af-role" x="84" y="278" font-size="13" fill="#6d675f">Humans</text>
+  <g class="af-conn" fill="none" stroke="#8f8a80" stroke-width="1.5">
+    <rect x="48" y="302" width="26" height="18" rx="4"/>
+    <circle cx="56" cy="311" r="2"/>
+    <circle cx="66" cy="311" r="2"/>
+    <path d="M61,302 v-6"/>
+  </g>
+  <text class="af-role" x="84" y="316" font-size="13" fill="#6d675f">Agents</text>
+  <line class="af-conn" x1="201" y1="276" x2="294" y2="276" stroke="#8f8a80" marker-start="url(#kg-head)" marker-end="url(#kg-head)"/>
+  <text class="af-conn-label" x="247" y="262" font-size="11.5" text-anchor="middle" fill="#6d675f">identical interface</text>
+
+  <!-- external economy -->
+  <rect class="af-bg" x="24.5" y="386.5" width="230" height="150" rx="10" fill="#faf9f7" stroke="#d9d4cc"/>
+  <text class="af-title" x="44" y="416" font-size="15" font-weight="600" fill="#1c1917">External economy</text>
+  <text class="af-role" x="44" y="442" font-size="12.5" fill="#6d675f">· transaction fees, asset purchases</text>
+  <text class="af-role" x="44" y="462" font-size="12.5" fill="#6d675f">· compute costs (for agents)</text>
+  <text class="af-role" x="44" y="482" font-size="12.5" fill="#6d675f">· potential gains or losses</text>
+  <line class="af-conn" x1="261" y1="440" x2="294" y2="440" stroke="#8f8a80" marker-end="url(#kg-head)"/>
+
+  <!-- inside the world -->
+  <rect class="af-bg" x="300.5" y="206.5" width="615" height="380" rx="10" fill="#faf9f7" stroke="#d9d4cc"/>
+  <text class="af-title" x="320" y="236" font-size="15" font-weight="600" fill="#1c1917">Inside the world</text>
+
+  <!-- harvest cycle -->
+  <text class="af-role" x="470" y="282" font-size="13" text-anchor="middle" fill="#6d675f"><tspan font-weight="600">Harvesting</tspan></text>
+  <text class="af-role" x="470" y="299" font-size="12" text-anchor="middle" fill="#6d675f">in-game currency</text>
+  <text class="af-role" x="556" y="408" font-size="13" text-anchor="middle" fill="#6d675f"><tspan font-weight="600">Drains health</tspan></text>
+  <text class="af-role" x="392" y="408" font-size="13" text-anchor="middle" fill="#6d675f"><tspan font-weight="600">Liquidation risk</tspan></text>
+  <text class="af-role" x="392" y="425" font-size="12" text-anchor="middle" fill="#6d675f">by other players</text>
+  <g class="af-conn" fill="none" stroke="#8f8a80" stroke-width="1.25">
+    <path d="M512,318 Q538,338 545,372" marker-end="url(#kg-head)"/>
+    <path d="M505,438 Q472,456 444,440" marker-end="url(#kg-head)"/>
+    <path d="M387,384 Q391,338 421,314" marker-end="url(#kg-head)"/>
+  </g>
+
+  <!-- MUSU and where it goes -->
+  <line class="af-conn" x1="540" y1="288" x2="694" y2="288" stroke="#8f8a80" marker-end="url(#kg-head)"/>
+  <rect class="af-box" x="700.5" y="266.5" width="90" height="44" rx="8" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="745" y="293" font-size="14" font-weight="700" text-anchor="middle" fill="#1c1917">MUSU</text>
+
+  <path class="af-conn" d="M722,311 V462" fill="none" stroke="#8f8a80" marker-end="url(#kg-head)"/>
+  <text class="af-role" x="712" y="380" font-size="12" text-anchor="end" fill="#6d675f">convert out</text>
+  <text class="af-role" x="712" y="397" font-size="12" text-anchor="end" fill="#6d675f">(in-game pool)</text>
+  <path class="af-conn" d="M770,311 V360 H845 V462" fill="none" stroke="#8f8a80" marker-end="url(#kg-head)"/>
+  <text class="af-role" x="780" y="342" font-size="12" fill="#6d675f">spend in-world</text>
+
+  <rect class="af-box" x="677.5" y="466.5" width="90" height="44" rx="8" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="722" y="493" font-size="14" font-weight="700" text-anchor="middle" fill="#1c1917">ONYX</text>
+  <rect class="af-box" x="795.5" y="466.5" width="100" height="56" rx="8" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-role" x="845" y="490" font-size="13" text-anchor="middle" fill="#6d675f"><tspan font-weight="600">Items,</tspan></text>
+  <text class="af-role" x="845" y="507" font-size="13" text-anchor="middle" fill="#6d675f"><tspan font-weight="600">efficiency</tspan></text>
+
+  <text class="af-role" x="320" y="486" font-size="12.5" fill="#6d675f"><tspan font-weight="600">And a lot more under the surface:</tspan></text>
+  <text class="af-role" x="320" y="508" font-size="12.5" fill="#6d675f">· quests, leveling, skill trees (74 skills)</text>
+  <text class="af-role" x="320" y="528" font-size="12.5" fill="#6d675f">· crafting; equipment and items with stat effects</text>
+  <text class="af-role" x="320" y="548" font-size="12.5" fill="#6d675f">· item pools for in-game swaps</text>
+  <text class="af-role" x="320" y="568" font-size="12.5" fill="#6d675f">· kami–node affinities that change yields</text>
+
+  <!-- ONYX back to the external economy through ETH -->
+  <path class="af-conn" d="M722,511 V622 H140 V542" fill="none" stroke="#8f8a80" marker-end="url(#kg-head)"/>
+  <text class="af-conn-label" x="430" y="614" font-size="12" text-anchor="middle" fill="#6d675f">ONYX–ETH conversion</text>
+</svg>

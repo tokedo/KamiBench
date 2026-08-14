@@ -8,13 +8,14 @@ import readmeSource from '../../../README.md?raw';
 const GITHUB_BLOB = 'https://github.com/tokedo/KamiBench/blob/main';
 
 /** README links are repo-relative (correct for GitHub's render); on the site they
- *  must point at the corresponding pages — experiment docs and the paper have site
+ *  must point at the corresponding pages — experiment docs and blog posts have site
  *  routes, everything else falls back to GitHub. */
 function rewriteRepoLinks(html: string): string {
   return html
     .replace(/href="experiments\/([^"]+)\.md"/g, 'href="/experiments/$1"')
     .replace(/href="experiments\/?"/g, 'href="/experiments"')
-    .replace(/href="paper\/paper\.md"/g, 'href="/paper"')
+    .replace(/href="blog\/\d{4}-\d{2}-\d{2}-([A-Za-z0-9-]+)\.md"/g, 'href="/blog/$1"')
+    .replace(/href="blog\/?"/g, 'href="/blog"')
     .replace(/href="STACK\.md"/g, 'href="/stack"')
     .replace(/href="((?:paper|research|site)\/[^"]+)"/g, `href="${GITHUB_BLOB}/$1"`);
 }
