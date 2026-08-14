@@ -1126,3 +1126,25 @@ td:first-child {
 .stack-metric {
   margin-top: 1.5rem;
 }
+
+/* GitHub mark in the nav: icon-only link, aligned to the text row */
+.nav-github svg {
+  display: block;
+  transform: translateY(2px);
+}
+
+.nav-github:hover {
+  color: var(--accent);
+}
+
+/* narrow screens: the nav shares one row with the wordmark — tighten it */
+@media (max-width: 430px) {
+  .site-header .container {
+    gap: 0.75rem;
+  }
+
+  .site-nav {
+    gap: 0.85rem;
+    font-size: 0.86rem;
+  }
+}
