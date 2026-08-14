@@ -1172,3 +1172,12 @@ td:first-child {
   border: 1px solid var(--line);
   border-radius: 10px;
 }
+
+/* highlighted key statement in a post */
+.post-highlight {
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 0.85rem 1.1rem;
+  margin: 1.5rem 0;
+}

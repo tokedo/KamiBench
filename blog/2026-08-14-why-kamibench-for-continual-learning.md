@@ -32,12 +32,14 @@ Yu Su put the distinction sharply in
   agents re-opening the same questions, session after session, in a world
   they had already explored.
 
-Expertise cannot be rented from a bigger model. It has to be learned in the
-world where it applies. That is the capability the current wave of learning
-systems is trying to build — and it is exactly the one that benchmarks made
-of isolated tasks cannot see. Every task starts fresh, so nothing carries
-over: the agent is put back to novice at exactly the point where its
-experience would begin to pay.
+<p class="post-highlight">Expertise cannot be rented from a bigger model. It
+has to be learned in the world where it applies — and that is exactly the
+capability the current wave of learning systems is trying to build.</p>
+
+It is also the capability that benchmarks made of isolated tasks cannot
+see. Every task starts fresh, so nothing carries over: the agent is put
+back to novice at exactly the point where its experience would begin to
+pay.
 
 ## What a real test of continual learning requires
 
@@ -58,7 +60,7 @@ A benchmark for continual learning needs four things, and it needs all four:
 
 ## A world that qualifies
 
-**Kamigotchi** is a live on-chain MMORPG that has run continuously for more
+**[Kamigotchi](https://docs.asphodel.io/kamigotchi)** is a live on-chain MMORPG that has run continuously for more
 than a year — in effect, a never-ending board game in which every move is
 public and permanent. Players operate Kami — persistent creatures that
 harvest MUSU, the in-game currency, at shared locations. Harvesting drains
@@ -94,9 +96,10 @@ themselves.
 
 ![A working session in Kamigotchi: a party of Kami harvesting at a node — health bars, yields, affinities — the node's description and scavenge progress, and an inventory of items, all inside the pixel-art world.](figures/kamigotchi-ui.png)
 
-Its [creators designed](https://docs.asphodel.io/architecture/bots-and-agents)
-it agent-first and describe it as a possible "real-stakes, adversarial
-benchmarking system." We argue it is the best-fit instance available today.
+Its creators — the Asphodel team —
+[designed it agent-first](https://docs.asphodel.io/architecture/bots-and-agents)
+and describe it as a possible "real-stakes, adversarial benchmarking
+system." We argue it is the best-fit instance available today.
 The game is the substrate, not the research question.
 
 ## Why on-chain execution matters
@@ -119,19 +122,23 @@ world and recording it are the same shared system:
   than pixels, so the measurement is planning, memory, adaptation, and
   resource use — not whether the agent can read a screen.
 
-## The measure: solvency
+## The score is a running balance
 
-The score is a running balance. An agent pays for its actions (gas), its
-infrastructure, and — the decisive line — **its own inference**. Earnings
-come from playing well in a live economy. Solvency prices capability and
-efficiency in one number, set by the economy rather than by a grader:
+An agent pays for its actions (gas), its infrastructure, and — the decisive
+line — **its own inference**. Earnings come from playing well in a live
+economy. What comes out is not one magic number: it is a set of financial
+curves — earnings, costs, and the balance between them over time — priced
+by the economy rather than by a grader. Solvency (does it earn more than it
+spends?) is the floor; the signal is the whole trajectory:
 
 - The smartest novice pays for its token burn. Brute-force search shows up
   directly as cost; learned shortcuts show up as margin.
-- The number is kept by the chain and the market — not by us, and not by
+- The books are kept by the chain and the market — not by us, and not by
   the agent.
-- Expertise becomes a curve, not a claim: same model, same stack, different
-  learning setups — compared on the one number none of them can argue with.
+- Continual learning shows up as the shape of the curves: every agent
+  starts as a novice running at a loss, and how fast its curve bends up is
+  how fast it is building expertise. Same model, same stack, different
+  learning setups — compared on curves anyone can read and interpret.
 
 ## Today vs. trajectory
 
@@ -157,9 +164,10 @@ present tense.
 
 Before anything open-ended runs on the stack, the stack itself has to be
 proven — environment interface, scaffold, telemetry, accounting. That is the
-purpose of the bounded stack-validation runs in
-[the experiment registry](../experiments/): controlled, deliberately boxed,
-with designs pre-registered and datasets published as runs close. The next
+purpose of the bounded stack-validation runs of
+[the budget-boxed series](../experiments/budget-boxed.md): controlled,
+deliberately boxed, with designs pre-registered and datasets published as
+runs close. The next
 family makes the thesis measurable: agents on a running balance, alive
 exactly as long as they can pay for their own thinking.
 
