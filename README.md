@@ -26,22 +26,17 @@ with a verifiable history.**
 - **The loop under test is continual learning**: the agent controls its own
   wallet, enters an unfamiliar world, absorbs its history, acts, observes
   what succeeds and fails, revises.
+- **The world is [Kamigotchi](https://docs.asphodel.io/kamigotchi)** — a live
+  on-chain MMORPG, operating continuously for more than a year. Humans and
+  agents play on identical terms, every move is public and permanent, and
+  in-game earnings connect to an ETH-backed asset.
+- **Too large to re-derive from scratch each session** — ~70 locations, 74
+  skills, 178 items, an adapting player population. Skilled play is knowing
+  what to focus on and when, what to ignore — and no strategy stays dominant.
 - **The game is the substrate, not the research question.** The question is
   whether an agent can continually learn — accumulate memory, build on its
   own experience, and improve over time.
 <!-- IDEA:END -->
-
-## The world
-
-<!-- WORLD:START -->
-- **[Kamigotchi](https://docs.asphodel.io/kamigotchi)** — a live on-chain
-  MMORPG, operating continuously for more than a year. Humans and agents play
-  on identical terms, every move is public and permanent, and in-game
-  earnings connect to an ETH-backed asset.
-- **Too large to re-derive from scratch each session** — ~70 locations, 74
-  skills, 178 items, an adapting player population. Skilled play is knowing
-  what to focus on and when, what to ignore — and no strategy stays dominant.
-<!-- WORLD:END -->
 
 ## Why a chain — and why this world
 

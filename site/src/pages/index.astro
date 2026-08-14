@@ -14,7 +14,6 @@ const github = 'https://github.com/tokedo/KamiBench';
 // prose lives in the blog posts (blog-first restructure, 2026-08-14).
 
 const ideaHtml = readmeSection('IDEA');
-const worldHtml = readmeSection('WORLD');
 const statusHtml = readmeSection('STATUS', { inline: true });
 const why = readmeWhy(); // cards only — the WHY block carries no lead paragraph
 const designs = getDesigns();
@@ -53,13 +52,6 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
     <h2 id="idea">The idea</h2>
     <div class="section-lead">
       <Fragment set:html={ideaHtml} />
-    </div>
-  </section>
-
-  <section class="section container" aria-labelledby="world">
-    <h2 id="world">The world</h2>
-    <div class="section-lead">
-      <Fragment set:html={worldHtml} />
     </div>
   </section>
 
