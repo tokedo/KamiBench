@@ -1147,3 +1147,15 @@ td:first-child {
     font-size: 0.86rem;
   }
 }
+
+/* the Kamigotchi environment figure gets a tinted ground so it stands out
+   from the page background (its inner world panel stays page-colored) */
+.arch-figure .kg-bg {
+  fill: #f2f0ec;
+}
+
+@media (prefers-color-scheme: dark) {
+  .arch-figure .kg-bg {
+    fill: #1f1b18;
+  }
+}

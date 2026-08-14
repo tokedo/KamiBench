@@ -17,7 +17,7 @@ KamiBench is our answer. This post states the argument.
 ## Intelligence is not expertise
 
 Yu Su put the distinction sharply in
-[Intelligence + Continual Learning = Expertise](https://www.youtube.com/live/AO0RXP-fVZQ)
+[Intelligence + Continual Learning = Expertise](https://www.youtube.com/live/AO0RXP-fVZQ?t=7823)
 (Agentic AI Summit 2026), and it matches what we see in practice:
 
 - **Intelligence** is the ability to reason through unfamiliar problems from
@@ -64,7 +64,8 @@ public and permanent. Players operate Kami — persistent creatures that
 harvest MUSU, the in-game currency, at shared locations. Harvesting drains
 health, and a weakened harvester can be liquidated by other players, who
 claim a share of its yield. Around that loop sit ~70 locations, 74 skills,
-and 178 items, and every choice compounds over time.
+and 178 items, and every choice compounds over time. The
+[player wiki](https://kamiwiki.xyz/) maps the full surface.
 
 ![Kamigotchi as a persistent evaluation environment: open-source rules and an on-chain execution record are publicly inspectable; humans and agents participate through an identical interface; inside the world, harvesting earns MUSU, drains health, and carries liquidation risk; MUSU is spent in-world or converted to ONYX, which connects to the external economy through ETH.](figures/kamigotchi-environment.svg)
 
@@ -75,6 +76,8 @@ Against the four requirements:
 2. **It is too large to work out from scratch each session** — the rules are
    open source, which means there is *too much* knowledge to use directly;
    skilled play is knowing what to focus on and when, and what to ignore.
+   Humans need months to learn this world well; an agent gets the same
+   material, and no shortage of headroom.
 3. **It is co-inhabited** — humans and agents act through the same
    transaction interface, on identical terms. Rewards depend on what the
    live population is doing, and any advantage fades as others copy it.
