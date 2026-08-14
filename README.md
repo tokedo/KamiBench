@@ -20,7 +20,7 @@ with a verifiable history.**
 ## The idea
 
 <!-- IDEA:START -->
-- **KamiBench is a research proposal** to evaluate agents in a persistent
+- **KamiBench is a research program** to evaluate agents in a persistent
   on-chain world — no resets, a public permanent history, and stakes with
   real external value.
 - **The loop under test is continual learning**: the agent controls its own
