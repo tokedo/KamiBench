@@ -85,6 +85,10 @@ Against the four requirements:
    external, ETH-backed value, and the chain records and settles every
    outcome.
 
+This is what one corner of it looks like to a human player:
+
+![A working session in Kamigotchi: a party of Kami harvesting at a node — health bars, yields, affinities — the node's description and scavenge progress, and an inventory of items, all inside the pixel-art world.](figures/kamigotchi-ui.png)
+
 Its [creators designed](https://docs.asphodel.io/architecture/bots-and-agents)
 it agent-first and describe it as a possible "real-stakes, adversarial
 benchmarking system." We argue it is the best-fit instance available today.

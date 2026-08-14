@@ -1159,3 +1159,16 @@ td:first-child {
     fill: #1f1b18;
   }
 }
+
+/* raster figures in posts (game screenshots): framed, rounded, responsive */
+.post-shot {
+  margin: 1.75rem 0;
+}
+
+.post-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 660" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="kg-env-desc">
-  <title id="kg-env-desc">Kamigotchi as a persistent evaluation environment. Top: publicly inspectable rules and execution history — an open-source specification (readable rules, mechanics, data catalogs) and an on-chain execution record (public, immutable history of actions, state transitions, rule changes). Left: participants — humans and agents — act through an identical interface, and an external economy of transaction fees, asset purchases, compute costs, and potential gains or losses connects to the world. Inside the world: harvesting earns MUSU, the in-game currency, drains health, and carries liquidation risk from other players; MUSU is spent in-world on items and efficiency or converted out through the in-game pool to ONYX, which converts to ETH back in the external economy. And a lot more surface: quests, leveling, skill trees (74 skills), crafting, equipment with real stat effects, item pools for in-game swaps, and kami–node affinities that change yields.</title>
+  <title id="kg-env-desc">Kamigotchi as a persistent evaluation environment. Top: publicly inspectable rules and execution history — an open-source specification (readable rules, mechanics, data catalogs) and an on-chain execution record (public, immutable history of actions, state transitions, rule changes). Left: participants — humans and agents — act through an identical interface, and an external economy of transaction fees, asset purchases, compute costs, and potential gains or losses connects to the world. Inside the world: harvesting earns MUSU, the in-game currency, drains health, and carries liquidation risk from other players; MUSU is spent in-world on items and efficiency or converted out through the in-game pool to ONYX, which converts to ETH back in the external economy. And a lot more under the surface: quests, leveling, skill trees (74 skills), crafting, equipment and items with stat effects, item pools for in-game swaps, and kami–node affinities that change yields.</title>
   <defs>
     <marker id="kg-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
       <path class="af-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#8f8a80"/>
@@ -9,7 +9,7 @@
   <rect class="af-bg kg-bg" x="0.5" y="0.5" width="939" height="659" rx="14" fill="#f2f0ec" stroke="#e5e1da"/>
 
   <!-- top band: what is publicly inspectable -->
-  <rect class="af-box" x="300.5" y="24.5" width="615" height="150" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <rect class="af-bg" x="300.5" y="24.5" width="615" height="150" rx="10" fill="#faf9f7" stroke="#d9d4cc"/>
   <text class="af-title" x="320" y="54" font-size="15" font-weight="600" fill="#1c1917">Publicly inspectable rules and execution history</text>
   <!-- open-source spec: document glyph -->
   <g class="af-conn" fill="none" stroke="#8f8a80" stroke-width="1.5">
@@ -30,7 +30,7 @@
   <text class="af-role" x="620" y="157" font-size="12.5" fill="#6d675f">public, immutable history of actions, rule changes</text>
 
   <!-- participants -->
-  <rect class="af-box" x="24.5" y="206.5" width="170" height="140" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <rect class="af-bg" x="24.5" y="206.5" width="170" height="140" rx="10" fill="#faf9f7" stroke="#d9d4cc"/>
   <text class="af-title" x="44" y="236" font-size="15" font-weight="600" fill="#1c1917">Participants</text>
   <g class="af-conn" fill="none" stroke="#8f8a80" stroke-width="1.5">
     <circle cx="60" cy="262" r="7"/>
@@ -48,7 +48,7 @@
   <text class="af-conn-label" x="247" y="262" font-size="11.5" text-anchor="middle" fill="#6d675f">identical interface</text>
 
   <!-- external economy -->
-  <rect class="af-box" x="24.5" y="386.5" width="230" height="150" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <rect class="af-bg" x="24.5" y="386.5" width="230" height="150" rx="10" fill="#faf9f7" stroke="#d9d4cc"/>
   <text class="af-title" x="44" y="416" font-size="15" font-weight="600" fill="#1c1917">External economy</text>
   <text class="af-role" x="44" y="442" font-size="12.5" fill="#6d675f">· transaction fees, asset purchases</text>
   <text class="af-role" x="44" y="462" font-size="12.5" fill="#6d675f">· compute costs (for agents)</text>
@@ -88,9 +88,9 @@
   <text class="af-role" x="845" y="490" font-size="13" text-anchor="middle" fill="#6d675f"><tspan font-weight="600">Items,</tspan></text>
   <text class="af-role" x="845" y="507" font-size="13" text-anchor="middle" fill="#6d675f"><tspan font-weight="600">efficiency</tspan></text>
 
-  <text class="af-role" x="320" y="486" font-size="12.5" fill="#6d675f"><tspan font-weight="600">And a lot more surface:</tspan></text>
+  <text class="af-role" x="320" y="486" font-size="12.5" fill="#6d675f"><tspan font-weight="600">And a lot more under the surface:</tspan></text>
   <text class="af-role" x="320" y="508" font-size="12.5" fill="#6d675f">· quests, leveling, skill trees (74 skills)</text>
-  <text class="af-role" x="320" y="528" font-size="12.5" fill="#6d675f">· crafting; equipment with real stat effects</text>
+  <text class="af-role" x="320" y="528" font-size="12.5" fill="#6d675f">· crafting; equipment and items with stat effects</text>
   <text class="af-role" x="320" y="548" font-size="12.5" fill="#6d675f">· item pools for in-game swaps</text>
   <text class="af-role" x="320" y="568" font-size="12.5" fill="#6d675f">· kami–node affinities that change yields</text>
 

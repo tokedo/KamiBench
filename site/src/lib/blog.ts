@@ -27,6 +27,14 @@ const figures = import.meta.glob('../../../blog/figures/*.svg', {
   eager: true,
 }) as Record<string, string>;
 
+// Raster figures (screenshots) are emitted as hashed assets and referenced by
+// URL — unlike SVGs, they don't need theme restyling, so no inlining.
+const images = import.meta.glob('../../../blog/figures/*.{png,jpg,webp}', {
+  query: '?url',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
 export interface BlogPost {
   /** Site path segment, from the filename with the date prefix stripped. */
   slug: string;
@@ -101,6 +109,19 @@ function renderBody(src: string): string {
       }
       const label = alt ? ` aria-label="${alt}"` : '';
       return `<figure class="arch-figure"${label}>${svg}</figure>`;
+    }
+  );
+
+  // Raster figures → hashed asset URLs, framed like a screenshot.
+  html = html.replace(
+    /(?:<p>)?<img src="figures\/([^"]+\.(?:png|jpg|webp))"(?:\s+alt="([^"]*)")?[^>]*>(?:<\/p>)?/g,
+    (m, name: string, alt: string | undefined) => {
+      const url = images[`../../../blog/figures/${name}`];
+      if (!url) {
+        console.warn(`[blog] image not found: figures/${name}`);
+        return m;
+      }
+      return `<figure class="post-shot"><img src="${url}" alt="${alt ?? ''}" loading="lazy" decoding="async"></figure>`;
     }
   );
 
