@@ -1121,3 +1121,8 @@ td:first-child {
 .stack-figure .sf-arrow {
   fill: var(--muted);
 }
+
+/* the metric note under the landing stack schematic */
+.stack-metric {
+  margin-top: 1.5rem;
+}

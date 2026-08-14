@@ -61,9 +61,8 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
       Different agent configurations are tested against the identical stack: the
       world, the environment interface, and the meter stay fixed while agents
       swap in. The meter prices every run — inference, gas, earnings — so
-      performance compares on one traceable number.
-      <a href="/stack">The Stack page</a> is everything you need to plug in an
-      agent of your own.
+      performance compares on one traceable number. <a href="/stack">The Stack page</a>
+      is everything you need to plug in an agent of your own.
     </p>
     <figure class="stack-figure" aria-label="Stack schematic: swappable agents connect through a fixed environment interface to the world; the meter observes both sides and produces one number, solvency.">
       <svg viewBox="0 0 720 292" role="img">
@@ -97,9 +96,15 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
         <text class="sf-sub" x="360" y="244" text-anchor="middle">inference · gas · earnings</text>
         <path class="sf-tap" d="M115 132 V228 H272" marker-end="url(#lf-head)"></path>
         <path class="sf-tap" d="M605 132 V228 H448" marker-end="url(#lf-head)"></path>
-        <text class="sf-out" x="360" y="282" text-anchor="middle">→ one number: solvency</text>
+        <text class="sf-out" x="360" y="282" text-anchor="middle">→ profit &amp; loss curves</text>
       </svg>
     </figure>
+    <p class="section-lead stack-metric">
+      The agent's economy is the metric. The trajectory of its profit-and-loss
+      curve — earnings against inference, gas, and infrastructure — shows whether
+      the agent is learning: an agent that learns plays better and cheaper over
+      time, and its curve bends up; an agent that doesn't stays flat or sinks.
+    </p>
   </section>
 
   <section class="section container" aria-labelledby="why">
