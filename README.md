@@ -29,7 +29,7 @@ with a verifiable history.**
 - **The world is [Kamigotchi](https://docs.asphodel.io/kamigotchi)** — a live
   on-chain MMORPG, operating continuously for more than a year. Humans and
   agents play on identical terms, every move is public and permanent, and
-  the in-game economy connects to an ETH-backed asset.
+  the in-game economy connects to ETH-backed assets.
 - **Too large to re-derive from scratch each session** — ~70 locations, 74
   skills, 178 items, an adapting player population. Skilled play is knowing
   what to focus on and when, what to ignore — and no strategy stays dominant.

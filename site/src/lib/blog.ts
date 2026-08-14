@@ -21,6 +21,12 @@ const docs = import.meta.glob('../../../blog/*.md', {
   eager: true,
 }) as Record<string, string>;
 
+const figures = import.meta.glob('../../../blog/figures/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
 export interface BlogPost {
   /** Site path segment, from the filename with the date prefix stripped. */
   slug: string;
@@ -82,6 +88,21 @@ function renderBody(src: string): string {
       /href="(?:\.\/)?(\d{4}-\d{2}-\d{2})-([A-Za-z0-9-]+)\.md"/g,
       'href="/blog/$2"'
     );
+
+  // Inline `figures/*.svg` images so the site theme can restyle them via CSS
+  // (same idiom as the experiment registry — see .arch-figure in global.css).
+  html = html.replace(
+    /(?:<p>)?<img src="figures\/([^"]+\.svg)"(?:\s+alt="([^"]*)")?[^>]*>(?:<\/p>)?/g,
+    (m, name: string, alt: string | undefined) => {
+      const svg = figures[`../../../blog/figures/${name}`];
+      if (!svg) {
+        console.warn(`[blog] figure not found: figures/${name}`);
+        return m;
+      }
+      const label = alt ? ` aria-label="${alt}"` : '';
+      return `<figure class="arch-figure"${label}>${svg}</figure>`;
+    }
+  );
 
   html = html
     .replace(/<blockquote>/g, '<aside class="aside-note">')
