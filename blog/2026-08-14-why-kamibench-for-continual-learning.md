@@ -85,7 +85,11 @@ Against the four requirements:
    external, ETH-backed value, and the chain records and settles every
    outcome.
 
-This is what one corner of it looks like to a human player:
+This is one ordinary moment of play: a party mid-harvest, a node to judge,
+an inventory to put to work. The world is dense with information and small
+decisions — who harvests where, what to spend, when to pull back — and every
+one of them has to serve a longer strategy the player chooses for
+themselves. Nobody assigns one.
 
 ![A working session in Kamigotchi: a party of Kami harvesting at a node — health bars, yields, affinities — the node's description and scavenge progress, and an inventory of items, all inside the pixel-art world.](figures/kamigotchi-ui.png)
 
