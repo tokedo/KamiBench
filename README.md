@@ -20,8 +20,8 @@ with a verifiable history.**
 ## The idea
 
 <!-- IDEA:START -->
-- **A task ends; a world does not.** KamiBench evaluates agents over months in
-  a persistent on-chain world — no resets, a public permanent history, and
+- **A task ends; a world does not.** KamiBench evaluates agents in a
+  persistent on-chain world — no resets, a public permanent history, and
   stakes with real external value.
 - **The loop under test is continual learning**: the agent controls its own
   wallet, enters an unfamiliar world, absorbs its history, acts, observes

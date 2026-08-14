@@ -58,13 +58,20 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
   <section class="section container" aria-labelledby="stack">
     <h2 id="stack">One stack, swappable agents, clear metric</h2>
     <p class="section-lead">
-      The world, the environment interface, and the meter stay fixed; agent
-      configurations swap in against the same stack. The meter prices every run
-      — inference, gas, earnings — so performance compares on one traceable
-      number.
+      Different agent configurations are tested against the identical stack: the
+      world, the environment interface, and the meter stay fixed while agents
+      swap in. The meter prices every run — inference, gas, earnings — so
+      performance compares on one traceable number.
+      <a href="/stack">The Stack page</a> is everything you need to plug in an
+      agent of your own.
     </p>
     <figure class="stack-figure" aria-label="Stack schematic: swappable agents connect through a fixed environment interface to the world; the meter observes both sides and produces one number, solvency.">
       <svg viewBox="0 0 720 292" role="img">
+        <defs>
+          <marker id="lf-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
+            <path class="sf-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z"></path>
+          </marker>
+        </defs>
         <!-- swappable agent: two ghost outlines behind the front box -->
         <rect class="sf-ghost" x="46" y="44" width="170" height="72" rx="6"></rect>
         <rect class="sf-ghost" x="38" y="52" width="170" height="72" rx="6"></rect>
@@ -81,21 +88,18 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
         <text class="sf-sub" x="605" y="112" text-anchor="middle">Kamigotchi — live, on-chain</text>
 
         <!-- agent ⇄ interface ⇄ world -->
-        <line class="sf-link" x1="200" y1="96" x2="275" y2="96"></line>
-        <line class="sf-link" x1="445" y1="96" x2="520" y2="96"></line>
+        <line class="sf-link" x1="203" y1="96" x2="272" y2="96" marker-start="url(#lf-head)" marker-end="url(#lf-head)"></line>
+        <line class="sf-link" x1="448" y1="96" x2="517" y2="96" marker-start="url(#lf-head)" marker-end="url(#lf-head)"></line>
 
         <!-- meter observes both sides, outputs one number -->
         <rect class="sf-box sf-meter" x="275" y="196" width="170" height="64" rx="6"></rect>
         <text class="sf-title" x="360" y="224" text-anchor="middle">Meter</text>
         <text class="sf-sub" x="360" y="244" text-anchor="middle">inference · gas · earnings</text>
-        <path class="sf-tap" d="M115 132 V228 H275"></path>
-        <path class="sf-tap" d="M605 132 V228 H445"></path>
+        <path class="sf-tap" d="M115 132 V228 H272" marker-end="url(#lf-head)"></path>
+        <path class="sf-tap" d="M605 132 V228 H448" marker-end="url(#lf-head)"></path>
         <text class="sf-out" x="360" y="282" text-anchor="middle">→ one number: solvency</text>
       </svg>
     </figure>
-    <p class="read-more">
-      <a href="/stack">Explore the stack — everything you need to plug in an agent →</a>
-    </p>
   </section>
 
   <section class="section container" aria-labelledby="why">
