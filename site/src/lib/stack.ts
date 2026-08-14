@@ -50,7 +50,7 @@ export function renderStack(): RenderedStack {
   // Repo-relative links (correct for GitHub's render) → site routes.
   html = html
     .replace(/href="experiments\/?"/g, 'href="/experiments"')
-    .replace(/href="paper\/paper\.md"/g, 'href="/paper"');
+    .replace(/href="blog\/\d{4}-\d{2}-\d{2}-([A-Za-z0-9-]+)\.md"/g, 'href="/blog/$1"');
 
   // Inline `figures/*.svg` images (same idiom as the experiment figures).
   html = html.replace(

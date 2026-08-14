@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Hand-maintained. One entry per page: /, /experiments, one per experiment, /paper, /stack. -->
+<!-- Hand-maintained. One entry per page: /, /experiments, one per experiment, /blog, one per post, /stack. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kamibench.ai/</loc>
   </url>
   <url>
     <loc>https://kamibench.ai/experiments</loc>
+  </url>
+  <url>
+    <loc>https://kamibench.ai/experiments/sustainability</loc>
   </url>
   <url>
     <loc>https://kamibench.ai/experiments/budget-boxed</loc>
@@ -23,7 +26,13 @@
     <loc>https://kamibench.ai/experiments/004-perception-parity-rerun</loc>
   </url>
   <url>
-    <loc>https://kamibench.ai/paper</loc>
+    <loc>https://kamibench.ai/experiments/005-verification-run</loc>
+  </url>
+  <url>
+    <loc>https://kamibench.ai/blog</loc>
+  </url>
+  <url>
+    <loc>https://kamibench.ai/blog/why-kamibench-for-continual-learning</loc>
   </url>
   <url>
     <loc>https://kamibench.ai/stack</loc>

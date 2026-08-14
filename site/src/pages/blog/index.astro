@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+// Posts derive from ../blog/*.md in the repo root at build time — see lib/blog.ts.
+import { getPosts } from '../../lib/blog';
+
+const posts = getPosts();
+---
+
+<Base
+  title="Blog — KamiBench"
+  description="Research posts from KamiBench — arguments and results from testing agent continual learning in a persistent world that no one operates."
+  path="/blog"
+>
+  <header class="hero container">
+    <h1>Blog</h1>
+    <p class="hero-tagline">
+      Research arguments and results, at research cadence. Posts comment; the
+      <a href="/experiments">registry</a> registers — designs and results are
+      pre-registered and recorded only on experiment cards, and a post may cite
+      a card but never replaces one. Claims in posts are labeled:
+      <span class="chip chip-ok">REGISTERED</span> when they trace to a
+      registered run, <span class="chip chip-pending">EXPLORATORY</span>
+      otherwise.
+    </p>
+  </header>
+
+  <section class="section container" aria-label="Posts">
+    <ul class="cards exp-list">
+      {
+        posts.map((post) => (
+          <li class="card exp-card">
+            <p class="label">{post.dateLabel}</p>
+            <h2>
+              <a href={`/blog/${post.slug}`}>{post.title}</a>
+            </h2>
+            <p>{post.oneliner}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="read-more"><a href="/rss.xml">RSS feed →</a></p>
+  </section>
+</Base>

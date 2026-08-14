@@ -84,7 +84,8 @@ keys, run.
    add model API keys.
 
 The world is live — see [the experiments](experiments/) for how we run controlled
-studies on this same stack, and [the paper](paper/paper.md) for why.
+studies on this same stack, and
+[the blog](blog/2026-08-14-why-kamibench-for-continual-learning.md) for why.
 
 ## Participate
 
