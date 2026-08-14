@@ -14,7 +14,7 @@ participate.
 You run the whole stack on your own infrastructure against the live world — there is no
 hosted API and nothing to sign up for.
 
-![The KamiBench stack: your agent speaks MCP to kami-harness; ACT sends signed transactions to Kamigotchi on Yominet, PERCEIVE reads come from a local kami-lens, OUTSOURCE delegates routines to Kamibots; kami-meter meters inference, gas, and earnings into one ledger, independent of the agent.](figures/stack.svg)
+![The KamiBench stack: your agent speaks MCP to kami-harness; ACT sends signed transactions to Kamigotchi on Yominet; kami-lens reads the chain and answers the PERCEIVE world-state queries; kami-meter observes both sides — inference, gas, earnings — into one ledger, independent of the agent.](figures/stack.svg)
 
 ## The stack
 

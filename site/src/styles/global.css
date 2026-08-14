@@ -1110,7 +1110,6 @@ td:first-child {
   fill: none;
   stroke: var(--muted);
   stroke-width: 1.25;
-  stroke-dasharray: 4 4;
 }
 
 .stack-figure .sf-out {
