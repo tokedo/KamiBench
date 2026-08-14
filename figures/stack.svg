@@ -22,7 +22,7 @@
   <text class="af-conn-label" x="48" y="188" font-size="10.5" font-weight="700" letter-spacing="0.1em" fill="#6d675f">YOUR MACHINE</text>
 
   <!-- your agent (black box) with the optional reference scaffold ghosted inside -->
-  <rect class="af-box" x="48.5" y="206.5" width="200" height="168" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <rect class="af-box af-box-var" x="48.5" y="206.5" width="200" height="168" rx="10" fill="#ffffff" stroke="#a03518" stroke-width="1.5"/>
   <text class="af-title" x="66" y="236" font-size="16" font-weight="600" fill="#1c1917">Your agent</text>
   <text class="af-role" x="66" y="258" font-size="12.5" fill="#6d675f">any framework, any</text>
   <text class="af-role" x="66" y="276" font-size="12.5" fill="#6d675f">model — yours</text>
@@ -60,14 +60,15 @@
   <rect class="af-box" x="300.5" y="510.5" width="176" height="110" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
   <text class="af-title" x="318" y="540" font-size="16" font-weight="600" fill="#1c1917"><a href="https://github.com/tokedo/kami-lens"><tspan class="af-repo" fill="#a03518" text-decoration="underline">kami-lens</tspan></a></text>
   <text class="af-role" x="318" y="562" font-size="12.5" fill="#6d675f">local mirror + projection,</text>
-  <text class="af-role" x="318" y="580" font-size="12.5" fill="#6d675f">the game's own rules — read-only</text>
+  <text class="af-role" x="318" y="580" font-size="12.5" fill="#6d675f">the game's own rules —</text>
+  <text class="af-role" x="318" y="598" font-size="12.5" fill="#6d675f">read-only</text>
 
   <!-- the chain → kami-lens (the lens only reads) -->
   <path class="af-conn" d="M628.5,356.5 H586 V565.5 H482.5" fill="none" stroke="#8f8a80" marker-end="url(#sf-head)"/>
   <text class="af-conn-label" x="531" y="553" font-size="12" text-anchor="middle" fill="#6d675f">chain RPC (reads)</text>
 
   <!-- kamigotchi-gdd: docs artifact the agent reads -->
-  <rect class="af-bound" x="48.5" y="540.5" width="200" height="80" rx="10" fill="none" stroke="#d9d4cc" stroke-dasharray="5 5"/>
+  <rect class="af-box" x="48.5" y="540.5" width="200" height="80" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
   <text x="66" y="568" font-size="14" font-weight="600"><a href="https://github.com/tokedo/kamigotchi-gdd"><tspan class="af-repo" fill="#a03518" text-decoration="underline">kamigotchi-gdd</tspan></a></text>
   <text class="af-role" x="66" y="588" font-size="12" fill="#6d675f">the world spec, extracted</text>
   <text class="af-role" x="66" y="604" font-size="12" fill="#6d675f">from the game's source</text>
