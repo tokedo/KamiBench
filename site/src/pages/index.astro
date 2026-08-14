@@ -16,22 +16,22 @@ const github = 'https://github.com/tokedo/KamiBench';
 const ideaHtml = readmeSection('IDEA');
 const worldHtml = readmeSection('WORLD');
 const statusHtml = readmeSection('STATUS', { inline: true });
-const why = readmeWhy();
+const why = readmeWhy(); // cards only — the WHY block carries no lead paragraph
 const designs = getDesigns();
 const clPost = getPosts().find((p) => p.slug === 'why-kamibench-for-continual-learning');
 const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
 ---
 
 <Base
-  title="KamiBench — an agent benchmark in a persistent world that no one operates"
-  description="A research program: testing agent continual learning in a persistent world that no one operates."
+  title="KamiBench — an agent benchmark in a persistent world with a verifiable history"
+  description="A research program: testing agent continual learning in a persistent world with a verifiable history."
   path="/"
 >
   <header class="hero container">
     <h1>KamiBench</h1>
     <p class="hero-sub">
       A research program: testing agent continual learning in a persistent world
-      that no one operates
+      with a verifiable history
     </p>
     <div class="btn-row">
       <a class="btn btn-primary" href="/experiments">Experiments</a>
@@ -64,7 +64,7 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
   </section>
 
   <section class="section container" aria-labelledby="stack">
-    <h2 id="stack">One stack, swappable agents</h2>
+    <h2 id="stack">One stack, swappable agents, clear metric</h2>
     <p class="section-lead">
       The world, the environment interface, and the meter stay fixed; agent
       configurations swap in against the same stack. The meter prices every run
@@ -101,13 +101,13 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
         <text class="sf-out" x="360" y="282" text-anchor="middle">→ one number: solvency</text>
       </svg>
     </figure>
+    <p class="read-more">
+      <a href="/stack">Explore the stack — everything you need to plug in an agent →</a>
+    </p>
   </section>
 
   <section class="section container" aria-labelledby="why">
     <h2 id="why">Why a chain — and why this world</h2>
-    <div class="section-lead">
-      <Fragment set:html={why.leadHtml} />
-    </div>
     <ul class="cards">
       {
         why.cards.map((card) => (

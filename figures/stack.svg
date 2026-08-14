@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="stack-desc">
-  <title id="stack-desc">The KamiBench stack. On your machine: your agent — any framework, any model, with kami-agent as an optional reference implementation — speaks MCP to kami-harness, the MCP server whose tools fall into four classes: ACT, PERCEIVE, OUTSOURCE, and META. ACT sends signed transactions to Kamigotchi, the on-chain world running on its own chain, Yominet. PERCEIVE world-state queries are answered by kami-lens, a local mirror and projection, which reads the chain over RPC. OUTSOURCE delegates standing routines to Kamibots (part of Asphodel), which acts as your operator on the world. kamigotchi-gdd is the machine-readable world spec your agent can read.</title>
+  <title id="stack-desc">The KamiBench stack. On your machine: your agent — any framework, any model, with kami-agent as an optional reference implementation — speaks MCP to kami-harness, the MCP server whose tools fall into four classes: ACT, PERCEIVE, OUTSOURCE, and META. ACT sends signed transactions to Kamigotchi, the on-chain world running on its own chain, Yominet. PERCEIVE world-state queries are answered by kami-lens, a local mirror and projection, which reads the chain over RPC. OUTSOURCE delegates standing routines to Kamibots (part of Asphodel), which acts as your operator on the world. kamigotchi-gdd is the machine-readable world spec your agent can read. kami-meter is the unified measurement system: one ledger of inference, gas, and earnings per agent, reading the chain and provider billing, independent of the agent under test.</title>
   <defs>
     <marker id="sf-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
       <path class="af-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#8f8a80"/>
@@ -87,4 +87,13 @@
   <text class="af-title" x="658" y="360" font-size="16" font-weight="600" fill="#1c1917"><a href="https://kamibots.xyz"><tspan class="af-repo" fill="#a03518" text-decoration="underline">Kamibots</tspan></a></text>
   <text class="af-role" x="658" y="386" font-size="12.5" fill="#6d675f">automation service —</text>
   <text class="af-role" x="658" y="404" font-size="12.5" fill="#6d675f">runs standing routines</text>
+
+  <!-- kami-meter: observe-only measurement, independent of the agent under test -->
+  <path class="af-conn" d="M904.5,246 H918 V495.5 H898.5" fill="none" stroke="#8f8a80" stroke-dasharray="4 5" marker-end="url(#sf-head)"/>
+  <rect class="af-box" x="640.5" y="440.5" width="252" height="110" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="658" y="470" font-size="16" font-weight="600" fill="#1c1917"><a href="https://github.com/tokedo/kami-meter"><tspan class="af-repo" fill="#a03518" text-decoration="underline">kami-meter</tspan></a></text>
+  <text class="af-role" x="658" y="492" font-size="12.5" fill="#6d675f">unified measurement: inference,</text>
+  <text class="af-role" x="658" y="510" font-size="12.5" fill="#6d675f">gas, earnings — one ledger,</text>
+  <text class="af-role" x="658" y="528" font-size="12.5" fill="#6d675f">independent of the agent</text>
+  <text class="af-conn-label" x="766" y="572" font-size="12" text-anchor="middle" fill="#6d675f">reads the chain and provider billing — writes nothing</text>
 </svg>

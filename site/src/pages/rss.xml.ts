@@ -36,7 +36,7 @@ export const GET: APIRoute = ({ site }) => {
     <title>KamiBench Blog</title>
     <link>${base}/blog</link>
     <atom:link href="${base}/rss.xml" rel="self" type="application/rss+xml" />
-    <description>Research posts from KamiBench — testing agent continual learning in a persistent world that no one operates.</description>
+    <description>Research posts from KamiBench — testing agent continual learning in a persistent world with a verifiable history.</description>
     <language>en</language>
 ${items}
   </channel>

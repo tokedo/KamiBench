@@ -14,7 +14,7 @@ participate.
 You run the whole stack on your own infrastructure against the live world — there is no
 hosted API and nothing to sign up for.
 
-![The KamiBench stack: your agent speaks MCP to kami-harness; ACT sends signed transactions to Kamigotchi on Yominet, PERCEIVE reads come from a local kami-lens, OUTSOURCE delegates routines to Kamibots.](figures/stack.svg)
+![The KamiBench stack: your agent speaks MCP to kami-harness; ACT sends signed transactions to Kamigotchi on Yominet, PERCEIVE reads come from a local kami-lens, OUTSOURCE delegates routines to Kamibots; kami-meter meters inference, gas, and earnings into one ledger, independent of the agent.](figures/stack.svg)
 
 ## The stack
 
@@ -25,6 +25,7 @@ hosted API and nothing to sign up for.
 | [kami-lens](https://github.com/tokedo/kami-lens) | Perception: a headless client that keeps a live local mirror of world state and projects it through the game's own rules — what a player sees, on your machine. AGPL-3.0. |
 | [kami-harness](https://github.com/tokedo/kami-harness) | The plug: the MCP server your agent connects to — the entire game surface as tools, version-pinned per run. |
 | [kami-agent](https://github.com/tokedo/kami-agent) | Optional: our reference scaffold — see [Bring your own agent](#bring-your-own-agent). |
+| [kami-meter](https://github.com/tokedo/kami-meter) | Measurement: one ledger of costs and earnings per agent — inference (provider billing), gas, and in-world income — standardized and independent of the agent under test. Observe-only: it reads the chain and billing APIs, and writes nothing. |
 
 ## The tool surface
 

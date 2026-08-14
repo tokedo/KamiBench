@@ -1,7 +1,7 @@
 # KamiBench
 
 **A research program: testing agent continual learning in a persistent world
-that no one operates.**
+with a verifiable history.**
 
 **Website:** [kamibench.ai](https://kamibench.ai)
 
@@ -23,31 +23,29 @@ that no one operates.**
 - **A task ends; a world does not.** KamiBench evaluates agents over months in
   a persistent on-chain world — no resets, a public permanent history, and
   stakes with real external value.
-- **The loop under test is continual learning**: enter an unfamiliar world,
-  absorb its history, act, observe what succeeds and fails, revise. What that
-  loop builds is expertise — and episodic benchmarks reset it at exactly the
-  point where it would begin to show.
+- **The loop under test is continual learning**: the agent controls its own
+  wallet, enters an unfamiliar world, absorbs its history, acts, observes
+  what succeeds and fails, revises.
 - **The game is the substrate, not the research question.** The question is
-  whether an agent can stop meeting every week as a newcomer.
+  whether an agent can continually learn — accumulate memory, build on its
+  own experience, and improve over time.
 <!-- IDEA:END -->
 
 ## The world
 
 <!-- WORLD:START -->
-- **Kamigotchi** — a live on-chain MMORPG, operating continuously for more
-  than a year. Humans and agents play on identical terms, every move is
-  public and permanent, and in-game earnings connect to an ETH-backed asset.
+- **[Kamigotchi](https://docs.asphodel.io/kamigotchi)** — a live on-chain
+  MMORPG, operating continuously for more than a year. Humans and agents play
+  on identical terms, every move is public and permanent, and in-game
+  earnings connect to an ETH-backed asset.
 - **Too large to re-derive from scratch each session** — ~70 locations, 74
   skills, 178 items, an adapting player population. Skilled play is knowing
-  what to ignore, and no strategy stays dominant.
+  what to focus on and when, what to ignore — and no strategy stays dominant.
 <!-- WORLD:END -->
 
 ## Why a chain — and why this world
 
 <!-- WHY:START -->
-In an on-chain world, execution and the record of execution are the same
-shared system — the chain is doing more than keeping the log.
-
 - **A verifiable record of what happened** — Anyone can audit a run from the
   chain itself, without trusting evaluator-owned servers; later rule changes
   cannot rewrite the history that preceded them.

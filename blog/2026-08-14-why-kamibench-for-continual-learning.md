@@ -71,7 +71,7 @@ Against the four requirements:
    experiment.
 2. **It is too large to re-derive each session** — the rules are open
    source, which means there is *too much* knowledge to use directly;
-   skilled play is knowing what to ignore.
+   skilled play is knowing what to focus on and when, and what to ignore.
 3. **It is co-inhabited** — humans and agents act through the same
    transaction interface, on identical terms; payoffs depend on the live
    population, and advantages decay as tactics spread.
@@ -120,8 +120,9 @@ efficiency in one number, set by the economy rather than by a grader:
 
 ## Today vs. trajectory
 
-Host-independence is a spectrum, and we state plainly which properties hold
-today and which depend on future governance:
+Host-independence is a spectrum. The end state — a persistent world that *no
+one* operates — is where Kamigotchi is headed, not where it is; we state
+plainly which properties hold today and which depend on future governance:
 
 | Property | Holds today | Trajectory / mechanism |
 |---|---|---|
