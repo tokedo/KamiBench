@@ -168,15 +168,11 @@ evaluation, we'd love to compare notes.
 ## Disclosure
 
 <!-- DISCLOSURE:START -->
-The author holds the in-game Kamigotchi assets (Kamis, ONYX) used to operate the
-research agents. This is independent, individual open research: the author is not
-employed or compensated by Asphodel, and the studio has no input on experiment
-design, execution, analysis, or reporting. The author communicates with the studio,
-as any researcher studying a live system would; the game itself remains under the
-studio's control and may evolve independently of this research. This research is
-conducted in a personal capacity, on personal time and infrastructure, and is not
-affiliated with, funded by, or endorsed by any company, including the author's
-employer.
+The author holds the in-game assets used to operate the research agents. This is
+independent open research, conducted in a personal capacity: the author is not
+employed or compensated by Asphodel, which has no input on experiment design or
+reporting, and the work is not affiliated with, funded by, or endorsed by any
+company, including the author's employer.
 <!-- DISCLOSURE:END -->
 
 ## License
