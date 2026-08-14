@@ -17,7 +17,7 @@ const { title, description, path = '/', ogType = 'website' } = Astro.props;
 const canonical = new URL(path, Astro.site);
 // Versioned filename: scrapers (Discord, Twitter, Slack) cache og images by URL,
 // so a content change must also change the URL to show up in new shares.
-const ogImage = new URL('/og-v2.png', Astro.site);
+const ogImage = new URL('/og-v3.png', Astro.site);
 const github = 'https://github.com/tokedo/KamiBench';
 ---
 
