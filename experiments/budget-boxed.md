@@ -79,7 +79,7 @@ run's findings changed in the stack for the next.
 
 | run | status | stack under test | what its findings changed |
 |---|---|---|---|
-| [Run 5](005-verification-run.md) | running | E3 verification — scaffold v0.4.0 · interface v2.1.0, 101 tools · lens v0.3.0 · cost meter in shadow | results at close-out |
+| [Run 5](005-verification-run.md) | complete | E3 verification — scaffold v0.4.0 · interface v2.1.0, 101 tools · lens v0.3.0 · cost meter in shadow | the exit test passed (MINOR-FIXES) — **the series is closed**; the fixes verified in agent hands, the shadow meter validated, and the sustainability family proceeds |
 | [Run 4](004-perception-parity-rerun.md) | complete | identical pins to Run 3, fresh cohort | root-caused + fixed the never-succeeding collect action and four sibling tools (interface → v2.1.0); per-objective progress and per-account quest state (lens → v0.3.0); revert-reason channel rebuilt (v2.1.0) |
 | [Run 3](003-perception-parity.md) | aborted | perception-parity E2 — scaffold v0.3.2 · interface v2.0.0, 99 tools | two pre-launch gates on our own run tooling; the design itself carried over to Run 4 unchanged |
 | [Run 2](002-stack-delta.md) | complete | the hardened v1.x stack — scaffold v0.2.0 · interface v1.5.1, same 84 tools | perception parity as a first-class surface requirement, the sacrifice≠liquidate disambiguation, three-state transaction reporting, a pre-run delegation gate (interface → v2.0.0; scaffold → v0.3.2) |
@@ -89,25 +89,27 @@ run's findings changed in the stack for the next.
 
 Same three models, same box, on the E3 stack — scaffold v0.4.0, environment
 interface v2.1.0 (101 tools), lens v0.3.0 — with a cost meter riding in
-shadow. Running; results are added at close-out.
+shadow. Complete and public; **the run that closed the series**.
 
-**What it tests.** Run 4 met every check of the pre-registered series-exit
+**What it asked.** Run 4 met every check of the pre-registered series-exit
 criterion and still produced three concrete defects: an action that never once
 succeeded on-chain across two runs, a surface omission that cost an arm most of
 a week, and a revert-reason channel that was unusable in every instance it was
-raised. All three have fixes in the pinned stack; none has been demonstrated by
-an agent that does not know it exists. Run 5 asks the one question that
-matters before this series closes — **did the fixes land in agent hands?** — and
-carries its own binding pre-registered exit test on
+raised. All three had fixes in the pinned stack; none had been demonstrated by
+an agent that does not know it exists. Run 5 asked the one question that
+mattered before this series could close — **did the fixes land in agent
+hands?** — under a binding pre-registered exit test on
 [its page](005-verification-run.md).
 
-Alongside it, the run gives the program's cost meter its first live test. The
-meter independently observes what each arm consumes — inference, on-chain gas,
-infrastructure rent — and issues per-arm statements, but it runs in *shadow*:
-it never binds. No budget enforcement, no death rule, nothing agent-visible;
-the budget envelope is enforced by the scaffold exactly as in Runs 1–4. Its
-output is the per-arm financial curve the sustainability family needs to size
-its seeds.
+**What it found.** They landed: the repaired collect action went 36 attempts /
+20 on-chain / 0 reverts, the dormancy class did not recur (the new progress
+counters were read and acted on), and the revert-reason channel was used to
+correct a failing call within one session. The shadow meter — computing each
+arm's spend independently from provider usage records — agreed with the run's
+own accounting within millionths of a dollar on both eligible arms, across
+five closed comparison windows. The exit test scored **MINOR-FIXES**: the
+series is closed, and the sustainability family proceeds on a validated stack
+and a validated meter.
 
 ### Run 4 — perception parity re-run ([Experiment 004](004-perception-parity-rerun.md))
 
