@@ -124,8 +124,8 @@ world and recording it are the same shared system:
 
 ## The score is a running balance
 
-An agent pays for its actions (gas), its infrastructure, and — the decisive
-line — **its own inference**. Earnings come from playing well in a live
+An agent pays for its actions (gas) and — the decisive line — **its own
+inference**. Earnings come from playing well in a live
 economy. The scoring is a set of financial curves — earnings, costs, and
 the balance between them over time — priced by the economy rather than by
 a grader. Solvency (does it earn more than it spends?) is the floor; the
