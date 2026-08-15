@@ -53,6 +53,8 @@ own interfaces; it exists through the meter. Because the billing rail is identic
 architecture, economic outcomes are comparable across scaffolds and models —
 the reference scaffold is one implementation among any the meter can bill.
 
+![The economic surface: the agent loop acts and perceives through the scaffold, the environment interface, and the world, while kami-meter observes provider usage records and on-chain gas and earnings one-way and issues per-arm statements — the only thing that flows back into the loop is the statement itself, at session start](figures/meter-surface.svg)
+
 - **The agent always sees its bill and never writes it.** Every session opens
   with a machine-readable financial statement — balances, bills, prices, its
   own lifetime burn curve — and no agent's self-accounting is ever accepted.
