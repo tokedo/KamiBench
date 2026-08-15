@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 628" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="ms-desc">
-  <title id="ms-desc">The economic surface: an agent loop acts and perceives through the reference scaffold, the environment interface, and the world. kami-meter sits to the side and receives one-way dashed observation arrows — provider usage records from the agent loop, on-chain gas and earnings from the world — and issues per-arm statements. The only thing that flows back into the loop is the statement itself, at session start: the agent always sees its bill and never writes it.</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 616" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="ms-desc">
+  <title id="ms-desc">The economic surface: an agent loop acts and perceives through the reference scaffold, the environment interface, and the world. kami-meter sits to the side and receives one-way dashed observation arrows — provider usage records from the agent loop, on-chain gas and earnings from the world — and issues per-arm statements at the top. The statement flows straight back into the agent loop at session start: the agent always sees its bill and never writes it.</title>
   <defs>
     <marker id="ms-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
       <path class="af-arrow" d="M0.5,0.5 L6.5,3.5 L0.5,6.5 Z" fill="#8f8a80"/>
     </marker>
   </defs>
 
-  <rect class="af-bg" x="0.5" y="0.5" width="719" height="627" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
+  <rect class="af-bg" x="0.5" y="0.5" width="719" height="615" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
 
   <!-- ============ the run: the acting/perceiving stack (left column) ============ -->
 
@@ -50,7 +50,7 @@
   <!-- ============ one-way observation: the run → the meter ============ -->
 
   <g class="af-conn" fill="none" stroke="#8f8a80" stroke-dasharray="5 4">
-    <path d="M332,82 H348 V250 H432" marker-end="url(#ms-head)"><title>Inference spend is read from provider usage records — one-way, into the meter.</title></path>
+    <path d="M332,110 H348 V250 H432" marker-end="url(#ms-head)"><title>Inference spend is read from provider usage records — one-way, into the meter.</title></path>
     <path d="M332,476 H362 V288 H432" marker-end="url(#ms-head)"><title>On-chain gas and earnings are read from the chain — one-way, into the meter.</title></path>
   </g>
   <g font-size="11" text-anchor="end" fill="#6d675f">
@@ -73,18 +73,18 @@
 
   <!-- ============ what the meter emits ============ -->
 
-  <line class="af-conn" x1="562" y1="384" x2="562" y2="438" stroke="#8f8a80" marker-end="url(#ms-head)"/>
-  <rect class="af-box" x="436.5" y="444.5" width="251" height="99" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
-  <text class="af-title" x="456" y="474" font-size="16" font-weight="600" fill="#1c1917">Per-arm statements</text>
-  <text class="af-role" x="456" y="500" font-size="12.5" fill="#6d675f">Inference · gas · earnings, broken</text>
-  <text class="af-role" x="456" y="518" font-size="12.5" fill="#6d675f">out — the financial curves, per arm.</text>
+  <line class="af-conn" x1="562" y1="167" x2="562" y2="137" stroke="#8f8a80" marker-end="url(#ms-head)"/>
+  <rect class="af-box" x="436.5" y="32.5" width="251" height="99" rx="10" fill="#ffffff" stroke="#d9d4cc"/>
+  <text class="af-title" x="456" y="62" font-size="16" font-weight="600" fill="#1c1917">Per-arm statements</text>
+  <text class="af-role" x="456" y="88" font-size="12.5" fill="#6d675f">Inference · gas · earnings, broken</text>
+  <text class="af-role" x="456" y="106" font-size="12.5" fill="#6d675f">out — the financial curves, per arm.</text>
 
   <!-- the one flow back: the statement at session start -->
-  <path class="af-conn" d="M436,494 H400 V62 H336" fill="none" stroke="#8f8a80" marker-end="url(#ms-head)"><title>The statement is the one thing that flows back: every session opens with the arm's machine-readable financial statement.</title></path>
-  <text class="af-conn-label" x="394" y="52" font-size="11" text-anchor="end" fill="#6d675f">statement at session start</text>
+  <path class="af-conn" d="M436,82 H336" fill="none" stroke="#8f8a80" marker-end="url(#ms-head)"><title>The statement is the one thing that flows back: every session opens with the arm's machine-readable financial statement.</title></path>
+  <text class="af-conn-label" x="386" y="72" font-size="11" text-anchor="middle" fill="#6d675f">statement</text>
 
   <!-- ============ caption ============ -->
 
-  <text class="af-conn-label" x="360" y="582" font-size="12" text-anchor="middle" fill="#6d675f">Observation arrows are one-way. The only thing that flows back is the statement itself —</text>
-  <text class="af-conn-label" x="360" y="602" font-size="12" text-anchor="middle" fill="#6d675f">and death is the balance's verdict, not the evaluator's.</text>
+  <text class="af-conn-label" x="360" y="566" font-size="12" text-anchor="middle" fill="#6d675f">Observation arrows are one-way. The only thing that flows back is the statement itself —</text>
+  <text class="af-conn-label" x="360" y="586" font-size="12" text-anchor="middle" fill="#6d675f">and death is the balance's verdict, not the evaluator's.</text>
 </svg>
