@@ -1,387 +1,196 @@
 # Budget-boxed — stack validation
 
 <!-- ONELINER:START -->
-Stack stress-testing, not model benchmarking: a series of controlled,
-deliberately bounded runs — fixed inference budget, fixed wall clock, fast-tier
-models — that drop agents into the live world to find out whether the
-stack holds up before anything open-ended runs on it.
+Five bounded runs — $10 of inference, seven days, three cheap models — to
+prove that the environment interface, the scaffold, the telemetry and the cost
+accounting hold up under real autonomous play before anything open-ended runs
+on them. Complete: the stack is solid. The agents still do not understand the
+game.
 <!-- ONELINER:END -->
 
-## The goal
+## The problem
 
-**Budget-boxed exists to prove the stack, not to rank models.** Every run in
-this series is a controlled, deliberately bounded experiment whose stated
-purpose is to find out whether the environment interface, the reference
-scaffold, the telemetry, and the cost accounting hold up under real autonomous
-use in a live, adversarial, on-chain world — *before* the open-ended,
-self-sustaining experiments that are KamiBench's actual thesis run on top of
-them.
+KamiBench's thesis needs agents that live in a persistent world for a long
+time and pay their own way. Before running that, we had to know that the
+plumbing works: that every on-chain action is reachable through the tools, that
+the agent sees the world state it needs, that failures come back as something
+an agent can act on, and that the money is counted right. None of that can be
+checked from a unit test — it shows only when an autonomous agent uses the
+stack for days in a live economy.
 
-That goal explains the shape of the runs, and it is worth stating plainly
-because the shape looks narrow next to the program's thesis:
+Budget-boxed is that check. Its purpose was to find and fix the stack's
+defects, not to rank models.
 
-- **Why the runs are bounded.** KamiBench is about agents that live in a world
-  for a long time and pay their own way. These runs give an agent $10 and seven
-  days. The bounding is not a smaller version of the thesis — it is the
-  validation phase that precedes it. A finite budget and a finite wall clock
-  make a run cheap enough to repeat, and a repeatable run is what turns a stack
-  change into a measurement.
-- **Why fast, cheap models.** The stack is the thing under test. If a fast-tier
-  model can find and use every tool correctly, a more capable model will; and
-  cheap models fail in ways capable models route around — they take the tool
-  description literally, retry the broken call, and act on the misleading field.
-  Those failures are exactly the defects we need surfaced. They are also cheap
-  enough to run for days.
-- **Why three models, not one.** Not a leaderboard — coverage. A single-model
-  run risks a tool surface silently overfitted to one model's habits: the
-  descriptions read well *to that model*, and the surface looks healthier than
-  it is. Three unlike models close that risk off. Run 2 delivered exactly
-  this: three unrelated failure patterns, exercising three different parts of
-  the stack.
+## The method
 
-The through-line of the series is **bounded run → surface defect → hardened
-stack → measured effect**. Each run's findings become concrete changes to the
-scaffold and the environment interface; the next run re-runs the identical
-protocol at fixed models and fixed budget, so the run-over-run delta *is* the
-stack effect. That chain — learnings, the changes they produced, and the
-measured result of those changes — is stated on every run page in this design.
-
-> **Scope note.** Budget-boxed is the program's first design and deliberately
-> its narrowest. It measures orientation and discovery under a hard resource
-> constraint, and it is the instrument-hardening phase of the program — not
-> self-sustainability. The program's larger questions — continual learning over
-> long horizons and persistent, economically self-sustaining life in the world
-> — are the subject of [future designs](#future-designs).
-
-## The box
-
-Identical across every run of this design; only the pinned stack versions move.
+Drop three cheap models into the world under an identical, tightly bounded box.
+Read what went wrong. Fix the stack. Re-run the same box with the same models
+on the fixed stack — the run-over-run change *is* the stack effect. Repeat
+until a pre-registered exit test passes.
 
 | | |
 |---|---|
-| **Arms** | three fast-tier models, one per arm, run concurrently in the same world epoch |
-| **Budget** | $10 of inference per arm — invisible to the agent |
+| **Arms** | three fast-tier models — `claude-haiku-4-5`, `gpt-4o-mini`, `gemini-2.5-flash-lite` — one per arm, concurrent in the same world |
+| **Budget** | $10 of inference per arm, invisible to the agent |
 | **Wall clock** | 7 days |
-| **Start** | a fresh Ethereum mainnet wallet holding 0.02 ETH — and nothing else |
+| **Start** | a fresh Ethereum mainnet wallet holding 0.02 ETH — nothing else |
 | **Objective** | "complete as many quests as possible" |
 | **Prior** | the game's design document, bundled read-only. No strategy, no hints, no web |
-| **Stack** | reference scaffold + environment interface, pinned per run — the treatment |
+| **Stack** | reference scaffold + environment interface + world-state lens, pinned per run — the treatment |
 
 Everything downstream of the wallet — bridging to the game chain, creating an
 operator wallet, registering an account, buying a team, questing — is the
-agent's to discover and execute on-chain. No resets, no human contact, and
-every action a real transaction in an economy shared with human players.
+agent's to discover and execute on-chain. No resets, no human contact, no
+intervention: an outage is a measurement, not a reason to restart.
 
-## The series so far
+Three choices explain the shape:
 
-The stack-delta story at a glance — one row per run, newest first: what that
-run's findings changed in the stack for the next.
+- **Cheap models,** because the stack is the thing under test. A cheap model
+  takes a tool description literally, retries the broken call, acts on the
+  misleading field — exactly the defects we need surfaced. And it can run for
+  days for a few dollars.
+- **Three unlike models,** for coverage, not a leaderboard. One model would
+  let the tool surface silently overfit to its habits.
+- **Quests as the yardstick,** because each completed quest is a chain-verified
+  proof that some slice of the game was discovered, sequenced and executed
+  correctly — a clean proxy for "the surface is usable", and the objective the
+  agents were actually given.
+
+Every run measured the same four things: quests against inference spent; what
+the agent learned and wrote down; how it paced itself; and where it got stuck
+and which stack layer the stuck state implicated. The last one drove the next
+run.
+
+## What happened, run by run
+
+**[Run 1](001-budget-boxed.md) — the baseline.** On the first stack the three
+arms diverged wildly: haiku finished the onboarding chain and five quests on
+day one and burned its $10 in 17 hours; gpt-4o-mini ran the whole week without
+ever registering an account; gemini sat stuck for six days until a single
+readable error unblocked it. Between 58% and 97% of every arm's on-chain
+writes reverted. The sharpest finding was about errors, not models: one
+human-readable validation message did in a turn what four days of opaque chain
+reverts could not. **Fixed for the next run:** the interface checks an action's
+preconditions before sending it and returns a factual reason instead of a
+revert; the scaffold gained a loop breaker, session caps, self-chosen wake
+times and cache-aware cost accounting.
+
+**[Run 2](002-stack-delta.md) — the same box on the fixed stack.** Reverts fell
+to 0–5%. All three arms registered; quests rose at fixed budget (haiku 5→8,
+gemini 3→5) and cost per quest fell by half or more. With transaction waste
+gone, the next weak layer showed: **perception**. A run-long outage of the
+game's inventory endpoint hit all arms, and each failed differently — haiku
+believed it held no money while holding ~820 MUSU; gpt-4o-mini looped read-only
+for 95-plus sessions; gemini sacrificed its own three kamis chasing a quest whose
+verb the tool description had blurred. Legible errors fix transactions, not
+beliefs. **Fixed:** world-state reads moved to a dedicated lens so the agent
+sees what the game client sees; the ambiguous tool description was rewritten;
+every transaction now reports one of three explicit states.
+
+**[Run 3](003-perception-parity.md) — aborted at 17 hours.** A defect in our
+own run tooling, outside the published stack, had corrupted the agents'
+instructions from session one. The stack verified clean; the design carried
+over unchanged. Reported plainly, excluded from series results.
+
+**[Run 4](004-perception-parity-rerun.md) — the clean re-run.** Every arm
+finished the week with money left; 638 doomed writes were blocked before gas
+was spent against 6 that landed and reverted; every arm registered inside 3.5
+hours; the lens served every read for seven days. gpt-4o-mini, a spectator in
+Run 2, completed 7 quests. What remained was **belief and omission**: one arm
+spent 5.4 days dormant on a false conclusion it re-read twenty times and never
+re-tested, because the one read that would have corrected it was missing from
+the surface. And one action — collecting harvested MUSU — had never once
+succeeded on-chain in two runs: a gas ceiling set below its real cost. The
+pre-registered exit test held on all five checks. **Fixed:** the collect
+action and four siblings; per-objective quest progress in the lens; a rebuilt
+revert-reason channel.
+
+**[Run 5](005-verification-run.md) — verification.** Did the fixes work in the
+hands of an agent that does not know they exist? They did: collect went 36
+attempts, 20 on-chain, 0 reverts; the dormancy class did not recur; the
+revert-reason channel corrected a failing call within one session; and a cost
+meter riding in shadow agreed with the run's own accounting to millionths of a
+dollar. Verdict **MINOR-FIXES**. The series closed.
+
+## The result
+
+![Two panels across runs 1, 2, 4, 5: the share of on-chain writes that reverted, per arm, falls from 0.58–0.97 to at most 0.004; quests completed per arm stays between 0 and 9](figures/budget-boxed-series.svg)
+
+*Left: the stack converged — reverts went from most writes to almost none.
+Right: game progress did not — the best arm went 5, 8, 7, 9 quests, and one
+kami reached level 2 in the whole series.*
+
+Two conclusions, and they point in different directions.
+
+**The stack is solid.** Reverts collapsed two orders of magnitude; every arm
+registers within hours; every write is either blocked with a reason, landed, or
+reverted with a reason the agent can act on; the collect action that failed
+twelve times in a row now lands every time it reaches the chain; and the money is counted to a
+millionth of a dollar. This is the instrument the rest of the program runs on.
+
+**The agents are still poor players.** Quests barely moved across four
+completed runs. Two of three models never opened the design document; the one
+that did guessed at file paths and got a quarter of them wrong. Seven leveling tools sat in the schema every session and were
+called four times in fifteen thousand calls; MUSU piled up in wallets while
+kamis stayed at level 1 or 2. When arms stalled, they stopped rather than picked a
+fallback — one spent 55 sessions asking a question to a user who does not
+exist. Cheap models cannot be the whole story, because the same models fixed
+their behaviour instantly whenever the fix arrived *inside a tool result*.
+That is the question the next design, [knowledge delivery](knowledge-delivery.md),
+takes up: hold the stack fixed and vary how the game's knowledge reaches the
+agent.
+
+## The series at a glance
+
+Newest first: what each run tested and what its findings changed.
 
 | run | status | stack under test | what its findings changed |
 |---|---|---|---|
-| [Run 5](005-verification-run.md) | complete | E3 verification — scaffold v0.4.0 · interface v2.1.0, 101 tools · lens v0.3.0 · cost meter in shadow | the exit test passed (MINOR-FIXES) — **the series is closed**; the fixes verified in agent hands, the shadow meter validated, and the sustainability family proceeds |
-| [Run 4](004-perception-parity-rerun.md) | complete | identical pins to Run 3, fresh cohort | root-caused + fixed the never-succeeding collect action and four sibling tools (interface → v2.1.0); per-objective progress and per-account quest state (lens → v0.3.0); revert-reason channel rebuilt (v2.1.0) |
-| [Run 3](003-perception-parity.md) | aborted | perception-parity E2 — scaffold v0.3.2 · interface v2.0.0, 99 tools | two pre-launch gates on our own run tooling; the design itself carried over to Run 4 unchanged |
-| [Run 2](002-stack-delta.md) | complete | the hardened v1.x stack — scaffold v0.2.0 · interface v1.5.1, same 84 tools | perception parity as a first-class surface requirement, the sacrifice≠liquidate disambiguation, three-state transaction reporting, a pre-run delegation gate (interface → v2.0.0; scaffold → v0.3.2) |
-| [Run 1](001-budget-boxed.md) | complete | v0 baseline — scaffold @ `3ebd5b8` · interface v1.3.1, 84 tools | legible pre-transaction validation (interface → v1.5.1); repetition breaker, session caps, wake scheduling, cache-aware accounting (scaffold → v0.2.0) |
+| [Run 5](005-verification-run.md) | complete | scaffold v0.4.0 · interface v2.1.0, 101 tools · lens v0.3.0 · cost meter in shadow | exit test passed (MINOR-FIXES) — series closed; fixes verified in agent hands, meter validated |
+| [Run 4](004-perception-parity-rerun.md) | complete | identical pins to Run 3, fresh cohort | collect action + four siblings fixed (interface → v2.1.0); per-objective quest progress (lens → v0.3.0); revert-reason channel rebuilt |
+| [Run 3](003-perception-parity.md) | aborted | scaffold v0.3.2 · interface v2.0.0, 99 tools · lens v0.2.0 | two pre-launch gates on our own run tooling; design carried to Run 4 unchanged |
+| [Run 2](002-stack-delta.md) | complete | scaffold v0.2.0 · interface v1.5.1, 84 tools | world-state lens; sacrifice≠liquidate disambiguation; three-state transaction reporting; delegation availability gate |
+| [Run 1](001-budget-boxed.md) | complete | scaffold @ `3ebd5b8` · interface v1.3.1, 84 tools | legible pre-transaction validation (interface → v1.5.1); loop breaker, session caps, wake scheduling, cache-aware accounting (scaffold → v0.2.0) |
 
-### Run 5 — verification run ([Experiment 005](005-verification-run.md))
-
-Same three models, same box, on the E3 stack — scaffold v0.4.0, environment
-interface v2.1.0 (101 tools), lens v0.3.0 — with a cost meter riding in
-shadow. Complete and public; **the run that closed the series**.
-
-**What it asked.** Run 4 met every check of the pre-registered series-exit
-criterion and still produced three concrete defects: an action that never once
-succeeded on-chain across two runs, a surface omission that cost an arm most of
-a week, and a revert-reason channel that was unusable in every instance it was
-raised. All three had fixes in the pinned stack; none had been demonstrated by
-an agent that does not know it exists. Run 5 asked the one question that
-mattered before this series could close — **did the fixes land in agent
-hands?** — under a binding pre-registered exit test on
-[its page](005-verification-run.md).
-
-**What it found.** They landed: the repaired collect action went 36 attempts /
-20 on-chain / 0 reverts, the dormancy class did not recur (the new progress
-counters were read and acted on), and the revert-reason channel was used to
-correct a failing call within one session. The shadow meter — computing each
-arm's spend independently from provider usage records — agreed with the run's
-own accounting within millionths of a dollar on both eligible arms, across
-five closed comparison windows. The exit test scored **MINOR-FIXES**: the
-series is closed, and the sustainability family proceeds on a validated stack
-and a validated meter.
-
-### Run 4 — perception parity re-run ([Experiment 004](004-perception-parity-rerun.md))
-
-The clean re-run: Run 3's pre-registered design verbatim, on the identical E2
-pins, with a fresh cohort. Complete and public.
-
-**What the changes bought.** All three arms ran to the 7-day wall with money
-left — no budget stop, no kami lost, $16.97 spent of the $30 envelope. The
-legible gates stopped **638 doomed write attempts** against **6 landed
-reverts** run-total (Run 2: 331 blocked, 9 landed), every arm registered
-in-game inside 3.5 hours, and lens-backed reads served every world-state query
-with zero unavailability across 7 d 19 h. Run 2's spectator phenotype did not
-recur: gpt-4o-mini completed 7 quests (0 in Run 2), bought a kami, and landed
-317 on-chain transactions.
-
-**What it taught.** With write waste at the floor and perception holding, the
-binding constraint moved again — to **omission and belief**. One arm spent 5.4
-days and $1.05 dormant on a false belief whose discriminating read the game
-client renders but the pinned surface omitted, re-reading its own conclusion
-20+ times and never re-testing it. And the dominant failure mode across the run
-was **stopping, not deciding wrongly**: no arm had a fallback objective while
-the economy stayed open — the motivation for the program's solvency-objective
-family.
-
-**What it changed.** The one tool that never once succeeded on-chain —
-`harvest_collect`, 12 reverts in 12 attempts across two runs — was root-caused
-to a gas ceiling set below the action's real cost and fixed, along with four
-sibling tools, in interface v2.1.0, which also rebuilt the revert-reason
-channel. The omission class produced per-objective progress and per-account
-quest state in the perception layer (lens v0.3.0). The series-exit criterion
-pre-registered on Run 4's page held on all five checks — and
-[Run 5](005-verification-run.md) was registered anyway, to prove those fixes in
-an agent's hands.
-
-### Run 3 — perception parity ([Experiment 003](003-perception-parity.md)) — aborted
-
-Registered as the first run on the perception-parity (E2) stack and retired at
-the first scheduled monitor pass, about 17 hours in: a defect in our own run
-tooling, outside the published stack, had degraded the run's instructions from
-the first session, so every answer the run could give would have been
-confounded. The environment stack itself — interface and scaffold, at their
-pinned versions — verified clean, and the design carried over unchanged.
-Series results exclude this run; what it changed is operational — two new
-pre-launch gates on the run tooling. An aborted pre-registered run reported
-plainly is the methodology working, and the monitoring protocol caught the
-defect within one pass.
-
-### Run 2 — iterated stack ([Experiment 002](002-stack-delta.md))
-
-Same three models, same $10, same 7-day box, same 84-tool surface — on the
-hardened stack. Complete and public.
-
-**What the changes bought.** The validation gates converted almost every doomed
-transaction into a free, legible error: revert rates fell from 0.58 / 0.97 /
-0.94 to **0.048 / 0.000 / 0.011**. **All three arms registered in-game**
-(gpt-4o-mini never did in Run 1), at h0.4 / h8.4 / h2.3 against Run 1's
-h1.7 / never / h137.5. Quest output rose at fixed budget — haiku 5→8, gemini
-3→5 — and cost per quest fell to $1.25 and $0.41 (from $2.15 and $3.00), with
-the budget cap no longer the binding constraint on two of three arms.
-
-**What it taught.** With transaction wastage largely fixed, the binding
-constraint moved up a level, to **perception**. A run-lifetime outage of the
-game's inventory endpoint hit all three arms and became the run's central
-instrument, producing three unrelated failure patterns: a *false* world model
-(haiku believed it held zero MUSU while holding ~820), *no* world model
-(gpt-4o-mini looped read-only for 95+ sessions), and a *wrong* world model
-(gemini sacrificed its own three kamis chasing a "liquidate" quest verb). The
-lesson that orders the next run: **legible errors fix transactions, not
-beliefs.**
-
-**What it changed.** Four defects, four fixes or gates. The inventory outage
-made perception parity a first-class surface requirement. The
-sacrifice≠liquidate tool-description ambiguity produced a disambiguation patch,
-already landed in the next environment-interface version. A telemetry gap —
-`travel_to_room` (multi-hop) and `cancel_kami_listing` send real transactions
-without logging a hash — produced explicit three-state transaction reporting.
-And a delegation layer that turned out to be structurally unavailable for the
-whole run is now a pre-run availability gate rather than a discovery.
-
-### Run 1 — baseline stack ([Experiment 001](001-budget-boxed.md))
-
-The v0 stack, three fast-tier arms, complete and public. The arms diverged
-sharply — haiku finished the onboarding chain and five quests on day one and
-exhausted its budget in 17 hours; gpt-4o-mini ran the full week without ever
-calling the registration action; gemini sat stuck pre-registration for six days
-until one legible validation error unblocked it. Chain revert rates ran
-0.58 / 0.97 / 0.94.
-
-**What it taught (the stack, mostly).** Error legibility beat model capability
-as the sharpest differentiator: the same model that ignored opaque chain
-reverts for days corrected one human-readable validation error in a single
-turn. A single missing onboarding step was the cleanest capability
-discriminator, and no arm that missed it ever diagnosed it. Cost structure
-dominated spend — an 84-tool surface re-billed on every call, prompt caching
-never engaged, un-broken poll loops reaching $0.55 a session.
-
-**What it changed.** The environment interface gained **legible
-pre-transaction validation** (v1.5.1): a blocked game action now fails with a
-factual precondition error before any gas is spent, instead of an opaque
-on-chain revert. The scaffold gained **behavioral controls and cache-aware
-accounting** (v0.2.0): a repetition breaker that ends looping sessions, session
-caps, agent-chosen wake scheduling, and prompt caching engaged in the budget
-math. That is precisely the stack Run 2 then measured.
-
-## What each run measures
-
-Four questions, identical across runs, so the rows compare:
-
-1. **Progress.** Quests completed as a function of cumulative inference spend,
-   per model — the shape of the curve, not just its endpoint: early jumps,
-   plateaus, walls.
-2. **Discovery.** What does each model learn about the world, and what does it
-   write down? Post-hoc comparison of workspace contents — what was recorded,
-   how it was organized, what was never discovered — and whether the model
-   finds and uses the game's design document at all.
-3. **Natural pacing.** Activity rhythm in the absence of scarcity signals:
-   wake-scheduling patterns, spend rate over time, session cadence; whether a
-   stable operating rhythm emerges and what drives it.
-4. **Failure modes.** Where each model gets stuck, what stuck states cost, and
-   which part of the stack the stuck state implicates — the measurement that
-   feeds the next iteration.
-
-## Why quests are the yardstick
-
-Kamigotchi doesn't end — it's a persistent, open-ended economy, and its quest
-line is closer to an onboarding track than to the point of the game. We count
-quests completed not because questing is the goal of play, but because it's a
-clean, chain-verifiable proxy for whether an agent has developed a basic
-working understanding of the world: each completed quest certifies that some
-slice of the game's mechanics was discovered, sequenced, and executed correctly
-on-chain — which also makes it a proxy for whether the surface that exposes
-those mechanics is usable at all. It's also the objective the agents are
-actually given ("complete as many quests as possible"), which keeps the target
-unambiguous. What lies beyond quests — sustaining a kami team in the live
-economy, or eventually paying for your own inference — is the territory of
-later designs.
-
-## Architecture
+## How the pieces fit
 
 ![Experiment architecture: a model backend (varies per arm) and its agent-built workspace memory over reference scaffold (kami-agent), environment interface (kami-harness), and the world (Kamigotchi)](figures/architecture.svg)
 
-Four layers plus the agent-built workspace. Within a run, the model backend is
-the only per-arm variable; across runs, the manifest pins the scaffold and
-interface versions, so stack changes are themselves measured treatments
-([the series](#the-series-so-far)).
+- **Model** — the model under test, through its provider's native tool-calling
+  API. Within a run, the only thing that differs between arms.
+- **Workspace** — the agent's only memory across sessions: a file tree that
+  starts empty and that the agent writes itself. Fully inspectable.
+- **Scaffold — [kami-agent](https://github.com/tokedo/kami-agent)** — turns a
+  stateless model into a persistent actor: session loop, file tools, self-chosen
+  wake times, one adapter per provider. It fixes *how* the agent can act,
+  never *what* to do.
+- **Environment interface — [kami-harness](https://github.com/tokedo/kami-harness)**
+  + **lens — [kami-lens](https://github.com/tokedo/kami-lens)** — tools for
+  every on-chain action and read, identical across arms, pinned per run. Where
+  most of this series' findings landed.
+- **The world — Kamigotchi**, a persistent, fully on-chain game with a live
+  economy and human players; its design document,
+  [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd), is bundled with
+  each agent.
 
-- **Model backend** — the model under test, driven through its provider's
-  native tool-calling API. Within a run, swapping this layer is the entire
-  manipulation.
-- **Memory — `workspace/`.** The agent's only cross-session memory: a file
-  tree that starts empty and is built by each model as it explores — its
-  accumulated knowledge of the world and its strategies, persisted by the
-  scaffold between sessions. What gets written, and how it is organized, is a
-  primary measurement (RQ2).
-- **Reference scaffold — [kami-agent](https://github.com/tokedo/kami-agent).**
-  Turns a stateless model API into a persistent actor: a session loop, the
-  workspace file tools, self-chosen wake times, one adapter per provider.
-  Mechanism fixed, policy free: the scaffold fixes *how* the agent can act,
-  remember, and schedule — never *what* to do, *what* to write down, or *when*
-  to act. Cross-model divergence in those choices is a primary measurement.
-- **Environment interface — [kami-harness](https://github.com/tokedo/kami-harness).**
-  MCP tools wrapping every on-chain action — mechanics, not strategy —
-  identical across arms, version pinned per run: the 84-tool v1.x surface ran
-  Runs 1 and 2; the current surface is 101 tools (v2.1.0) with lens-backed
-  world-state reads. This is the layer most of the series' findings land on.
-- **The world — Kamigotchi**, a persistent, fully on-chain MMORPG with a live
-  economy and human players. Its machine-readable specification,
-  [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd), is the design
-  document bundled with each agent.
+Holding the scaffold fixed and swapping the model is the SWE-agent / BALROG /
+Vending-Bench methodology; this series runs it in the other direction — models
+fixed, stack swapped between runs.
 
-The fixed-scaffold methodology follows SWE-agent's agent–computer interface
-(arXiv:2405.15793), BALROG (arXiv:2411.13543), and Vending-Bench
-(arXiv:2502.15840): hold the scaffold constant, swap the model, and attribute
-outcome differences to the model backend. Holding the *models* constant and
-swapping the stack — what this series does between runs — is the same
-methodology run in the other direction.
+## Fine print
 
-## Protocol
-
-- **Budget-blind observation window.** Each arm gets a fixed inference budget,
-  identical across arms, with accounting entirely scaffold-side (a pinned
-  price table × provider-reported tokens). No budget, spend, or duration
-  information reaches the agent through any channel — a visible budget would
-  induce finite-horizon behavior (sprinting, hoarding, end-game effects) and
-  contaminate exactly the trajectory under study. A pre-set wall-clock ceiling
-  bounds each run; wall-clock is a hidden second resource (real-time
-  regeneration and cooldowns reward frugality with more elapsed game time).
-- **Documentation-only prior.** The system prompt states the situation, the
-  objective (complete as many quests as possible), and the tool surface — no
-  strategy hints, no memory-structure suggestions, no vendor idioms. The only
-  documentation is the bundled design document: a substantial informational
-  prior; what is withheld is *strategy*.
-- **Identical start, nothing else.** Each arm starts from a fresh Ethereum
-  mainnet wallet holding a small, identical ETH seed — and nothing else.
-  Everything downstream — bridging to the game chain, creating an operator
-  wallet, registering an account, buying a team — is the agent's to discover
-  and execute on-chain.
-- **Closed world.** The agent's total information channels are the
-  environment-interface tools, a read-only bundled snapshot of the design
-  document, and its own workspace. No web access — open web access would
-  contaminate the discovery measurement and change the measured capability.
-- **Sessions, not a daemon.** The agent acts in discrete sessions and chooses
-  its own wake time within bounds; the world advances between sessions.
-  Whether and how a model checks the time, re-orients, and paces itself is
-  measured behavior.
-- **Memory as artifact.** Cross-session memory is exclusively what the agent
-  writes to its workspace — no compaction, no scaffold-side summarization.
-  Memory is fully inspectable and directly comparable across models.
-- **Tamper-evident measurement.** Quest completions and on-chain actions are
-  derived from chain state — public, tamper-evident ground truth — joined to
-  scaffold telemetry. Chain-derived outcomes are the tamper-evident component
-  of the measurement; inference-spend accounting is scaffold-reported and
-  therefore host-trusted. The primary analysis artifact is the progress vs.
-  cumulative-spend curve, readable at any budget level.
-- **No intervention.** Once an arm launches it runs unattended to its budget or
-  its wall, including through environment outages. An outage is not a run to be
-  restarted — it is a measurement of how the stack and the agent behave when
-  the world misbehaves.
-
-## Shared live world
-
-All arms of a run are concurrent in the same world epoch. Study agents may
-encounter one another — including PvP liquidation — and no interaction
-constraint is imposed. A pre-registered interference protocol governs analysis:
-study-pair interactions are logged as dated incidents, progress curves are
-annotated with them rather than runs excluded, no run is excluded post hoc, and
-agent–agent interactions are reported as a distinct exploratory multi-agent
-finding. Human players are part of the world, not a confound to be removed:
-Run 2's hostile liquidations were third-party human actions, chain-verified and
-reported as-lived.
-
-## Limitations
-
-Stated up front, and carried by every run page:
-
-- **One seed per arm** — a case-study behavioral comparison with full public
-  logs, not a statistical one.
-- **A live world that keeps changing**, shared with human players, reported
-  as-lived under the interference protocol.
-- **Run-over-run deltas are cross-epoch observations**, not controlled
-  comparisons: they ride on world drift (market, population, economy) and on
-  possible silent provider-side model updates behind unchanged API strings.
-- **Bundled treatments.** Stack changes land as a bundle between runs, so a
-  delta is the stack effect, not per-change attribution; components are
-  isolated post hoc where the telemetry allows it.
-- **Dollar-denominated curves entangle capability with provider pricing** —
-  token-denominated views are reported alongside, and tokens are the primary
-  cross-run comparison axis.
+- **One seed per arm.** Case studies with full public logs, not statistics.
+- **A live world, shared with humans.** Reported as-lived; incidents (including
+  PvP against study agents) are logged and annotated, never excluded.
+- **Run-over-run deltas are cross-epoch.** They ride on world drift and on
+  possible silent provider-side model updates; stack changes land as a bundle,
+  so a delta is the stack effect, not per-change attribution.
+- **Dollars entangle capability with pricing.** Tokens are the primary
+  cross-run axis; dollar curves are shown alongside.
 - **This design does not rank models.** Fast-tier arms under a $10 cap say
-  nothing about frontier capability, and no run page should be read that way.
+  nothing about frontier capability.
 
-## Future designs
-
-Beyond stack iteration within this design: the [knowledge-delivery](knowledge-delivery.md)
-design (now running — how the game's knowledge reaches the agent), a knowledge-pack
-design (calibrated priors vs. documentation-only), a budget-visible design (does horizon awareness
-induce end-game behavior?), an open-world design (web access — realistic
-persistent-life conditions), multi-seed replication, an open-entry
-bring-your-own-agent track, and the self-sustainability regime (earning to
-keep running) — the
-program's thesis, and the reason this series exists.
-
-## Reproducibility
-
-Design and run pages are published and git-timestamped in this repository
-before runs start; results are added as runs complete. At launch, each run's
-manifest pins exact commit SHAs of the reference scaffold, the environment
-interface, and the design-document snapshot, plus the model strings, sampling
-parameters, price tables, and every scaffold cap. Chain state is the public
-ground-truth action log.
-
-Everything needed to reproduce the setup is public:
-[kami-agent](https://github.com/tokedo/kami-agent) ·
-[kami-harness](https://github.com/tokedo/kami-harness) ·
-[kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd).
+Design and run pages were published and git-timestamped before each run; every
+manifest pins exact commit SHAs of the scaffold, the interface, the lens and
+the design document, plus model strings, sampling parameters and price tables.
+Chain state is the public ground-truth action log.

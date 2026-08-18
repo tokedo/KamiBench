@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="bbs-desc">
+  <title id="bbs-desc">Budget-boxed series, runs 1 to 5 (run 3 aborted): left, the share of on-chain writes that reverted per arm fell from 0.58–0.97 in run 1 to at most 0.004 in run 5; right, quests completed per arm stayed between 0 and 9 across the same runs — the best arm went 5, 8, 7, 9.</title>
+  <rect class="mf-bg" x="0.5" y="0.5" width="719" height="399" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
+  <circle class="mf-s1" cx="150" cy="27" r="5.5" fill="#2a78d6"/>
+  <text class="mf-legend-label" x="162" y="31.5" font-size="12.5" fill="#1c1917">haiku-4.5</text>
+  <circle class="mf-s2" cx="261.8" cy="27" r="5.5" fill="#008300"/>
+  <text class="mf-legend-label" x="273.8" y="31.5" font-size="12.5" fill="#1c1917">gpt-4o-mini</text>
+  <circle class="mf-s3" cx="390.0" cy="27" r="5.5" fill="#e87ba4"/>
+  <text class="mf-legend-label" x="402.0" y="31.5" font-size="12.5" fill="#1c1917">gemini-2.5-flash-lite</text>
+  <text class="mf-rowlabel" x="56" y="66" font-size="14" font-weight="600" fill="#1c1917">The stack: chain reverts</text>
+  <text class="mf-label" x="56" y="83" font-size="12" fill="#6b6560">share of on-chain writes that failed</text>
+  <line class="mf-grid" x1="50" y1="330.0" x2="330" y2="330.0" stroke="#e5e1da"/>
+  <text class="mf-tick" x="46" y="334.0" font-size="11" text-anchor="end" fill="#6b6560">0</text>
+  <line class="mf-grid" x1="50" y1="271.5" x2="330" y2="271.5" stroke="#e5e1da"/>
+  <text class="mf-tick" x="46" y="275.5" font-size="11" text-anchor="end" fill="#6b6560">0.25</text>
+  <line class="mf-grid" x1="50" y1="213.0" x2="330" y2="213.0" stroke="#e5e1da"/>
+  <text class="mf-tick" x="46" y="217.0" font-size="11" text-anchor="end" fill="#6b6560">0.5</text>
+  <line class="mf-grid" x1="50" y1="154.5" x2="330" y2="154.5" stroke="#e5e1da"/>
+  <text class="mf-tick" x="46" y="158.5" font-size="11" text-anchor="end" fill="#6b6560">0.75</text>
+  <line class="mf-grid" x1="50" y1="96.0" x2="330" y2="96.0" stroke="#e5e1da"/>
+  <text class="mf-tick" x="46" y="100.0" font-size="11" text-anchor="end" fill="#6b6560">1</text>
+  <text class="mf-tick" x="56.0" y="350" font-size="12" text-anchor="middle" fill="#6b6560">Run 1</text>
+  <text class="mf-tick" x="147.3" y="350" font-size="12" text-anchor="middle" fill="#6b6560">Run 2</text>
+  <text class="mf-tick" x="238.7" y="350" font-size="12" text-anchor="middle" fill="#6b6560">Run 4</text>
+  <text class="mf-tick" x="330.0" y="350" font-size="12" text-anchor="middle" fill="#6b6560">Run 5</text>
+  <polyline class="mf-s1-o" points="56.0,195.5 147.3,318.8 238.7,324.4 330.0,330.0" fill="none" stroke="#2a78d6" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline class="mf-s2-o" points="56.0,103.7 147.3,330.0 238.7,327.2 330.0,329.1" fill="none" stroke="#008300" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline class="mf-s3-o" points="56.0,109.3 147.3,327.4 238.7,330.0 330.0,330.0" fill="none" stroke="#e87ba4" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle class="mf-s1 mf-dot" cx="56.0" cy="195.5" r="4.5" fill="#2a78d6" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s1 mf-dot" cx="147.3" cy="318.8" r="4.5" fill="#2a78d6" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s1 mf-dot" cx="238.7" cy="324.4" r="4.5" fill="#2a78d6" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s1 mf-dot" cx="330.0" cy="330.0" r="4.5" fill="#2a78d6" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s2 mf-dot" cx="56.0" cy="103.7" r="4.5" fill="#008300" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s2 mf-dot" cx="147.3" cy="330.0" r="4.5" fill="#008300" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s2 mf-dot" cx="238.7" cy="327.2" r="4.5" fill="#008300" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s2 mf-dot" cx="330.0" cy="329.1" r="4.5" fill="#008300" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s3 mf-dot" cx="56.0" cy="109.3" r="4.5" fill="#e87ba4" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s3 mf-dot" cx="147.3" cy="327.4" r="4.5" fill="#e87ba4" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s3 mf-dot" cx="238.7" cy="330.0" r="4.5" fill="#e87ba4" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s3 mf-dot" cx="330.0" cy="330.0" r="4.5" fill="#e87ba4" stroke="#faf9f7" stroke-width="1.5"/>
+  <text class="mf-rowlabel" x="410" y="66" font-size="14" font-weight="600" fill="#1c1917">The game: quests completed</text>
+  <text class="mf-label" x="410" y="83" font-size="12" fill="#6b6560">per arm, $10 and 7 days each</text>
+  <line class="mf-grid" x1="404" y1="330.0" x2="684" y2="330.0" stroke="#e5e1da"/>
+  <text class="mf-tick" x="400" y="334.0" font-size="11" text-anchor="end" fill="#6b6560">0</text>
+  <line class="mf-grid" x1="404" y1="283.2" x2="684" y2="283.2" stroke="#e5e1da"/>
+  <text class="mf-tick" x="400" y="287.2" font-size="11" text-anchor="end" fill="#6b6560">2</text>
+  <line class="mf-grid" x1="404" y1="236.4" x2="684" y2="236.4" stroke="#e5e1da"/>
+  <text class="mf-tick" x="400" y="240.4" font-size="11" text-anchor="end" fill="#6b6560">4</text>
+  <line class="mf-grid" x1="404" y1="189.6" x2="684" y2="189.6" stroke="#e5e1da"/>
+  <text class="mf-tick" x="400" y="193.6" font-size="11" text-anchor="end" fill="#6b6560">6</text>
+  <line class="mf-grid" x1="404" y1="142.8" x2="684" y2="142.8" stroke="#e5e1da"/>
+  <text class="mf-tick" x="400" y="146.8" font-size="11" text-anchor="end" fill="#6b6560">8</text>
+  <line class="mf-grid" x1="404" y1="96.0" x2="684" y2="96.0" stroke="#e5e1da"/>
+  <text class="mf-tick" x="400" y="100.0" font-size="11" text-anchor="end" fill="#6b6560">10</text>
+  <text class="mf-tick" x="410.0" y="350" font-size="12" text-anchor="middle" fill="#6b6560">Run 1</text>
+  <text class="mf-tick" x="501.3" y="350" font-size="12" text-anchor="middle" fill="#6b6560">Run 2</text>
+  <text class="mf-tick" x="592.7" y="350" font-size="12" text-anchor="middle" fill="#6b6560">Run 4</text>
+  <text class="mf-tick" x="684.0" y="350" font-size="12" text-anchor="middle" fill="#6b6560">Run 5</text>
+  <polyline class="mf-s1-o" points="410.0,213.0 501.3,142.8 592.7,213.0 684.0,119.4" fill="none" stroke="#2a78d6" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline class="mf-s2-o" points="410.0,330.0 501.3,330.0 592.7,166.2 684.0,166.2" fill="none" stroke="#008300" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline class="mf-s3-o" points="410.0,259.8 501.3,213.0 592.7,283.2 684.0,283.2" fill="none" stroke="#e87ba4" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle class="mf-s1 mf-dot" cx="410.0" cy="213.0" r="4.5" fill="#2a78d6" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s1 mf-dot" cx="501.3" cy="142.8" r="4.5" fill="#2a78d6" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s1 mf-dot" cx="592.7" cy="213.0" r="4.5" fill="#2a78d6" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s1 mf-dot" cx="684.0" cy="119.4" r="4.5" fill="#2a78d6" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s2 mf-dot" cx="410.0" cy="330.0" r="4.5" fill="#008300" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s2 mf-dot" cx="501.3" cy="330.0" r="4.5" fill="#008300" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s2 mf-dot" cx="592.7" cy="166.2" r="4.5" fill="#008300" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s2 mf-dot" cx="684.0" cy="166.2" r="4.5" fill="#008300" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s3 mf-dot" cx="410.0" cy="259.8" r="4.5" fill="#e87ba4" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s3 mf-dot" cx="501.3" cy="213.0" r="4.5" fill="#e87ba4" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s3 mf-dot" cx="592.7" cy="283.2" r="4.5" fill="#e87ba4" stroke="#faf9f7" stroke-width="1.5"/>
+  <circle class="mf-s3 mf-dot" cx="684.0" cy="283.2" r="4.5" fill="#e87ba4" stroke="#faf9f7" stroke-width="1.5"/>
+  <text class="mf-caption" x="56" y="376" font-size="11.5" fill="#6b6560">Run 3 aborted (lab tooling), excluded from series results.</text>
+  <text class="mf-caption" x="410" y="376" font-size="11.5" fill="#6b6560">One kami reached level 2 in the whole series.</text>
+</svg>
