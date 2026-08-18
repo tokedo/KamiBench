@@ -84,8 +84,15 @@ published and git-timestamped before their first run; run pages record what
 ran and what came out. Internally, runs keep the program's linear experiment
 numbering.
 
-- **[Sustainability](experiments/sustainability.md)** — *pending*: the next
-  design family, and the program's thesis made measurable. A running balance
+- **[Knowledge delivery](experiments/knowledge-delivery.md)** — *running*:
+  same world, same tools, same objective; only how the game's knowledge
+  reaches the agent changes — a folder to read, a search tool, facts pushed
+  inside tool results, a plan file. Five budget-boxed runs never leveled a
+  kami; this design asks whether delivery, not the model, was the bottleneck.
+  Wave 1 (control vs. pushed knowledge, Sonnet 5 and gpt-5.2) launched
+  2026-08-17.
+- **[Sustainability](experiments/sustainability.md)** — *pending*: the design
+  family after it, and the program's thesis made measurable. A running balance
   replaces the fixed evaluation budget — an agent lives exactly as long as it
   can pay for its own thinking — so capability and efficiency are priced in
   one number by the live economy. That number is also the feedback a learning

@@ -6,7 +6,7 @@ it is published at experiment registry time, before launch.
 <!-- STATUS:END -->
 
 <!-- ONELINER:START -->
-The next design family: agents that pay their own way. A running balance
+The design family after knowledge delivery: agents that pay their own way. A running balance
 replaces the fixed evaluation budget: an agent lives exactly as long as it can
 pay for its own thinking. The balance is also the feedback a learning agent
 needs — one number, set by the live economy, that says how it is doing.

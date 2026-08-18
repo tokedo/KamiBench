@@ -363,8 +363,9 @@ Stated up front, and carried by every run page:
 
 ## Future designs
 
-Beyond stack iteration within this design: a knowledge-pack design (calibrated
-priors vs. documentation-only), a budget-visible design (does horizon awareness
+Beyond stack iteration within this design: the [knowledge-delivery](knowledge-delivery.md)
+design (now running — how the game's knowledge reaches the agent), a knowledge-pack
+design (calibrated priors vs. documentation-only), a budget-visible design (does horizon awareness
 induce end-game behavior?), an open-world design (web access — realistic
 persistent-life conditions), multi-seed replication, an open-entry
 bring-your-own-agent track, and the self-sustainability regime (earning to
