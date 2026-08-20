@@ -38,7 +38,7 @@ Delivery family, the multi-wave experiment described on the design page; the
 two selected models define the tier tested here.
 
 One question: **does pushing the game's knowledge to a capable model change
-how it plays?** Five [budget-boxed](budget-boxed.md) runs failed to level a
+how it plays?** Five [stack-validation](budget-boxed.md) runs failed to level a
 single Kami. The [design](knowledge-delivery.md) argues that the failure came
 not because the models were small but because the knowledge sat in a folder
 nobody read. This wave tests that interpretation by comparing the control and

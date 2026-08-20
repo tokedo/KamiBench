@@ -67,7 +67,7 @@ export interface ExperimentRun {
 export interface ExperimentDesign {
   /** File basename, e.g. "budget-boxed" — also the site path segment. */
   slug: string;
-  /** The H1, e.g. "Budget-boxed". */
+  /** The H1, e.g. "Stack validation — whether the stack supports autonomous play". */
   title: string;
   /** Framing question, plain text (cards, OG description). */
   oneliner: string;

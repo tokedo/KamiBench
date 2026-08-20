@@ -28,9 +28,9 @@ series, and the frozen baseline every iteration after it is measured against.
 
 The goal was to prove the v0 stack under real autonomous use in the live world
 before anything open-ended ran on it. Run 1 opened the
-[Budget-boxed](budget-boxed.md) series and established the frozen baseline for
-every later stack iteration. The series protocol, architecture, and measurement
-are defined on the design page.
+[stack-validation series](budget-boxed.md) and established the frozen baseline
+for every later stack iteration. The series protocol, architecture, and
+measurement are defined on the design page.
 
 ## Outcome
 

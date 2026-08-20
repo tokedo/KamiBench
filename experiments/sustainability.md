@@ -1,4 +1,4 @@
-# Sustainability
+# Sustainability — whether an agent can earn enough to pay for inference and gas
 
 <!-- STATUS:START -->
 Pending — the design family is settled, and its binding public pre-registration

@@ -1,12 +1,12 @@
-# Budget-boxed — stack validation
+# Stack validation — whether the stack supports autonomous play
 
 <!-- ONELINER:START -->
-Budget-boxed used five bounded runs to prove that the stack holds up under real
-autonomous play before anything open-ended runs on it. The runs tested the
-environment interface, the scaffold, the telemetry, and the cost accounting
-using the same box each time: $10 of inference, seven days, and three cheap
-models. Complete: the stack is solid. The agents still do not understand the
-game.
+The stack-validation series used five bounded runs to prove that the stack
+holds up under real autonomous play before anything open-ended runs on it. The
+runs tested the environment interface, the scaffold, the telemetry, and the
+cost accounting using the same box each time: $10 of inference, seven days,
+and three cheap models. Complete: the stack is solid. The agents still do not
+understand the game.
 <!-- ONELINER:END -->
 
 ## The problem
@@ -19,7 +19,7 @@ to see the world state it needed. Failures had to return information the agent
 could act on, while the system counted the money correctly. Unit tests alone
 could not establish that all four properties held under sustained use.
 
-Budget-boxed is that check. Its purpose was to find and fix the stack's
+Stack validation is that check. Its purpose was to find and fix the stack's
 defects, not to rank models.
 
 ## The method

@@ -9,7 +9,7 @@ delivery method turns a capable model into a player that understands the game.
 
 ## The problem
 
-Five [budget-boxed](budget-boxed.md) runs proved the stack works, but they also
+Five [stack-validation](budget-boxed.md) runs proved the stack works, but they also
 showed the agents playing blind. The game's design document was bundled in a
 folder next to the agent, yet two of three models never opened it. The third
 model guessed at file paths and got them wrong up to a quarter of the time.
@@ -32,9 +32,9 @@ directly.
 
 The world, tool surface, starting wallet, and objective stay fixed across all
 arms. The objective remains "complete as many quests as possible"; only the way
-knowledge reaches the agent changes. The models are one tier up from
-budget-boxed (Sonnet 5, gpt-5.2), so a null result is not "the model was too
-small".
+knowledge reaches the agent changes. The models are one tier up from those in
+the stack-validation series (Sonnet 5, gpt-5.2), so a null result is not "the
+model was too small".
 
 Each delivery variant is a rung in a cumulative ladder. Rung A is the control,
 and every later rung adds one delivery path to those before it. The table shows

@@ -87,14 +87,14 @@ published and git-timestamped before their first run; run pages record what
 ran and what came out. Internally, runs keep the program's linear experiment
 numbering.
 
-- **[Knowledge delivery](experiments/knowledge-delivery.md)** — *running*:
+- **[Knowledge delivery — how the game's knowledge reaches the agent](experiments/knowledge-delivery.md)** — *running*:
   same world, same tools, same objective; only how the game's knowledge
   reaches the agent changes — a folder to read, a search tool, facts pushed
-  inside tool results, a plan file. Five budget-boxed runs never leveled a
+  inside tool results, a plan file. Five stack-validation runs never leveled a
   Kami; this design asks whether delivery, not the model, was the bottleneck.
   Wave 1 (control vs. pushed knowledge, Sonnet 5 and gpt-5.2) launched
   2026-08-17.
-- **[Sustainability](experiments/sustainability.md)** — *pending*: the design
+- **[Sustainability — whether an agent can earn enough to pay for inference and gas](experiments/sustainability.md)** — *pending*: the design
   family after it, and the program's thesis made measurable. A running balance
   replaces the fixed evaluation budget — an agent lives exactly as long as it
   can pay for its own thinking — so capability and efficiency are priced in
@@ -102,7 +102,7 @@ numbering.
   agent needs: a continuous signal of how it is doing, set by the economy
   rather than by a grader. Binding
   pre-registration publishes before launch.
-- **[Budget-boxed — stack validation](experiments/budget-boxed.md)** — the
+- **[Stack validation — whether the stack supports autonomous play](experiments/budget-boxed.md)** — the
   instrument-hardening series: controlled, deliberately bounded runs (fixed
   inference budget, fixed wall clock, fast-tier models) that prove the
   environment interface, the scaffold, the telemetry, and the accounting
@@ -151,7 +151,7 @@ never replaces one. A formal publication is in preparation offline.
   case-study behavioral comparison with full public logs, and the run-over-run delta
   is a cross-epoch observation, not a controlled comparison. Replication comes before
   any statistical claim.
-- **Not** a model ranking — the budget-boxed runs are stack stress-tests: fast-tier
+- **Not** a model ranking — the stack-validation runs are stack stress-tests: fast-tier
   arms under a $10 cap, chosen for coverage of the tool surface, say nothing about
   frontier capability.
 - **Not** free of the pretraining-absorption confound: a model trained after season N carries
