@@ -6,11 +6,11 @@ is published at experiment registry time, before launch.
 <!-- STATUS:END -->
 
 <!-- ONELINER:START -->
-Sustainability is the design family after knowledge delivery, testing agents
-that pay their own way. A running balance replaces the fixed evaluation budget,
-so an agent lives exactly as long as it can pay for its own thinking. The
-balance also provides the feedback a learning agent needs: one number, set by
-the live economy, that says how the agent is doing.
+The sustainability family follows knowledge delivery and tests agents that pay
+their own way. A running balance replaces the fixed evaluation budget, so an
+agent lives exactly as long as it can pay for its own thinking. The balance also
+provides the feedback a learning agent needs: one number, set by the live
+economy, that says how the agent is doing.
 <!-- ONELINER:END -->
 
 ## The balance is the metric

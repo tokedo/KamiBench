@@ -4,7 +4,7 @@
 
 <!-- STATUS:START -->
 Aborted — launched 2026-07-27 and retired at the first scheduled monitor pass,
-about 17 hours in: a defect in our own run tooling, outside the published
+about 17 hours later. A defect in our own run tooling, outside the published
 stack, had degraded the run's instructions from the first session. The design
 carries over unchanged to Run 4.
 <!-- STATUS:END -->
