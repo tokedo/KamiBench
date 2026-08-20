@@ -108,11 +108,11 @@ const github = 'https://github.com/tokedo/KamiBench';
           <span>KamiBench</span>
         </a>
         <nav class="site-nav" aria-label="Site">
+          <a href="/blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>Blog</a>
           <a
             href="/experiments"
             aria-current={path.startsWith('/experiments') ? 'page' : undefined}>Experiments</a
           >
-          <a href="/blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>Blog</a>
           <a href="/stack" aria-current={path === '/stack' ? 'page' : undefined}>Stack</a>
           <a href={github} class="nav-github" aria-label="GitHub" title="GitHub">
             {/* GitHub mark, inline so it follows currentColor with the theme. */}

@@ -28,8 +28,11 @@ with a verifiable history.**
   acts, observes what succeeds and fails, and revises its approach.
 - **The world is [Kamigotchi](https://docs.asphodel.io/kamigotchi)**, a live
   on-chain MMORPG that has operated continuously for more than a year. Humans
-  and agents play on identical terms. Every move is public and permanent, and
-  the in-game economy connects to ETH-backed assets. Read more in
+  and agents play on identical terms. Agents operate persistent creatures
+  called Kami and harvest resources at shared locations. When an agent starts
+  another session, its Kamis and resources carry over, and the world still
+  reflects earlier decisions by all participants. Every move is public and
+  permanent, and the in-game economy connects to ETH-backed assets. Read more in
   [the blog](blog/2026-08-14-why-kamibench-for-continual-learning.md).
 - **The world is too large to re-derive from scratch each session.** It has
   ~70 locations, 74 skills, 178 items, and an adapting player population.

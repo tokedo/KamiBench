@@ -7,8 +7,6 @@ import { readmeSection, readmeWhy } from '../lib/readme';
 import { getDesigns } from '../lib/experiments';
 import { getPosts } from '../lib/blog';
 
-const github = 'https://github.com/tokedo/KamiBench';
-
 // Copy on this page derives from README.md — reuse, condense, lightly rephrase;
 // never escalate claims. The landing is deliberately bullet-dense: the crafted
 // prose lives in the blog posts (blog-first restructure, 2026-08-14).
@@ -29,15 +27,14 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
   <header class="hero container">
     <h1>KamiBench</h1>
     <p class="hero-sub">
-      A research program: testing agent continual learning in a persistent world
-      with a verifiable history
+      Can an AI agent enter an unfamiliar world, keep operating there, and get
+      better over time? KamiBench is a research program that tests agent continual
+      learning in a persistent world with a verifiable history.
     </p>
     <div class="btn-row">
-      <a class="btn btn-primary" href="/experiments">Experiments</a>
-      <a class="btn" href="/blog">Blog</a>
-      <a class="btn" href="/stack">Stack</a>
-      <a class="btn" href={github}>GitHub</a>
-      <a class="btn" href="https://docs.asphodel.io/kamigotchi">Kamigotchi</a>
+      <a class="btn btn-primary" href={clPostHref}>Read the research story</a>
+      <a class="btn" href="/experiments">Inspect experiments</a>
+      <a class="btn" href="/stack">Run an agent</a>
     </div>
   </header>
 
@@ -127,6 +124,12 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
       }
     </ul>
     <div class="why-coda">
+      <p>
+        KamiBench does not simulate work such as coding or research. It isolates one
+        challenge that agents working in those settings over long periods may share:
+        carrying useful experience forward while actions have costs, earlier choices
+        persist, and the environment keeps changing.
+      </p>
       <p>
         The program is portable: Kamigotchi is the best-fit instance we know of
         today, and if a more autonomous world emerges, the same experiments
