@@ -29,27 +29,35 @@ constraint moved again, from perception to omission and belief.
 
 ## Goal
 
-[Run 2](002-stack-delta.md)'s death spirals traced to perception, not
-judgment, and this run is the series' first completed run on the E2 stack:
-world-state reads lens-backed, confirmed reverts raised as tool errors,
-liquidation expressible, the sacrifice≠liquidate ambiguity disambiguated.
-Models, budget, box, and objective text are unchanged from Run 2, so the
-Run 2 → Run 4 delta is an environment-change measurement, and Run 4's numbers
-stand as the E2 baseline. [Run 3](003-perception-parity.md) — the first
-attempt — was retired by a tooling defect before its environment ever ran.
+[Run 2](002-stack-delta.md)'s death spirals traced to missing or incorrect
+world state — to perception, not judgment. [Run 3](003-perception-parity.md) was
+the first attempt to test the resulting E2 stack, but a tooling defect retired
+that run before its environment ever ran. Run 4 repeated the identical
+pre-registered design and pins with a fresh cohort, becoming the series' first
+completed run on E2.
+
+On the E2 stack, world-state reads are lens-backed and confirmed reverts are
+raised as tool errors. The stack also makes liquidation expressible and
+distinguishes sacrifice from liquidate. Models, budget, box, and objective text
+are unchanged from Run 2. The difference between Runs 2 and 4 is therefore an
+environment-change measurement, and Run 4's numbers stand as the E2 baseline.
 Everything shared lives on the [design page](budget-boxed.md).
 
 ## Outcome
 
-All three arms ran to the 7-day wall with money still in the box — no budget
-stop, no kami lost, $16.97 spent of the $30 envelope. The legible
-pre-transaction gates stopped **638 doomed write attempts** against **6 landed
-reverts** run-total (Run 2: 331 blocked, 9 landed), and every arm registered
-in-game inside 3.5 hours. Run 2's spectator phenotype did not recur:
-gpt-4o-mini completed 7 quests (0 in Run 2), bought a kami, and landed 317
-on-chain transactions. Lens-backed reads served every world-state query with
-zero unavailability and zero restarts across 7 d 19 h, and cost accounting
-came out exact on every arm. Run 2 values in parentheses.
+All three arms ran to the 7-day wall with money still in the box. There was no
+budget stop and no kami was lost; the arms spent $16.97 of the $30 envelope.
+The legible pre-transaction gates stopped **638 doomed write attempts**, while
+**6 landed transactions reverted** across the run (Run 2: 331 blocked attempts
+and 9 landed reverts). Every arm registered in-game inside 3.5 hours.
+
+gpt-4o-mini completed 7 quests, compared with 0 in Run 2. It also bought a
+kami and landed 317 on-chain transactions. Run 2's spectator behavior did not
+recur.
+
+Lens-backed reads served every world-state query with zero unavailability and
+zero restarts across 7 d 19 h. Cost accounting came out exact on every arm.
+Run 2 values appear in parentheses.
 
 | | haiku-4.5 | gpt-4o-mini | gemini-2.5-flash-lite |
 |---|---|---|---|
@@ -90,14 +98,17 @@ directions; no new single-point-of-failure perception-outage class; lifecycle
 clean, every stop a graceful wake-time check.
 
 **All five held as written — and we registered a verification run anyway.**
-The counterweights, stated plainly. The checks score *attempted* behaviour
-only, and the arms attempted a narrow slice of the 99-tool surface: 160
-tool-arm cells were never attempted at all. The run's largest behavioural loss
-came from a surface-**omission** class the checks do not cover. And one
-reproducible write-path defect traveled the whole series undiagnosed —
-`harvest_collect`, 12 on-chain reverts in 12 attempts across two runs —
-root-caused only after this run (a gas ceiling set below the action's real
-cost) and fixed in interface v2.1.0, but never yet proven in an agent's hands.
+Several limits qualify what those checks cover. They score *attempted*
+behaviour only, and the arms attempted a narrow slice of the 99-tool surface:
+160 tool-arm cells were never attempted at all. The run's largest behavioural
+loss came from a surface-**omission** class outside the checks.
+
+A reproducible write-path defect also traveled the whole series undiagnosed:
+`harvest_collect` produced 12 on-chain reverts in 12 attempts across two runs.
+Only after Run 4 was the defect traced to a gas ceiling below the action's real
+cost and fixed in interface v2.1.0; the fix had not yet been proven in an
+agent's hands.
+
 [Run 5](005-verification-run.md) is that verification run, and carries its own
 binding pre-registered exit test. A met-but-not-acted-on pre-registered
 criterion, reported plainly, is the methodology working.
@@ -105,7 +116,7 @@ criterion, reported plainly, is the methodology working.
 ## Key learnings
 
 - **Legible gates now absorb nearly all write waste** — 638 blocked attempts against 6 landed reverts.
-- **The binding constraint moved from perception outage to omission and belief** — a 5.4-day, $1.05-unspent dormancy on a false belief whose discriminating read the game client renders but the pinned surface omitted (fixed in the next perception-layer version: per-objective progress, per-account quest state).
+- **A missing read left one arm dormant for 5.4 days with $1.05 unspent** — the arm held a false belief because the game client rendered a discriminating read that the pinned surface omitted. This moved the binding constraint from perception outage to omission and belief. The next perception-layer version added per-objective progress and per-account quest state.
 - **The agent's workspace can cement a wrong belief** — 20+ re-reads of its own conclusion, zero re-tests; memory design is a live scaffold question.
 - **The dominant failure mode is stopping, not deciding wrongly** — no arm had a fallback objective while the economy stayed open; the motivation for the program's solvency-objective family.
 - **The one tool that never once succeeded on-chain** — `harvest_collect`, 12/12 reverts across two runs — was root-caused to a gas ceiling below the action's real cost, fixed in interface v2.1.0; [Run 5](005-verification-run.md) verifies it in agent hands.

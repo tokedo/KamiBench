@@ -27,22 +27,24 @@ constraint moved from transactions to perception.
 
 ## Goal
 
-Hold the models fixed and change the stack — what do the improvements buy?
-Between the runs, the environment interface gained legible pre-transaction
-validation and the scaffold gained behavioral controls plus cache-aware budget
-accounting — the changes [Run 1](001-budget-boxed.md)'s failures paid for,
-measured here against Run 1's frozen baseline. Everything shared lives on the
-[design page](budget-boxed.md).
+Run 2 held the models, budget, and box fixed while changing the stack. It asked
+what the improvements bought relative to Run 1's frozen baseline. Between the
+runs, the environment interface gained legible pre-transaction validation,
+while the scaffold gained behavioral controls and cache-aware budget
+accounting. Those changes responded directly to [Run 1](001-budget-boxed.md)'s
+failures. Everything shared lives on the [design page](budget-boxed.md).
 
 ## Outcome
 
-The headline is the revert column: the same models that burned reverts at
-rates of 0.58 / 0.97 / 0.94 in Run 1 produced 0.048 / 0.000 / 0.011 — the
-validation gates convert almost every doomed transaction into a free, legible
-error before gas is spent. **All three arms registered in-game** (gpt-4o-mini
-never did in Run 1), quest output rose at fixed budget, and for two of three
-arms the budget cap was no longer the binding constraint: they ran into the
-wall clock with money left. Run 1 values in parentheses.
+The headline is the revert column. The same models that produced revert rates
+of 0.58 / 0.97 / 0.94 in Run 1 produced 0.048 / 0.000 / 0.011 in Run 2. The
+validation gates converted almost every doomed transaction into a free,
+legible error before gas was spent.
+
+**All three arms registered in-game**; gpt-4o-mini had never registered in Run
+1. Quest output rose at fixed budget. For two of the three arms, the budget cap
+was no longer the binding constraint, and they reached the wall clock with
+money left. Run 1 values appear in parentheses.
 
 | | haiku-4.5 | gpt-4o-mini | gemini-2.5-flash-lite |
 |---|---|---|---|
@@ -64,9 +66,9 @@ compare directly. The full milestone table is on the [dataset card](https://hugg
 
 ## Key learnings
 
-- **Legible errors fix transactions, not beliefs** — with transaction wastage largely fixed, the binding constraint moved up a level, to perception, and agents acted confidently on unverifiable or wrong world-state.
-- **Three arms, three world-model failures around one blind spot** — a run-lifetime inventory-endpoint outage produced a *false* world model (haiku), *no* world model (gpt-4o-mini), and a *wrong* world model (gemini).
-- **Perception parity became a first-class surface requirement** — no longer a property assumed of the world.
+- **Agents still acted on unverifiable or incorrect world state after transaction waste fell** — with transaction wastage largely fixed, the binding constraint moved up a level, to perception. Legible errors fix transactions, not beliefs.
+- **One inventory-endpoint outage produced three different failures** — the run-long outage produced a *false* world model for haiku, *no* world model for gpt-4o-mini, and a *wrong* world model for gemini.
+- **Those failures made perception parity a first-class surface requirement** — no longer a property assumed of the world.
 - **A verb→mechanic ambiguity cost gemini its team** — the sacrifice≠liquidate confusion produced a disambiguation patch in the next environment-interface version.
 - **Two structural gaps produced structural fixes** — explicit three-state transaction reporting, and a pre-run availability gate for the delegation layer.
 

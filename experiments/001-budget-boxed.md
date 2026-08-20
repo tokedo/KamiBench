@@ -26,21 +26,21 @@ series, and the frozen baseline every iteration after it is measured against.
 
 ## Goal
 
-Prove the v0 stack under real autonomous use in the live world before anything
-open-ended runs on it. This is entry #1 of the [Budget-boxed](budget-boxed.md)
-series — the protocol, the architecture, and the measurement live on that page
-— and its rows are the frozen baseline every stack iteration after it is
-measured against.
+The goal was to prove the v0 stack under real autonomous use in the live world
+before anything open-ended ran on it. Run 1 opened the
+[Budget-boxed](budget-boxed.md) series and established the frozen baseline for
+every later stack iteration. The series protocol, architecture, and measurement
+are defined on the design page.
 
 ## Outcome
 
 The three arms diverged sharply. Haiku completed the entire onboarding chain
-and five quests on day one, exhausting its budget in 17 hours; gpt-4o-mini ran
-the full week and never once called `register_account` — all 24 of its game
-transactions reverted, zero quests; gemini spent six days stuck
-pre-registration, was unblocked by a single legible validation error, then
-completed three quests. Cost per quest: haiku $2.15, gemini $3.00,
-gpt-4o-mini ∞.
+and five quests on day one, exhausting its budget in 17 hours. gpt-4o-mini ran
+for the full week without ever calling `register_account`; all 24 of its game
+transactions reverted, and it completed zero quests. Gemini spent six days
+stuck before registration, then a single legible validation error unblocked it
+and it completed three quests. Cost per quest was $2.15 for haiku, $3.00 for
+gemini, and ∞ for gpt-4o-mini.
 
 | | haiku-4.5 | gpt-4o-mini | gemini-2.5-flash-lite |
 |---|---|---|---|

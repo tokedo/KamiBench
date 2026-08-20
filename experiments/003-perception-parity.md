@@ -30,25 +30,29 @@ design re-runs as Run 4.
 
 ## Goal
 
-The perception-parity question: both of [Run 2](002-stack-delta.md)'s death
-spirals traced to what the agents could see, not to how they reasoned, and
+Both of [Run 2](002-stack-delta.md)'s death spirals traced to missing or
+incorrect world state — to what the agents could see, not to how they reasoned.
 Run 3 was registered as the first run on the E2 stack to measure what fixing
-the surface bought. That question is now carried, on the identical
-pre-registered design and pins, by [Run 4](004-perception-parity-rerun.md).
-Everything shared lives on the [design page](budget-boxed.md).
+that surface bought. Because Run 3 was invalidated,
+[Run 4](004-perception-parity-rerun.md) carries the same question on the
+identical pre-registered design and pins. Everything shared lives on the
+[design page](budget-boxed.md).
 
 ## Outcome
 
 A defect in our own run tooling — outside the published stack — degraded the
-run's instructions from the first session onward, and the first scheduled
-monitor pass detected it, about 17 hours in. With the registered environment
-never actually live, every answer the run could give would have been
-confounded, and its pre-registered binding exit criterion could not have been
-satisfied regardless of agent behavior — so the run was stopped and retired
-rather than left to spend its remaining budget on unusable evidence. The
-environment stack itself — interface and scaffold, at their pinned versions —
-was verified clean, and the design carries over unchanged. Series results
-exclude this run.
+run's instructions from the first session onward. The first scheduled monitor
+pass detected the defect about 17 hours after launch.
+
+The registered environment was therefore never actually live. Every answer
+the run could give would have been confounded, and the pre-registered binding
+exit criterion could not have been satisfied regardless of agent behavior.
+The run was stopped and retired instead of spending its remaining budget on
+unusable evidence.
+
+The environment stack itself — the interface and scaffold at their pinned
+versions — was verified clean. The design carries over unchanged, and series
+results exclude this run.
 
 ## Key learnings
 

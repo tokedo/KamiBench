@@ -31,29 +31,36 @@ family proceeds.
 
 ## Goal
 
-One question: **did the fixes land in agent hands?** [Run 4](004-perception-parity-rerun.md)
-met every check of the pre-registered series-exit criterion and also produced
-three concrete defects — an action that never once succeeded on-chain, a
-surface omission that cost an arm most of a week, and a revert-reason channel
-that was unusable in every instance it was raised. Each had a fix in this
-run's pinned stack; none had been demonstrated by an agent that does not know
-it exists. This run was the gate between the
-[budget-boxed series](budget-boxed.md) and the program's sustainability
-family. It earned the exit.
+One question: **did the fixes land in agent hands?**
+[Run 4](004-perception-parity-rerun.md) met every check of the pre-registered
+series-exit criterion but also produced three concrete defects. The collect
+action had never succeeded on-chain, a surface omission cost an arm most of a
+week, and the revert-reason channel was unusable every time it was raised.
+
+This run's pinned stack contained a fix for each defect. None of the fixes had
+been demonstrated by an agent that did not know the fix existed. Run 5 was the
+gate between the [budget-boxed series](budget-boxed.md) and the program's
+sustainability family. It earned the exit.
 
 ## Outcome
 
-The first budget stop since Run 2: haiku-4.5 hit the $10 cap at hour 154 and
-stopped gracefully 13.5 hours before the wall; the other two arms ran to the
-7-day wall. The repaired collect action — 0 successes in 15 attempts across
-the whole series before the fix — went **36 attempts, 20 on-chain, 0
-reverts**, every receipt inside the repaired gas band. Route discovery
-collapsed on the richer surface: first kami at hour 3.1 (haiku, vs 12.7 in
-Run 4) and hour 25.2 (gpt-4o-mini, vs 99.2). Cost accounting came out exact
-on every arm, and the shadow meter — computing spend independently from
-provider usage records on dedicated per-arm credentials — agreed with the
-run's own accounting within **4–6 millionths of a dollar** on both arms whose
-providers expose a usage API. Run 4 values in parentheses.
+Run 5 produced the first budget stop since Run 2. haiku-4.5 hit the $10 cap at
+hour 154 and stopped gracefully 13.5 hours before the wall, while the other two
+arms ran to the 7-day wall.
+
+Before the fix, the collect action had produced 0 successes in 15 attempts
+across the series. In Run 5, the repaired action recorded **36 attempts, 20
+on-chain, 0 reverts**, with every receipt inside the repaired gas band.
+
+The arms also found their first kami sooner on the richer surface: hour 3.1
+for haiku, compared with 12.7 in Run 4, and hour 25.2 for gpt-4o-mini,
+compared with 99.2. The result was a collapse in route-discovery time.
+
+The run's own cost accounting came out exact on every arm. The shadow meter
+computed spend independently from provider usage records, using dedicated
+credentials for each arm. On both arms whose providers expose a usage API, the
+meter agreed with the run's accounting within **4–6 millionths of a dollar**.
+Run 4 values appear in parentheses.
 
 | | haiku-4.5 | gpt-4o-mini | gemini-2.5-flash-lite |
 |---|---|---|---|
@@ -94,8 +101,8 @@ the sustainability family proceeds.**
 ## Key learnings
 
 - **Verification runs earn their keep** — every fix was demonstrated by agents that did not know the fixes existed, which is a different standard than the fixes passing their own tests.
-- **The delegation surface failed in the opposite direction from Run 4.** Run 4's delegated bot outlived the run; Run 5's delegation service reported RUNNING for containers that had stopped signing — or never signed at all — while the account-scoped strategy list read empty on all 45 queries across both enrolled arms. Every delegation decision either agent made was blind, and service-side status was unreliable in both directions. By cycle-opener attribution the LLM out-earned its own bot 2,121 vs 544 MUSU.
-- **The stopping-not-deciding finding reached its purest form**: gemini-2.5-flash-lite spent $1.08 of $10 over 122 sessions, never acquired a kami, and ended 55 of them asking a question to a user who does not exist. No arm in four runs had a fallback objective while the economy stayed open — the motivation, now fully documented, for the sustainability family's solvency objective.
+- **Delegation status did not match signing activity.** Run 4's delegated bot outlived the run. In Run 5, the delegation service reported RUNNING for containers that had stopped signing or had never signed at all, while the account-scoped strategy list was empty on all 45 queries across both enrolled arms. Every delegation decision made by either enrolled agent was blind, and service-side status was unreliable in both directions. By cycle-opener attribution, the LLM out-earned its own bot 2,121 vs 544 MUSU.
+- **gemini-2.5-flash-lite never chose a fallback objective.** It spent $1.08 of $10 over 122 sessions, never acquired a kami, and ended 55 sessions by asking a question to a user who does not exist. This was the purest form of the stopping-not-deciding finding. No arm in four runs had a fallback objective while the economy stayed open — the motivation, now fully documented, for the sustainability family's solvency objective.
 - **Measurement is ready for the family that needs it**: five closed comparison windows across the run, all inside tolerance by ~3 orders of magnitude; the meter's append-only ledgers replay hash-exact and ship in the dataset.
 
 ## Full detail
