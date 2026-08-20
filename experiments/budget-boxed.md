@@ -12,12 +12,12 @@ game.
 ## The problem
 
 KamiBench's thesis needs agents that live in a persistent world for a long
-time and pay their own way. Before running that, we had to know that the
-plumbing works: that every on-chain action is reachable through the tools, that
-the agent sees the world state it needs, that failures come back as something
-an agent can act on, and that the money is counted right. None of that can be
-checked from a unit test — it shows only when an autonomous agent uses the
-stack for days in a live economy.
+time and pay their own way. Before running that experiment, we had to know
+whether the stack could support autonomous play for days in a live economy.
+Every on-chain action had to be reachable through the tools, and the agent had
+to see the world state it needed. Failures had to return information the agent
+could act on, while the system counted the money correctly. Unit tests alone
+could not establish that all four properties held under sustained use.
 
 Budget-boxed is that check. Its purpose was to find and fix the stack's
 defects, not to rank models.
@@ -28,6 +28,11 @@ Drop three cheap models into the world under an identical, tightly bounded box.
 Read what went wrong. Fix the stack. Re-run the same box with the same models
 on the fixed stack — the run-over-run change *is* the stack effect. Repeat
 until a pre-registered exit test passes.
+
+That comparison is cross-epoch: world drift and possible silent provider-side
+model updates remain in the run-over-run delta. Stack changes also landed in
+bundles, so the series treats the delta as a stack effect without attributing
+it to any single change.
 
 | | |
 |---|---|
@@ -57,36 +62,42 @@ Three choices explain the shape:
   correctly — a clean proxy for "the surface is usable", and the objective the
   agents were actually given.
 
-Every run measured the same four things: quests against inference spent; what
-the agent learned and wrote down; how it paced itself; and where it got stuck
-and which stack layer the stuck state implicated. The last one drove the next
-run.
+Every run measured quests against inference spent, what the agent learned and
+wrote down, and how it paced itself. The runs also recorded where each agent
+got stuck and which stack layer the stuck state implicated. That final
+observation drove the next run.
 
 ## What happened, run by run
 
-**[Run 1](001-budget-boxed.md) — the baseline.** On the first stack the three
-arms diverged wildly: haiku finished the onboarding chain and five quests on
-day one and burned its $10 in 17 hours; gpt-4o-mini ran the whole week without
-ever registering an account; gemini sat stuck for six days until a single
-readable error unblocked it. Between 58% and 97% of every arm's on-chain
-writes reverted. The sharpest finding was about errors, not models: one
-human-readable validation message did in a turn what four days of opaque chain
-reverts could not. **Fixed for the next run:** the interface checks an action's
-preconditions before sending it and returns a factual reason instead of a
-revert; the scaffold gained a loop breaker, session caps, self-chosen wake
-times and cache-aware cost accounting.
+**[Run 1](001-budget-boxed.md) — the baseline.** On the first stack, the three
+arms diverged widely. Haiku finished the onboarding chain and five quests on
+day one, then burned its $10 in 17 hours. gpt-4o-mini ran for the full week
+without registering an account, while gemini remained stuck for six days until
+a single readable error unblocked it. Between 58% and 97% of every arm's
+on-chain writes reverted.
+
+The sharpest finding concerned errors, not models: one human-readable
+validation message did in one turn what four days of opaque chain reverts could
+not. **Fixed for the next run:** the interface began checking an action's
+preconditions before sending it and returning a factual reason instead of a
+revert. The scaffold gained a loop breaker, session caps, self-chosen wake
+times, and cache-aware cost accounting.
 
 **[Run 2](002-stack-delta.md) — the same box on the fixed stack.** Reverts fell
 to 0–5%. All three arms registered; quests rose at fixed budget (haiku 5→8,
-gemini 3→5) and cost per quest fell by half or more. With transaction waste
-gone, the next weak layer showed: **perception**. A run-long outage of the
-game's inventory endpoint hit all arms, and each failed differently — haiku
-believed it held no money while holding ~820 MUSU; gpt-4o-mini looped read-only
-for 95-plus sessions; gemini sacrificed its own three kamis chasing a quest whose
-verb the tool description had blurred. Legible errors fix transactions, not
-beliefs. **Fixed:** world-state reads moved to a dedicated lens so the agent
-sees what the game client sees; the ambiguous tool description was rewritten;
-every transaction now reports one of three explicit states.
+gemini 3→5), and cost per quest fell by half or more.
+
+A run-long outage of the game's inventory endpoint then affected all three
+arms, but each failed differently. Haiku believed it held no money while
+holding ~820 MUSU; gpt-4o-mini looped read-only for 95-plus sessions; and
+gemini sacrificed its own three kamis while chasing a quest whose verb the
+tool description had blurred. With transaction waste gone, these failures
+exposed the next weak layer: **perception**. Legible errors fix transactions,
+not beliefs.
+
+**Fixed:** world-state reads moved to a dedicated lens so the agent sees what
+the game client sees; the ambiguous tool description was rewritten; and every
+transaction now reports one of three explicit states.
 
 **[Run 3](003-perception-parity.md) — aborted at 17 hours.** A defect in our
 own run tooling, outside the published stack, had corrupted the agents'
@@ -96,22 +107,25 @@ over unchanged. Reported plainly, excluded from series results.
 **[Run 4](004-perception-parity-rerun.md) — the clean re-run.** Every arm
 finished the week with money left; 638 doomed writes were blocked before gas
 was spent against 6 that landed and reverted; every arm registered inside 3.5
-hours; the lens served every read for seven days. gpt-4o-mini, a spectator in
-Run 2, completed 7 quests. What remained was **belief and omission**: one arm
-spent 5.4 days dormant on a false conclusion it re-read twenty times and never
-re-tested, because the one read that would have corrected it was missing from
-the surface. And one action — collecting harvested MUSU — had never once
-succeeded on-chain in two runs: a gas ceiling set below its real cost. The
-pre-registered exit test held on all five checks. **Fixed:** the collect
-action and four siblings; per-objective quest progress in the lens; a rebuilt
-revert-reason channel.
+hours; and the lens served every read for seven days. After looping read-only
+for 95-plus sessions in Run 2, gpt-4o-mini completed 7 quests in Run 4.
+
+One remaining failure involved **belief and omission**. An arm spent 5.4 days
+dormant on a false conclusion that it re-read twenty times and never re-tested
+because the one read that would have corrected the conclusion was missing from
+the surface. Separately, one action—collecting harvested MUSU—had not succeeded
+on-chain once in two runs because its gas ceiling was below the real cost.
+
+The pre-registered exit test held on all five checks. **Fixed:** the collect
+action and four siblings; per-objective quest progress in the lens; and a
+rebuilt revert-reason channel.
 
 **[Run 5](005-verification-run.md) — verification.** Did the fixes work in the
-hands of an agent that does not know they exist? They did: collect went 36
-attempts, 20 on-chain, 0 reverts; the dormancy class did not recur; the
-revert-reason channel corrected a failing call within one session; and a cost
-meter riding in shadow agreed with the run's own accounting to millionths of a
-dollar. Verdict **MINOR-FIXES**. The series closed.
+hands of an agent that does not know they exist? They did: of 36 collect
+attempts, 20 reached the chain and 0 reverted. The dormancy class did not
+recur, and the revert-reason channel corrected a failing call within one
+session. A cost meter running in shadow agreed with the run's own accounting to
+millionths of a dollar. Verdict **MINOR-FIXES**. The series closed.
 
 ## The result
 
@@ -124,22 +138,32 @@ kami reached level 2 in the whole series.*
 Two conclusions, and they point in different directions.
 
 **The stack is solid.** Reverts collapsed two orders of magnitude; every arm
-registers within hours; every write is either blocked with a reason, landed, or
-reverted with a reason the agent can act on; the collect action that failed
-twelve times in a row now lands every time it reaches the chain; and the money is counted to a
-millionth of a dollar. This is the instrument the rest of the program runs on.
+registers within hours. Every write is either blocked with a reason, landed, or
+reverted with a reason the agent can act on. The collect action that failed
+twelve times in a row now lands every time it reaches the chain, and the money
+is counted to a millionth of a dollar. This is the instrument the rest of the
+program runs on.
 
 **The agents are still poor players.** Quests barely moved across four
-completed runs. Two of three models never opened the design document; the one
-that did guessed at file paths and got a quarter of them wrong. Seven leveling tools sat in the schema every session and were
-called four times in fifteen thousand calls; MUSU piled up in wallets while
-kamis stayed at level 1 or 2. When arms stalled, they stopped rather than picked a
-fallback — one spent 55 sessions asking a question to a user who does not
-exist. Cheap models cannot be the whole story, because the same models fixed
-their behaviour instantly whenever the fix arrived *inside a tool result*.
-That is the question the next design, [knowledge delivery](knowledge-delivery.md),
-takes up: hold the stack fixed and vary how the game's knowledge reaches the
-agent.
+completed runs.
+
+Two of three models never opened the design document. The one that did open it
+guessed at file paths and got a quarter of them wrong.
+
+Seven leveling tools sat in the schema every session but were called only four
+times in fifteen thousand calls. Meanwhile, MUSU accumulated in wallets while
+kamis remained at level 1 or 2.
+
+When arms stalled, they stopped instead of choosing a fallback. One arm spent
+55 sessions asking a question to a user who does not exist.
+
+Cheap models cannot be the whole story, because the same models fixed their
+behaviour instantly whenever the fix arrived *inside a tool result*.
+
+That delivery pattern does not change the result about the stack; it raises a
+separate question about the agents. The next design,
+[knowledge delivery](knowledge-delivery.md), holds the stack fixed and varies
+how the game's knowledge reaches the agent.
 
 ## The series at a glance
 
