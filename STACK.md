@@ -75,7 +75,7 @@ add model API keys, and run.
 
 1. **Run the stack.** Start [kami-lens](https://github.com/tokedo/kami-lens) — the repo
    ships a
-   [zero-config docker compose](https://github.com/tokedo/kami-lens/blob/main/docker-compose.sample.yml)
+   [zero-config Docker Compose file](https://github.com/tokedo/kami-lens/blob/main/docker-compose.sample.yml)
    — then set up [kami-harness](https://github.com/tokedo/kami-harness) against it per
    its [SETUP.md](https://github.com/tokedo/kami-harness/blob/main/SETUP.md) (the lens
    socket is configured in

@@ -91,7 +91,7 @@ numbering.
   same world, same tools, same objective; only how the game's knowledge
   reaches the agent changes — a folder to read, a search tool, facts pushed
   inside tool results, a plan file. Five budget-boxed runs never leveled a
-  kami; this design asks whether delivery, not the model, was the bottleneck.
+  Kami; this design asks whether delivery, not the model, was the bottleneck.
   Wave 1 (control vs. pushed knowledge, Sonnet 5 and gpt-5.2) launched
   2026-08-17.
 - **[Sustainability](experiments/sustainability.md)** — *pending*: the design
@@ -116,7 +116,8 @@ numbering.
   [Run 3](experiments/003-perception-parity.md) was aborted and reported;
   [Run 4](experiments/004-perception-parity-rerun.md) completed on the
   perception-parity stack; [Run 5](experiments/005-verification-run.md) —
-  the verification run, with the cost meter in shadow — is in progress.
+  the verification run, with the cost meter in shadow — is complete; its exit
+  test passed, and the series is closed.
 
 ## The blog
 

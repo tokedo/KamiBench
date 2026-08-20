@@ -39,7 +39,7 @@ two selected models define the tier tested here.
 
 One question: **does pushing the game's knowledge to a capable model change
 how it plays?** Five [budget-boxed](budget-boxed.md) runs failed to level a
-single kami. The [design](knowledge-delivery.md) argues that the failure came
+single Kami. The [design](knowledge-delivery.md) argues that the failure came
 not because the models were small but because the knowledge sat in a folder
 nobody read. This wave tests that interpretation by comparing the control and
 pushed outcomes for each model.

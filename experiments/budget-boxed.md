@@ -90,7 +90,7 @@ gemini 3→5), and cost per quest fell by half or more.
 A run-long outage of the game's inventory endpoint then affected all three
 arms, but each failed differently. Haiku believed it held no money while
 holding ~820 MUSU; gpt-4o-mini looped read-only for 95-plus sessions; and
-gemini sacrificed its own three kamis while chasing a quest whose verb the
+gemini sacrificed its own three Kamis while chasing a quest whose verb the
 tool description had blurred. With transaction waste gone, these failures
 exposed the next weak layer: **perception**. Legible errors fix transactions,
 not beliefs.
@@ -113,7 +113,7 @@ for 95-plus sessions in Run 2, gpt-4o-mini completed 7 quests in Run 4.
 One remaining failure involved **belief and omission**. An arm spent 5.4 days
 dormant on a false conclusion that it re-read twenty times and never re-tested
 because the one read that would have corrected the conclusion was missing from
-the surface. Separately, one action—collecting harvested MUSU—had not succeeded
+the surface. Separately, one action — collecting harvested MUSU — had not succeeded
 on-chain once in two runs because its gas ceiling was below the real cost.
 
 The pre-registered exit test held on all five checks. **Fixed:** the collect
@@ -133,7 +133,7 @@ millionths of a dollar. Verdict **MINOR-FIXES**. The series closed.
 
 *Left: the stack converged — reverts went from most writes to almost none.
 Right: game progress did not — the best arm went 5, 8, 7, 9 quests, and one
-kami reached level 2 in the whole series.*
+Kami reached level 2 in the whole series.*
 
 Two conclusions, and they point in different directions.
 
@@ -152,13 +152,13 @@ guessed at file paths and got a quarter of them wrong.
 
 Seven leveling tools sat in the schema every session but were called only four
 times in fifteen thousand calls. Meanwhile, MUSU accumulated in wallets while
-kamis remained at level 1 or 2.
+Kamis remained at level 1 or 2.
 
 When arms stalled, they stopped instead of choosing a fallback. One arm spent
 55 sessions asking a question to a user who does not exist.
 
 Cheap models cannot be the whole story, because the same models fixed their
-behaviour instantly whenever the fix arrived *inside a tool result*.
+behavior instantly whenever the fix arrived *inside a tool result*.
 
 That delivery pattern does not change the result about the stack; it raises a
 separate question about the agents. The next design,

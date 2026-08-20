@@ -70,7 +70,7 @@ excluded on purpose.
 
 The primary outcome and the pre-registered verdict rule determine the
 experimental result. The other process measurements help explain how each arm
-reached its outcome, although one of them—a landed level-up—also appears in the
+reached its outcome, although one of them — a landed level-up — also appears in the
 verdict rule. This is the distinction behind the shorthand: outcomes decide;
 process observables explain.
 

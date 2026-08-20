@@ -50,11 +50,11 @@ money left. Run 1 values appear in parentheses.
 |---|---|---|---|
 | stopped | budget $10.03, h112 | 7-day wall, $5.38 | 7-day wall, $2.04 |
 | quests | **8** (5) | 0 (0) | 5 (3) |
-| kamis bought | 3 (2) | 0 (0) | 3 (1) |
+| Kamis bought | 3 (2) | 0 (0) | 3 (1) |
 | real on-chain successes | 156 (45) | 19 (0) | 88 (11) |
 | chain revert rate | 0.048 (0.575) | 0.000 (0.967) | 0.011 (0.943) |
 | registered in-game | h0.4 (h1.7) | h8.4 (never) | h2.3 (h137.5) |
-| usd per quest | 1.25 (2.15) | ∞ (∞) | 0.41 (3.00) |
+| USD per quest | 1.25 (2.15) | ∞ (∞) | 0.41 (3.00) |
 
 ## Milestones
 
@@ -66,7 +66,7 @@ compare directly. The full milestone table is on the [dataset card](https://hugg
 
 ## Key learnings
 
-- **Agents still acted on unverifiable or incorrect world state after transaction waste fell** — with transaction wastage largely fixed, the binding constraint moved up a level, to perception. Legible errors fix transactions, not beliefs.
+- **Agents still acted on unverifiable or incorrect world state after transaction waste fell** — with transaction waste largely fixed, the binding constraint moved up a level, to perception. Legible errors fix transactions, not beliefs.
 - **One inventory-endpoint outage produced three different failures** — the run-long outage produced a *false* world model for haiku, *no* world model for gpt-4o-mini, and a *wrong* world model for gemini.
 - **Those failures made perception parity a first-class surface requirement** — no longer a property assumed of the world.
 - **A verb→mechanic ambiguity cost gemini its team** — the sacrifice≠liquidate confusion produced a disambiguation patch in the next environment-interface version.

@@ -11,7 +11,7 @@ Same three models, same $10 / 7-day box, same objective text — the clean
 re-run of Run 3's pre-registered design on the identical perception-parity
 pins (environment interface v2.0.0, 99 tools, lens-backed reads; scaffold
 v0.3.2), and the E2 baseline for the series. The stack held: zero perception
-outages, zero kamis lost, write waste at the floor — and the binding
+outages, zero Kamis lost, write waste at the floor — and the binding
 constraint moved again, from perception to omission and belief.
 <!-- ONELINER:END -->
 
@@ -46,13 +46,13 @@ Everything shared lives on the [design page](budget-boxed.md).
 ## Outcome
 
 All three arms ran to the 7-day wall with money still in the box. There was no
-budget stop and no kami was lost; the arms spent $16.97 of the $30 envelope.
+budget stop and no Kami was lost; the arms spent $16.97 of the $30 envelope.
 The legible pre-transaction gates stopped **638 doomed write attempts**, while
 **6 landed transactions reverted** across the run (Run 2: 331 blocked attempts
 and 9 landed reverts). Every arm registered in-game inside 3.5 hours.
 
 gpt-4o-mini completed 7 quests, compared with 0 in Run 2. It also bought a
-kami and landed 317 on-chain transactions. Run 2's spectator behavior did not
+Kami and landed 317 on-chain transactions. Run 2's spectator behavior did not
 recur.
 
 Lens-backed reads served every world-state query with zero unavailability and
@@ -63,10 +63,10 @@ Run 2 values appear in parentheses.
 |---|---|---|---|
 | stopped | 7-day wall, $8.95 (budget $10.03, h112) | 7-day wall, $6.48 ($5.38) | 7-day wall, $1.54 ($2.04) |
 | quests | 5 (**8**) | **7** (0) | 2 (5) |
-| kamis bought | 1 (3) | 1 (0) | 0 (3) |
+| Kamis bought | 1 (3) | 1 (0) | 0 (3) |
 | chain revert rate | 0.024 (0.048) | 0.012 (0.000) | 0.000 (0.011) |
 | registered in-game | h0.4 (h0.4) | h1.5 (h8.4) | h3.4 (h2.3) |
-| usd per quest | 1.79 (1.25) | 0.93 (∞) | 0.77 (0.41) |
+| USD per quest | 1.79 (1.25) | 0.93 (∞) | 0.77 (0.41) |
 
 ## Milestones
 
@@ -99,8 +99,8 @@ clean, every stop a graceful wake-time check.
 
 **All five held as written — and we registered a verification run anyway.**
 Several limits qualify what those checks cover. They score *attempted*
-behaviour only, and the arms attempted a narrow slice of the 99-tool surface:
-160 tool-arm cells were never attempted at all. The run's largest behavioural
+behavior only, and the arms attempted a narrow slice of the 99-tool surface:
+160 tool-arm cells were never attempted at all. The run's largest behavioral
 loss came from a surface-**omission** class outside the checks.
 
 A reproducible write-path defect also traveled the whole series undiagnosed:

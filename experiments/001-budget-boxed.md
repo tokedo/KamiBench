@@ -46,7 +46,7 @@ gemini, and ∞ for gpt-4o-mini.
 |---|---|---|---|
 | stopped | budget, hour 17 | 7-day wall | 7-day wall |
 | quests | **5** | 0 | 3 |
-| kamis bought | 2 (level 1) | 0 | 1 (level 31) |
+| Kamis bought | 2 (level 1) | 0 | 1 (level 31) |
 | successful on-chain actions | 45 | 0 | 11 |
 | chain revert rate | 0.58 | 0.97 | 0.94 |
 
@@ -63,7 +63,7 @@ compared against. The full milestone table is on the [dataset card](https://hugg
 - **Error legibility, not model capability, was the sharpest differentiator** — one human-readable validation error did in a single turn what four days of opaque chain reverts could not.
 - **A single missing step was the cleanest capability discriminator** — two arms completed every onboarding step except registration, and neither ever identified it as the blocker.
 - **Cost structure dominated spend** — the 84-tool surface re-billed uncached on every call, and un-broken poll loops made repetition detection a budget control, not just hygiene.
-- **Orientation speed and decision quality are different axes** — haiku moved fast and bought level-1 kamis; gemini moved slowly and bought a level-31 kami near floor price.
+- **Orientation speed and decision quality are different axes** — haiku moved fast and bought level-1 Kamis; gemini moved slowly and bought a level-31 Kami near floor price.
 
 Most of what this run taught us was about the stack, not the models — each
 learning became a pinned stack change that [Run 2](002-stack-delta.md) then

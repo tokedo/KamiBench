@@ -64,7 +64,7 @@ A benchmark for continual learning needs four things, and it needs all four:
 that has run continuously for more than a year. In effect, it is a
 never-ending board game in which every move is public and permanent.
 
-Players operate persistent creatures called Kami. The Kami harvest MUSU, the
+Players operate persistent creatures called Kami. Kamis harvest MUSU, the
 in-game currency, at shared locations. Harvesting drains their health; other
 players can liquidate a weakened harvester and claim a share of its yield.
 
@@ -97,7 +97,7 @@ decisions — who harvests where, what to spend, when to pull back — and
 every one of them has to serve a longer strategy the player chooses for
 themselves.
 
-![A working session in Kamigotchi: a party of Kami harvesting at a node — health bars, yields, affinities — the node's description and scavenge progress, and an inventory of items, all inside the pixel-art world.](figures/kamigotchi-ui.png)
+![A working session in Kamigotchi: a party of Kamis harvesting at a node — health bars, yields, affinities — the node's description and scavenge progress, and an inventory of items, all inside the pixel-art world.](figures/kamigotchi-ui.png)
 
 Its creators — the Asphodel team —
 [designed it agent-first](https://docs.asphodel.io/architecture/bots-and-agents)
@@ -132,7 +132,7 @@ for its thinking. It earns by playing well in a live economy. KamiBench records
 the agent's earnings, costs, and running balance over time, with each quantity
 priced by the economy rather than by a grader.
 
-Solvency—does the agent earn more than it spends?—is the floor. The learning
+Solvency — does the agent earn more than it spends? — is the floor. The learning
 signal is the full trajectory of those financial curves:
 
 - The smartest novice pays for its token burn. Brute-force search shows up
@@ -173,7 +173,7 @@ stack validation. [The budget-boxed series](../experiments/budget-boxed.md)
 performed this check through deliberately bounded runs with fixed limits,
 pre-registered designs, and datasets published as the runs closed.
 
-The next experiment family—a related sequence of runs—makes the thesis
+The next experiment family — a related sequence of runs — makes the thesis
 measurable. Its agents use a running balance and remain alive exactly as long
 as they can pay for their own thinking.
 

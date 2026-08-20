@@ -52,7 +52,7 @@ Before the fix, the collect action had produced 0 successes in 15 attempts
 across the series. In Run 5, the repaired action recorded **36 attempts, 20
 on-chain, 0 reverts**, with every receipt inside the repaired gas band.
 
-The arms also found their first kami sooner on the richer surface: hour 3.1
+The arms also found their first Kami sooner on the richer surface: hour 3.1
 for haiku, compared with 12.7 in Run 4, and hour 25.2 for gpt-4o-mini,
 compared with 99.2. The result was a collapse in route-discovery time.
 
@@ -66,10 +66,10 @@ Run 4 values appear in parentheses.
 |---|---|---|---|
 | stopped | **budget $10.02, h154** (7-day wall, $8.95) | 7-day wall, $6.10 ($6.48) | 7-day wall, $1.08 ($1.54) |
 | quests | **9** (5) | 7 (7) | 2 (2) |
-| kamis bought | 1 (1) | 1 (1) | 0 (0) |
+| Kamis bought | 1 (1) | 1 (1) | 0 (0) |
 | chain revert rate | 0.000 (0.024) | 0.004 (0.012) | 0.000 (0.000) |
 | registered in-game | h0.9 (h0.4) | h3.0 (h1.5) | h1.9 (h3.4) |
-| usd per quest | 1.11 (1.79) | 0.87 (0.93) | 0.54 (0.77) |
+| USD per quest | 1.11 (1.79) | 0.87 (0.93) | 0.54 (0.77) |
 
 ## Milestones
 
@@ -102,7 +102,7 @@ the sustainability family proceeds.**
 
 - **Verification runs earn their keep** — every fix was demonstrated by agents that did not know the fixes existed, which is a different standard than the fixes passing their own tests.
 - **Delegation status did not match signing activity.** Run 4's delegated bot outlived the run. In Run 5, the delegation service reported RUNNING for containers that had stopped signing or had never signed at all, while the account-scoped strategy list was empty on all 45 queries across both enrolled arms. Every delegation decision made by either enrolled agent was blind, and service-side status was unreliable in both directions. By cycle-opener attribution, the LLM out-earned its own bot 2,121 vs 544 MUSU.
-- **gemini-2.5-flash-lite never chose a fallback objective.** It spent $1.08 of $10 over 122 sessions, never acquired a kami, and ended 55 sessions by asking a question to a user who does not exist. This was the purest form of the stopping-not-deciding finding. No arm in four runs had a fallback objective while the economy stayed open — the motivation, now fully documented, for the sustainability family's solvency objective.
+- **gemini-2.5-flash-lite never chose a fallback objective.** It spent $1.08 of $10 over 122 sessions, never acquired a Kami, and ended 55 sessions by asking a question to a user who does not exist. This was the purest form of the stopping-not-deciding finding. No arm in four runs had a fallback objective while the economy stayed open — the motivation, now fully documented, for the sustainability family's solvency objective.
 - **Measurement is ready for the family that needs it**: five closed comparison windows across the run, all inside tolerance by ~3 orders of magnitude; the meter's append-only ledgers replay hash-exact and ship in the dataset.
 
 ## Full detail
