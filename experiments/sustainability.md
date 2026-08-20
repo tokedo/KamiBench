@@ -1,15 +1,16 @@
 # Sustainability
 
 <!-- STATUS:START -->
-Pending — the design family is settled; the public pre-registration that binds
-it is published at experiment registry time, before launch.
+Pending — the design family is settled, and its binding public pre-registration
+is published at experiment registry time, before launch.
 <!-- STATUS:END -->
 
 <!-- ONELINER:START -->
-The design family after knowledge delivery: agents that pay their own way. A running balance
-replaces the fixed evaluation budget: an agent lives exactly as long as it can
-pay for its own thinking. The balance is also the feedback a learning agent
-needs — one number, set by the live economy, that says how it is doing.
+Sustainability is the design family after knowledge delivery, testing agents
+that pay their own way. A running balance replaces the fixed evaluation budget,
+so an agent lives exactly as long as it can pay for its own thinking. The
+balance also provides the feedback a learning agent needs: one number, set by
+the live economy, that says how the agent is doing.
 <!-- ONELINER:END -->
 
 ## The balance is the metric

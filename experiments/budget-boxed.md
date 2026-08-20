@@ -1,10 +1,11 @@
 # Budget-boxed — stack validation
 
 <!-- ONELINER:START -->
-Five bounded runs — $10 of inference, seven days, three cheap models — to
-prove that the environment interface, the scaffold, the telemetry and the cost
-accounting hold up under real autonomous play before anything open-ended runs
-on them. Complete: the stack is solid. The agents still do not understand the
+Budget-boxed used five bounded runs to prove that the stack holds up under real
+autonomous play before anything open-ended runs on it. The runs tested the
+environment interface, the scaffold, the telemetry, and the cost accounting
+using the same box each time: $10 of inference, seven days, and three cheap
+models. Complete: the stack is solid. The agents still do not understand the
 game.
 <!-- ONELINER:END -->
 

@@ -58,14 +58,13 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
   <section class="section container" aria-labelledby="stack">
     <h2 id="stack">One stack, swappable agents, clear metric</h2>
     <p class="section-lead">
-      Different agent configurations are tested against the identical stack: the
-      world, the environment interface, and the meter stay fixed while agents
-      swap in. The meter prices every run — inference, gas, earnings — so every
-      cost and every earning is traceable.{' '}
+      Each agent configuration is tested against the same fixed stack: the world,
+      environment interface, and meter stay fixed. The meter prices every run —
+      inference, gas, and earnings — so every cost and earning is traceable.{' '}
       <a href="/stack">The Stack page</a>{' '}is everything you need to plug in an
       agent of your own.
     </p>
-    <figure class="stack-figure" aria-label="Stack schematic: swappable agents connect through a fixed environment interface to the world; the meter observes both sides and produces one number, solvency.">
+    <figure class="stack-figure" aria-label="Stack schematic: swappable agents connect to the world through a fixed environment interface. The meter observes the agent and the world and produces one number: solvency.">
       <svg viewBox="0 0 720 292" role="img">
         <defs>
           <marker id="lf-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
@@ -106,12 +105,12 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
       </svg>
     </figure>
     <p class="section-lead stack-metric">
-      The agent's economy is the metric. The trajectory of its profit-and-loss
-      curve — earnings against inference and gas — shows whether
-      the agent is learning: an agent that learns plays better and cheaper over
-      time, and its curve bends up; an agent that doesn't stays flat or sinks.
-      And the score is ungameable: earnings and costs are adjudicated by the
-      chain and the market, not reported by the agent or graded by us.
+      The agent's economy is the metric. Its profit-and-loss curve tracks earnings
+      against inference and gas, and the trajectory shows whether the agent is
+      learning. An agent that learns plays better and cheaper over time, so its
+      curve bends up, while an agent that does not learn stays flat or sinks. The
+      score is ungameable because earnings and costs are determined by the chain and
+      the market, not reported by the agent or graded by us.
     </p>
   </section>
 
@@ -129,9 +128,9 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
     </ul>
     <div class="why-coda">
       <p>
-        The program is portable: Kamigotchi is the best-fit instance we know of today,
-        and if a more autonomous world emerges, the same experiments transfer. The full
-        argument is in the blog:{' '}
+        The program is portable: Kamigotchi is the best-fit instance we know of
+        today, and if a more autonomous world emerges, the same experiments
+        transfer. The full argument is in the blog:{' '}
         <a href={clPostHref}>Why KamiBench for continual learning →</a>
       </p>
     </div>
@@ -140,11 +139,11 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
   <section class="section container" aria-labelledby="experiments">
     <h2 id="experiments">Experiments</h2>
     <p class="section-lead">
-      The registry of controlled experiments, grouped by design: a design fixes the
-      protocol — the question, the architecture, the measurement — and each run
-      executes it with a pinned manifest of models and stack versions. Designs are
-      published and git-timestamped before their first run; results are added as
-      runs complete.
+      The registry groups controlled experiments by design. A design fixes the
+      protocol: the question, the architecture, and the measurement. Each run
+      executes the protocol with a pinned manifest of models and stack versions. We
+      publish and git-timestamp each design before its first run, then add results
+      as runs complete.
     </p>
     <ul class="cards exp-list">
       {

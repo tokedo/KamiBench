@@ -7,12 +7,12 @@ with a verifiable history.**
 
 > ⚠️ **Open research in progress.**
 > <!-- STATUS:START -->
-> KamiBench is ongoing research: controlled experiments dropping AI agents
-> into a live, persistent world, with designs pre-registered and every dataset
-> published as its run closes — [the experiments](experiments/) carry the
-> current state of the series. The stack behind them is fully open, and
-> [one page](STACK.md) is everything you need to plug in an agent of your
-> own. If you build agents, consider this an invitation.
+> KamiBench is ongoing research built around controlled experiments that place
+> AI agents in a live, persistent world. Each design is pre-registered, and
+> every dataset is published when its run closes. [The experiments](experiments/)
+> carry the current state of the series. The stack is fully open, and
+> [one page](STACK.md) is everything you need to plug in an agent of your own.
+> If you build agents, consider this an invitation.
 > <!-- STATUS:END -->
 
 ---
@@ -21,19 +21,20 @@ with a verifiable history.**
 
 <!-- IDEA:START -->
 - **KamiBench is a research program** to evaluate agents in a persistent
-  on-chain world — no resets, a public permanent history, and stakes with
-  real external value.
-- **The loop under test is continual learning**: the agent controls its own
-  wallet, enters an unfamiliar world, absorbs its history, acts, observes
-  what succeeds and fails, revises.
-- **The world is [Kamigotchi](https://docs.asphodel.io/kamigotchi)** — a live
-  on-chain MMORPG, operating continuously for more than a year. Humans and
-  agents play on identical terms, every move is public and permanent, and
+  on-chain world that does not reset. The world has a public, permanent history
+  and stakes with real external value.
+- **The loop under test is continual learning.** The agent controls its own
+  wallet, enters an unfamiliar world, and takes in the world's history. It then
+  acts, observes what succeeds and fails, and revises its approach.
+- **The world is [Kamigotchi](https://docs.asphodel.io/kamigotchi)**, a live
+  on-chain MMORPG that has operated continuously for more than a year. Humans
+  and agents play on identical terms. Every move is public and permanent, and
   the in-game economy connects to ETH-backed assets. Read more in
   [the blog](blog/2026-08-14-why-kamibench-for-continual-learning.md).
-- **Too large to re-derive from scratch each session** — ~70 locations, 74
-  skills, 178 items, an adapting player population. Skilled play is knowing
-  what to focus on and when, what to ignore — and no strategy stays dominant.
+- **The world is too large to re-derive from scratch each session.** It has
+  ~70 locations, 74 skills, 178 items, and an adapting player population.
+  Skilled play requires knowing what to focus on and when, and what to ignore,
+  in a world where no strategy stays dominant.
 - **The game is the substrate, not the research question.** The question is
   whether an agent can continually learn — accumulate memory, build on its
   own experience, and improve over time.
@@ -43,21 +44,23 @@ with a verifiable history.**
 
 <!-- WHY:START -->
 - **A verifiable record of what happened** — Anyone can audit a run from the
-  chain itself, without trusting evaluator-owned servers; later rule changes
-  cannot rewrite the history that preceded them.
+  chain itself without trusting evaluator-owned servers. Later rule changes
+  cannot rewrite the history recorded before those changes.
 - **A world between experiments** — State never resets. New agents enter a
   world already shaped by prior players, agents, and rule changes.
-- **One world for humans and agents** — Same state, same economy, same
-  transaction layer; no segregated bot ladder, no provisioned instances.
+- **One world for humans and agents** — Humans and agents share the same state,
+  economy, and transaction layer. Agents do not play on a separate bot ladder
+  or in separate game instances.
 - **An open past, an unknown future** — Every entrant can study the same
-  public history, but the next state is produced by a live population; the
-  test distribution evolves without a curator authoring new episodes.
-- **Actions without a GUI** — Structured transactions, not pixels: the
-  measurement is planning, memory, and adaptation, not perception
+  public history. A live population produces the next state, so the test
+  distribution evolves without a curator writing new episodes.
+- **Actions without a GUI** — Actions are structured transactions rather than
+  pixels. The measurement is planning, memory, and adaptation, not perception
   brittleness.
 - **Consequences with external value** — Earnings are ETH-backed and can, in
-  principle, pay for the agent's own inference — survival as an operating
-  constraint, not just a score.
+  principle, pay for the agent's own inference. The ability to pay for
+  inference from earnings makes survival an operating constraint, not just a
+  score.
 <!-- WHY:END -->
 
 The program is portable: Kamigotchi is the best-fit instance we know of

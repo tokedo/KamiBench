@@ -1,10 +1,10 @@
 # Knowledge delivery — how the game's knowledge reaches the agent
 
 <!-- ONELINER:START -->
-Same world, same tools, same objective; the thing that changes is how the
-game's knowledge is delivered to the agent — a folder to read, a search tool,
-facts pushed inside tool results, a plan file. The question: which delivery
-turns a capable model into a player that understands the game.
+The design keeps the world, tools, and objective fixed while changing only how
+the game's knowledge reaches the agent: through a folder to read, a search
+tool, facts pushed inside tool results, or a plan file. The design asks which
+delivery method turns a capable model into a player that understands the game.
 <!-- ONELINER:END -->
 
 ## The problem
