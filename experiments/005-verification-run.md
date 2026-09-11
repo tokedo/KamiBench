@@ -9,7 +9,7 @@ closed. The full dataset is public.
 
 <!-- ONELINER:START -->
 Same three models, same $10 / 7-day box — the verification run that closed the
-budget-boxed series. The fixes Run 4 paid for had to work in agent hands, under
+stack-validation series. The fixes Run 4 paid for had to work in agent hands, under
 a binding pre-registered exit test, while a cost meter rode in shadow. They
 did: the never-succeeding collect action went 20-for-20 on-chain, the dormancy
 class did not recur, the revert-reason channel was used to correct a failure
@@ -39,7 +39,7 @@ week, and the revert-reason channel was unusable every time it was raised.
 
 This run's pinned stack contained a fix for each defect. None of the fixes had
 been demonstrated by an agent that did not know the fix existed. Run 5 was the
-gate between the [budget-boxed series](budget-boxed.md) and the program's
+gate between the [stack-validation series](budget-boxed.md) and the program's
 sustainability family. It earned the exit.
 
 ## Outcome
@@ -95,7 +95,7 @@ the run.
 
 **The exit test, scored as written: MINOR-FIXES.** Every queued fix is
 protocol wording or lab-side tooling — nothing touches agent-visible surface
-semantics or a measurement invariant. **The budget-boxed series is closed;
+semantics or a measurement invariant. **The stack-validation series is closed;
 the sustainability family proceeds.**
 
 ## Key learnings

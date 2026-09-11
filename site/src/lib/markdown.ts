@@ -1,4 +1,4 @@
-// Shared markdown post-processing helpers, used by lib/paper.ts and
+// Shared markdown post-processing helpers, used by lib/paper.ts, lib/blog.ts and
 // lib/experiments.ts. All of this operates on marked's HTML output — the source
 // markdown files are never edited.
 
@@ -71,4 +71,19 @@ export function wrapTables(html: string): string {
   return html
     .replace(/<table>/g, '<div class="table-wrap"><table>')
     .replace(/<\/table>/g, '</table></div>');
+}
+
+/** Evidence-tier chips: **[REGISTERED]** / **[EXPLORATORY]** → visible labels.
+ *  Shared by the blog and the experiment registry so one marker convention
+ *  renders the same wherever a claim carries its tier inline. */
+export function tierChips(html: string): string {
+  return html
+    .replace(
+      /<strong>\[REGISTERED\]<\/strong>/g,
+      '<span class="chip chip-ok" title="Traces to a registered comparison in the experiment registry">REGISTERED</span>'
+    )
+    .replace(
+      /<strong>\[EXPLORATORY\]<\/strong>/g,
+      '<span class="chip chip-pending" title="Observation outside a registered comparison — not a comparative claim">EXPLORATORY</span>'
+    );
 }

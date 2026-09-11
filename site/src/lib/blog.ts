@@ -13,7 +13,13 @@
 // uncontrolled observations). Rendered as chips so the label is visible at the
 // claim, not just in methodology text.
 import { marked } from 'marked';
-import { linkArxivIds, slugify, transformTextNodes, wrapTables } from './markdown';
+import {
+  linkArxivIds,
+  slugify,
+  tierChips,
+  transformTextNodes,
+  wrapTables,
+} from './markdown';
 
 const docs = import.meta.glob('../../../blog/*.md', {
   query: '?raw',
@@ -58,19 +64,6 @@ const MONTHS = [
 function dateLabel(iso: string): string {
   const [y, m, d] = iso.split('-').map(Number);
   return `${MONTHS[m! - 1]} ${d}, ${y}`;
-}
-
-/** Evidence-tier chips: **[REGISTERED]** / **[EXPLORATORY]** → visible labels. */
-function tierChips(html: string): string {
-  return html
-    .replace(
-      /<strong>\[REGISTERED\]<\/strong>/g,
-      '<span class="chip chip-ok" title="Traces to a registered comparison in the experiment registry">REGISTERED</span>'
-    )
-    .replace(
-      /<strong>\[EXPLORATORY\]<\/strong>/g,
-      '<span class="chip chip-pending" title="Observation outside a registered comparison — not a comparative claim">EXPLORATORY</span>'
-    );
 }
 
 function renderBody(src: string): string {

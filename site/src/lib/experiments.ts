@@ -16,12 +16,20 @@
 //                 <!-- DATASET:START/END -->    optional: published-dataset URL,
 //                                               surfaced in the run-page header
 // Marker blocks and the H1 are stripped from rendered bodies — the page templates
-// present them as styled headers instead. Figures referenced as `figures/*.svg`
+// present them as styled headers instead. Inline **[REGISTERED]** /
+// **[EXPLORATORY]** markers render as evidence-tier chips, the same convention
+// the blog uses (see markdown.ts). Figures referenced as `figures/*.svg`
 // are inlined at build time so their embedded links stay clickable and the site
 // theme can restyle them via CSS. Links between registry docs (`*.md`, correct
 // for GitHub's render) are rewritten to site routes.
 import { marked } from 'marked';
-import { linkArxivIds, slugify, transformTextNodes, wrapTables } from './markdown';
+import {
+  linkArxivIds,
+  slugify,
+  tierChips,
+  transformTextNodes,
+  wrapTables,
+} from './markdown';
 
 const docs = import.meta.glob('../../../experiments/*.md', {
   query: '?raw',
@@ -67,7 +75,7 @@ export interface ExperimentRun {
 export interface ExperimentDesign {
   /** File basename, e.g. "budget-boxed" — also the site path segment. */
   slug: string;
-  /** The H1, e.g. "Budget-boxed". */
+  /** The H1, e.g. "Stack validation — whether the stack supports autonomous play". */
   title: string;
   /** Framing question, plain text (cards, OG description). */
   oneliner: string;
@@ -144,6 +152,7 @@ function renderBody(src: string): string {
     .replace(/<\/blockquote>/g, '</aside>');
 
   html = wrapTables(html);
+  html = tierChips(html);
   html = transformTextNodes(html, linkArxivIds);
   return html;
 }

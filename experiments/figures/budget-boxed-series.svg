@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="bbs-desc">
-  <title id="bbs-desc">Budget-boxed series, runs 1 to 5 (run 3 aborted): left, the share of on-chain writes that reverted per arm fell from 0.58–0.97 in run 1 to at most 0.004 in run 5; right, quests completed per arm stayed between 0 and 9 across the same runs — the best arm went 5, 8, 7, 9.</title>
+  <title id="bbs-desc">Stack-validation series, runs 1 to 5 (run 3 aborted): left, the share of on-chain writes that reverted per arm fell from 0.58–0.97 in run 1 to at most 0.004 in run 5; right, quests completed per arm stayed between 0 and 9 across the same runs — the best arm went 5, 8, 7, 9.</title>
   <rect class="mf-bg" x="0.5" y="0.5" width="719" height="399" rx="14" fill="#faf9f7" stroke="#e5e1da"/>
   <circle class="mf-s1" cx="150" cy="27" r="5.5" fill="#2a78d6"/>
   <text class="mf-legend-label" x="162" y="31.5" font-size="12.5" fill="#1c1917">haiku-4.5</text>

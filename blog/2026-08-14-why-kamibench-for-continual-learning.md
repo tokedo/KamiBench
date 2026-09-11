@@ -169,7 +169,7 @@ present tense.
 
 Before anything open-ended runs, the environment interface, scaffold,
 telemetry, and accounting have to be proven under autonomous use. That is
-stack validation. [The budget-boxed series](../experiments/budget-boxed.md)
+stack validation. [The stack-validation series](../experiments/budget-boxed.md)
 performed this check through deliberately bounded runs with fixed limits,
 pre-registered designs, and datasets published as the runs closed.
 

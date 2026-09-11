@@ -5,11 +5,13 @@ The design keeps the world, tools, and objective fixed while changing only how
 the game's knowledge reaches the agent: through a folder to read, a search
 tool, facts pushed inside tool results, or a plan file. The design asks which
 delivery method turns a capable model into a player that understands the game.
+Closed at Wave 1: the top rung moved neither model, so the family's answer is
+"delivery is not the bottleneck at this tier".
 <!-- ONELINER:END -->
 
 ## The problem
 
-Five [budget-boxed](budget-boxed.md) runs proved the stack works, but they also
+Five [stack-validation](budget-boxed.md) runs proved the stack works, but they also
 showed the agents playing blind. The game's design document was bundled in a
 folder next to the agent, yet two of three models never opened it. The third
 model guessed at file paths and got them wrong up to a quarter of the time.
@@ -32,9 +34,9 @@ directly.
 
 The world, tool surface, starting wallet, and objective stay fixed across all
 arms. The objective remains "complete as many quests as possible"; only the way
-knowledge reaches the agent changes. The models are one tier up from
-budget-boxed (Sonnet 5, gpt-5.2), so a null result is not "the model was too
-small".
+knowledge reaches the agent changes. The models are one tier up from those in
+the stack-validation series (Sonnet 5, gpt-5.2), so a null result is not "the
+model was too small".
 
 Each delivery variant is a rung in a cumulative ladder. Rung A is the control,
 and every later rung adds one delivery path to those before it. The table shows
@@ -112,10 +114,43 @@ Wave 1 decides whether the family stops or proceeds to Wave 2. If the family
 proceeds, Wave 2 runs the intermediate tests above before Wave 3 replicates the
 winning cell.
 
+Wave 1 stopped the family. Waves 2 and 3 were not run — the result is below.
+
 Because arms launch in waves and run in the live world, cells are not
 synchronized. Every arm's record names the other arms live during its window
 and the world era in which it started. Cells are **exploratory** by grade; only
 a synchronized replication earns a registered comparison.
+
+## The result — closed at Wave 1
+
+[Run 1](006-knowledge-delivery-wave-1.md) ran the control rung and the full
+pushed rung on Sonnet 5 and gpt-5.2 from 2026-08-17, one arm per cell. Scored
+exactly as the rule was registered: both pushed arms matched or beat their own
+control on quests — 22 against 19 on Sonnet 5, 19 against 11 on gpt-5.2 — and
+neither landed a level-up, against 8 on the Sonnet 5 control arm. The rule's
+first clause fails on both models, so **the pushed rung works on neither model,
+and the family's answer is "delivery is not the bottleneck at this tier".**
+Wave 2 and Wave 3 are not run: the design says the family stops on this
+outcome, and it does. Evidence tier: exploratory — one arm per cell, no
+replication, and both model pairs stopped early.
+
+**[EXPLORATORY]** Beside the verdict, the run carries a reading the design did
+not anticipate. Its only level-ups came from the arm with the *least* knowledge
+delivery, after a side quest returned the objective "Level up a Kami" in plain
+words; the arm then made leveling a standing habit and finished at level 9. The
+two arms that were told the mechanism in their prompt, and could search the
+documentation for it, ended at zero — sitting on banked experience they had no
+way to see, because no tool in the run ever returned it. Objective legibility
+beat mechanism delivery. That reading is why the successor family,
+[sustainability](sustainability.md), makes the balance itself the objective
+rather than delivering more knowledge: a solvency number that moves every
+session is a counter in front of the agent by construction.
+
+| wave | status | what it tested | outcome |
+|---|---|---|---|
+| [Wave 1](006-knowledge-delivery-wave-1.md) | complete | rung A against the full pushed rung A+B+C+D, on Sonnet 5 and gpt-5.2 | the pushed rung works on neither model — "delivery is not the bottleneck at this tier"; the family closes here |
+| Wave 2 — bisect | not run | which piece of the pushed rung did the work, and rung E on top of the best | contingent on Wave 1 moving; it did not |
+| Wave 3 — replication | not run | replicate the winning cell | there is no winning cell |
 
 ## Reproducibility
 
