@@ -400,3 +400,21 @@ Honest limits, all of them load-bearing:
 - **Live shared world**: other players acted throughout and the arms'
   windows differ slightly; zero third-party actions touched study
   entities this run.
+
+## Errata (2026-09-11, after approval — these corrections govern the text above)
+
+- "it leveled six more times in 37 seconds" → it leveled once, wrote the
+  note, and landed five more: six in 37 seconds in all (eight in the run:
+  sessions 60 ×1, 70 ×6, 74 ×1).
+- "the control arm's 3,633 XP, which bought nine levels" → the control
+  arm's kami reached level 9 through eight level-ups and still held 3,633
+  surplus experience at the last snapshot (2026-08-25 04:35 UTC); leveling
+  consumes experience (levels 1→9 cost 817 XP).
+- "The variable is the model tier, not the treatment" → onboarding
+  collapsed on all four arms, controls included, so it is not a treatment
+  effect; whether the step change from run 5 comes from the model tier or
+  the newer stack cannot be separated here, because both changed.
+- Wherever earlier runs are said to have "never leveled a Kami": across
+  the four completed stack-validation runs the leveling tools were called
+  four times in 15,815 tool calls and succeeded twice, both on a single
+  kami in run 5 (gpt-4o-mini).
