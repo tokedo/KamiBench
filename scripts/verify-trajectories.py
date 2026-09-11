@@ -26,6 +26,21 @@ def field_value(record, field):
 count = 0
 for gallery in galleries:
     for case in gallery['cases']:
+        covered = []
+        for beat in case['story']:
+            indices = beat['steps']
+            assert indices and all(isinstance(i, int) and 0 <= i < len(case['steps']) for i in indices)
+            covered.extend(indices)
+            sources = [case['steps'][i] for i in indices]
+            assert len({s['session'] for s in sources}) == 1, f'Story merges sessions: {case["id"]}'
+            kinds = {s['kind'] for s in sources}
+            assert len(kinds) == 1 or kinds <= {'agent', 'tool'}, f'Story merges memory with activity: {case["id"]}'
+            if 'highlight' in beat:
+                assert beat['highlightStep'] in indices
+                assert beat['highlight'] in case['steps'][beat['highlightStep']]['quote'], f'Highlight differs: {case["id"]}'
+            if kinds & {'memory-write', 'memory-read'}:
+                assert beat.get('highlight'), f'Memory story needs a verbatim note: {case["id"]}'
+        assert covered == list(range(len(case['steps']))), f'Story drops or reorders evidence: {case["id"]}'
         for step in case['steps']:
             src = step['source']
             path = args.transcripts / src['dataset'] / src['path']
@@ -64,4 +79,4 @@ for gallery in galleries:
                     assert call['name'] == 'workspace_read'
                     assert call['args']['path'] == step['workspace']
             count += 1
-print(f'PASS: {count} excerpts match pinned public transcripts, source lines, fields, and memory operations.')
+print(f'PASS: {count} excerpts match pinned public transcripts, source lines, fields, memory operations, and visual-story provenance.')

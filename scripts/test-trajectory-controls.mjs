@@ -27,7 +27,8 @@ function fixture(hash = '') {
   const track = new Element(); track.scrollLeft = 0;
   const cards = ['first', 'second', 'third'].map((id, i) => {
     const card = new Element(); card.id = id; card.offsetLeft = i * 340;
-    card.getBoundingClientRect = () => ({ left: card.offsetLeft - track.scrollLeft, height: [520, 680, 590][i] });
+    card.height = [520, 680, 590][i];
+    card.getBoundingClientRect = () => ({ left: card.offsetLeft - track.scrollLeft, height: card.height });
     card.scrollIntoView = () => { card.wasScrolledIntoView = true; };
     return card;
   });
@@ -39,7 +40,8 @@ function fixture(hash = '') {
     ['.trace-controls', new Element()], ['.trace-choices', new Element()],
   ]);
   gallery.querySelector = (s) => nodes.get(s);
-  gallery.querySelectorAll = () => choices;
+  const evidence = cards.map(() => { const e = new Element(); e.open = false; return e; });
+  gallery.querySelectorAll = (s) => s === '[data-trace-evidence]' ? evidence : choices;
   track.querySelectorAll = () => cards;
   track.getBoundingClientRect = () => ({ left: 0 });
   track.scrollCalls = [];
@@ -48,13 +50,14 @@ function fixture(hash = '') {
   const location = { hash };
   const frames = [];
   let onResize;
+  const observed = [];
   vm.runInNewContext(script, {
     document: { querySelectorAll: () => [gallery] }, window, location,
     matchMedia: () => ({ matches: false }),
     requestAnimationFrame: (fn) => { frames.push(fn); return frames.length; },
-    ResizeObserver: class { constructor(fn) { onResize = fn; } observe() {} },
+    ResizeObserver: class { constructor(fn) { onResize = fn; } observe(e) { observed.push(e); } },
   });
-  return { gallery, track, cards, previous, next, toggle, status, choices, location, window,
+  return { gallery, track, cards, evidence, observed, previous, next, toggle, status, choices, location, window,
     resize: () => onResize(), flush: () => { while (frames.length) frames.shift()(); } };
 }
 
@@ -103,4 +106,26 @@ test('per-example links select the right slide', () => {
   assert.equal(f.track.scrollLeft, 340);
   f.location.hash = '#third'; f.window.fire('hashchange');
   assert.equal(f.track.scrollLeft, 680);
+});
+
+
+test('expanding evidence resizes its observed card without re-scrolling', () => {
+  const f = fixture();
+  assert.ok(f.cards.every((card) => f.observed.includes(card)));
+  const calls = f.track.scrollCalls.length;
+  f.cards[0].height = 1800;
+  f.resize();
+  assert.equal(f.track.style.height, '1800px');
+  assert.equal(f.track.scrollCalls.length, calls);
+  f.cards[0].height = 520;
+  f.resize();
+  assert.equal(f.track.style.height, '520px');
+});
+
+test('printing opens all source excerpts and restores their state', () => {
+  const f = fixture(); f.evidence[1].open = true;
+  f.window.fire('beforeprint');
+  assert.ok(f.evidence.every((e) => e.open));
+  f.window.fire('afterprint');
+  assert.deepEqual(f.evidence.map((e) => e.open), [false, true, false]);
 });

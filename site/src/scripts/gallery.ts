@@ -66,13 +66,18 @@ if (gallery) {
     const link = (event.target as Element).closest('a');
     if (link?.getAttribute('href') === location.hash) followHash();
   });
+  const evidence = Array.from(gallery.querySelectorAll<HTMLDetailsElement>('[data-trace-evidence]'));
+  let evidencePrintState: boolean[] = [];
   let printState: boolean[] = [];
   window.addEventListener('beforeprint', () => {
+    evidencePrintState = evidence.map((e) => e.open);
+    evidence.forEach((e) => { e.open = true; });
     printState = entries.map((e) => e.open);
     entries.forEach((e) => { if (!e.hidden) e.open = true; });
   });
   window.addEventListener('afterprint', () => {
     entries.forEach((e, i) => { e.open = printState[i] ?? e.open; });
+    evidence.forEach((e, i) => { e.open = evidencePrintState[i] ?? e.open; });
   });
   filter();
   followHash();

@@ -68,7 +68,34 @@
           "Stack"
         ],
         "question": "Does a persistent note preserve evidence, or harden an unsupported conclusion?",
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Gets the rule right",
+            "text": "The agent explains that progress counts from quest acceptance. The insight is not saved."
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Saves a false diagnosis",
+            "text": "A later note calls the unmet objective a smart-contract bug.",
+            "highlight": "SMART CONTRACT BUG - validation fails despite meeting objective",
+            "highlightStep": 1
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Adds unsupported certainty",
+            "text": "Another file claims the bug is reproducible across every session.",
+            "highlight": "100% across 49 sessions",
+            "highlightStep": 2
+          }
+        ]
       },
       {
         "id": "error-teaches",
@@ -121,7 +148,23 @@
           "Stack"
         ],
         "question": "Can a clear tool error teach the next action?",
-        "span": "Within one session"
+        "span": "Within one session",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "The tool names the problem",
+            "text": "The creature is already harvesting. The refusal points toward collecting or stopping."
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "The next operation works",
+            "text": "The agent calls harvest_collect and receives a successful result."
+          }
+        ]
       },
       {
         "id": "broken-collect",
@@ -190,7 +233,30 @@
             "tool": "harvest_stop"
           }
         ],
-        "span": "Within one session"
+        "span": "Within one session",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Collection fails",
+            "text": "The transaction reverts and spends gas. Its response does not explain why."
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Chooses a workaround",
+            "text": "The agent says it will stop the harvest and collect that way."
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "The alternative succeeds",
+            "text": "harvest_stop returns success. This repairs the immediate problem."
+          }
+        ]
       }
     ]
   },
@@ -264,7 +330,36 @@
           "Planning"
         ],
         "question": "Can an agent carry an experiment across sessions and revise a belief?",
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Saves an experiment",
+            "text": "Leave the harvest unmanaged, then compare its output with the bot’s routine.",
+            "highlight": "Plan: let it harvest UNMANAGED",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Retrieves the plan",
+            "text": "The next wake reads the same test from notes.md.",
+            "highlight": "Plan: let it harvest UNMANAGED",
+            "highlightStep": 1
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Changes the saved belief",
+            "text": "The agent records that health drained even without collection. The earlier hypothesis was wrong.",
+            "highlight": "Confirmed HP DOES drain passively while HARVESTING even without collecting",
+            "highlightStep": 2
+          }
+        ]
       },
       {
         "id": "recovery",
@@ -331,7 +426,28 @@
           "Tool feedback"
         ],
         "question": "Can an agent recover a partially completed operation without repeating the completed half?",
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0,
+              1
+            ],
+            "title": "Saves a recovery procedure",
+            "text": "A claim can succeed while its reveal fails. Check consumed points before retrying the unfinished part.",
+            "highlight": "scavenge_claim_and_reveal can partially fail (claim lands, reveal doesn't)",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Updates the record later",
+            "text": "The agent writes that session 81 was clean. It treats the failure as intermittent.",
+            "highlight": "Session 81 was clean, so this is intermittent/rare, not systemic.",
+            "highlightStep": 2
+          }
+        ]
       },
       {
         "id": "belief-revised",
@@ -382,7 +498,27 @@
           "Tool feedback"
         ],
         "question": "Does new evidence correct a saved belief?",
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Writes “trapped” into memory",
+            "text": "The note says the room is completely isolated and travel is impossible.",
+            "highlight": "**COMPLETELY ISOLATED**",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Revises the next note",
+            "text": "The next session records that the issue is resolved. The earlier conclusion is replaced.",
+            "highlight": "The issue from session 37 (stuck in room 30) has been resolved.",
+            "highlightStep": 1
+          }
+        ]
       },
       {
         "id": "feed-before-collect",
@@ -468,7 +604,35 @@
             "tool": "harvest_collect"
           }
         ],
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Saves the operation order",
+            "text": "Feed first, then collect. Collection triggers a cooldown that can block feeding.",
+            "highlight": "so feed first, then collect, is a safe order and avoids a wait.",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Reads the saved procedure",
+            "text": "The next session retrieves that same ordering rule.",
+            "highlight": "so feed first, then collect, is a safe order and avoids a wait.",
+            "highlightStep": 1
+          },
+          {
+            "steps": [
+              2,
+              3
+            ],
+            "title": "Follows the order",
+            "text": "Feeding succeeds. Collection succeeds next. The actions match the retrieved note."
+          }
+        ]
       },
       {
         "id": "stop-before-travel",
@@ -570,7 +734,36 @@
             "tool": "travel_to_room"
           }
         ],
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Turns a detour into a rule",
+            "text": "After traveling away and back, the agent saves: stop the harvest before leaving its room.",
+            "highlight": "until AFTER harvest_stop has actually succeeded.",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Retrieves the rule later",
+            "text": "Four sessions later, notes.md still says to wait for a successful stop before traveling.",
+            "highlight": "Do NOT start traveling toward the next destination until AFTER a harvest_stop has\n  actually succeeded",
+            "highlightStep": 1
+          },
+          {
+            "steps": [
+              2,
+              3,
+              4
+            ],
+            "title": "Executes in the right order",
+            "text": "The agent states its plan, receives a successful stop result, and then reaches the next room."
+          }
+        ]
       }
     ]
   },
@@ -644,7 +837,28 @@
           "Knowledge"
         ],
         "question": "Can a searched mechanism become a reusable operational rule?",
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0,
+              1
+            ],
+            "title": "Saves what the search taught",
+            "text": "The harvest-time counter updates on stopping. The agent turns that mechanism into a procedure.",
+            "highlight": "is only incremented by **HarvestStopSystem**",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Reads the procedure next wake",
+            "text": "The next session retrieves the saved rule from progress.md.",
+            "highlight": "PRACTICAL UPSHOT: to complete a HARVEST_TIME quest",
+            "highlightStep": 2
+          }
+        ]
       },
       {
         "id": "quest-habit",
@@ -712,7 +926,30 @@
           "Planning"
         ],
         "question": "Can a concrete objective make an unused capability actionable?",
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Sees a concrete objective",
+            "text": "The tool returns a direct instruction: level up a creature."
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Recognizes the success",
+            "text": "The agent says the level-up succeeded and satisfied the objective."
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Uses the mechanic again",
+            "text": "A later session reports another level and plans further upgrades."
+          }
+        ]
       },
       {
         "id": "untested-note",
@@ -779,7 +1016,36 @@
           "Knowledge"
         ],
         "question": "What makes a saved plan become an actual test?",
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Saves a question for later",
+            "text": "The note suggests checking experience points, but says it is not urgent.",
+            "highlight": "Check XP via lens_kami if curious; not urgent for quest progress.",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Preserves the assumption",
+            "text": "Fifteen sessions later, leveling is still not prioritized.",
+            "highlight": "Not prioritized",
+            "highlightStep": 1
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Drops the proposed check",
+            "text": "The next version keeps the low priority but loses the concrete XP check.",
+            "highlight": "Low priority; revisit once\n  MIN/MSQ chain grind slows down",
+            "highlightStep": 2
+          }
+        ]
       },
       {
         "id": "search-to-quest",
@@ -849,7 +1115,30 @@
             "tool": "complete_quest"
           }
         ],
-        "span": "Within one session"
+        "span": "Within one session",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Finds a task in the manual",
+            "text": "A search result connects the current location to a side quest."
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Checks readiness",
+            "text": "After accepting the quest, the agent gets a true completion check."
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Finishes the task",
+            "text": "complete_quest returns a successful transaction."
+          }
+        ]
       }
     ]
   },
@@ -924,7 +1213,34 @@
             "tool": "get_kami_state_slim"
           }
         ],
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Saves a narrower fallback",
+            "text": "When inventory access fails, inspect creatures individually with get_kami_state_slim.",
+            "highlight": "Workaround: Use get_kami_state_slim to check individual kamis",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Retrieves the fallback",
+            "text": "The next session reads the same advice from the progress file.",
+            "highlight": "Workaround: Use get_kami_state_slim to check individual kamis",
+            "highlightStep": 1
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Gets usable state",
+            "text": "The individual read returns RESTING. Inventory access still fails."
+          }
+        ]
       },
       {
         "id": "wrong-verb",
@@ -1009,7 +1325,31 @@
             "tool": "sacrifice_kami"
           }
         ],
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Confuses two operations",
+            "text": "The agent equates liquidating another creature with sacrificing its own."
+          },
+          {
+            "steps": [
+              1,
+              2
+            ],
+            "title": "Executes the wrong action",
+            "text": "The sacrifice burns a creature, but the quest still rejects completion."
+          },
+          {
+            "steps": [
+              3
+            ],
+            "title": "Repeats the substitution",
+            "text": "A later session burns another creature using the same operation."
+          }
+        ]
       },
       {
         "id": "process-not-permission",
@@ -1079,7 +1419,30 @@
             "tool": "start_strategy"
           }
         ],
-        "span": "Within one session"
+        "span": "Within one session",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Own roster is empty",
+            "text": "The opening tool response lists no creatures for this account."
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Reads a broad process list",
+            "text": "Another response contains hundreds of processes, beyond the agent’s own roster."
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Starts a process anyway",
+            "text": "The service reports RUNNING. That does not establish an authorized action in the game."
+          }
+        ]
       },
       {
         "id": "explicit-amount",
@@ -1132,7 +1495,23 @@
             "tool": "withdraw_operator"
           }
         ],
-        "span": "Within one session"
+        "span": "Within one session",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Receives a readable error",
+            "text": "The tool says the withdrawal reverted, spent gas and lacked funds for the transfer."
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Changes the next request",
+            "text": "An explicit withdrawal amount succeeds. This is a local correction."
+          }
+        ]
       },
       {
         "id": "bridge-repeats",
@@ -1202,7 +1581,30 @@
             "tool": "bridge_eth_from_mainnet"
           }
         ],
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "The source wallet is short",
+            "text": "The bridge reports insufficient funds in its mainnet source wallet."
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Changes the wrong prerequisite",
+            "text": "The agent moves money between wallets on the destination chain."
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Hits the source limit again",
+            "text": "A later bridge request fails with the same available source balance."
+          }
+        ]
       },
       {
         "id": "starvation-repeats",
@@ -1270,7 +1672,34 @@
             "tool": "harvest_stop"
           }
         ],
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Saves the repair",
+            "text": "Feed the creature while it is still harvesting to clear starvation.",
+            "highlight": "Fix for \"kami starving\" is to feed while still harvesting.",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Writes a prevention goal",
+            "text": "A later note explicitly says never to let health reach zero again.",
+            "highlight": "Ensure HP never hits 0 again;",
+            "highlightStep": 1
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "The failure recurs",
+            "text": "Another session tries to stop a starving creature. The tool refuses."
+          }
+        ]
       },
       {
         "id": "unattended-job",
@@ -1354,7 +1783,41 @@
             }
           }
         ],
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Recognizes a successful rescue",
+            "text": "Feeding works even though the creature was shown at zero health."
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Saves a monitoring rule",
+            "text": "Feed for long harvests and schedule an intermediate health check.",
+            "highlight": "schedule a mid-point wake at\nMOST 4-5h out (not 6+)",
+            "highlightStep": 1
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Retrieves the monitoring rule",
+            "text": "The later note retains the need to check health, with a wider interval of four to six hours.",
+            "highlight": "recheck every 4-6h",
+            "highlightStep": 2
+          },
+          {
+            "steps": [
+              3
+            ],
+            "title": "Plans the next check",
+            "text": "The agent plans to wake before the harvest deadline. The run stops before that check occurs."
+          }
+        ]
       },
       {
         "id": "attention-budget",
@@ -1423,7 +1886,34 @@
             "tool": "check_quest_completable"
           }
         ],
-        "span": "Across sessions"
+        "span": "Across sessions",
+        "story": [
+          {
+            "steps": [
+              0
+            ],
+            "title": "Writes down the cost of a query",
+            "text": "The broad quest registry wastes context. The note names smaller alternatives.",
+            "highlight": "wasted a lot of context",
+            "highlightStep": 0
+          },
+          {
+            "steps": [
+              1
+            ],
+            "title": "Retrieves those alternatives",
+            "text": "The next wake reads the same warning from notes.md.",
+            "highlight": "Use quest_state(index) / check_quest_completable(index)",
+            "highlightStep": 1
+          },
+          {
+            "steps": [
+              2
+            ],
+            "title": "Uses a targeted check",
+            "text": "A specific quest check returns a small result instead of the full registry."
+          }
+        ]
       }
     ]
   }

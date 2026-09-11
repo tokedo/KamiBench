@@ -74,7 +74,7 @@ for (const gallery of document.querySelectorAll<HTMLElement>('[data-trajectory-g
   }
   window.addEventListener('hashchange', followHash);
   let width = gallery.clientWidth;
-  new ResizeObserver(() => {
+  const observer = new ResizeObserver(() => {
     // A slide-height update also resizes the gallery. Only a width change
     // needs re-alignment; re-scrolling on height changes interrupts swipes.
     const nextWidth = gallery.clientWidth;
@@ -83,7 +83,21 @@ for (const gallery of document.querySelectorAll<HTMLElement>('[data-trajectory-g
       if (!showAll) goTo(current, true);
     }
     update();
-  }).observe(gallery);
+  });
+  observer.observe(gallery);
+  // Opening source excerpts changes the card even when the track has a fixed height.
+  cases.forEach((card) => observer.observe(card));
+
+  const evidence = Array.from(gallery.querySelectorAll<HTMLDetailsElement>('[data-trace-evidence]'));
+  let printState: boolean[] = [];
+  window.addEventListener('beforeprint', () => {
+    printState = evidence.map((e) => e.open);
+    evidence.forEach((e) => { e.open = true; });
+  });
+  window.addEventListener('afterprint', () => {
+    evidence.forEach((e, i) => { e.open = printState[i] ?? e.open; });
+    update();
+  });
   followHash();
   update();
 }

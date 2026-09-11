@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { trajectoryCases, renderTrajectoryCase } from '../lib/trajectories';
+import { trajectoryCases, renderTrajectoryCase, trajectoryLegend } from '../lib/trajectories';
 
 // Keep complete sequences together. The post and gallery share the same records.
 const cases = [...trajectoryCases].sort((a, b) => a.run.localeCompare(b.run));
@@ -25,9 +25,12 @@ const runs = [...new Set(cases.map((c) => c.run))];
       <p><span class="chip chip-pending">EXPLORATORY</span>{' '}
         These are selected case studies, not model rankings or estimates of how often a behavior occurs.
         “Success,” “failure” and “mixed” describe the selected sequence, not the whole run.</p>
-      <p>A memory write shows what was saved. A memory read shows what reached a later context.
+      <p>Each example starts with a short visual sequence. Saved notes and retrieved notes have
+        separate labels; session markers show when the context changes. Open the source excerpts
+        for the full quoted passages and annotations.
         A subsequent action can show reuse, but the sequence alone does not establish that memory
         caused an improvement. The annotations distinguish these claims.</p>
+      <Fragment set:html={trajectoryLegend} />
     </aside>
 
     <section class="gallery-start" aria-labelledby="gallery-start-title">
