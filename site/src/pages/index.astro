@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-// Intro bullets, status banner, and why-cards all derive from the repo-root
+// Intro bullets and why-cards derive from the repo-root
 // README at build time (between marker comments) — see lib/readme.ts.
 // Experiment cards derive from ../experiments/*.md — see lib/experiments.ts.
 import { readmeSection, readmeWhy } from '../lib/readme';
@@ -12,8 +12,6 @@ import { getPosts } from '../lib/blog';
 // prose lives in the blog posts (blog-first restructure, 2026-08-14).
 
 const ideaHtml = readmeSection('IDEA');
-const statusHtml = readmeSection('STATUS', { inline: true });
-const resultsHtml = readmeSection('RESULTS');
 const why = readmeWhy(); // cards only — the WHY block carries no lead paragraph
 const designs = getDesigns();
 const clPost = getPosts().find((p) => p.slug === 'why-kamibench-for-continual-learning');
@@ -34,25 +32,33 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
     </p>
     <div class="btn-row">
       <a class="btn btn-primary" href={clPostHref}>Read the research story</a>
+      <a class="btn" href="/blog">Blog</a>
       <a class="btn" href="/experiments">Inspect experiments</a>
       <a class="btn" href="/stack">Run an agent</a>
     </div>
   </header>
 
   <div class="container">
-    <aside class="status-banner" role="note">
-      <strong>Open research in progress</strong>
-      <Fragment set:html={statusHtml} />
+    <!-- Condensed from README STATUS and RESULTS; full details stay in the registry. -->
+    <aside class="research-update" aria-labelledby="results">
+      <div class="research-update-heading">
+        <h2 id="results">Research in progress</h2>
+        <time datetime="2026-09">September 2026</time>
+      </div>
+      <p>
+        KamiBench is an ongoing research program. Five runs have produced data
+        across two completed experiment families. Agents carried plans into later
+        sessions, revised their notes, and sometimes preserved mistakes. Next,
+        we’ll test whether paying for inference and gas encourages more efficient
+        use of knowledge.
+      </p>
+      <ul class="research-update-links" aria-label="Research updates">
+        <li><a href="/blog/what-agents-remember">Latest findings →</a></li>
+        <li><a href="/experiments">Experiments &amp; data →</a></li>
+        <li><a href="/experiments/sustainability">Next experiment →</a></li>
+      </ul>
     </aside>
   </div>
-
-  <section class="section container" aria-labelledby="results">
-    <div class="latest-research">
-      <p class="label">Latest research · September 2026</p>
-      <h2 id="results">What agents carry into their next session</h2>
-      <Fragment set:html={resultsHtml} />
-    </div>
-  </section>
 
   <section class="section container" aria-labelledby="idea">
     <h2 id="idea">The idea</h2>

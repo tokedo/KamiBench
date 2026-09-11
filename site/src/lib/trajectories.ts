@@ -31,25 +31,32 @@ export const trajectoryLegend = `<div class="trace-legend" aria-label="How to re
 
 /** The visual story is editorial; only blockquotes contain verbatim agent text. */
 function renderStory(example: TrajectoryCase): string {
-  let previousSession: number | undefined;
-  const beats = example.story.map((beat) => {
-    const sources = beat.steps.map((i) => example.steps[i]);
-    const session = sources[0].session;
-    const types = [...new Set(sources.map((s) => s.kind))];
-    const kind: Kind = types.length === 1 ? types[0] as Kind : 'activity';
-    const changed = previousSession !== undefined && session !== previousSession;
-    const sessionLabel = previousSession === undefined ? `Session ${session}`
-      : !changed ? `Same session · ${session}`
-      : session === previousSession + 1 ? `Next session · ${session}` : `Later session · ${session}`;
-    previousSession = session;
-    const highlight = 'highlight' in beat && beat.highlight;
-    const highlightedStep = 'highlightStep' in beat ? example.steps[beat.highlightStep!] : undefined;
-    return `<li class="trace-beat${changed ? ' trace-session-break' : ''}" data-kind="${kind}">
-      <p class="trace-session">${sessionLabel}</p><div class="trace-beat-body">
-      ${badge(kind)}<h4>${escape(beat.title)}</h4><p class="trace-beat-text">${escape(beat.text)}</p>
-      ${highlight && highlightedStep ? `<div class="trace-note"><p class="trace-note-label">Verbatim note · <code>${escape(highlightedStep.workspace || '')}</code></p><blockquote><p>${escape(highlight)}</p></blockquote></div>` : ''}
-      <div class="trace-beat-sources">${sources.map((s) => sourceLink(s, `HF · line ${s.source.line}`)).join('')}</div>
-      </div></li>`;
+  const sessions: { session: number; beats: TrajectoryCase['story'][number][] }[] = [];
+  for (const beat of example.story) {
+    const session = example.steps[beat.steps[0]].session;
+    const previous = sessions.at(-1);
+    if (previous?.session === session) previous.beats.push(beat);
+    else sessions.push({ session, beats: [beat] });
+  }
+  const blocks = sessions.map(({ session, beats }, index) => {
+    const previous = sessions[index - 1]?.session;
+    const sessionLabel = previous === undefined ? `Session ${session}`
+      : session === previous + 1 ? `Next session · ${session}` : `Later session · ${session}`;
+    const sessionId = `${example.id}-session-${session}`;
+    const content = beats.map((beat) => {
+      const sources = beat.steps.map((i) => example.steps[i]);
+      const types = [...new Set(sources.map((s) => s.kind))];
+      const kind: Kind = types.length === 1 ? types[0] as Kind : 'activity';
+      const highlight = 'highlight' in beat && beat.highlight;
+      const highlightedStep = 'highlightStep' in beat ? example.steps[beat.highlightStep!] : undefined;
+      return `<div class="trace-beat" data-kind="${kind}"><div class="trace-beat-body">
+        ${badge(kind)}<h4>${escape(beat.title)}</h4><p class="trace-beat-text">${escape(beat.text)}</p>
+        ${highlight && highlightedStep ? `<div class="trace-note"><p class="trace-note-label">Verbatim note · <code>${escape(highlightedStep.workspace || '')}</code></p><blockquote><p>${escape(highlight)}</p></blockquote></div>` : ''}
+        <div class="trace-beat-sources">${sources.map((s) => sourceLink(s, `Transcript · line ${s.source.line}`)).join('')}</div>
+        </div></div>`;
+    }).join('');
+    return `<li class="trace-session-block${index > 0 ? ' trace-session-break' : ''}" data-session="${session}" aria-labelledby="${sessionId}">
+      <p class="trace-session" id="${sessionId}">${sessionLabel}</p><div class="trace-session-beats">${content}</div></li>`;
   }).join('');
   const writes = example.steps.some((s) => s.kind === 'memory-write');
   const reads = example.steps.some((s) => s.kind === 'memory-read');
@@ -57,7 +64,7 @@ function renderStory(example: TrajectoryCase): string {
     : writes ? 'Memory evidence: writes are shown. A later read is not shown in these excerpts.'
     : 'Session activity: no persistent-memory write or read is shown in these excerpts.';
   return `<p class="trace-story-label">The sequence <span>· editorial summary</span></p>
-    <ol class="trace-story" data-beats="${example.story.length}" style="--story-count:${example.story.length}">${beats}</ol><p class="trace-scope">${scope}</p>`;
+    <ol class="trace-story" data-beats="${example.story.length}">${blocks}</ol><p class="trace-scope">${scope}</p>`;
 }
 
 /** Shared verbatim record for embedded carousels and the research gallery. */
@@ -96,7 +103,7 @@ export function renderTrajectories(html: string): string {
     const cases = gallery.cases.map((example) => renderTrajectoryCase(example)).join('\n');
     return `<section class="trajectory-gallery" id="${prefix}" aria-labelledby="${prefix}-title" data-trajectory-gallery>
       <header class="trace-gallery-header"><p class="label">From the agents’ own records</p><h3 id="${prefix}-title">${escape(gallery.title)}</h3>
-      <p class="trace-guide">Read the short sequence first, then open the source excerpts. Quoted notes are verbatim; the summaries are ours. Every HF link opens a public transcript at a pinned revision.</p>${trajectoryLegend}</header>
+      <p class="trace-guide">Read the short sequence first, then open the source excerpts. Quoted notes are verbatim; the summaries are ours. Every HF link opens a public transcript at a pinned revision.</p></header>
       <div class="trace-controls" hidden><div class="trace-paging"><button type="button" data-trace-prev aria-label="Previous example" aria-controls="${prefix}-track">←</button><span data-trace-status aria-live="polite" aria-atomic="true">1 / ${gallery.cases.length}</span><button type="button" data-trace-next aria-label="Next example" aria-controls="${prefix}-track">→</button></div><button type="button" class="trace-toggle" data-trace-all aria-pressed="false" aria-controls="${prefix}-track">Read all examples</button></div>
       <div class="trace-choices" hidden aria-label="Choose an example">${gallery.cases.map((c, i) => `<button type="button" data-trace-index="${i}" aria-controls="${c.id}" aria-pressed="${i === 0}">${i + 1}. ${escape(c.title)}</button>`).join('')}</div>
       <div class="trace-track" id="${prefix}-track" data-trace-track>${cases}</div>

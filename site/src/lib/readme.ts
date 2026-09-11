@@ -1,5 +1,5 @@
 // Build-time extraction of README.md copy sections — single source of truth: the
-// landing-page intro, the status banner, the why-cards, and the footer
+// landing-page intro, the why-cards, and the footer
 // disclosure all render from the repo-root README, so every push re-syncs them
 // with no manual step.
 import { marked } from 'marked';

@@ -120,6 +120,10 @@ test('visual stories keep session activity distinct from persistent memory', () 
     if (writes && !reads) assert.ok(article.includes('A later read is not shown'));
     if (!writes && !reads) assert.ok(article.includes('no persistent-memory write or read is shown'));
     const sessions = c.story.map((b) => c.steps[b.steps[0]].session);
+    const sessionGroups = sessions.filter((n, i) => i === 0 || n !== sessions[i - 1]);
+    assert.deepEqual([...story.matchAll(/data-session="(\d+)"/g)].map((m) => Number(m[1])), sessionGroups);
+    assert.equal((story.match(/class="trace-session-beats"/g) || []).length, sessionGroups.length);
+    assert.ok(!story.includes('Same session'), 'Same-session actions share one session block');
     assert.equal((story.match(/trace-session-break/g) || []).length,
       sessions.filter((n, i) => i > 0 && n !== sessions[i - 1]).length);
   }

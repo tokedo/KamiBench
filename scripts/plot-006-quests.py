@@ -17,12 +17,12 @@ quests = list(csv.DictReader((data / '006-quest-timeline.csv').open()))
 levels = list(csv.DictReader((data / '006-levelup-timeline.csv').open()))
 stops = {'sonnet5-control': 189.6, 'sonnet5-pushed': 186.5, 'gpt52-control': 147.1, 'gpt52-pushed': 146.2}
 plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 10, 'svg.fonttype': 'none', 'svg.hashsalt': 'kamibench-006', 'axes.spines.top': False, 'axes.spines.right': False})
-fig, axes = plt.subplots(2, 1, figsize=(4.8, 7.8))
-fig.subplots_adjust(left=.12, right=.96, top=.86, bottom=.09, hspace=.95)
+fig, axes = plt.subplots(1, 2, figsize=(10, 5.6))
+fig.subplots_adjust(left=.075, right=.97, top=.77, bottom=.31, wspace=.27)
 fig.patch.set_facecolor('#faf9f7')
-fig.text(.12,.965,'Knowledge delivery, run 006',fontsize=15,weight='bold',color='#1c1917')
-fig.text(.12,.929,'EXPLORATORY · one arm per condition',fontsize=10,color='#6d675f')
-fig.text(.12,.9,'Dashed: control     Solid: pushed knowledge',fontsize=10,color='#6d675f')
+fig.text(.075,.95,'Knowledge delivery, run 006',fontsize=15,weight='bold',color='#1c1917')
+fig.text(.075,.9,'EXPLORATORY · one arm per condition',fontsize=10,color='#6d675f')
+fig.text(.075,.85,'Dashed: control     Solid: pushed knowledge',fontsize=10,color='#6d675f')
 
 for ax, model, name, color in zip(axes,['sonnet5','gpt52'],['Sonnet 5','gpt-5.2'],['#2a78d6','#008300']):
     ax.set_facecolor('#faf9f7')
@@ -51,7 +51,7 @@ for ax, model, name, color in zip(axes,['sonnet5','gpt52'],['Sonnet 5','gpt-5.2'
 
 # Separate event strip expands the six overlapping markers; uses the six frozen
 # timestamps and the interval explicitly verified in the lab answer.
-strip=fig.add_axes([.12,.433,.84,.065]);strip.axis('off')
+strip=fig.add_axes([.075,.065,.395,.08]);strip.axis('off')
 strip.text(0,1,'Session 70: six level-ups in 37 seconds',transform=strip.transAxes,fontsize=10,color='#1c1917')
 seconds=[0,10,16,23,31,37]
 strip.set_xlim(-1,38);strip.set_ylim(-1,1)
@@ -59,10 +59,12 @@ strip.plot([0,37],[0,0],color='#e5e1da',linewidth=1)
 strip.plot(seconds,[0]*6,'^',color='#2a78d6',markersize=6)
 strip.text(0,-.8,'04:41:26 UTC',ha='left',fontsize=9,color='#6d675f')
 strip.text(37,-.8,'04:42:03 UTC',ha='right',fontsize=9,color='#6d675f')
-fig.text(.12,.015,'Lines end at operator stops. ▲ Landed level-up.',fontsize=9,color='#6d675f')
+fig.text(.075,.015,'Lines end at operator stops. ▲ Landed level-up.',fontsize=9,color='#6d675f')
 dst=root/'blog/figures/006-quests-over-time.svg'
 fig.savefig(dst,metadata={'Date':None,'Description':'Frozen run 006 quest timelines and eight level-up events. Both pushed arms completed more quests; only Sonnet control leveled. See the run page for stop boundaries and limitations.'})
-fig.savefig('/private/tmp/kamibench-editorial-2026-09-11/006-quests-over-time.png',dpi=160)
+preview=Path('/private/tmp/kamibench-editorial-2026-09-11/006-quests-over-time.png')
+preview.parent.mkdir(parents=True,exist_ok=True)
+fig.savefig(preview,dpi=160)
 
 # Make the matplotlib output follow the existing site's theme conventions while
 # preserving fallback colors for GitHub and other standalone SVG renderers.
@@ -74,8 +76,13 @@ title.text='Run 006: quest progress within each model. Sonnet control 19, pushed
 svg.insert(0,title)
 palette={'#faf9f7':'var(--bg, #faf9f7)','#1c1917':'var(--text, #1c1917)','#6d675f':'var(--muted, #6d675f)','#e5e1da':'var(--line, #e5e1da)','#2a78d6':'var(--plot-blue, #2a78d6)','#008300':'var(--plot-green, #008300)'}
 for element in svg.iter():
+    # Inline HTML recognizes SVG href, but not ElementTree's generated ns4:href.
+    # Keep every endpoint and level-up marker visible when the SVG is embedded.
+    link=element.attrib.pop('{http://www.w3.org/1999/xlink}href',None)
+    if link is not None: element.set('href',link)
     if 'style' in element.attrib:
         style=element.attrib['style']
+        style=style.replace("font-family: 'DejaVu Sans'", "font-family: system-ui, -apple-system, 'Segoe UI', sans-serif")
         for color,value in palette.items(): style=style.replace(color,value)
         element.set('style',style)
 tree.write(dst,encoding='unicode')
