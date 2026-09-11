@@ -78,12 +78,12 @@ export function renderTrajectoryCase(example: TrajectoryCase, catalog = false): 
       <p class="trace-annotation">${escape(step.note)}</p>${sourceLink(step, `Original transcript · line ${s.line}`)}</li>`;
   }).join('\n');
   return `<article class="trace-case" id="${example.id}" aria-labelledby="${example.id}-title" data-trace-case>
-    ${catalog ? '' : `<div class="trace-case-meta"><span class="chip ${example.tier === 'REGISTERED' ? 'chip-ok' : 'chip-pending'}">${example.tier}</span><span>Run ${example.run} · ${escape(example.model)}</span></div>
+    ${catalog ? '' : `<div class="trace-case-meta"><span class="chip ${example.tier === 'REGISTERED' ? 'chip-ok' : 'chip-pending'}">${example.tier}</span><span>Run ${example.run} · ${escape(example.model)}</span><a class="trace-permalink" href="#${example.id}" aria-label="Link to example: ${escape(example.title)}">Link to this example</a></div>
     <h3 id="${example.id}-title">${escape(example.title)}</h3>`}<p class="trace-intro">${escape(example.intro)}</p>
     ${renderStory(example)}<div class="trace-takeaway"><p><strong>What the sequence shows.</strong> ${escape(example.takeaway)}</p></div>
     <details class="trace-evidence" data-trace-evidence><summary>Read the ${example.steps.length} source excerpts <span>· verbatim transcripts &amp; annotations</span></summary><ol class="trace-steps">${steps}</ol></details>
     ${catalog ? `<p class="trace-question"><strong>Question beyond the game.</strong> ${escape(example.question)} This is a proposed test, not demonstrated transfer.</p>` : ''}
-    <p class="trace-record">${escape(example.arm)} · <a href="#${example.id}" aria-label="Link to example: ${escape(example.title)}">Link to this example</a></p></article>`;
+    </article>`;
 }
 
 /** Excerpts stay in the source record. Neither markdown nor linkification may

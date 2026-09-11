@@ -27,11 +27,12 @@ Each excerpt links to its source file and line on Hugging Face at the frozen
 `v0-final` revision. The surrounding explanations are ours; the quoted text is
 the agent's or its tools'. An agent's claim inside a quotation can be wrong.
 
-The [trajectory gallery](/gallery) collects twenty examples across the five
-completed runs, with filters for memory, planning, tool feedback and other
-behaviors. The selection below follows this post's argument; the full gallery
-includes more successes, failures and mixed cases, with links to individual
-examples for later reference.
+This post presents twelve examples: five about memory, three about the stack,
+and four about knowledge delivery. The [trajectory gallery](/gallery) contains
+all twenty examples across the five completed runs, including eight additional
+successes, failures and mixed cases. The gallery has filters for memory,
+planning, tool feedback and other behaviors, plus links to individual examples
+for later reference.
 
 <nav class="post-route" aria-label="In this post"><a href="#experience-has-to-survive-the-session">Memory across sessions</a> · <a href="#first-make-the-instrument-answer-honestly">How traces shaped the stack</a> · <a href="#access-to-knowledge-is-only-a-beginning">Knowledge delivery</a> · <a href="#what-carries-beyond-the-game">Beyond the game</a> · <a href="#make-efficiency-matter">Sustainability</a></nav>
 

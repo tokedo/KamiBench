@@ -1242,7 +1242,9 @@ td:first-child {
 .post-body .trace-source { display: inline-block; padding-block: 0.35rem; min-height: 32px; font-size: 0.74rem; }
 .trace-takeaway { border-top: 1px solid var(--line); margin-top: 1.3rem; padding-top: 0.95rem; font-size: 0.85rem; }
 .trace-takeaway p { margin: 0; }
-.trace-record { color: var(--muted); font-size: 0.69rem; margin: 0.85rem 0 0; overflow-wrap: anywhere; }
+.trace-permalink { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.74rem; font-weight: 400; }
+.trace-case-meta .trace-permalink { margin-left: auto; }
+.gallery-entry > summary > .trace-permalink { margin-left: 0.8rem; }
 .trace-swipe { margin: 0; padding: 0.65rem 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.7rem; }
 .post-body .post-route { font-family: var(--font-sans); font-size: 0.82rem; line-height: 1.8; padding-block: 0.7rem; border-block: 1px solid var(--line); }
 .latest-research { border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.25rem; }

@@ -67,6 +67,7 @@ const runs = [...new Set(cases.map((c) => c.run))];
           data-topics={c.topics.join('|')} data-outcome={c.outcome} data-run={c.run}>
           <summary>
             <span class="gallery-entry-meta">Run {c.run} · {c.model}</span>
+            <a class="trace-permalink" href={`#${c.id}`} aria-label={`Link to example: ${c.title}`}>Link to this example</a>
             <span class="gallery-entry-title" id={`${c.id}-title`}>{c.title}</span>
             <span class="gallery-entry-tags"><span class={`gallery-outcome outcome-${c.outcome.toLowerCase()}`}>{c.outcome}</span>{' '}
               <span>{c.span}</span><span>{c.topics.join(' · ')}</span></span>
