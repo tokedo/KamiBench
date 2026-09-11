@@ -129,6 +129,10 @@ function renderBody(src: string): string {
     (_, doc: string, hash: string | undefined) =>
       `href="/experiments/${doc}${hash ?? ''}"`
   );
+  html = html.replace(
+    /href="\.\.\/blog\/\d{4}-\d{2}-\d{2}-([a-z0-9-]+)\.md(#[^"]*)?"/g,
+    'href="/blog/$1$2"'
+  );
 
   // Inline `figures/*.svg` images so embedded repo links stay clickable and the
   // theme can restyle the figure via CSS (see .arch-figure in global.css).

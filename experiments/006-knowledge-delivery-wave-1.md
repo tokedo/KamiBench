@@ -4,21 +4,17 @@
 
 <!-- STATUS:START -->
 Complete — stopped 2026-08-24 (gpt-5.2 arms) and 2026-08-25 (Sonnet 5 arms) by
-operator ruling once the pre-registered verdict was decided; the family closes
-at Wave 1 on its registered verdict. Dataset public at publication.
+operator ruling: the gpt pair under a burn-rate ruling and the Sonnet pair
+after the verdict was decided. The family closed at Wave 1 on its registered
+verdict. Dataset public with citable revision v0-final.
 <!-- STATUS:END -->
 
 <!-- ONELINER:START -->
-The cheapest decisive test of the design: the control rung against the full
-pushed-knowledge rung, on two mid-tier models, one arm per cell. It came back a
-clean null. Both pushed arms matched or beat their own control on quests — 22
-against 19 on Sonnet 5, 19 against 11 on gpt-5.2 — and neither landed a single
-level-up, so the registered rule scores the pushed rung as not working on
-either model, and the family's answer is "delivery is not the bottleneck at
-this tier". The one arm that did level, eight times, to level 9, was the Sonnet
-5 control — the arm with the least knowledge delivery of any, which found the
-objective in a side quest that asked for it. Wave 2 and Wave 3 are not run; the
-family closes here.
+The pushed-knowledge arms completed more quests than their controls, but
+neither leveled a Kami. The intervention failed the registered rule on both
+models, and the family closed at Wave 1. The exploratory trajectory analysis
+asks why the control arm turned leveling into a habit while the pushed arms
+left the mechanic unused.
 <!-- ONELINER:END -->
 
 <!-- DATASET:START -->https://huggingface.co/datasets/KamiBench/experiment-006-knowledge-delivery<!-- DATASET:END -->
@@ -47,11 +43,12 @@ Delivery family, the multi-wave experiment described on the design page; the
 two selected models define the tier tested here.
 
 One question: **does pushing the game's knowledge to a capable model change
-how it plays?** Five [stack-validation](budget-boxed.md) runs failed to level a
-single Kami. The [design](knowledge-delivery.md) argues that the failure came
-not because the models were small but because the knowledge sat in a folder
-nobody read. This wave tests that interpretation by comparing the control and
-pushed outcomes for each model.
+how it plays?** Across runs 002, 004, and 005 of
+[stack validation](budget-boxed.md), the leveling and skill tools were called
+four times in 15,815 tool calls. Two calls succeeded, both leveling the same
+Kami in run 005. The [design](knowledge-delivery.md) tested whether delivering
+knowledge through additional channels would make the capability more widely
+used.
 
 ## The two rungs
 
@@ -107,11 +104,15 @@ Kami, and the verdict rule needs both.
 | spend | $27.89 | $39.16 | $61.47 | $51.10 |
 | USD per quest | 1.47 | 1.78 | 5.59 | 2.69 |
 
-The wave spent $179.63 of an $800 planning envelope and bought a verdict.
+MUSU banked here is gross currency moved, including salvage from liquidations.
+The harvesting-only figures in the cross-run tables use a different basis.
 
-**The one quest gap large enough to look like a treatment effect mostly is not
-one.** The gpt-5.2 pushed arm finished eight quests ahead of its control, and
-the control arm was ahead first: it reached its eighth completion on 2026-08-18
+The wave spent $179.63 of an $800 planning envelope. Both model pairs were
+stopped by the operator before the planned ceiling.
+
+**The quest gap needs its trajectory to be interpreted.** The gpt-5.2 pushed
+arm finished eight quests ahead of its control. The control arm was ahead
+first: it reached its eighth completion on 2026-08-18
 at 07:26 UTC, fifteen hours before the pushed arm reached its own eighth. Then
 it accepted a quest to burn three Scrap Metal and took 93.9 hours to finish it,
 harvesting a tier-300 scrap node while its own earlier sweep had already listed
@@ -131,33 +132,38 @@ refusal because the Kami was not resting, stop the harvest, level up, complete
 the quest, and pick up the follow-on quest that asks for a skill point. Two
 quests and the run's first level-up in eight minutes, from a quest that asked
 for it. Two days later, with no quest asking for anything, the same arm leveled
-six more times in 37 seconds and wrote the habit into its own notes. It ended
+six times in 37 seconds and wrote the habit into its own notes. It ended
 at level 9.
 
-The two arms that were *told* the mechanism ended at zero. The Sonnet 5 pushed
+The two pushed arms ended with no level-ups despite receiving the mechanism
+in their standing instructions. The Sonnet 5 pushed
 arm had leveling in its standing prompt and a search tool over the
 documentation. It made one level-up call in the entire run, was refused because
 the Kami was not resting, and never tried again — while its notes drifted from
 "could consider leveling once enough XP banked" to "both Kamis still level 1 —
-never leveled up. Low priority." It finished with 6,584 experience banked on a
-level-1 Kami, against the control arm's 3,633, which had bought nine levels.
+never leveled up. Low priority." The pushed arm's Kami held 6,584 experience
+at level 1, where the next level costs 40. The control arm's Kami reached
+level 9 through eight level-ups and
+still held 3,633 surplus experience at the last snapshot (2026-08-25 04:35 UTC).
 The gpt-5.2 pushed arm came within one tool call of the same lever: it swept
 the same side quest's index and got back only booleans, then asked three
 neighbouring indices for their objectives and never that one.
 
-The reason both arms could sit on unspent experience is that **experience was
-invisible**: the string `xp` appears in zero of the 11,761 tool results
-returned to the four arms across the run. The lens serves a Kami's level and
-never its experience, and no tool carries experience state. The pushed rung
+**Experience was invisible on the in-run surface**: the string `xp` appears
+in zero of the 11,761 tool results returned to the four arms across the run.
+The world-state reader serves a Kami's level and never its experience, and
+no tool carries experience state. The pushed rung
 even delivered the word inside the error that blocked a level-up — *"need more
 experience"*, in a message that also named experience as something the
 environment interface does not read — to an agent with no surface anywhere that
 could show it.
 
 The reading this page puts forward, and it is exploratory at one arm per cell:
-**legibility of the objective beat delivery of the mechanism.** All four arms
-could have leveled. One did, because a counter it could watch asked it to. Two
-were told how and had nothing to look at.
+**legibility of the objective beat delivery of the mechanism.** The control
+arm's level-ups followed an explicit quest objective, while the pushed arms
+had the mechanism explained but no experience counter to inspect. This is not
+a claim that pushed knowledge is useless: search also produced useful quest
+progress, and both pushed arms completed more quests than their controls.
 
 ## Milestones
 
@@ -165,21 +171,21 @@ First success per onboarding/economy milestone, against cumulative inference —
 the same instrument as [Run 1](001-budget-boxed.md#milestones),
 [Run 2](002-stack-delta.md#milestones),
 [Run 4](004-perception-parity-rerun.md#milestones) and
-[Run 5](005-verification-run.md#milestones), so the rows compare directly. The
-full milestone table is on the
+[Run 5](005-verification-run.md#milestones). The milestone definitions are
+shared; model tiers and stack versions differ. The full milestone table is on the
 [dataset card](https://huggingface.co/datasets/KamiBench/experiment-006-knowledge-delivery).
 
 ![Milestone trajectories: first success per onboarding milestone vs cumulative tokens, per arm, Run 6 — all four arms clear all seven milestones inside 7.5M tokens](figures/006-milestones.svg)
 
-**Onboarding collapsed, and it belongs to the model tier rather than to the
-treatment.** All four arms bridged, funded an operator, registered, bought a
-Kami, completed a quest, started a harvest and banked MUSU within 3.3 hours of
-their first session. The same instrument on [Run 5](005-verification-run.md)
-records a first Kami at hour 3.1, hour 25.2 and never, and first MUSU banked at
-hour 4.3, hour 27.4 and never. Same world, same interface family, same
-instrument; the variable is the model tier. Onboarding — the thing Runs 1
-through 4 spent most of their evidence on — is finished as a research question
-at this tier.
+**[EXPLORATORY]** All four arms bridged funds, funded an operator, registered,
+bought a Kami, completed a quest, started a harvest, and banked MUSU within
+3.3 hours of their first session. Controls reached those milestones too, so
+this was not an effect of the pushed treatment.
+
+[Run 005](005-verification-run.md) recorded first Kami purchases at hour 3.1,
+hour 25.2, and never, and first MUSU banked at hour 4.3, hour 27.4, and never.
+The newer models and stack arrived together in run 006. Their contributions
+to that improvement cannot be separated here.
 
 ## Pre-registered expectations, scored
 
@@ -283,9 +289,10 @@ a result. The verdict rule as registered, quoted from the run card:
   (25- and 30-minute medians) while the Sonnet arms scheduled against *accrual
   arithmetic* (90 and 190 minutes). A session costs about the same on every arm.
   The arms differ in how many they take.
-- **Zero on-chain reverts across 2,970 transactions — and that is not a result
-  about the agents.** Version 2.2.0 of the environment interface blocks a
-  doomed write before it is submitted, so on-chain reverts are impossible by
+- **Zero on-chain reverts is a property of the write gate.** There were
+  2,936 agent-era transactions (2,970 including the lab's 34 recovery
+  transactions after the stops). Version 2.2.0 of the environment interface
+  blocks a doomed write before it is submitted, so on-chain reverts are impossible by
   construction. The stack-validation series' chain-revert-rate axis therefore
   does **not** extend to this run, and no comparison to those runs' revert
   numbers is valid. What the run does show on that axis is 625 write attempts
@@ -339,7 +346,9 @@ Everything shared across the family lives on the
 [design page](knowledge-delivery.md), which also records the family's closure
 at Wave 1.
 
-The successor family, [sustainability](sustainability.md), makes the balance
-itself the objective rather than delivering more knowledge — a solvency number
-that moves every session is, by construction, the counter in front of the agent
-that this run found to be the thing that mattered.
+The successor family, [sustainability](sustainability.md), makes the agent's
+running balance its survival constraint. It will test whether paying for
+inference and gas gives agents a stronger reason to use knowledge efficiently.
+[What agents remember, and what they do next](../blog/2026-09-11-what-agents-remember.md)
+explores the continual-learning interpretation through excerpts from the public
+transcripts.

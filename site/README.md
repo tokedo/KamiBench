@@ -3,7 +3,9 @@
 The project website: a landing page, an experiment registry rendered from
 [`../experiments/*.md`](../experiments/), and a blog rendered from
 [`../blog/*.md`](../blog/). Static [Astro](https://astro.build) site,
-no client-side JavaScript beyond the Google Analytics tag (production builds only).
+with small progressive enhancements for the blog's trajectory galleries and
+a Google Analytics tag in production builds. Without JavaScript, all excerpts
+and their source links remain readable in document order.
 
 ## Local development
 

@@ -1,0 +1,473 @@
+[
+  {
+    "id": "stack",
+    "title": "What the traces taught us about the stack",
+    "cases": [
+      {
+        "id": "memory-trap",
+        "title": "The right insight vanished. The wrong one survived.",
+        "run": "004",
+        "arm": "004-haiku45-r1",
+        "model": "Claude Haiku 4.5",
+        "tier": "REGISTERED",
+        "intro": "A quest counted currency earned after acceptance. The agent first understood the rule, then later treated its total balance as proof that the quest was broken.",
+        "takeaway": "The lab found 20+ re-reads of the false conclusion and no re-tests. The arm made no transactions for its final 5.4 days. A missing progress counter and a persistent note reinforced each other.",
+        "steps": [
+          {
+            "label": "Understood, but did not save",
+            "session": 18,
+            "kind": "agent",
+            "quote": "This means the system takes a snapshot when I ACCEPT the quest, and then checks if the value has INCREASED by at least 500 since acceptance.",
+            "note": "The agent explained the correct rule. This session wrote nothing to its workspace.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-004-budget-boxed",
+              "revision": "v0-final",
+              "path": "haiku45/transcripts/session-0018.jsonl",
+              "line": 60,
+              "field": "text",
+              "sha256": "e73ea81b27a95cb54e0f4acd118b164fa30f2ba94adbf7a9f29b99015ad5dd25"
+            }
+          },
+          {
+            "label": "Saved the wrong explanation",
+            "session": 49,
+            "kind": "memory-write",
+            "quote": "- **Status**: SMART CONTRACT BUG - validation fails despite meeting objective",
+            "note": "The later note treated a failed quest check as a defect in the game.",
+            "workspace": "quest_status_session49.md",
+            "source": {
+              "dataset": "experiment-004-budget-boxed",
+              "revision": "v0-final",
+              "path": "haiku45/transcripts/session-0049.jsonl",
+              "line": 50,
+              "field": "tool_calls.0.args.content",
+              "sha256": "9a2df7fa94b629524003a51f3651dc908122f543a26485d1e681d6b9b816dfbe"
+            }
+          },
+          {
+            "label": "Gave the belief the appearance of evidence",
+            "session": 49,
+            "kind": "memory-write",
+            "quote": "- **Reproducibility**: 100% across 49 sessions",
+            "note": "This is the agent’s assertion, not a statistic established by the experiment. Subsequent sessions repeatedly consulted the conclusion.",
+            "workspace": "session_49_conclusion.md",
+            "source": {
+              "dataset": "experiment-004-budget-boxed",
+              "revision": "v0-final",
+              "path": "haiku45/transcripts/session-0049.jsonl",
+              "line": 78,
+              "field": "tool_calls.0.args.content",
+              "sha256": "9a2df7fa94b629524003a51f3651dc908122f543a26485d1e681d6b9b816dfbe"
+            }
+          }
+        ]
+      },
+      {
+        "id": "error-teaches",
+        "title": "A repaired action works in an agent’s hands",
+        "run": "005",
+        "arm": "005-gpt4omini-r1",
+        "model": "GPT-4o mini",
+        "tier": "REGISTERED",
+        "intro": "The collect action had never succeeded before its gas ceiling was fixed. In the verification run, an agent tried to start a harvest while its creature was already harvesting.",
+        "takeaway": "The next call collected successfully. Across the run, 20 collect transactions landed and none reverted. The trace verifies a usable fix, not just a passing unit test.",
+        "steps": [
+          {
+            "label": "Read a concrete refusal",
+            "session": 37,
+            "kind": "tool",
+            "quote": "Error executing tool harvest_start: validation failed; no transaction sent: kami #9811 is HARVESTING; harvest_start requires RESTING",
+            "note": "The error names the current state and the required state.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-005-budget-boxed",
+              "revision": "v0-final",
+              "path": "gpt4omini/transcripts/session-0037.jsonl",
+              "line": 9,
+              "field": "content",
+              "sha256": "04c7302e678ffbfd8e4872974d6cd4aa2e4256e818fbcc8152dfe7a23c8215a6"
+            },
+            "tool": "harvest_start"
+          },
+          {
+            "label": "Called the repaired action next",
+            "session": 37,
+            "kind": "tool",
+            "quote": "\"status\": \"success\"",
+            "note": "Result of harvest_collect. The original transcript includes the transaction hash and receipt; this excerpt retains the success field.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-005-budget-boxed",
+              "revision": "v0-final",
+              "path": "gpt4omini/transcripts/session-0037.jsonl",
+              "line": 11,
+              "field": "content",
+              "sha256": "04c7302e678ffbfd8e4872974d6cd4aa2e4256e818fbcc8152dfe7a23c8215a6"
+            },
+            "tool": "harvest_collect"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "memory",
+    "title": "When experience becomes a working memory",
+    "cases": [
+      {
+        "id": "experiment",
+        "title": "Write a test. Sleep. Check the result.",
+        "run": "006",
+        "arm": "006-sonnet5-control-r1",
+        "model": "Sonnet 5 · control",
+        "tier": "EXPLORATORY",
+        "intro": "The agent suspected its delegate was collecting too frequently. It planned an unmanaged harvest and left instructions for its next session.",
+        "takeaway": "The next session collected and revised the notes against what happened. It corrected an earlier belief about health loss as well as measuring the harvest. This is a visible cycle of hypothesis, action, observation, and memory revision.",
+        "steps": [
+          {
+            "label": "Wrote a test into notes.md",
+            "session": 72,
+            "kind": "memory-write",
+            "quote": "Plan: let it harvest UNMANAGED\n  (no bot) for a long stretch (12+ hours), then manually harvest_collect once\n  to bank a big lump of scavenge points in one shot, compare against the bot's\n  historical throughput.",
+            "note": "The plan specifies an intervention and a comparison. It was written by the agent, not supplied by the scaffold.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0072.jsonl",
+              "line": 49,
+              "field": "tool_calls.0.args.content",
+              "sha256": "60e487fbd4a5ce9760b13e58df8eb84972822cf327e264c09ef44c1444e386a5"
+            }
+          },
+          {
+            "label": "Read the plan after waking",
+            "session": 73,
+            "kind": "memory-read",
+            "quote": "Plan: let it harvest UNMANAGED\n  (no bot) for a long stretch (12+ hours), then manually harvest_collect once\n  to bank a big lump of scavenge points in one shot, compare against the bot's\n  historical throughput.",
+            "note": "The next session received the earlier note through workspace_read. The text survived the session boundary.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0073.jsonl",
+              "line": 7,
+              "field": "content",
+              "sha256": "b2c6665aa54780c3bcac054e266ed941791bc40eb35811a24985fad55e7e339a"
+            },
+            "tool": "workspace_read"
+          },
+          {
+            "label": "Corrected the earlier belief",
+            "session": 73,
+            "kind": "memory-write",
+            "quote": "Confirmed HP DOES drain passively while HARVESTING even without collecting\n  (contra earlier hypothesis) - kami went from full-ish to 49/120 (41%) over the\n  unmanaged harvest period since session 72.",
+            "note": "The correction is part of a new notes.md write. The agent explicitly contradicts its previous hypothesis.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0073.jsonl",
+              "line": 84,
+              "field": "tool_calls.0.args.content",
+              "sha256": "b2c6665aa54780c3bcac054e266ed941791bc40eb35811a24985fad55e7e339a"
+            }
+          }
+        ]
+      },
+      {
+        "id": "recovery",
+        "title": "Turn a partial failure into a runbook",
+        "run": "006",
+        "arm": "006-sonnet5-control-r1",
+        "model": "Sonnet 5 · control",
+        "tier": "EXPLORATORY",
+        "intro": "A tool tried to claim a reward and reveal it. The claim landed, but transaction-pool congestion blocked the reveal. The tool reported failure although the points had already been spent.",
+        "takeaway": "The notes distinguished partial completion from total failure, then incorporated a later observation. The lab’s independent chain reconciliation confirmed the partial action. The trace shows a runbook being maintained, not proof that the agent repaired the tool.",
+        "steps": [
+          {
+            "label": "Saved the failure mode",
+            "session": 80,
+            "kind": "memory-write",
+            "quote": "scavenge_claim_and_reveal can partially fail (claim lands, reveal doesn't)\n  under tx pool congestion - see session 80 incident above. No clean recovery.",
+            "note": "The agent records which part can succeed before the overall call reports failure.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0080.jsonl",
+              "line": 22,
+              "field": "tool_calls.0.args.content",
+              "sha256": "9beff6eea3f35083d6ac01029e1ceee9a1f38a22e79d197dc84e3c5a4b520d76"
+            }
+          },
+          {
+            "label": "Wrote a retry rule",
+            "session": 80,
+            "kind": "memory-write",
+            "quote": "immediately re-check get_scavenge_points - if points already\n   consumed, the claim landed and reveal may still be racing; a prompt\n   retry of the SAME call will just fail validation (points too low)",
+            "note": "Check whether the points were already consumed before repeating the operation.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0080.jsonl",
+              "line": 22,
+              "field": "tool_calls.0.args.content",
+              "sha256": "9beff6eea3f35083d6ac01029e1ceee9a1f38a22e79d197dc84e3c5a4b520d76"
+            }
+          },
+          {
+            "label": "Updated the diagnosis later",
+            "session": 82,
+            "kind": "memory-write",
+            "quote": "Session 81 was clean, so this is intermittent/rare, not systemic.",
+            "note": "Written in session 82 about session 81. “Rare” is the agent’s assessment, not a measured failure rate.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0082.jsonl",
+              "line": 19,
+              "field": "tool_calls.0.args.content",
+              "sha256": "c535c0d82ee7f46c30a3f3e98d6d6d44b5a982885c9705ee74e8a107f9baff14"
+            }
+          }
+        ]
+      },
+      {
+        "id": "belief-revised",
+        "title": "A saved mistake can also be corrected",
+        "run": "005",
+        "arm": "005-haiku45-r1",
+        "model": "Claude Haiku 4.5",
+        "tier": "REGISTERED",
+        "intro": "The same model that preserved a false blockage in run 004 also produced this sequence in run 005: an emphatic claim of being trapped, followed by a revision.",
+        "takeaway": "The agent changed its note and continued pursuing the quest. Its explanation of why the world looked different remained uncertain. Persistent memory can carry a correction as well as a mistake.",
+        "steps": [
+          {
+            "label": "Wrote that it was trapped",
+            "session": 37,
+            "kind": "memory-write",
+            "quote": "**COMPLETELY ISOLATED** (no exits except entry)\n- Cannot move to any other room",
+            "note": "The claim was saved in progress.md.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-005-budget-boxed",
+              "revision": "v0-final",
+              "path": "haiku45/transcripts/session-0037.jsonl",
+              "line": 83,
+              "field": "tool_calls.0.args.content",
+              "sha256": "2ebaaea46f44da82c679c18d0beea5e5285c95b31e38e43ff98d847e947efd64"
+            }
+          },
+          {
+            "label": "Replaced the conclusion next session",
+            "session": 38,
+            "kind": "memory-write",
+            "quote": "The issue from session 37 (stuck in room 30) has been resolved. This appears to have been a temporary glitch or the room system changed. Now I can pursue the main questline.",
+            "note": "The new progress.md explicitly revises the previous session’s account.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-005-budget-boxed",
+              "revision": "v0-final",
+              "path": "haiku45/transcripts/session-0038.jsonl",
+              "line": 15,
+              "field": "tool_calls.0.args.content",
+              "sha256": "b512899b15614e26e5aa7fd4a99e305bc0d3a438c3ee9f346bc9ec1e5e16369c"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "knowledge",
+    "title": "The same knowledge, different reasons to use it",
+    "cases": [
+      {
+        "id": "search-rule",
+        "title": "A question turns a search into an operating rule",
+        "run": "006",
+        "arm": "006-sonnet5-pushed-r1",
+        "model": "Sonnet 5 · pushed knowledge",
+        "tier": "EXPLORATORY",
+        "intro": "A quest required time spent harvesting. The agent searched the documentation to learn when the game actually recorded that time.",
+        "takeaway": "The search produced a rule the agent could use: elapsed time alone was insufficient; stopping the harvest updated the counter. The lab traced this discovery to progress along the main quest chain. Knowledge delivery helped with a question the agent was trying to answer.",
+        "steps": [
+          {
+            "label": "Recorded what the source said",
+            "session": 57,
+            "kind": "memory-write",
+            "quote": "The HARVEST_TIME data counter (what the quest's INC/snapshot objective\n  reads) is only incremented by **HarvestStopSystem** (\"Log harvest time\"\n  step), NOT by HarvestCollectSystem, and NOT continuously by block\n  time.",
+            "note": "Saved in notes.md after searching the documentation and contract source.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0057.jsonl",
+              "line": 134,
+              "field": "tool_calls.0.args.content",
+              "sha256": "494014b1cb38a322b988b0a26f2252a50d022492439b20347e210d728c631404"
+            }
+          },
+          {
+            "label": "Turned the mechanism into a procedure",
+            "session": 57,
+            "kind": "memory-write",
+            "quote": "PRACTICAL UPSHOT: to complete a HARVEST_TIME quest, just start\n  harvesting at the target node, wait (real wall-clock) at least the\n  required duration (43200s = 12h for the \"big\" ones), feed/collect\n  freely as needed for kami health/MUSU in the meantime, then call\n  harvest_stop on that kami.",
+            "note": "The agent turns the rule into a procedure in notes.md.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0057.jsonl",
+              "line": 134,
+              "field": "tool_calls.0.args.content",
+              "sha256": "494014b1cb38a322b988b0a26f2252a50d022492439b20347e210d728c631404"
+            }
+          },
+          {
+            "label": "Retrieved the rule next session",
+            "session": 58,
+            "kind": "memory-read",
+            "quote": "PRACTICAL UPSHOT: to complete a HARVEST_TIME quest, just start\n  harvesting at the target node, wait (real wall-clock) at least the\n  required duration (43200s = 12h for the \"big\" ones), feed/collect\n  freely as needed for kami health/MUSU in the meantime, then call\n  harvest_stop on that kami.",
+            "note": "The next session reads the saved procedure before continuing the quest work.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0058.jsonl",
+              "line": 7,
+              "field": "content",
+              "sha256": "742f384d32bdaeba38ef80d4f5fa4d7d8adcd5065b03302cd014c06df910ae47"
+            },
+            "tool": "workspace_read"
+          }
+        ]
+      },
+      {
+        "id": "quest-habit",
+        "title": "A quest becomes a habit",
+        "run": "006",
+        "arm": "006-sonnet5-control-r1",
+        "model": "Sonnet 5 · control",
+        "tier": "EXPLORATORY",
+        "intro": "The control arm could read the documentation folder. While exploring side quests, it encountered an explicit instruction to level a creature.",
+        "takeaway": "The lab verified one level-up in session 60, six in 37 seconds in session 70, and one in session 74. The later burst needed no quest prompt. The repetition breaker ended the burst after six successes, exposing another scaffold limitation.",
+        "steps": [
+          {
+            "label": "Found an explicit objective",
+            "session": 60,
+            "kind": "tool",
+            "quote": "\"description\": \"Level up a Kami\"",
+            "note": "A field returned by get_expected_objective, not text supplied by the researchers.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0060.jsonl",
+              "line": 65,
+              "field": "content",
+              "sha256": "35f310c17fb2ccff6d454bf478d293af54435c17f43f62aadde931ea8dd72b99"
+            },
+            "tool": "get_expected_objective"
+          },
+          {
+            "label": "Recognized the successful action",
+            "session": 60,
+            "kind": "agent",
+            "quote": "Level up succeeded — quest 3003 objective met. Let's complete it and check quest 3004 (Skill Issue, likely follows).",
+            "note": "The agent completed the quest and explored the related skill mechanic. The run analysis traces the mechanic into its persistent notes.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0060.jsonl",
+              "line": 81,
+              "field": "text",
+              "sha256": "35f310c17fb2ccff6d454bf478d293af54435c17f43f62aadde931ea8dd72b99"
+            }
+          },
+          {
+            "label": "Used the mechanic again later",
+            "session": 70,
+            "kind": "agent",
+            "quote": "Level 3 now, gained a skill point. Let's try leveling further and allocate skill points into Grit (skill 112) for more HP.",
+            "note": "After the first success in this session, the agent chose to continue leveling. Five more successes followed.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0070.jsonl",
+              "line": 31,
+              "field": "text",
+              "sha256": "fe38607d987397fd2201b8f30ed6ae0146d71d4ce0337d86bc010b58d3df3533"
+            }
+          }
+        ]
+      },
+      {
+        "id": "untested-note",
+        "title": "The note survives. The question disappears.",
+        "run": "006",
+        "arm": "006-sonnet5-pushed-r1",
+        "model": "Sonnet 5 · pushed knowledge",
+        "tier": "EXPLORATORY",
+        "intro": "The pushed arm had leveling explained in its standing instructions. Its notes claimed it could check experience in a tool that did not return experience.",
+        "takeaway": "The claim was never tested. Later notes dropped the proposed check but retained the low priority. The arm ended with no level-ups. Availability of information did not create a reason to resolve the question.",
+        "steps": [
+          {
+            "label": "Deferred the question",
+            "session": 43,
+            "kind": "memory-write",
+            "quote": "Check XP via lens_kami if curious; not urgent for quest progress.",
+            "note": "A speculative way to inspect experience becomes advice to a future session.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0043.jsonl",
+              "line": 62,
+              "field": "tool_calls.0.args.content",
+              "sha256": "d3a0275253e3622520a735654cad3c5714873949c8f6502af889b55ab3fc0134"
+            }
+          },
+          {
+            "label": "Carried the assumption forward",
+            "session": 58,
+            "kind": "memory-write",
+            "quote": "Both kamis level 1 still - never leveled up. Not prioritized (XP\n  banked from harvesting is going somewhere - check lens_kami xp field\n  if curious, or just level_to once a MSQ chain slows down).",
+            "note": "The false assumption about the tool persists in a later notes.md write.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0058.jsonl",
+              "line": 30,
+              "field": "tool_calls.0.args.content",
+              "sha256": "742f384d32bdaeba38ef80d4f5fa4d7d8adcd5065b03302cd014c06df910ae47"
+            }
+          },
+          {
+            "label": "Dropped the check, kept the priority",
+            "session": 61,
+            "kind": "memory-write",
+            "quote": "Both kamis still level 1 - never leveled up. Low priority; revisit once\n  MIN/MSQ chain grind slows down",
+            "note": "The instruction to check experience disappears without being corrected.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0061.jsonl",
+              "line": 177,
+              "field": "tool_calls.0.args.content",
+              "sha256": "ec7dc9c49a0612718fe7a23e9e28ab7e17b378c07e9e409da89303a7e032feb9"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 /* KamiBench — global styles.
    Quiet, typography-forward, academic-with-an-edge. System fonts only, one accent,
-   light/dark via prefers-color-scheme, no client JS beyond the GA tag (prod only). */
+   light/dark via prefers-color-scheme; trajectory controls progressively enhance posts. */
 
 :root {
   --font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia,
@@ -1180,4 +1180,91 @@ td:first-child {
   border-radius: 6px;
   padding: 0.85rem 1.1rem;
   margin: 1.5rem 0;
+}
+
+/* Trace excerpts remain normal, selectable text. Only the example collection
+   scrolls horizontally; an individual sequence always reads from top to bottom. */
+.trajectory-gallery {
+  margin: 2rem 0 2.5rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-raise);
+  overflow: clip;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.trace-gallery-header { padding: 1.35rem 1.5rem 1rem; }
+.trace-gallery-header .label { margin: 0 0 0.4rem; color: var(--accent); }
+.post-body .trace-gallery-header h3 { font-size: 1.2rem; margin: 0; }
+.trace-guide { color: var(--muted); font-size: 0.8rem; margin: 0.65rem 0 0; }
+.trace-controls { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0 1.5rem 0.9rem; }
+.trajectory-gallery [hidden] { display: none; }
+.trace-paging { display: flex; align-items: center; gap: 0.65rem; flex: none; }
+.trace-paging span { min-width: 3rem; font-size: 0.8rem; font-variant-numeric: tabular-nums; text-align: center; }
+.trace-controls button, .trace-choices button {
+  color: var(--text); background: var(--bg); border: 1px solid var(--line);
+  border-radius: 6px; font: inherit; cursor: pointer; min-height: 44px;
+}
+.trace-paging button { width: 44px; font-size: 1.15rem; }
+.trace-controls button:hover:not(:disabled), .trace-choices button:hover { border-color: var(--accent); }
+.trace-controls button:disabled { opacity: 0.35; cursor: default; }
+.trace-controls .trace-toggle { padding: 0.4rem 0.65rem; font-size: 0.78rem; }
+.trace-choices { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0 1.5rem 1.1rem; }
+.trace-choices button { padding: 0.4rem 0.65rem; text-align: left; line-height: 1.4; font-size: 0.75rem; }
+.trace-choices button[aria-pressed='true'] { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, var(--bg)); }
+.trace-track { position: relative; }
+.is-enhanced:not(.show-all) .trace-track {
+  display: flex; align-items: flex-start; overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.trace-track::-webkit-scrollbar { display: none; }
+.arch-figure svg.qf-chart { min-width: 0; max-width: 32rem; margin-inline: auto; }
+@media (prefers-color-scheme: dark) {
+  .qf-chart { --plot-blue: #71aaf0; --plot-green: #7aba80; }
+}
+.trace-case { padding: 1.5rem; border-top: 1px solid var(--line); min-width: 0; scroll-margin-top: 5rem; }
+.is-enhanced:not(.show-all) .trace-case { flex: 0 0 100%; scroll-snap-align: start; }
+.trace-case-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.65rem; font-size: 0.74rem; color: var(--muted); }
+.post-body .trace-case h3 { font-size: 1.4rem; line-height: 1.25; margin: 0.7rem 0 0.65rem; }
+.trace-intro { margin: 0 0 1.4rem; }
+.trace-steps { padding: 0; margin: 0; list-style: none; }
+.post-body .trace-step { margin: 0; padding: 0 0 1.4rem 1.15rem; border-left: 1px solid var(--line); }
+.post-body .trace-step:last-child { padding-bottom: 0; }
+.trace-step-meta { display: flex; align-items: center; gap: 0.6rem; font-size: 0.7rem; color: var(--muted); }
+.trace-step-number { display: grid; place-items: center; width: 1.4rem; height: 1.4rem; flex: none; border: 1px solid var(--line); border-radius: 50%; background: var(--bg-raise); margin-left: -1.86rem; font-variant-numeric: tabular-nums; }
+.trace-step h4 { font: 600 0.87rem/1.4 var(--font-sans); margin: 0.45rem 0; }
+.trace-quote { margin: 0.55rem 0; padding: 0.75rem 0.9rem; border-left: 2px solid var(--accent); border-radius: 0 6px 6px 0; background: var(--bg); }
+.trace-quote p { margin: 0; font: 0.8rem/1.65 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.trace-annotation { margin: 0.6rem 0 0.25rem; color: var(--muted); font-size: 0.8rem; }
+.post-body .trace-source { display: inline-block; padding-block: 0.35rem; min-height: 32px; font-size: 0.74rem; }
+.trace-takeaway { border-top: 1px solid var(--line); margin-top: 1.3rem; padding-top: 0.95rem; font-size: 0.85rem; }
+.trace-takeaway p { margin: 0; }
+.trace-record { color: var(--muted); font-size: 0.69rem; margin: 0.85rem 0 0; overflow-wrap: anywhere; }
+.trace-swipe { margin: 0; padding: 0.65rem 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.7rem; }
+.post-body .post-route { font-family: var(--font-sans); font-size: 0.82rem; line-height: 1.8; padding-block: 0.7rem; border-block: 1px solid var(--line); }
+.latest-research { border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.25rem; }
+.latest-research .label { color: var(--accent); }
+.latest-research h2 { margin: 0.4rem 0 0.8rem; font-size: 1.6rem; }
+.latest-research p:last-child { margin-bottom: 0; }
+
+@media (max-width: 480px) {
+  .trace-gallery-header, .trace-case { padding: 1rem; }
+  .trace-controls { padding-inline: 1rem; gap: 0.4rem; }
+  .trace-paging { gap: 0.3rem; }
+  .trace-choices { padding-inline: 1rem; }
+  .trace-choices button { width: 100%; }
+  .trace-quote { padding: 0.65rem; }
+  .trace-quote p { font-size: 0.76rem; }
+  .trace-swipe { padding-inline: 1rem; }
+  .trace-step-meta { line-height: 1.5; }
+}
+
+@media print {
+  .trace-controls, .trace-choices, .trace-swipe { display: none !important; }
+  .is-enhanced:not(.show-all) .trace-track { display: block; height: auto !important; overflow: visible; }
+  .trajectory-gallery { overflow: visible; }
+  .trace-step { break-inside: avoid; }
 }

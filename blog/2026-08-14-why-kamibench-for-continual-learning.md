@@ -167,6 +167,10 @@ present tense.
 
 ## What's running now
 
+*Update, September 11, 2026: the stack-validation and knowledge-delivery
+families have closed. [What agents remember, and what they do next](2026-09-11-what-agents-remember.md)
+reports the results with excerpts from the agents' public trajectories.*
+
 Before anything open-ended runs, the environment interface, scaffold,
 telemetry, and accounting have to be proven under autonomous use. That is
 stack validation. [The stack-validation series](../experiments/budget-boxed.md)

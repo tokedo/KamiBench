@@ -30,17 +30,43 @@ reference implementation.
 | [kami-lens](https://github.com/tokedo/kami-lens) | Perception: maintains a live local mirror of world state and returns what the game's own rules show to a player. It is headless, runs on your machine, and is licensed AGPL-3.0. |
 | [kami-harness](https://github.com/tokedo/kami-harness) | The MCP server your agent connects to. It exposes the entire game surface as tools and is version-pinned per run. |
 | [kami-agent](https://github.com/tokedo/kami-agent) | Our optional reference scaffold. You can replace it with any agent that connects over MCP; see [Bring your own agent](#bring-your-own-agent). |
-| [kami-meter](https://github.com/tokedo/kami-meter) | Measurement: maintains one standardized ledger of costs and earnings per agent: inference (provider billing), gas, and in-world income. It operates independently of the agent under test. It is observe-only: the meter reads the chain and billing APIs and writes nothing. |
+| [kami-meter](https://github.com/tokedo/kami-meter) | Measurement independent of the agent: reads provider billing, on-chain gas, and in-world earnings. Maintains each arm's financial record and, in metered runs, issues statements and determines whether the agent can still pay. |
+
+### Current public components
+
+These versions describe the stack available as of September 11, 2026. Each
+experiment's run page records the older versions it actually used.
+
+| Component | Version | Public revision |
+|---|---|---|
+| kami-harness | 3.7.0 | [`a2c22c1`](https://github.com/tokedo/kami-harness/tree/a2c22c1) |
+| kami-lens | 0.6.1 | [`f07209d`](https://github.com/tokedo/kami-lens/tree/f07209d) |
+| kami-agent | 0.6.0 | [`0fb9036`](https://github.com/tokedo/kami-agent/tree/0fb9036) |
+| kami-meter | specification 0.6.0 | [`c9576ac`](https://github.com/tokedo/kami-meter/tree/c9576ac) |
+
+The interface now validates writes before submission and supports batched
+action sequences. The world-state reader recovers missing state from the chain
+and reports freshness information with its answers. The component READMEs
+describe these mechanisms; the [experiments](experiments/) record which
+versions were tested, and [post 2](blog/2026-09-11-what-agents-remember.md)
+shows how agent traces exposed the problems behind the changes.
+
+The meter never accepts the agent's own accounting and signs no transaction
+in the world. In run 005 it operated in shadow, observing without billing the
+agent. In a metered run it issues each arm's statement, records the arm's
+on-chain inference payments, and declares when the arm can no longer pay.
+Infrastructure rent stays outside the experiment, on the researcher's books.
 
 ## The tool surface
 
-The current harness surface (v2.1.0) exposes **101 tools** in four classes:
+The current environment interface (kami-harness 3.7.0) exposes **104 tools**
+in four classes:
 
-- **ACT [55 tools] — write to the world.** Signed transactions into
+- **ACT [56 tools] — write to the world.** Signed transactions into
   [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi)'s contracts: move, harvest,
   feed, craft, trade, liquidate. The contracts enforce real costs and consequences. A
   transaction that reverts is reported as a revert, never smoothed over.
-- **PERCEIVE [30 tools] — read the world.** These tools send world-state queries to your
+- **PERCEIVE [32 tools] — read the world.** These tools send world-state queries to your
   local [kami-lens](https://github.com/tokedo/kami-lens). The lens maintains a live mirror
   and applies the game's own rules. The result is parity, not privilege: you see what an
   equipped human player sees, nothing more.
@@ -53,6 +79,10 @@ The current harness surface (v2.1.0) exposes **101 tools** in four classes:
 - **META [7 tools] — know your session.** These tools expose the wallet, account registry,
   and bridge infrastructure needed to bring a bare wallet to a playable account. This is
   infrastructure, not world state.
+
+Historical surfaces remain part of the record: runs 001–002 used **84 tools**
+(v1.3.1 and v1.5.1), run 004 used **99 tools** (v2.0.0), and runs 005–006
+used **101 tools** (v2.1.0 and v2.2.0).
 
 Every run pins exact versions of everything. The harness also fingerprints its live
 tool surface with a hash carried in the MCP handshake. Results are comparable only within

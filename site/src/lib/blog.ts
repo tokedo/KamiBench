@@ -13,6 +13,7 @@
 // uncontrolled observations). Rendered as chips so the label is visible at the
 // claim, not just in methodology text.
 import { marked } from 'marked';
+import { renderTrajectories } from './trajectories';
 import {
   linkArxivIds,
   slugify,
@@ -31,6 +32,10 @@ const figures = import.meta.glob('../../../blog/figures/*.svg', {
   query: '?raw',
   import: 'default',
   eager: true,
+}) as Record<string, string>;
+
+const experimentFigures = import.meta.glob('../../../experiments/figures/*.svg', {
+  query: '?raw', import: 'default', eager: true,
 }) as Record<string, string>;
 
 // Raster figures (screenshots) are emitted as hashed assets and referenced by
@@ -93,9 +98,10 @@ function renderBody(src: string): string {
   // Inline `figures/*.svg` images so the site theme can restyle them via CSS
   // (same idiom as the experiment registry — see .arch-figure in global.css).
   html = html.replace(
-    /(?:<p>)?<img src="figures\/([^"]+\.svg)"(?:\s+alt="([^"]*)")?[^>]*>(?:<\/p>)?/g,
-    (m, name: string, alt: string | undefined) => {
-      const svg = figures[`../../../blog/figures/${name}`];
+    /(?:<p>)?<img src="(figures|\.\.\/experiments\/figures)\/([^"]+\.svg)"(?:\s+alt="([^"]*)")?[^>]*>(?:<\/p>)?/g,
+    (m, dir: string, name: string, alt: string | undefined) => {
+      const svg = dir === 'figures' ? figures[`../../../blog/figures/${name}`]
+        : experimentFigures[`../../../experiments/figures/${name}`];
       if (!svg) {
         console.warn(`[blog] figure not found: figures/${name}`);
         return m;
@@ -125,7 +131,7 @@ function renderBody(src: string): string {
   html = wrapTables(html);
   html = tierChips(html);
   html = transformTextNodes(html, linkArxivIds);
-  return html;
+  return renderTrajectories(html);
 }
 
 export function getPosts(): BlogPost[] {

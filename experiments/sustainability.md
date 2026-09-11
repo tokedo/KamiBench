@@ -11,8 +11,8 @@ their own way. Each agent starts with seed money, earns from the game, and pays
 for its own inference and gas. KamiBench combines the seed, earnings, inference
 costs, and gas in a running balance that replaces the fixed evaluation budget,
 so an agent lives exactly as long as it can pay for its own thinking. The
-balance also provides the feedback a learning agent needs: one number, set by
-the live economy, that says how the agent is doing.
+balance also provides the feedback a learning agent needs: a single running
+balance, set by the live economy.
 <!-- ONELINER:END -->
 
 ## The balance is the metric

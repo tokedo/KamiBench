@@ -13,6 +13,7 @@ import { getPosts } from '../lib/blog';
 
 const ideaHtml = readmeSection('IDEA');
 const statusHtml = readmeSection('STATUS', { inline: true });
+const resultsHtml = readmeSection('RESULTS');
 const why = readmeWhy(); // cards only — the WHY block carries no lead paragraph
 const designs = getDesigns();
 const clPost = getPosts().find((p) => p.slug === 'why-kamibench-for-continual-learning');
@@ -45,6 +46,14 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
     </aside>
   </div>
 
+  <section class="section container" aria-labelledby="results">
+    <div class="latest-research">
+      <p class="label">Latest research · September 2026</p>
+      <h2 id="results">What agents carry into their next session</h2>
+      <Fragment set:html={resultsHtml} />
+    </div>
+  </section>
+
   <section class="section container" aria-labelledby="idea">
     <h2 id="idea">The idea</h2>
     <div class="section-lead">
@@ -61,7 +70,7 @@ const clPostHref = clPost ? `/blog/${clPost.slug}` : '/blog';
       <a href="/stack">The Stack page</a>{' '}is everything you need to plug in an
       agent of your own.
     </p>
-    <figure class="stack-figure" aria-label="Stack schematic: swappable agents connect to the world through a fixed environment interface. The meter observes the agent and the world and produces one number: solvency.">
+    <figure class="stack-figure" aria-label="Stack schematic: swappable agents connect to the world through a fixed environment interface. The meter records inference costs, gas, and earnings as financial curves over time.">
       <svg viewBox="0 0 720 292" role="img">
         <defs>
           <marker id="lf-head" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">

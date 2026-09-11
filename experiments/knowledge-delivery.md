@@ -5,13 +5,14 @@ The design keeps the world, tools, and objective fixed while changing only how
 the game's knowledge reaches the agent: through a folder to read, a search
 tool, facts pushed inside tool results, or a plan file. The design asks which
 delivery method turns a capable model into a player that understands the game.
-Closed at Wave 1: the top rung moved neither model, so the family's answer is
-"delivery is not the bottleneck at this tier".
+Closed at Wave 1: neither pushed arm leveled a Kami, so the intervention
+failed the registered rule despite both arms completing more quests than their
+controls. The family verdict is "delivery is not the bottleneck at this tier".
 <!-- ONELINER:END -->
 
 ## The problem
 
-Five [stack-validation](budget-boxed.md) runs proved the stack works, but they also
+Four completed [stack-validation](budget-boxed.md) runs tested the stack, but they also
 showed the agents playing blind. The game's design document was bundled in a
 folder next to the agent, yet two of three models never opened it. The third
 model guessed at file paths and got them wrong up to a quarter of the time.
@@ -123,28 +124,31 @@ a synchronized replication earns a registered comparison.
 
 ## The result — closed at Wave 1
 
-[Run 1](006-knowledge-delivery-wave-1.md) ran the control rung and the full
-pushed rung on Sonnet 5 and gpt-5.2 from 2026-08-17, one arm per cell. Scored
-exactly as the rule was registered: both pushed arms matched or beat their own
-control on quests — 22 against 19 on Sonnet 5, 19 against 11 on gpt-5.2 — and
-neither landed a level-up, against 8 on the Sonnet 5 control arm. The rule's
-first clause fails on both models, so **the pushed rung works on neither model,
-and the family's answer is "delivery is not the bottleneck at this tier".**
-Wave 2 and Wave 3 are not run: the design says the family stops on this
-outcome, and it does. Evidence tier: exploratory — one arm per cell, no
-replication, and both model pairs stopped early.
+**[EXPLORATORY]** [Run 1](006-knowledge-delivery-wave-1.md) compared control
+and pushed knowledge on Sonnet 5 and gpt-5.2, with one arm per cell. Both
+pushed arms beat their controls on quests: 22 against 19 on Sonnet 5 and
+19 against 11 on gpt-5.2. Neither pushed arm landed a level-up; the Sonnet
+control landed eight.
 
-**[EXPLORATORY]** Beside the verdict, the run carries a reading the design did
-not anticipate. Its only level-ups came from the arm with the *least* knowledge
-delivery, after a side quest returned the objective "Level up a Kami" in plain
-words; the arm then made leveling a standing habit and finished at level 9. The
-two arms that were told the mechanism in their prompt, and could search the
-documentation for it, ended at zero — sitting on banked experience they had no
-way to see, because no tool in the run ever returned it. Objective legibility
-beat mechanism delivery. That reading is why the successor family,
-[sustainability](sustainability.md), makes the balance itself the objective
-rather than delivering more knowledge: a solvency number that moves every
-session is a counter in front of the agent by construction.
+The first clause of the registered rule therefore fails on both models.
+**The pushed rung works on neither model under that rule, and the family's
+answer is "delivery is not the bottleneck at this tier".** The design stops
+on this outcome, so Waves 2 and 3 were not run. Both model pairs were stopped
+early, and there was no replication.
+
+**[EXPLORATORY]** The only level-ups followed a side quest that returned the
+objective "Level up a Kami". The control arm completed the quest, preserved
+the mechanic in its notes, and later leveled without a quest prompting it.
+The pushed arms had leveling explained but no way to inspect experience:
+no tool returned that state.
+
+The lab's interpretation is that objective legibility mattered more than
+mechanism delivery in this case. This is not a claim that pushed knowledge
+is useless; search also produced useful quest progress. The
+[blog's transcript examples](../blog/2026-09-11-what-agents-remember.md)
+show both sides. The next family, [sustainability](sustainability.md), tests
+whether economic pressure gives agents a stronger reason to use knowledge
+efficiently.
 
 | wave | status | what it tested | outcome |
 |---|---|---|---|

@@ -1,7 +1,7 @@
 # Stack validation — whether the stack supports autonomous play
 
 <!-- ONELINER:START -->
-The stack-validation series used five bounded runs to prove that the stack
+The stack-validation series completed four bounded runs to test whether the stack
 holds up under real autonomous play before anything open-ended runs on it. The
 runs tested the environment interface, the scaffold, the telemetry, and the
 cost accounting using the same box each time: $10 of inference, seven days,
@@ -161,9 +161,11 @@ Cheap models cannot be the whole story, because the same models fixed their
 behavior instantly whenever the fix arrived *inside a tool result*.
 
 That delivery pattern does not change the result about the stack; it raises a
-separate question about the agents. The next design,
-[knowledge delivery](knowledge-delivery.md), holds the stack fixed and varies
-how the game's knowledge reaches the agent.
+separate question about the agents. The following design,
+[knowledge delivery](knowledge-delivery.md), held the
+stack fixed within its comparisons and varied how the game's knowledge
+reached the agent. That family has now closed at Wave 1; its design page
+records the verdict and the exploratory interpretation.
 
 ## The series at a glance
 

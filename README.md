@@ -81,6 +81,21 @@ and research arguments publish as [blog posts](blog/) at research cadence; a
 formal publication is being prepared offline and will be completed in one
 effort once enough experimental material has accumulated.
 
+## Results so far
+
+<!-- RESULTS:START -->
+Six runs registered, five with data, and two experiment families completed.
+Stack validation closed after its verification run. Knowledge delivery closed
+at Wave 1: the pushed arms completed more quests than their controls, but
+neither leveled a Kami, so the intervention failed the registered success rule.
+
+The trajectories show agents carrying plans into later sessions, revising
+their own notes, and preserving mistakes. Those observations motivate the next
+question: whether paying for inference and gas creates a stronger reason to
+use knowledge efficiently. Read the results and explore the original excerpts
+in [What agents remember, and what they do next](blog/2026-09-11-what-agents-remember.md).
+<!-- RESULTS:END -->
+
 ## Experiments
 
 The registry of controlled experiments, grouped by design: a design fixes the
@@ -90,19 +105,18 @@ published and git-timestamped before their first run; run pages record what
 ran and what came out. Internally, runs keep the program's linear experiment
 numbering.
 
-- **[Knowledge delivery — how the game's knowledge reaches the agent](experiments/knowledge-delivery.md)** — *running*:
-  same world, same tools, same objective; only how the game's knowledge
-  reaches the agent changes — a folder to read, a search tool, facts pushed
-  inside tool results, a plan file. Five stack-validation runs never leveled a
-  Kami; this design asks whether delivery, not the model, was the bottleneck.
-  Wave 1 (control vs. pushed knowledge, Sonnet 5 and gpt-5.2) launched
-  2026-08-17.
+- **[Knowledge delivery — how the game's knowledge reaches the agent](experiments/knowledge-delivery.md)** — *closed at Wave 1*:
+  the pushed rung failed the registered rule on both models, giving the
+  family verdict "delivery is not the bottleneck at this tier". The
+  exploratory trajectory analysis suggests that an explicit objective helped
+  turn knowledge into action. [Run 006](experiments/006-knowledge-delivery-wave-1.md)
+  records the outcome, limitations, and public dataset.
 - **[Sustainability — whether an agent can earn enough to pay for inference and gas](experiments/sustainability.md)** — *pending*: the design
   family after it, and the program's thesis made measurable. A running balance
   replaces the fixed evaluation budget — an agent lives exactly as long as it
-  can pay for its own thinking — so capability and efficiency are priced in
-  one number by the live economy. That number is also the feedback a learning
-  agent needs: a continuous signal of how it is doing, set by the economy
+  can pay for its own thinking. Capability and efficiency contribute to
+  a single running balance, set by the live economy. The balance also gives a learning
+  agent feedback: a continuous signal of how it is doing, set by the economy
   rather than by a grader. Binding
   pre-registration publishes before launch.
 - **[Stack validation — whether the stack supports autonomous play](experiments/budget-boxed.md)** — the
@@ -139,7 +153,7 @@ never replaces one. A formal publication is in preparation offline.
 | [`site/`](site/) | The project website — landing page + build-time renders of the blog and the experiment registry (updates on every push). Astro, deployed on Vercel; see [`site/README.md`](site/README.md). |
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Technical Game Design Document — all mechanics and data catalogs extracted from source, the agent-readable spec of the world. |
 | [kami-lens](https://github.com/tokedo/kami-lens) | Perception layer — a headless client keeping a live local mirror of world state, projected through the game's own rules: what an equipped human player sees, on your machine. |
-| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — MCP tools wrapping every on-chain action; version pinned per run. Current surface (v2.1.0): 101 tools with lens-backed world-state reads; the 84-tool v1.x surface ran Experiments 001–002. |
+| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — MCP tools for game actions and world-state reads, pinned per run. Current surface: 104 tools (3.7.0). Runs 001–002 used 84 tools, run 004 used 99, and runs 005–006 used 101. See the [stack page](STACK.md) for component versions. |
 | [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — turns a stateless model API into a persistent actor; model-agnostic by construction. |
 
 ## What this is *not* (yet)

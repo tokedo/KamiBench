@@ -14,6 +14,12 @@
     <loc>https://kamibench.ai/experiments/budget-boxed</loc>
   </url>
   <url>
+    <loc>https://kamibench.ai/experiments/knowledge-delivery</loc>
+  </url>
+  <url>
+    <loc>https://kamibench.ai/experiments/006-knowledge-delivery-wave-1</loc>
+  </url>
+  <url>
     <loc>https://kamibench.ai/experiments/001-budget-boxed</loc>
   </url>
   <url>
@@ -33,6 +39,9 @@
   </url>
   <url>
     <loc>https://kamibench.ai/blog/why-kamibench-for-continual-learning</loc>
+  </url>
+  <url>
+    <loc>https://kamibench.ai/blog/what-agents-remember</loc>
   </url>
   <url>
     <loc>https://kamibench.ai/stack</loc>

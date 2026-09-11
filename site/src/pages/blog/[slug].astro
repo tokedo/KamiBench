@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getPosts } from '../../lib/blog';
+import TrajectoryControls from '../../components/TrajectoryControls.astro';
 
 export function getStaticPaths() {
   return getPosts().map((post) => ({ params: { slug: post.slug }, props: { post } }));
@@ -25,4 +26,5 @@ const { post } = Astro.props;
     </div>
     <p class="read-more"><a href="/blog">← All posts</a></p>
   </article>
+  {post.html.includes('data-trajectory-gallery') && <TrajectoryControls />}
 </Base>
