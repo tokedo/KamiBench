@@ -1,6 +1,6 @@
-<!-- Narrative base copy from kami-lab (experiments/knowledge-delivery/runs/006/SUMMARY.md, commit 726c90d). Status: DRAFT until Anatoly approves; the run page in experiments/ adapts presentation only, never claims or numbers. Not built into the site. -->
+<!-- Narrative base copy from kami-lab (experiments/knowledge-delivery/runs/006/SUMMARY.md, commit 726c90d). Status: APPROVED 2026-09-11 (claims and numbers frozen); the run page in experiments/ adapts presentation only, never claims or numbers. Not built into the site. -->
 
-# Run 006 — public summary (DRAFT until Anatoly approves; claims and numbers freeze at approval)
+# Run 006 — public summary (APPROVED 2026-09-11 — claims and numbers FROZEN)
 
 *The narrative base copy the kamibench card adapts (kamibench-handoff
 v3 §3, review-gate sequencing: the dataset may publish at close-out,
@@ -358,7 +358,7 @@ construction.
 - **Dataset:** `KamiBench/experiment-006-knowledge-delivery` on Hugging
   Face — telemetry, full transcripts, terminal oracle extracts,
   manifests, the frozen run card and the tool scorecard, with sha256
-  and byte size for every file. **Private as of this draft**; making it
+  and byte size for every file. **Public since 2026-09-11, pinned revision `v0-final`**; making it
   public and pinning the citable revision tag are deliberate operator
   acts taken after review.
 - **Frozen analysis:** `analysis/CHAPTER.md` governs every number in

@@ -32,7 +32,7 @@ family closes here.
 | **Reasoning** | Sonnet 5 at the provider default; gpt-5.2 at `medium` (its default is no reasoning) |
 | **Stack** | [kami-agent](https://github.com/tokedo/kami-agent) v0.5.1 · [kami-harness](https://github.com/tokedo/kami-harness) v2.2.0 — 101 tools, identical surface on every arm · [kami-lens](https://github.com/tokedo/kami-lens) v0.4.0 · design document pinned at launch |
 | **Window** | launched 2026-08-17 ≈20:20 UTC (Sonnet 5) and ≈20:55 UTC (gpt-5.2); the gpt-5.2 arms stopped 2026-08-24, the Sonnet 5 arms 2026-08-25 — both pairs ahead of the 14-day ceiling |
-| **Dataset** | [experiment-006-knowledge-delivery](https://huggingface.co/datasets/KamiBench/experiment-006-knowledge-delivery) — telemetry, full transcripts, terminal chain extracts, manifests, the frozen run card and the tool scorecard, with a sha256 and a byte size for every file |
+| **Dataset** | [experiment-006-knowledge-delivery](https://huggingface.co/datasets/KamiBench/experiment-006-knowledge-delivery) · citable pinned revision [`v0-final`](https://huggingface.co/datasets/KamiBench/experiment-006-knowledge-delivery/tree/v0-final) — telemetry, full transcripts, terminal chain extracts, manifests, the frozen run card and the tool scorecard, with a sha256 and a byte size for every file |
 
 ## Goal
 
