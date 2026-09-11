@@ -34,7 +34,7 @@ reference implementation.
 
 ### Current public components
 
-These versions describe the stack available as of September 11, 2026. Each
+These versions describe the stack available as of September 10, 2026. Each
 experiment's run page records the older versions it actually used.
 
 | Component | Version | Public revision |
@@ -48,7 +48,7 @@ The interface now validates writes before submission and supports batched
 action sequences. The world-state reader recovers missing state from the chain
 and reports freshness information with its answers. The component READMEs
 describe these mechanisms; the [experiments](experiments/) record which
-versions were tested, and [post 2](blog/2026-09-11-what-agents-remember.md)
+versions were tested, and [post 2](blog/2026-09-10-what-agents-remember.md)
 shows how agent traces exposed the problems behind the changes.
 
 The meter never accepts the agent's own accounting and signs no transaction

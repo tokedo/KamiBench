@@ -167,8 +167,8 @@ present tense.
 
 ## What's running now
 
-*Update, September 11, 2026: the stack-validation and knowledge-delivery
-families have closed. [What agents remember, and what they do next](2026-09-11-what-agents-remember.md)
+*Update, September 10, 2026: the stack-validation and knowledge-delivery
+families have closed. [What agents remember, and what they do next](2026-09-10-what-agents-remember.md)
 reports the results with excerpts from the agents' public trajectories.*
 
 Before anything open-ended runs, the environment interface, scaffold,

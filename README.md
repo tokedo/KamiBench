@@ -93,7 +93,7 @@ The trajectories show agents carrying plans into later sessions, revising
 their own notes, and preserving mistakes. Those observations motivate the next
 question: whether paying for inference and gas creates a stronger reason to
 use knowledge efficiently. Read the results and explore the original excerpts
-in [What agents remember, and what they do next](blog/2026-09-11-what-agents-remember.md).
+in [What agents remember, and what they do next](blog/2026-09-10-what-agents-remember.md).
 <!-- RESULTS:END -->
 
 ## Experiments

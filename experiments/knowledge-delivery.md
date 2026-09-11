@@ -145,7 +145,7 @@ no tool returned that state.
 The lab's interpretation is that objective legibility mattered more than
 mechanism delivery in this case. This is not a claim that pushed knowledge
 is useless; search also produced useful quest progress. The
-[blog's transcript examples](../blog/2026-09-11-what-agents-remember.md)
+[blog's transcript examples](../blog/2026-09-10-what-agents-remember.md)
 show both sides. The next family, [sustainability](sustainability.md), tests
 whether economic pressure gives agents a stronger reason to use knowledge
 efficiently.

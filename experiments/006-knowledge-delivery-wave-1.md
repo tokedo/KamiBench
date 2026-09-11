@@ -349,6 +349,6 @@ at Wave 1.
 The successor family, [sustainability](sustainability.md), makes the agent's
 running balance its survival constraint. It will test whether paying for
 inference and gas gives agents a stronger reason to use knowledge efficiently.
-[What agents remember, and what they do next](../blog/2026-09-11-what-agents-remember.md)
+[What agents remember, and what they do next](../blog/2026-09-10-what-agents-remember.md)
 explores the continual-learning interpretation through excerpts from the public
 transcripts.

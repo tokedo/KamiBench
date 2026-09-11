@@ -1,7 +1,7 @@
 # Transcript excerpts and research gallery
 
 `learning-from-experience.json` is the single content source for twenty examples.
-Twelve appear in [What agents remember, and what they do next](../2026-09-11-what-agents-remember.md);
+Twelve appear in [What agents remember, and what they do next](../2026-09-10-what-agents-remember.md);
 all twenty appear at `/gallery`. The `archive` group is gallery-only.
 The post places galleries with `<!-- TRAJECTORY:memory -->`,
 `<!-- TRAJECTORY:stack -->`, and `<!-- TRAJECTORY:knowledge -->`.
