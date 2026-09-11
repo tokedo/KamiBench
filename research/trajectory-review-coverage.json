@@ -1,0 +1,27 @@
+{
+  "sessions_by_arm": {
+    "001-smoke-gemini25fl-r1": 156,
+    "001-smoke-gpt4omini-r1": 165,
+    "001-smoke-haiku45-r1": 14,
+    "002-gemini25fl-r1": 130,
+    "002-gpt4omini-r1": 235,
+    "002-haiku45-r1": 92,
+    "004-gemini25fl-r1": 130,
+    "004-gpt4omini-r1": 196,
+    "004-haiku45-r1": 53,
+    "005-gemini25fl-r1": 122,
+    "005-gpt4omini-r1": 203,
+    "005-haiku45-r1": 79,
+    "006-gpt52-control-r1": 131,
+    "006-gpt52-pushed-r1": 123,
+    "006-sonnet5-control-r1": 82,
+    "006-sonnet5-pushed-r1": 63
+  },
+  "total_transcript_files": 1974,
+  "excluded": {
+    "publication_duplicates": 1974,
+    "retired_003": 87
+  },
+  "invalid_json_lines": [],
+  "indexed_events": 77629
+}

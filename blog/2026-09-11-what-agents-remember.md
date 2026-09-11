@@ -27,6 +27,12 @@ Each excerpt links to its source file and line on Hugging Face at the frozen
 `v0-final` revision. The surrounding explanations are ours; the quoted text is
 the agent's or its tools'. An agent's claim inside a quotation can be wrong.
 
+The [trajectory gallery](/gallery) collects twenty examples across the five
+completed runs, with filters for memory, planning, tool feedback and other
+behaviors. The selection below follows this post's argument; the full gallery
+includes more successes, failures and mixed cases, with links to individual
+examples for later reference.
+
 <nav class="post-route" aria-label="In this post"><a href="#experience-has-to-survive-the-session">Memory across sessions</a> · <a href="#first-make-the-instrument-answer-honestly">How traces shaped the stack</a> · <a href="#access-to-knowledge-is-only-a-beginning">Knowledge delivery</a> · <a href="#what-carries-beyond-the-game">Beyond the game</a> · <a href="#make-efficiency-matter">Sustainability</a></nav>
 
 ## Experience has to survive the session
@@ -46,14 +52,17 @@ find it, use it in the right circumstances, and revise it when evidence changes.
 
 The program has registered six runs across two families; five produced data.
 The first family tested the stack with small, bounded runs. The second tested
-knowledge delivery on more capable models. **[REGISTERED]** labels trace to
-the stack-validation runs. **[EXPLORATORY]** labels mark the knowledge-delivery
-observations. Both families are case studies, with one arm per condition;
+knowledge delivery on more capable models. **[REGISTERED]** labels mark
+registered designs and findings. Interpretations of individual trajectories
+are **[EXPLORATORY]**, including those from stack-validation runs.
+Both families are case studies, with one arm per condition;
 an arm is one agent, model, wallet, and experimental condition.
 
-Start with three constructive examples. An agent carries an experiment across
+Start with five constructive examples. An agent carries an experiment across
 a session boundary. Another sequence turns an incident into a recovery note.
-A third replaces a saved misconception instead of defending it.
+A third replaces a saved misconception instead of defending it. Two more show
+saved procedures in later actions: feed before collecting, and stop a harvest
+before traveling away.
 
 <!-- TRAJECTORY:memory -->
 
@@ -63,6 +72,12 @@ achievement: a recovery procedure and a later observation preserved together.
 We should not count those as identical evidence of learning. The distinction
 between a note being written, retrieved, and acted on is part of what the
 record lets us inspect.
+
+The two ordering examples make the later action visible. A session retrieves
+the saved rule, then feeds before collecting or stops before traveling. The
+same gallery also contains the counterexample: a
+[correct starvation warning followed by another starvation failure](/gallery#starvation-repeats).
+Saving the repair did not ensure prevention.
 
 ## First, make the instrument answer honestly
 

@@ -9,7 +9,7 @@
         "run": "004",
         "arm": "004-haiku45-r1",
         "model": "Claude Haiku 4.5",
-        "tier": "REGISTERED",
+        "tier": "EXPLORATORY",
         "intro": "A quest counted currency earned after acceptance. The agent first understood the rule, then later treated its total balance as proof that the quest was broken.",
         "takeaway": "The lab found 20+ re-reads of the false conclusion and no re-tests. The arm made no transactions for its final 5.4 days. A missing progress counter and a persistent note reinforced each other.",
         "steps": [
@@ -61,7 +61,14 @@
               "sha256": "9a2df7fa94b629524003a51f3651dc908122f543a26485d1e681d6b9b816dfbe"
             }
           }
-        ]
+        ],
+        "outcome": "Failure",
+        "topics": [
+          "Memory",
+          "Stack"
+        ],
+        "question": "Does a persistent note preserve evidence, or harden an unsupported conclusion?",
+        "span": "Across sessions"
       },
       {
         "id": "error-teaches",
@@ -69,7 +76,7 @@
         "run": "005",
         "arm": "005-gpt4omini-r1",
         "model": "GPT-4o mini",
-        "tier": "REGISTERED",
+        "tier": "EXPLORATORY",
         "intro": "The collect action had never succeeded before its gas ceiling was fixed. In the verification run, an agent tried to start a harvest while its creature was already harvesting.",
         "takeaway": "The next call collected successfully. Across the run, 20 collect transactions landed and none reverted. The trace verifies a usable fix, not just a passing unit test.",
         "steps": [
@@ -107,7 +114,83 @@
             },
             "tool": "harvest_collect"
           }
-        ]
+        ],
+        "outcome": "Success",
+        "topics": [
+          "Tool feedback",
+          "Stack"
+        ],
+        "question": "Can a clear tool error teach the next action?",
+        "span": "Within one session"
+      },
+      {
+        "id": "broken-collect",
+        "title": "A useful workaround for the wrong diagnosis",
+        "run": "002",
+        "arm": "002-haiku45-r1",
+        "model": "Haiku 4.5",
+        "tier": "EXPLORATORY",
+        "outcome": "Mixed",
+        "topics": [
+          "Tool feedback",
+          "Stack"
+        ],
+        "intro": "Haiku notices that collecting a harvest reverted. It changes the operation and successfully stops the harvest instead. Later stack analysis traced collect failures to the tool’s gas ceiling.",
+        "takeaway": "The agent responds to the failure and finds a working alternative. This is within-session adaptation, not proof that it understood the defect or permanently stopped retrying the broken tool.",
+        "question": "Does an agent recover from an API failure without mistaking its causal guess for a diagnosis?",
+        "steps": [
+          {
+            "label": "The failed operation is visible",
+            "session": 47,
+            "kind": "tool",
+            "quote": "\"status\": \"reverted\",\n  \"block\": 31176070,\n  \"gas_used\": 1999501,",
+            "note": "The old tool response reports a revert and gas use but gives no usable explanation of the cause.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-002-budget-boxed",
+              "revision": "v0-final",
+              "path": "haiku45/transcripts/session-0047.jsonl",
+              "line": 12,
+              "field": "content",
+              "sha256": "30bf422969bcc2b6d607fe4a3cd4cc8951076b2e81c9f9d97ed3741ab6fea169"
+            },
+            "tool": "harvest_collect"
+          },
+          {
+            "label": "Choose another operation",
+            "session": 47,
+            "kind": "agent",
+            "quote": "The harvest collection reverted. Let me try to stop the harvest and collect instead:",
+            "note": "Haiku explicitly connects the failed collection to trying harvest_stop.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-002-budget-boxed",
+              "revision": "v0-final",
+              "path": "haiku45/transcripts/session-0047.jsonl",
+              "line": 13,
+              "field": "text",
+              "sha256": "30bf422969bcc2b6d607fe4a3cd4cc8951076b2e81c9f9d97ed3741ab6fea169"
+            }
+          },
+          {
+            "label": "The alternative succeeds",
+            "session": 47,
+            "kind": "tool",
+            "quote": "\"status\": \"success\",\n  \"block\": 31176074,\n  \"gas_used\": 2332041,",
+            "note": "The stop operation succeeds. Run 5 later verifies the repaired collection tool in agents’ hands.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-002-budget-boxed",
+              "revision": "v0-final",
+              "path": "haiku45/transcripts/session-0047.jsonl",
+              "line": 14,
+              "field": "content",
+              "sha256": "30bf422969bcc2b6d607fe4a3cd4cc8951076b2e81c9f9d97ed3741ab6fea169"
+            },
+            "tool": "harvest_stop"
+          }
+        ],
+        "span": "Within one session"
       }
     ]
   },
@@ -174,7 +257,14 @@
               "sha256": "b2c6665aa54780c3bcac054e266ed941791bc40eb35811a24985fad55e7e339a"
             }
           }
-        ]
+        ],
+        "outcome": "Mixed",
+        "topics": [
+          "Memory",
+          "Planning"
+        ],
+        "question": "Can an agent carry an experiment across sessions and revise a belief?",
+        "span": "Across sessions"
       },
       {
         "id": "recovery",
@@ -234,7 +324,14 @@
               "sha256": "c535c0d82ee7f46c30a3f3e98d6d6d44b5a982885c9705ee74e8a107f9baff14"
             }
           }
-        ]
+        ],
+        "outcome": "Success",
+        "topics": [
+          "Memory",
+          "Tool feedback"
+        ],
+        "question": "Can an agent recover a partially completed operation without repeating the completed half?",
+        "span": "Across sessions"
       },
       {
         "id": "belief-revised",
@@ -242,7 +339,7 @@
         "run": "005",
         "arm": "005-haiku45-r1",
         "model": "Claude Haiku 4.5",
-        "tier": "REGISTERED",
+        "tier": "EXPLORATORY",
         "intro": "The same model that preserved a false blockage in run 004 also produced this sequence in run 005: an emphatic claim of being trapped, followed by a revision.",
         "takeaway": "The agent changed its note and continued pursuing the quest. Its explanation of why the world looked different remained uncertain. Persistent memory can carry a correction as well as a mistake.",
         "steps": [
@@ -278,7 +375,202 @@
               "sha256": "b512899b15614e26e5aa7fd4a99e305bc0d3a438c3ee9f346bc9ec1e5e16369c"
             }
           }
-        ]
+        ],
+        "outcome": "Success",
+        "topics": [
+          "Memory",
+          "Tool feedback"
+        ],
+        "question": "Does new evidence correct a saved belief?",
+        "span": "Across sessions"
+      },
+      {
+        "id": "feed-before-collect",
+        "title": "A saved procedure changes the order of work",
+        "run": "006",
+        "arm": "006-sonnet5-control-r1",
+        "model": "Sonnet 5 · control",
+        "tier": "EXPLORATORY",
+        "outcome": "Success",
+        "topics": [
+          "Memory",
+          "Planning"
+        ],
+        "intro": "Collecting a harvest triggers a cooldown that can block feeding. Sonnet records a useful order: feed first, then collect. The next session retrieves that note and executes both actions in that order.",
+        "takeaway": "A concrete procedure passes through persistent memory and appears in the next session’s actions. This is evidence of reuse in one sequence, not a controlled estimate of memory’s effect.",
+        "question": "Does a runbook learned from an operational mistake change the order of work tomorrow?",
+        "steps": [
+          {
+            "label": "Save the order",
+            "session": 26,
+            "kind": "memory-write",
+            "quote": "feeding BEFORE harvest_collect worked fine (cooldown only kicks in AFTER\n  collect/stop, not before) - so feed first, then collect, is a safe order and avoids a wait.",
+            "note": "The file calls this “session 24,” but the write is in transcript session 26. Source labels use the transcript number, not the agent’s internal numbering.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0026.jsonl",
+              "line": 25,
+              "field": "tool_calls.0.args.content",
+              "sha256": "36540b942abcb73686535e2db18f9cc8c7ad190da0bd32f9c7d42a2a898ba3ea"
+            }
+          },
+          {
+            "label": "Read the order at the next wake",
+            "session": 27,
+            "kind": "memory-read",
+            "quote": "feeding BEFORE harvest_collect worked fine (cooldown only kicks in AFTER\n  collect/stop, not before) - so feed first, then collect, is a safe order and avoids a wait.",
+            "note": "The same instruction is returned from notes.md in session 27.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0027.jsonl",
+              "line": 7,
+              "field": "content",
+              "sha256": "ac2dfe0ccabf8de5ab491a56d49ee6b6e0ff25747bd7b5fc373731676f685e31"
+            },
+            "tool": "workspace_read"
+          },
+          {
+            "label": "Feed first",
+            "session": 27,
+            "kind": "tool",
+            "quote": "\"status\": \"success\",\n  \"block\": 32336203,\n  \"gas_used\": 1893539,",
+            "note": "feed_kami succeeds before the collection call.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0027.jsonl",
+              "line": 14,
+              "field": "content",
+              "sha256": "ac2dfe0ccabf8de5ab491a56d49ee6b6e0ff25747bd7b5fc373731676f685e31"
+            },
+            "tool": "feed_kami"
+          },
+          {
+            "label": "Then collect",
+            "session": 27,
+            "kind": "tool",
+            "quote": "\"status\": \"success\",\n  \"block\": 32336207,\n  \"gas_used\": 2003071,",
+            "note": "harvest_collect succeeds next. The sequence matches the retrieved procedure.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0027.jsonl",
+              "line": 16,
+              "field": "content",
+              "sha256": "ac2dfe0ccabf8de5ab491a56d49ee6b6e0ff25747bd7b5fc373731676f685e31"
+            },
+            "tool": "harvest_collect"
+          }
+        ],
+        "span": "Across sessions"
+      },
+      {
+        "id": "stop-before-travel",
+        "title": "Six wasted hops become a runbook",
+        "run": "006",
+        "arm": "006-sonnet5-control-r1",
+        "model": "Sonnet 5 · control",
+        "tier": "EXPLORATORY",
+        "outcome": "Success",
+        "topics": [
+          "Memory",
+          "Planning"
+        ],
+        "intro": "Sonnet leaves a creature harvesting, travels away, then has to return to stop it. The agent records the mistake. Four sessions later, the retrieved instruction is followed by the correct sequence.",
+        "takeaway": "The record connects a costly mistake, a persistent instruction, a later read and changed action order. A cooldown still blocks the next harvest start; solving one ordering problem does not solve every precondition.",
+        "question": "Can an agent turn a wasted operational detour into a reusable dependency rule?",
+        "steps": [
+          {
+            "label": "Record the mistake and the remedy",
+            "session": 50,
+            "kind": "memory-write",
+            "quote": "- Wasted several move_to_room transactions: moved account away from node 59 (58, 12, 34)\n  WHILE kami 3149 was still on a post-harvest_collect/claim COOLDOWN, planning to travel to\n  node 29 for quest 12. But harvest_stop requires account CO-LOCATED with the kami's node\n  (59), so had to travel BACK (12, 58, 59) before the cooldown even mattered. Net: 6 wasted\n  hops (30 stamina) round-tripping for nothing.\n- LESSON: after harvest_collect/claim, do NOT start traveling toward the next destination\n  until AFTER harvest_stop has actually succeeded. Check cooldownSec via lens_kami, and\n  physically stay in the node's room until cooldown hits 0 and harvest_stop lands. Only\n  THEN start traveling to the next node.",
+            "note": "The six-hop detour is the agent’s own accounting. The session contains the outward moves and the return moves.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0050.jsonl",
+              "line": 77,
+              "field": "tool_calls.0.args.content",
+              "sha256": "bec9cf02fde6771833d3005fff30b9ae7ed515d54546c9419380c840a733274d"
+            }
+          },
+          {
+            "label": "Retrieve the rule four sessions later",
+            "session": 54,
+            "kind": "memory-read",
+            "quote": "- Do NOT start traveling toward the next destination until AFTER a harvest_stop has\n  actually succeeded and its cooldown is accounted for. harvest_stop/harvest_collect/\n  feed_kami all require account CO-LOCATED with the kami's current node/room.",
+            "note": "The rule is carried forward in notes.md rather than needing to be reconstructed from the original session.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0054.jsonl",
+              "line": 7,
+              "field": "content",
+              "sha256": "4fe8466492926f1377aec2b5d5e12de568f01d0455084b1e8ed40e0b28b935b5"
+            },
+            "tool": "workspace_read"
+          },
+          {
+            "label": "Apply the ordering rule",
+            "session": 54,
+            "kind": "agent",
+            "quote": "Cooldown is clear. Proceeding with the plan: stop harvest, travel to node 56, start harvesting there.",
+            "note": "The next tool result confirms harvest_stop succeeded; travel_to_room follows and reaches room 56. The later restart is deferred because of a cooldown.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0054.jsonl",
+              "line": 10,
+              "field": "text",
+              "sha256": "4fe8466492926f1377aec2b5d5e12de568f01d0455084b1e8ed40e0b28b935b5"
+            }
+          },
+          {
+            "label": "Confirm the stop succeeded",
+            "session": 54,
+            "kind": "tool",
+            "quote": "\"status\": \"success\",",
+            "note": "The agent waits for a successful stop result before issuing travel_to_room.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0054.jsonl",
+              "line": 11,
+              "field": "content",
+              "sha256": "4fe8466492926f1377aec2b5d5e12de568f01d0455084b1e8ed40e0b28b935b5"
+            },
+            "tool": "harvest_stop"
+          },
+          {
+            "label": "Then travel to the next node",
+            "session": 54,
+            "kind": "tool",
+            "quote": "\"reached_target\": true,",
+            "note": "The travel result confirms arrival. A subsequent harvest_start is blocked by cooldown, so the agent schedules a short wake.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0054.jsonl",
+              "line": 13,
+              "field": "content",
+              "sha256": "4fe8466492926f1377aec2b5d5e12de568f01d0455084b1e8ed40e0b28b935b5"
+            },
+            "tool": "travel_to_room"
+          }
+        ],
+        "span": "Across sessions"
       }
     ]
   },
@@ -345,7 +637,14 @@
             },
             "tool": "workspace_read"
           }
-        ]
+        ],
+        "outcome": "Success",
+        "topics": [
+          "Memory",
+          "Knowledge"
+        ],
+        "question": "Can a searched mechanism become a reusable operational rule?",
+        "span": "Across sessions"
       },
       {
         "id": "quest-habit",
@@ -406,7 +705,14 @@
               "sha256": "fe38607d987397fd2201b8f30ed6ae0146d71d4ce0337d86bc010b58d3df3533"
             }
           }
-        ]
+        ],
+        "outcome": "Success",
+        "topics": [
+          "Knowledge",
+          "Planning"
+        ],
+        "question": "Can a concrete objective make an unused capability actionable?",
+        "span": "Across sessions"
       },
       {
         "id": "untested-note",
@@ -466,7 +772,658 @@
               "sha256": "ec7dc9c49a0612718fe7a23e9e28ab7e17b378c07e9e409da89303a7e032feb9"
             }
           }
-        ]
+        ],
+        "outcome": "Failure",
+        "topics": [
+          "Memory",
+          "Knowledge"
+        ],
+        "question": "What makes a saved plan become an actual test?",
+        "span": "Across sessions"
+      },
+      {
+        "id": "search-to-quest",
+        "title": "A catalog search becomes a completed task",
+        "run": "006",
+        "arm": "006-gpt52-pushed-r1",
+        "model": "GPT-5.2 · pushed",
+        "tier": "EXPLORATORY",
+        "outcome": "Success",
+        "topics": [
+          "Knowledge",
+          "Tool feedback"
+        ],
+        "intro": "GPT-5.2 searches the manual for its current location. A result exposes a side quest. The agent accepts the quest, checks whether it can finish, and completes it in the same session.",
+        "takeaway": "This is a positive example of reference use producing action. It supports a specific useful role for search, while the overall knowledge-delivery rung still fails the registered joint rule.",
+        "question": "Can an agent turn a relevant procedure found in documentation into completed work?",
+        "steps": [
+          {
+            "label": "Find a relevant task in the manual",
+            "session": 49,
+            "kind": "tool",
+            "quote": "Rob's trading chain (Giver: ROB):\n(In Room: Restricted Area) --- SQ028  The More the Merrier",
+            "note": "This is the text of the first search hit, decoded from the JSON tool response. It is game documentation returned to the agent, not a summary written for this gallery.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "gpt52_pushed/transcripts/session-0049.jsonl",
+              "line": 32,
+              "field": "content.$json.hits.0.text",
+              "sha256": "5cea217951ecbd3bcfec3b70568c2ac752b2f0766db7b1d23e803e4146fa3c83"
+            },
+            "tool": "search_reference"
+          },
+          {
+            "label": "Check that the accepted task is ready",
+            "session": 49,
+            "kind": "tool",
+            "quote": "{\n  \"quest_index\": 3028,\n  \"completable\": true\n}",
+            "note": "The agent has accepted quest 3028. check_quest_completable now returns true.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "gpt52_pushed/transcripts/session-0049.jsonl",
+              "line": 52,
+              "field": "content",
+              "sha256": "5cea217951ecbd3bcfec3b70568c2ac752b2f0766db7b1d23e803e4146fa3c83"
+            },
+            "tool": "check_quest_completable"
+          },
+          {
+            "label": "Complete the task",
+            "session": 49,
+            "kind": "tool",
+            "quote": "\"status\": \"success\",\n  \"block\": 32341395,\n  \"gas_used\": 901047,",
+            "note": "The preceding call is complete_quest(3028). Its result reports a successful transaction.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "gpt52_pushed/transcripts/session-0049.jsonl",
+              "line": 56,
+              "field": "content",
+              "sha256": "5cea217951ecbd3bcfec3b70568c2ac752b2f0766db7b1d23e803e4146fa3c83"
+            },
+            "tool": "complete_quest"
+          }
+        ],
+        "span": "Within one session"
+      }
+    ]
+  },
+  {
+    "id": "archive",
+    "title": "More observations from the archive",
+    "cases": [
+      {
+        "id": "individual-state",
+        "title": "A partial workaround survives the next wake",
+        "run": "001",
+        "arm": "001-smoke-haiku45-r1",
+        "model": "Haiku 4.5",
+        "tier": "EXPLORATORY",
+        "outcome": "Mixed",
+        "topics": [
+          "Memory",
+          "Tool feedback"
+        ],
+        "intro": "An inventory endpoint fails. Haiku saves another way to inspect its creatures, then uses that narrower view in the next session. The workaround restores only part of the missing information.",
+        "takeaway": "The saved instruction is retrieved and followed. Individual creature state is still observable, but this does not repair inventory access or make the rest of the strategy sound.",
+        "question": "Can an agent preserve a useful fallback when one enterprise data source is unavailable?",
+        "steps": [
+          {
+            "label": "Save a usable alternative",
+            "session": 13,
+            "kind": "memory-write",
+            "quote": "Workaround: Use get_kami_state_slim to check individual kamis",
+            "note": "The note identifies an available read, rather than declaring all observation impossible.",
+            "workspace": "workspace/progress.md",
+            "source": {
+              "dataset": "experiment-001-budget-boxed",
+              "revision": "v0-baseline",
+              "path": "haiku45/transcripts/session-0013.jsonl",
+              "line": 59,
+              "field": "tool_calls.0.args.content",
+              "sha256": "3dda8462a80d87f1cde13240ebd6dfdb4b35406b0f82619734e385712aa35508"
+            }
+          },
+          {
+            "label": "Retrieve the workaround",
+            "session": 14,
+            "kind": "memory-read",
+            "quote": "Workaround: Use get_kami_state_slim to check individual kamis",
+            "note": "The next session retrieves workspace/progress.md. The path itself first needs correction.",
+            "workspace": "workspace/progress.md",
+            "source": {
+              "dataset": "experiment-001-budget-boxed",
+              "revision": "v0-baseline",
+              "path": "haiku45/transcripts/session-0014.jsonl",
+              "line": 8,
+              "field": "content",
+              "sha256": "37d42e8000f3b048b3b6c93244d9d24cec0e4016d795f4d0f3f68f8cc78f56b8"
+            },
+            "tool": "workspace_read"
+          },
+          {
+            "label": "Inspect the creature anyway",
+            "session": 14,
+            "kind": "tool",
+            "quote": "\"state\": \"RESTING\",",
+            "note": "get_kami_state_slim returns RESTING for creature 17463. The agent also retries the inventory endpoint, which still fails. The improvement is specific, not complete.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-001-budget-boxed",
+              "revision": "v0-baseline",
+              "path": "haiku45/transcripts/session-0014.jsonl",
+              "line": 11,
+              "field": "content",
+              "sha256": "37d42e8000f3b048b3b6c93244d9d24cec0e4016d795f4d0f3f68f8cc78f56b8"
+            },
+            "tool": "get_kami_state_slim"
+          }
+        ],
+        "span": "Across sessions"
+      },
+      {
+        "id": "wrong-verb",
+        "title": "The wrong verb consumes the asset",
+        "run": "002",
+        "arm": "002-gemini25fl-r1",
+        "model": "Gemini 2.5 Flash-Lite",
+        "tier": "EXPLORATORY",
+        "outcome": "Failure",
+        "topics": [
+          "Tool feedback",
+          "Stack"
+        ],
+        "intro": "A quest asks for a liquidation. Gemini interprets that as sacrificing one of its own creatures. The sacrifice succeeds; the quest does not. Later sessions sacrifice the remaining creatures too.",
+        "takeaway": "Successful execution can still be the wrong action. The stack then lacked a liquidation tool and left the distinction unclear. The next harness major version added that action and clarified sacrifice versus liquidation.",
+        "question": "Can an agent distinguish similar business verbs before an irreversible operation?",
+        "steps": [
+          {
+            "label": "Substitute one action for another",
+            "session": 83,
+            "kind": "agent",
+            "quote": "The objective for quest 6 is to \"Liquidate another Kamigotchi\". This means I need to sacrifice a Kami.",
+            "note": "Liquidating another player’s creature and sacrificing one’s own creature are different operations.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-002-budget-boxed",
+              "revision": "v0-final",
+              "path": "gemini25fl/transcripts/session-0083.jsonl",
+              "line": 22,
+              "field": "text",
+              "sha256": "3788b2dbaa30e197c2555366be12314fa7dd5cab7917714edd7911d140f2788b"
+            }
+          },
+          {
+            "label": "The sacrifice really executes",
+            "session": 83,
+            "kind": "tool",
+            "quote": "\"kami_id\": 20042,\n  \"kami_state\": \"RESTING\",\n  \"note\": \"Kami sacrificed (burned). The equipment item reveals automatically on-chain shortly after; it lands in the account inventory.\"",
+            "note": "The tool reports that the creature was burned. This is not merely an abandoned plan.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-002-budget-boxed",
+              "revision": "v0-final",
+              "path": "gemini25fl/transcripts/session-0083.jsonl",
+              "line": 23,
+              "field": "content",
+              "sha256": "3788b2dbaa30e197c2555366be12314fa7dd5cab7917714edd7911d140f2788b"
+            },
+            "tool": "sacrifice_kami"
+          },
+          {
+            "label": "The goal remains unmet",
+            "session": 83,
+            "kind": "agent",
+            "quote": "It seems that completing quest 6 failed with the error \"revert: quest objs not met: Reverted\". This is unexpected, as I have just sacrificed a Kami, which should have fulfilled the quest's objective.",
+            "note": "The agent notices the rejection but retains the premise that sacrifice should satisfy this quest.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-002-budget-boxed",
+              "revision": "v0-final",
+              "path": "gemini25fl/transcripts/session-0083.jsonl",
+              "line": 30,
+              "field": "text",
+              "sha256": "3788b2dbaa30e197c2555366be12314fa7dd5cab7917714edd7911d140f2788b"
+            }
+          },
+          {
+            "label": "The same substitution recurs later",
+            "session": 114,
+            "kind": "tool",
+            "quote": "\"kami_id\": 19861,\n  \"kami_state\": \"RESTING\",\n  \"note\": \"Kami sacrificed (burned). The equipment item reveals automatically on-chain shortly after; it lands in the account inventory.\"",
+            "note": "Session 108 sacrificed creature 14621 between these excerpts. Session 114 burns creature 19861. These separate sessions do not establish a persistent-memory mechanism.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-002-budget-boxed",
+              "revision": "v0-final",
+              "path": "gemini25fl/transcripts/session-0114.jsonl",
+              "line": 55,
+              "field": "content",
+              "sha256": "35beffbab596e808b75762f5302a7f1ca1a673bb70b4c4bf406ade3c62931c21"
+            },
+            "tool": "sacrifice_kami"
+          }
+        ],
+        "span": "Across sessions"
+      },
+      {
+        "id": "process-not-permission",
+        "title": "A running process does not prove useful work",
+        "run": "004",
+        "arm": "004-gemini25fl-r1",
+        "model": "Gemini 2.5 Flash-Lite",
+        "tier": "EXPLORATORY",
+        "outcome": "Failure",
+        "topics": [
+          "Delegation",
+          "Authority"
+        ],
+        "intro": "Gemini starts the session with an empty creature roster. A later status call returns a broad list of processes. The agent then starts strategies for creature IDs from that list, and the service returns RUNNING.",
+        "takeaway": "The agent starts strategies despite having no creatures in its own roster. Read scope, authority and execution status are separate questions. RUNNING confirms a process was started; these responses do not establish a successful, authorized action in the game.",
+        "question": "Would an enterprise agent mistake a company-wide job listing for work it is authorized to control?",
+        "steps": [
+          {
+            "label": "The agent has no creatures",
+            "session": 119,
+            "kind": "tool",
+            "quote": "\"kamis\": []",
+            "note": "The session’s opening lens_party response shows an empty creature roster for this account.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-004-budget-boxed",
+              "revision": "v0-final",
+              "path": "gemini25fl/transcripts/session-0119.jsonl",
+              "line": 3,
+              "field": "content",
+              "sha256": "6a2f812fe27b0e9928cf840794ef6ce6afadc01e2fb06d9a79687308495d41c2"
+            },
+            "tool": "lens_party"
+          },
+          {
+            "label": "A broad status response",
+            "session": 119,
+            "kind": "tool",
+            "quote": "\"total\": 493,\n  \"running\": 387,\n  \"paused\": 0,\n  \"stopped\": 106,\n  \"containers\": [",
+            "note": "Despite an account argument on the request, the result is a broad process listing. The count belongs to this response, not to the agent’s own assets.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-004-budget-boxed",
+              "revision": "v0-final",
+              "path": "gemini25fl/transcripts/session-0119.jsonl",
+              "line": 17,
+              "field": "content",
+              "sha256": "6a2f812fe27b0e9928cf840794ef6ce6afadc01e2fb06d9a79687308495d41c2"
+            },
+            "tool": "get_all_strategy_statuses"
+          },
+          {
+            "label": "One strategy reports RUNNING",
+            "session": 119,
+            "kind": "tool",
+            "quote": "\"status\": \"RUNNING\",",
+            "note": "This response follows start_strategy for creature 20340. Starting the process does not establish ownership or a successful game action.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-004-budget-boxed",
+              "revision": "v0-final",
+              "path": "gemini25fl/transcripts/session-0119.jsonl",
+              "line": 19,
+              "field": "content",
+              "sha256": "6a2f812fe27b0e9928cf840794ef6ce6afadc01e2fb06d9a79687308495d41c2"
+            },
+            "tool": "start_strategy"
+          }
+        ],
+        "span": "Within one session"
+      },
+      {
+        "id": "explicit-amount",
+        "title": "A readable error repairs the next call",
+        "run": "005",
+        "arm": "005-gpt4omini-r1",
+        "model": "GPT-4o mini",
+        "tier": "EXPLORATORY",
+        "outcome": "Success",
+        "topics": [
+          "Tool feedback",
+          "Stack"
+        ],
+        "intro": "GPT-4o mini attempts to withdraw without specifying an amount. The tool explains that the transaction reverted and spent gas. The next call supplies an explicit amount and succeeds.",
+        "takeaway": "This is a concrete benefit of exposing failure details. It shows a local correction, not a durable understanding of wallet management; the surrounding session still contains unsuccessful bridge retries.",
+        "question": "Does a failed enterprise operation return enough information for the agent to correct its next request?",
+        "steps": [
+          {
+            "label": "Expose the failure and its cost",
+            "session": 73,
+            "kind": "tool",
+            "quote": "landed on-chain in block 31915132 and REVERTED: gas was spent (112086 gas) and no state change was applied. Revert reason (best-effort eth_call replay at block 31915132): {'code': -32000, 'message': 'insufficient balance for transfer: EVMCall failed'}",
+            "note": "The response separates a transaction that was sent and reverted from a validation failure that sent nothing.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-005-budget-boxed",
+              "revision": "v0-final",
+              "path": "gpt4omini/transcripts/session-0073.jsonl",
+              "line": 47,
+              "field": "content",
+              "sha256": "c8bd8d354bc2775f125dad4751797848394dd647b41203d0e14b55eb4339162a"
+            },
+            "tool": "withdraw_operator"
+          },
+          {
+            "label": "Retry with an explicit amount",
+            "session": 73,
+            "kind": "tool",
+            "quote": "\"status\": \"success\",\n  \"block\": 31915142,\n  \"gas_used\": 113293,\n  \"account\": \"main\",\n  \"direction\": \"operator->owner\",\n  \"amount_eth\": \"0.006\",",
+            "note": "The immediately preceding call is withdraw_operator(amount_eth=\"0.006\"). This response confirms success and the transfer direction.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-005-budget-boxed",
+              "revision": "v0-final",
+              "path": "gpt4omini/transcripts/session-0073.jsonl",
+              "line": 49,
+              "field": "content",
+              "sha256": "c8bd8d354bc2775f125dad4751797848394dd647b41203d0e14b55eb4339162a"
+            },
+            "tool": "withdraw_operator"
+          }
+        ],
+        "span": "Within one session"
+      },
+      {
+        "id": "bridge-repeats",
+        "title": "Moving money in the wrong place",
+        "run": "005",
+        "arm": "005-gpt4omini-r1",
+        "model": "GPT-4o mini",
+        "tier": "EXPLORATORY",
+        "outcome": "Failure",
+        "topics": [
+          "Tool feedback",
+          "Planning"
+        ],
+        "intro": "A bridge request fails because its source wallet lacks funds. The agent moves funds between two wallets on the destination chain and retries. A later session meets the same source-balance limit.",
+        "takeaway": "The agent changes nearby state without changing the failed operation’s prerequisite. The repeated balance in the errors makes the mismatch visible. These excerpts do not demonstrate cross-session recall.",
+        "question": "Can an agent identify which system owns a failed prerequisite instead of changing a nearby system?",
+        "steps": [
+          {
+            "label": "The source wallet is short",
+            "session": 73,
+            "kind": "tool",
+            "quote": "insufficient funds for gas * price + value: address 0x230659ca3e4336F6028e5C424310630c33788e7E have 872705445170892 want 6010370491620622",
+            "note": "This bridge request is for 0.006 ETH. The error names the source wallet’s available and required balances.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-005-budget-boxed",
+              "revision": "v0-final",
+              "path": "gpt4omini/transcripts/session-0073.jsonl",
+              "line": 45,
+              "field": "content",
+              "sha256": "c8bd8d354bc2775f125dad4751797848394dd647b41203d0e14b55eb4339162a"
+            },
+            "tool": "bridge_eth_from_mainnet"
+          },
+          {
+            "label": "Move funds on the destination chain",
+            "session": 73,
+            "kind": "tool",
+            "quote": "\"status\": \"success\",\n  \"block\": 31915158,\n  \"gas_used\": 113251,\n  \"account\": \"main\",\n  \"direction\": \"owner->operator\",\n  \"amount_eth\": \"0.007\",",
+            "note": "fund_operator transfers funds from owner to operator on Yominet. It does not replenish the mainnet source wallet.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-005-budget-boxed",
+              "revision": "v0-final",
+              "path": "gpt4omini/transcripts/session-0073.jsonl",
+              "line": 53,
+              "field": "content",
+              "sha256": "c8bd8d354bc2775f125dad4751797848394dd647b41203d0e14b55eb4339162a"
+            },
+            "tool": "fund_operator"
+          },
+          {
+            "label": "The source balance is still the obstacle",
+            "session": 151,
+            "kind": "tool",
+            "quote": "insufficient funds for gas * price + value: address 0x230659ca3e4336F6028e5C424310630c33788e7E have 872705445170892 want 10010370491620622",
+            "note": "Session 151 requests 0.01 ETH. The source balance is the same as in session 73; the required amount has changed.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-005-budget-boxed",
+              "revision": "v0-final",
+              "path": "gpt4omini/transcripts/session-0151.jsonl",
+              "line": 29,
+              "field": "content",
+              "sha256": "7d7d39384ef3f3a301b875208f6735dc9babfd1f5c5a20095cdc2c3a930300ef"
+            },
+            "tool": "bridge_eth_from_mainnet"
+          }
+        ],
+        "span": "Across sessions"
+      },
+      {
+        "id": "starvation-repeats",
+        "title": "Writing a correct rule does not ensure prevention",
+        "run": "006",
+        "arm": "006-gpt52-control-r1",
+        "model": "GPT-5.2 · control",
+        "tier": "EXPLORATORY",
+        "outcome": "Failure",
+        "topics": [
+          "Memory",
+          "Planning"
+        ],
+        "intro": "GPT-5.2 repeatedly recovers a starving creature by feeding it. It writes the correct repair and later adds an explicit prevention rule. The creature still reaches zero health in another session.",
+        "takeaway": "Correct notes and successful recovery coexist with recurring failure. The excerpts establish that the rule was written, not that this exact rule was retrieved before the recurrence. Memory availability and policy enforcement must be tested separately.",
+        "question": "Does writing an incident runbook lead to prevention, or only repeated recovery?",
+        "steps": [
+          {
+            "label": "Save the repair",
+            "session": 82,
+            "kind": "memory-write",
+            "quote": "Fix for \"kami starving\" is to feed while still harvesting.",
+            "note": "The session includes a successful feed and records how the blockage was cleared.",
+            "workspace": "workspace/notes/session82.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "gpt52_control/transcripts/session-0082.jsonl",
+              "line": 62,
+              "field": "tool_calls.0.args.content",
+              "sha256": "4b27a81eb74dc62c768f7e5efbf7e14782510e75133b961d98e704f20d2f1940"
+            }
+          },
+          {
+            "label": "Add an explicit prevention rule",
+            "session": 107,
+            "kind": "memory-write",
+            "quote": "Ensure HP never hits 0 again;",
+            "note": "A later note explicitly asks future sessions to prevent the same condition. The excerpt does not establish that the prevention rule is retrieved at the later failure.",
+            "workspace": "workspace/notes/session104.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "gpt52_control/transcripts/session-0107.jsonl",
+              "line": 112,
+              "field": "tool_calls.0.args.content",
+              "sha256": "4ff8d1d7616fb2f520c832e50e9f04725515a6b835708400e5a777080aa0b755"
+            }
+          },
+          {
+            "label": "Meet the same failure again",
+            "session": 113,
+            "kind": "tool",
+            "quote": "Error executing tool harvest_stop: validation failed; no transaction sent: transaction dry-run reverted: {'code': -32000, 'message': 'revert: kami starving..: Reverted'}",
+            "note": "The session begins with the creature at zero health. harvest_stop is blocked by the starving condition. The agent subsequently travels back, feeds and stops successfully.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "gpt52_control/transcripts/session-0113.jsonl",
+              "line": 18,
+              "field": "content",
+              "sha256": "0e1b65b482972bf56ac5edf97e6014ce495cddb0f4d1ec74c897ef9f2c6eb625"
+            },
+            "tool": "harvest_stop"
+          }
+        ],
+        "span": "Across sessions"
+      },
+      {
+        "id": "unattended-job",
+        "title": "A rescue changes the plan for unattended work",
+        "run": "006",
+        "arm": "006-sonnet5-pushed-r1",
+        "model": "Sonnet 5 · pushed",
+        "tier": "EXPLORATORY",
+        "outcome": "Mixed",
+        "topics": [
+          "Memory",
+          "Planning"
+        ],
+        "intro": "Sonnet finds a harvesting creature at zero health and successfully feeds it. The agent writes a warning about long unattended harvests. Later notes retain the warning, and a new harvest starts with feeding and a scheduled check.",
+        "takeaway": "The notes shift from a fixed harvest deadline toward monitoring the resource that can run out first. The schedule is imperfect: the first warning says four to five hours; the later note allows four to six. The run stops before the final planned check, so its outcome is unobserved.",
+        "question": "Can an agent schedule checks around a changing resource limit while a long business process runs?",
+        "steps": [
+          {
+            "label": "Test whether zero health is recoverable",
+            "session": 60,
+            "kind": "agent",
+            "quote": "Feed succeeded, so the kami is still alive despite showing 0 HP. Let me check its state now.",
+            "note": "The preceding feed result reports success. The following state read shows 100/110 health. The agent’s explanation of the underlying death mechanism remains a hypothesis.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0060.jsonl",
+              "line": 18,
+              "field": "text",
+              "sha256": "b98401a353d674e54c55868647b0c0151516428ba1d790e9a39853ea83178d5e"
+            }
+          },
+          {
+            "label": "Write a monitoring rule",
+            "session": 60,
+            "kind": "memory-write",
+            "quote": "LESSON: after ANY harvest_start intended\nto run long (12h quest), feed with the BIGGEST food item available\n(Spell Card = 100hp) immediately, and schedule a mid-point wake at\nMOST 4-5h out (not 6+) to recheck HP, especially early in a fresh 12h\ntimer when starting HP was already low. ALWAYS lens_kami both active\nharvesters at the START of every session before doing anything else,",
+            "note": "The agent links unattended work to food reserves and a check before the full twelve-hour task is over.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0060.jsonl",
+              "line": 36,
+              "field": "tool_calls.0.args.content",
+              "sha256": "b98401a353d674e54c55868647b0c0151516428ba1d790e9a39853ea83178d5e"
+            }
+          },
+          {
+            "label": "Retrieve the revised rule",
+            "session": 63,
+            "kind": "memory-read",
+            "quote": "hpRatePerHr is noisy (-4 to -12/hr+) - recheck every 4-6h for a long (12h)\nunattended harvest, feed with the BIGGEST food item available right after\nstarting a long harvest.",
+            "note": "The later version retains the need to check and feed, but widens the interval to four to six hours.",
+            "workspace": "progress.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0063.jsonl",
+              "line": 7,
+              "field": "content",
+              "sha256": "5d75730e913eafc60c13ba3506edadef8d27358b1c8f78d65c110425f5ac79d7"
+            },
+            "tool": "workspace_read"
+          },
+          {
+            "label": "Plan an intermediate check",
+            "session": 63,
+            "kind": "agent",
+            "quote": "I'll wake up partway through to check HP, then again near the target time.",
+            "note": "Earlier in this session, feed_kami succeeds before harvest_start. set_next_wake requests 360 minutes. The operator stop occurs before that next wake.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_pushed/transcripts/session-0063.jsonl",
+              "line": 38,
+              "field": "text",
+              "sha256": "5d75730e913eafc60c13ba3506edadef8d27358b1c8f78d65c110425f5ac79d7"
+            }
+          }
+        ],
+        "span": "Across sessions"
+      },
+      {
+        "id": "attention-budget",
+        "title": "The agent writes instructions for its own attention",
+        "run": "006",
+        "arm": "006-sonnet5-control-r1",
+        "model": "Sonnet 5 · control",
+        "tier": "EXPLORATORY",
+        "outcome": "Mixed",
+        "topics": [
+          "Memory",
+          "Knowledge"
+        ],
+        "intro": "Sonnet notices that a broad quest query consumes a large amount of context. It writes a rule directing later sessions toward smaller, targeted queries. The next wake retrieves that rule and uses targeted quest checks.",
+        "takeaway": "The agent treats information retrieval itself as a cost to manage. This is not a demonstrated long-term optimization: the warning says it has happened before, and the example covers only the next wake.",
+        "question": "Can an agent learn which enterprise queries are worth their context and inference cost?",
+        "steps": [
+          {
+            "label": "Remember which query is expensive",
+            "session": 79,
+            "kind": "memory-write",
+            "quote": "- DO NOT call lens_quests with no filter (even with account_index set, it\n  still returns the FULL registry, 144KB+ - confirmed again session 79,\n  wasted a lot of context). Use quest_state(index) / check_quest_completable(index)\n  for specific quests, or read reference/catalogs/quests/quest-lines.md.",
+            "note": "“144KB+” is the agent’s estimate in its note. The research point is the explicit choice of narrower alternatives.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0079.jsonl",
+              "line": 19,
+              "field": "tool_calls.0.args.content",
+              "sha256": "fdf6dac22e9b999c89f1ff4f418b3c6dbc782512e411aa5f7905b088a034d2e5"
+            }
+          },
+          {
+            "label": "Retrieve the narrower alternatives",
+            "session": 80,
+            "kind": "memory-read",
+            "quote": "- DO NOT call lens_quests with no filter (even with account_index set, it\n  still returns the FULL registry, 144KB+ - confirmed again session 79,\n  wasted a lot of context). Use quest_state(index) / check_quest_completable(index)\n  for specific quests, or read reference/catalogs/quests/quest-lines.md.",
+            "note": "The next session reads the same advice from notes.md.",
+            "workspace": "notes.md",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0080.jsonl",
+              "line": 7,
+              "field": "content",
+              "sha256": "9beff6eea3f35083d6ac01029e1ceee9a1f38a22e79d197dc84e3c5a4b520d76"
+            },
+            "tool": "workspace_read"
+          },
+          {
+            "label": "Check a specific quest",
+            "session": 80,
+            "kind": "tool",
+            "quote": "{\n  \"quest_index\": 16,\n  \"completable\": false,\n  \"reason\": \"{'code': -32000, 'message': 'revert: quest objs not met: Reverted'}\"\n}",
+            "note": "check_quest_completable(16) returns a small result. Session 80 also checks quest 2003; it does not request the broad quest registry.",
+            "workspace": "",
+            "source": {
+              "dataset": "experiment-006-knowledge-delivery",
+              "revision": "v0-final",
+              "path": "sonnet5_control/transcripts/session-0080.jsonl",
+              "line": 20,
+              "field": "content",
+              "sha256": "9beff6eea3f35083d6ac01029e1ceee9a1f38a22e79d197dc84e3c5a4b520d76"
+            },
+            "tool": "check_quest_completable"
+          }
+        ],
+        "span": "Across sessions"
       }
     ]
   }

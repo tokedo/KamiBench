@@ -17,6 +17,12 @@ parser.add_argument('transcripts', type=Path)
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 galleries = json.loads((root / 'blog/trajectories/learning-from-experience.json').read_text())
+
+def field_value(record, field):
+    for part in field.split('.'):
+        record = json.loads(record) if part == '$json' else record[int(part)] if isinstance(record, list) else record[part]
+    return record
+
 count = 0
 for gallery in galleries:
     for case in gallery['cases']:
@@ -27,15 +33,29 @@ for gallery in galleries:
             assert hashlib.sha256(raw).hexdigest() == src['sha256'], f'File differs: {path}'
             rows = [json.loads(line) for line in raw.splitlines()]
             record = rows[src['line'] - 1]
-            value = record
-            for part in src['field'].split('.'):
-                value = value[int(part)] if isinstance(value, list) else value[part]
+            value = field_value(record, src['field'])
             assert step['quote'] in value, f'Quote differs: {case["id"]}, session {step["session"]}'
             if step['kind'] == 'memory-write':
                 index = int(src['field'].split('.')[1])
                 call = record['tool_calls'][index]
                 assert call['name'] == 'workspace_write'
                 assert call['args']['path'] == step['workspace']
+                acknowledgement = next((row for row in rows[src['line']:]
+                    if row.get('tool_call_id') == call['id']), None)
+                if acknowledgement:
+                    assert not acknowledgement.get('is_error', False)
+                    assert 'Wrote ' in (acknowledgement.get('content') or acknowledgement.get('text', ''))
+                else:
+                    # One archived session ends on the write request. Its next
+                    # session's read must prove that the quoted text persisted.
+                    later_reads = [st for st in case['steps'] if st['kind'] == 'memory-read'
+                        and st['workspace'] == step['workspace'] and st['session'] > step['session']]
+                    persisted = False
+                    for st in later_reads:
+                        rs = st['source']
+                        read_rows = [json.loads(line) for line in (args.transcripts / rs['dataset'] / rs['path']).read_bytes().splitlines()]
+                        persisted |= step['quote'] in field_value(read_rows[rs['line'] - 1], rs['field'])
+                    assert persisted, f'Unconfirmed memory write: {case["id"]}, session {step["session"]}'
             if step['kind'] in ('memory-read', 'tool'):
                 calls = {call['id']: call for row in rows[:src['line']-1] for call in row.get('tool_calls', [])}
                 call = calls[record['tool_call_id']]

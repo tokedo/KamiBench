@@ -1268,3 +1268,60 @@ td:first-child {
   .trajectory-gallery { overflow: visible; }
   .trace-step { break-inside: avoid; }
 }
+
+/* The larger research collection uses expandable records, so choosing an
+   example on a phone does not require swiping through the entire archive. */
+.gallery-hero { max-width: 52rem; padding-bottom: 1.5rem; }
+.gallery-hero > p:last-child { max-width: 44rem; color: var(--muted); }
+.gallery-body { max-width: 60rem; padding-bottom: 4rem; }
+.gallery-body [hidden] { display: none !important; }
+.gallery-reading { border-left: 2px solid var(--accent); padding: 0.1rem 1.2rem; color: var(--muted); font-size: 0.9rem; }
+.gallery-start { margin: 2.5rem 0; padding: 1.5rem; background: var(--bg-raise); border: 1px solid var(--line); border-radius: 10px; }
+.gallery-start h2, .gallery-method h2 { margin: 0 0 0.75rem; font-size: 1.35rem; }
+.gallery-start p { margin: 0 0 0.75rem; color: var(--muted); }
+.gallery-start ol { margin-bottom: 0; padding-left: 1.3rem; }
+.gallery-start li { padding: 0.25rem 0; }
+.gallery-filters { display: grid; grid-template-columns: minmax(12rem, 2fr) repeat(3, minmax(7rem, 1fr)) auto; align-items: end; gap: 0.75rem; }
+.gallery-filters label { display: grid; gap: 0.4rem; font-size: 0.78rem; font-weight: 600; min-width: 0; }
+.gallery-filters input, .gallery-filters select, .gallery-filters button, .gallery-toolbar button {
+  min-height: 44px; width: 100%; min-width: 0; padding: 0.6rem 0.7rem;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--bg);
+  color: var(--text); font: 0.85rem var(--font-sans);
+}
+.gallery-filters button, .gallery-toolbar button { cursor: pointer; width: auto; }
+.gallery-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: 1rem 0; font-size: 0.8rem; color: var(--muted); }
+.gallery-toolbar button:disabled { opacity: 0.4; cursor: default; }
+.gallery-records { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; align-items: start; }
+.gallery-entry { border: 1px solid var(--line); border-radius: 10px; background: var(--bg-raise); min-width: 0; scroll-margin-top: 5rem; }
+.gallery-entry[open] { grid-column: 1 / -1; }
+.gallery-entry summary { cursor: pointer; padding: 1.25rem 1.5rem; font-family: var(--font-sans); }
+.gallery-entry summary::marker { color: var(--accent); }
+.gallery-entry summary:hover .gallery-entry-title { color: var(--accent); }
+.gallery-entry-meta { color: var(--muted); font-size: 0.72rem; }
+.gallery-entry-title { display: block; margin: 0.5rem 0 0.8rem; font-weight: 600; font-size: 1.15rem; line-height: 1.35; }
+.gallery-entry-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.65rem; color: var(--muted); font-size: 0.7rem; }
+.gallery-outcome { padding: 0.15rem 0.5rem; border: 1px solid var(--line); border-radius: 4px; font-weight: 600; }
+.outcome-success { border-color: #739675; }
+.outcome-failure { border-color: #bb8270; }
+.outcome-mixed { border-color: #a99870; }
+.gallery-records .trace-case { font-family: var(--font-sans); font-size: 0.92rem; line-height: 1.6; }
+.gallery-records .trace-question { padding-top: 0.8rem; border-top: 1px solid var(--line); margin-top: 1rem; color: var(--muted); font-size: 0.85rem; }
+.gallery-method { max-width: 46rem; margin: 3rem auto 0; font-size: 0.9rem; color: var(--muted); }
+.gallery-empty { padding: 1rem; border: 1px solid var(--line); }
+@media (max-width: 760px) {
+  .gallery-filters { grid-template-columns: 1fr 1fr; }
+  .gallery-filters input, .gallery-filters select { font-size: 1rem; }
+  .gallery-search { grid-column: 1 / -1; }
+  .gallery-records { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .gallery-entry summary, .gallery-start { padding: 1rem; }
+  .gallery-toolbar { align-items: flex-start; }
+  .gallery-toolbar p { margin-block: 0.7rem; }
+  .gallery-toolbar button { max-width: 11rem; }
+}
+@media print {
+  .gallery-filters, .gallery-toolbar, .gallery-start { display: none !important; }
+  .gallery-records { display: block; }
+  .gallery-entry { margin-bottom: 1rem; }
+}
