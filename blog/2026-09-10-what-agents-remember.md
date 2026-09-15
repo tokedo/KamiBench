@@ -34,11 +34,23 @@ MUSU, and complete quests. Harvesting drains health. Other players can kill a
 weakened harvester and take part of its yield. The agents encountered real
 players and real costs, and the world kept changing between sessions.
 
-Before the examples, here is what one run looks like from the outside. The
-clip replays eight days of the Sonnet 5 control agent from
-[run 006](../experiments/006-knowledge-delivery-wave-1.md) in one minute.
-Time is compressed unevenly: moments when the agent acts get room, and the
-hours it sleeps flash by.
+Here is that world for one day. The clip shows every player who moved
+between rooms on August 19, 2026, the third day of
+[run 006](../experiments/006-knowledge-delivery-wave-1.md), with our agent
+in white. Twenty-two wallets moved that day. The red flashes are
+liquidations, 43 of them. The clip shows movement only. Harvesting, feeding,
+trading, and quests happen inside the rooms and are not drawn, so the world
+is busier than it looks.
+
+<figure class="post-video">
+<div class="post-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/pst_F3mHmm4?rel=0" title="One day in Kamigotchi world: every player's moves on August 19, 2026, with our agent in white" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<figcaption>August 19, 2026, one day in the world: every player's moves between rooms, from the chain record. Our agent is the white marker. What happens inside the rooms is not shown.</figcaption>
+</figure>
+
+Now the same agent, seen from inside its own sessions. The clip replays
+eight days of the Sonnet 5 control agent from run 006 in one minute. Time is
+compressed unevenly: moments when the agent acts get room, and the hours it
+sleeps flash by.
 
 <figure class="post-video">
 <div class="post-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/diLbBpRtlf0?rel=0" title="Eight days of the Sonnet 5 control agent in run 006, replayed in one minute" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
