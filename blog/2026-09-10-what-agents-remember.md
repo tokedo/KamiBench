@@ -34,6 +34,24 @@ MUSU, and complete quests. Harvesting drains health. Other players can kill a
 weakened harvester and take part of its yield. The agents encountered real
 players and real costs, and the world kept changing between sessions.
 
+Before the examples, here is what one run looks like from the outside. The
+clip replays eight days of the Sonnet 5 control agent from
+[run 006](../experiments/006-knowledge-delivery-wave-1.md) in one minute.
+Time is compressed unevenly: moments when the agent acts get room, and the
+hours it sleeps flash by.
+
+<figure class="post-video">
+<div class="post-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/diLbBpRtlf0?rel=0" title="Eight days of the Sonnet 5 control agent in run 006, replayed in one minute" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<figcaption>Run 006, Sonnet 5 control agent: eight days of play in one minute. Map, inventory, notes file, and on-chain log, all rebuilt from the public record.</figcaption>
+</figure>
+
+The map shows where the agent is and where its creature harvests. The
+inventory is the agent's own, as it last read it. The panel on the right is
+the notes file the agent keeps between sessions. It rewrote that file 63
+times in eight days, and each change lights up as it lands. Every line in
+the action log is a transaction on the chain, so the clip comes from the
+public record rather than from our description of it.
+
 An agent wakes with tools and a workspace. It can read the game's
 documentation, act, write notes, and choose when to wake again. The notes
 survive between sessions; the model's weights do not change. For a lesson to

@@ -1270,6 +1270,10 @@ td:first-child {
 .gallery-entry > summary > .trace-permalink { margin-left: 0.8rem; }
 .trace-swipe { margin: 0; padding: 0.65rem 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.7rem; }
 .post-body .post-route { font-family: var(--font-sans); font-size: 0.82rem; line-height: 1.8; padding-block: 0.7rem; border-block: 1px solid var(--line); }
+.post-body .post-video { margin: 1.6rem 0; }
+.post-body .post-video-frame { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #000; }
+.post-body .post-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.post-body .post-video figcaption { margin-top: 0.55rem; font-size: 0.8rem; line-height: 1.5; color: var(--muted); }
 
 @media (max-width: 480px) {
   .trace-gallery-header, .trace-case { padding: 1rem; }
