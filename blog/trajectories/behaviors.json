@@ -1,0 +1,781 @@
+{
+ "meta": {
+  "run": "006",
+  "arm": "006-sonnet5-control-r1",
+  "model": "Sonnet 5",
+  "condition": "control",
+  "tier": "EXPLORATORY",
+  "sessions": 82,
+  "span": "Aug 17 – 25, 2026"
+ },
+ "cases": [
+  {
+   "id": "context-budget",
+   "title": "Agent learns to manage its own context budget",
+   "lede": "One query returned the whole quest registry: about 23,000 tokens each time, a sixth of the session budget. The agent called it fourteen times in 82 sessions, noticed the cost, wrote itself a rule, kept it for sixty sessions, broke it once, and made the rule stronger.",
+   "stages": [
+    {
+     "kind": "stage",
+     "session": 10,
+     "date": "Aug 18",
+     "beat": "One query returns a huge dump: a sixth of the session's context in one call",
+     "calls": [
+      {
+       "name": "lens_quests",
+       "pill": {
+        "kind": "short",
+        "text": "+23k tokens"
+       }
+      }
+     ],
+     "aside": "The seventh full-registry call in ten sessions. A sixth of the session budget in one result.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0010.jsonl",
+      "line": 8
+     },
+     "note": {
+      "kind": "obs",
+      "tag": "first observation",
+      "quote": [
+       "the full lens_quests(account_index) dump (large output, ~130KB)",
+       "avoid re-pulling that huge payload every time"
+      ],
+      "why": "Still filed as useful: the cheap tool did not return a number it wanted.",
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0010.jsonl",
+       "line": 54,
+       "field": "tool_calls.0.args.content",
+       "sha256": "3dd1d0bfba33fa2478bc7edad923be452944fa7914df9af38251ee1dfc19a4a8"
+      }
+     }
+    },
+    {
+     "kind": "stage",
+     "session": 15,
+     "date": "Aug 18",
+     "beat": "Agent notices the cost and writes itself a rule: use the cheap, targeted call instead",
+     "calls": [
+      {
+       "name": "quest_state",
+       "pill": {
+        "kind": "long",
+        "text": "+0.9k"
+       }
+      }
+     ],
+     "aside": "Routine end-of-session rewrite of the notes. Having just used the cheap check, it split the earlier bullet into the rule and the quest facts.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0015.jsonl",
+      "line": 25
+     },
+     "note": {
+      "kind": "rule",
+      "tag": "becomes a rule",
+      "quote": [
+       "huge payload, avoid unless needed. Use quest_state(quest_index) for targeted checks\n  instead (much cheaper)."
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0015.jsonl",
+       "line": 29,
+       "field": "tool_calls.0.args.content",
+       "sha256": "e1ac22afffeac452049d9d3c07ee889512e9c00d86eb0aaf036c7f99047ef0db"
+      }
+     }
+    },
+    {
+     "kind": "gap",
+     "text": "sessions 16 – 78 · the rule held in most sessions"
+    },
+    {
+     "kind": "stage",
+     "session": 79,
+     "date": "Aug 25",
+     "beat": "The rule holds for sixty sessions, then one call slips through",
+     "calls": [
+      {
+       "name": "lens_quests",
+       "pill": {
+        "kind": "short",
+        "text": "+29k tokens"
+       }
+      }
+     ],
+     "aside": "A fifth of the session budget in one turn. Fired in the same parallel batch as the read of the notes, so the warning landed after the call.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0079.jsonl",
+      "line": 6
+     },
+     "note": {
+      "kind": "rule",
+      "tag": "rule strengthened",
+      "quote": [
+       "DO NOT call lens_quests with no filter (even with account_index set, it\n  still returns the FULL registry, 144KB+ - confirmed again session 79,\n  wasted a lot of context).",
+       "There is apparently no per-quest-index lens_quests call - only the full\n  registry dump."
+      ],
+      "why": "Every call since session 3 had used that filter. This is the first time the agent says it never worked.",
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0079.jsonl",
+       "line": 19,
+       "field": "tool_calls.0.args.content",
+       "sha256": "fdf6dac22e9b999c89f1ff4f418b3c6dbc782512e411aa5f7905b088a034d2e5"
+      }
+     }
+    },
+    {
+     "kind": "stage",
+     "session": 80,
+     "date": "Aug 25",
+     "beat": "The slip makes the rule stronger. From then on, only targeted calls",
+     "calls": [
+      {
+       "name": "check_quest_completable",
+       "pill": {
+        "kind": "long",
+        "text": "+2.4k"
+       }
+      }
+     ],
+     "aside": "Session peaks at a third of the budget. No registry call in the rest of the run.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0080.jsonl",
+      "line": 18
+     },
+     "note": {
+      "kind": "empty",
+      "text": "rule unchanged"
+     }
+    }
+   ],
+   "takeaway": "Memory turned a repeated cost into a rule, let the agent negotiate with the rule, and could not protect a session that acted before reading it. The evidence that it finally landed is three sessions long, because the run ended there."
+  },
+  {
+   "id": "tool-order",
+   "title": "Agent learns the correct order of tool calls",
+   "lede": "Collecting a harvest puts the creature on a short cooldown, and feeding during that cooldown fails. The agent hit this three times in a row, each time scheduling a five-minute wake just to retry. Then it reversed the order, and four sessions later wrote the rule down.",
+   "stages": [
+    {
+     "kind": "stage",
+     "session": 16,
+     "date": "Aug 18",
+     "beat": "Two actions in the wrong order: the second one fails on a cooldown",
+     "calls": [
+      {
+       "name": "harvest_collect",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "feed_kami",
+       "pill": {
+        "kind": "err"
+       }
+      },
+      {
+       "name": "set_next_wake",
+       "pill": {
+        "kind": "short",
+        "text": "5 min"
+       }
+      }
+     ],
+     "aside": "No note written. The next session exists only to feed: six model calls, about $0.20. Same again in sessions 18 and 19.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0016.jsonl",
+      "line": 13
+     },
+     "note": {
+      "kind": "empty",
+      "text": "nothing written this session"
+     }
+    },
+    {
+     "kind": "stage",
+     "session": 20,
+     "date": "Aug 19",
+     "beat": "Third failure: the agent notes it happened, but does not change the order yet",
+     "calls": [
+      {
+       "name": "harvest_collect",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "feed_kami",
+       "pill": {
+        "kind": "err"
+       }
+      },
+      {
+       "name": "set_next_wake",
+       "pill": {
+        "kind": "short",
+        "text": "5 min"
+       }
+      }
+     ],
+     "aside": "Third time in the same order.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0020.jsonl",
+      "line": 12
+     },
+     "note": {
+      "kind": "soft",
+      "tag": "failure noted, order kept",
+      "quote": [
+       "Feed attempt reverted due to post-collect cooldown (157s) - will\n  retry next wake (~5 min later)"
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0020.jsonl",
+       "line": 28,
+       "field": "tool_calls.0.args.content",
+       "sha256": "2d336fdf267d472de8fc53f0ad453911063ffcd4ad4a65a95c93912e26e9cd8a"
+      }
+     }
+    },
+    {
+     "kind": "stage",
+     "session": 26,
+     "date": "Aug 19",
+     "beat": "Once the reversed order works, it becomes a written rule",
+     "calls": [
+      {
+       "name": "feed_kami",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "harvest_collect",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "set_next_wake",
+       "pill": {
+        "kind": "long",
+        "text": "175 min"
+       }
+      }
+     ],
+     "aside": "The order had switched two sessions after the last failure, without comment. Now it is written.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0026.jsonl",
+      "line": 12
+     },
+     "note": {
+      "kind": "rule",
+      "tag": "becomes a rule",
+      "quote": [
+       "feeding BEFORE harvest_collect worked fine (cooldown only kicks in AFTER\n  collect/stop, not before) - so feed first, then collect, is a safe order and avoids a wait."
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0026.jsonl",
+       "line": 25,
+       "field": "tool_calls.0.args.content",
+       "sha256": "36540b942abcb73686535e2db18f9cc8c7ad190da0bd32f9c7d42a2a898ba3ea"
+      }
+     }
+    },
+    {
+     "kind": "stage",
+     "session": 27,
+     "date": "Aug 19",
+     "beat": "The rule holds for the rest of the run",
+     "calls": [
+      {
+       "name": "feed_kami",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "harvest_collect",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "set_next_wake",
+       "pill": {
+        "kind": "long",
+        "text": "175 min"
+       }
+      }
+     ],
+     "aside": "Right order, no revert, a three-hour sleep instead of a five-minute retry.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0027.jsonl",
+      "line": 13
+     },
+     "note": {
+      "kind": "empty",
+      "text": "nothing new written · the rule stays as it is, with a “Confirmed again” stamp added"
+     }
+    },
+    {
+     "kind": "gap",
+     "text": "sessions 28 – 82 · feed before collect in 7 of the 8 sessions that fed a harvesting creature · one relapse at session 50"
+    }
+   ],
+   "takeaway": "The behavior changed before the rule did. Three identical failures produced a note that it happened, not how to avoid it. The fix appeared in the actions two sessions later, unexplained, and only after four clean runs did the agent write it down. Once written, it held."
+  },
+  {
+   "id": "long-goal",
+   "title": "Agent works on a goal that spans many sessions",
+   "lede": "A quest asked for a scavenge claim in three different rooms of one type. The agent accepted it with no stamina left to travel, picked the cheapest matching room from the catalog, and walked there over the next sessions. The count in its notes went 0, 1, 2, 3 across fourteen sessions and two days.",
+   "stages": [
+    {
+     "kind": "stage",
+     "session": 50,
+     "date": "Aug 21",
+     "beat": "Agent takes on a goal that no single session can finish: three tasks in three distant places",
+     "calls": [
+      {
+       "name": "complete_quest",
+       "pill": {
+        "kind": "wk",
+        "text": "quest 11"
+       }
+      },
+      {
+       "name": "accept_quest",
+       "pill": {
+        "kind": "wk",
+        "text": "quest 12"
+       }
+      },
+      {
+       "name": "get_expected_objective",
+       "pill": {
+        "kind": "wk",
+        "text": "3 rooms"
+       }
+      },
+      {
+       "name": "travel_to_room",
+       "pill": {
+        "kind": "short",
+        "text": "8 hops"
+       }
+      }
+     ],
+     "aside": "Eight hops to the nearest matching room, three stamina in hand. Sleeps on it.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0050.jsonl",
+      "line": 19
+     },
+     "note": {
+      "kind": "rule",
+      "tag": "goal set · 0/3",
+      "quote": [
+       "Quest 12 \"Insects in the Miasma\" - ACCEPTED this session. Objective\n  SCAV_CLAIM_AFFINITY_INSECT, MIN 3 -- needs scavenge claims in 3 DISTINCT insect rooms.\n  Progress: 0/3 so far. Cheapest insect node: 29 \"Misty Forest Path\", cost 100, level\n  limit 15"
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0050.jsonl",
+       "line": 77,
+       "field": "tool_calls.0.args.content",
+       "sha256": "bec9cf02fde6771833d3005fff30b9ae7ed515d54546c9419380c840a733274d"
+      }
+     }
+    },
+    {
+     "kind": "stage",
+     "session": 53,
+     "date": "Aug 21",
+     "beat": "Each session reads the plan from its notes, completes one step, and updates the count",
+     "calls": [
+      {
+       "name": "harvest_collect",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "get_scavenge_points",
+       "pill": {
+        "kind": "val",
+        "text": "160 / 100"
+       }
+      },
+      {
+       "name": "scavenge_claim_and_reveal",
+       "pill": {
+        "kind": "val",
+        "text": "1/3"
+       }
+      },
+      {
+       "name": "workspace_read",
+       "pill": {
+        "kind": "wk",
+        "text": "nodes.csv"
+       }
+      },
+      {
+       "name": "travel_to_room",
+       "pill": {
+        "kind": "wk",
+        "text": "5 dry runs"
+       }
+      }
+     ],
+     "aside": "Compares five candidate rooms by distance before moving.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0053.jsonl",
+      "line": 16
+     },
+     "note": {
+      "kind": "obs",
+      "tag": "1/3",
+      "quote": [
+       "Progress: 1/3 DONE (claimed at node 29 \"Misty Forest Path\" this session, session 53).\n  NEED 2 MORE distinct insect-affinity nodes claimed."
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0053.jsonl",
+       "line": 45,
+       "field": "tool_calls.0.args.content",
+       "sha256": "93045036c0817335526e501c972acf709c2c828bba7490ed943b0689d8a6ec73"
+      }
+     }
+    },
+    {
+     "kind": "gap",
+     "text": "sessions 58 – 62 · harvests at the third room · sleeps of 3, 5, 8 and 6 hours while the 200-point tier fills"
+    },
+    {
+     "kind": "stage",
+     "session": 63,
+     "date": "Aug 22",
+     "beat": "Thirteen sessions and two days later the goal is complete, and the next one is already started",
+     "calls": [
+      {
+       "name": "get_scavenge_points",
+       "pill": {
+        "kind": "val",
+        "text": "200 / 200"
+       }
+      },
+      {
+       "name": "scavenge_claim_and_reveal",
+       "pill": {
+        "kind": "val",
+        "text": "3/3"
+       }
+      },
+      {
+       "name": "complete_quest",
+       "pill": {
+        "kind": "val",
+        "text": "done"
+       }
+      },
+      {
+       "name": "accept_quest",
+       "pill": {
+        "kind": "wk",
+        "text": "quest 13"
+       }
+      },
+      {
+       "name": "travel_to_room",
+       "pill": {
+        "kind": "wk",
+        "text": "6 hops"
+       }
+      }
+     ],
+     "aside": "Completes, accepts the next quest, and is already walking to its first room.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0063.jsonl",
+      "line": 8
+     },
+     "note": {
+      "kind": "rule",
+      "tag": "3/3 · done",
+      "quote": [
+       "Quests 1-12 COMPLETE (MSQ line, MSQ012 \"Insects in the Miasma\" done this session by\n  claiming 200/200 scavenge points at node 36 and completing)."
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0063.jsonl",
+       "line": 42,
+       "field": "tool_calls.0.args.content",
+       "sha256": "94567868e472c5ef54255f7dae6dc22ef4364cfe13e5d0f89b54f0bd879b8df2"
+      }
+     }
+    }
+   ],
+   "takeaway": "A goal that no single session could finish, carried by a three-line entry in the notes: what the quest needs, which rooms count, how many are done. Each wake reads it, does one step, and rewrites the count."
+  },
+  {
+   "id": "belief-correction",
+   "title": "Agent corrects a wrong belief by observation",
+   "lede": "From session 13 the agent knew, from watching its creature, that health falls a few points an hour while it harvests. In session 71 it found a puzzle: eleven hours of harvesting under a helper bot had banked almost nothing. Looking for the cause, it read the manual's section on the health cost of collecting and took that as the only cost. It labelled the new reading a hypothesis, slept ten hours to test it, and woke to a creature at 41% health.",
+   "stages": [
+    {
+     "kind": "stage",
+     "session": 13,
+     "date": "Aug 18",
+     "beat": "From direct observation the agent knows its creature loses health while working",
+     "calls": [
+      {
+       "name": "lens_kami",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "harvest_collect",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "lens_kami",
+       "pill": {
+        "kind": "ok"
+       }
+      }
+     ],
+     "aside": "Health read before and after, session after session, while the creature harvests.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0013.jsonl",
+      "line": 8
+     },
+     "note": {
+      "kind": "obs",
+      "tag": "from experience",
+      "quote": [
+       "Kami HP mechanics: while HARVESTING, HP decays ~-4 to -5/hr, ramping with harvest duration.\n  While RESTING, HP regens (+18/hr observed at 28% HP)."
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0013.jsonl",
+       "line": 19,
+       "field": "tool_calls.0.args.content",
+       "sha256": "51ab718470516b739d912ae0ca9a059414b9e6d14fe325140ba56173e3578eda"
+      }
+     }
+    },
+    {
+     "kind": "stage",
+     "session": 71,
+     "date": "Aug 24",
+     "beat": "A puzzle: hours of work yield almost nothing, the agent goes looking for a cause",
+     "calls": [
+      {
+       "name": "get_strategy_status",
+       "pill": {
+        "kind": "wk",
+        "text": "11 h"
+       }
+      },
+      {
+       "name": "get_scavenge_points",
+       "pill": {
+        "kind": "low",
+        "text": "9 pts"
+       }
+      },
+      {
+       "name": "harvest_collect",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "get_scavenge_points",
+       "pill": {
+        "kind": "low",
+        "text": "10 pts"
+       }
+      }
+     ],
+     "aside": "Eleven hours under the helper bot, nine points banked where the rate promised about two hundred. The bot is blamed.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0071.jsonl",
+      "line": 8
+     },
+     "note": {
+      "kind": "obs",
+      "tag": "a puzzle",
+      "quote": [
+       "Contrary to earlier assumption, scavenge points do NOT accrue at the full\n  spot musu rate continuously. Observed: kami harvesting at node 2 for ~11.2 real\n  hours",
+       "had only accumulated 9-10 scavenge points total, despite\n  a spot musu rate of ~20/hr",
+       "strategy apparently does NOT\n  spend most of its time actively harvesting-and-accruing"
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0071.jsonl",
+       "line": 92,
+       "field": "tool_calls.0.args.content",
+       "sha256": "a88a183c5ec74797d189f1c02e9179a85a142947704029dcc0db5fbe9e451e31"
+      }
+     }
+    },
+    {
+     "kind": "stage",
+     "session": 72,
+     "date": "Aug 24",
+     "beat": "It reads the manual, forms a new belief, and labels it a hypothesis to verify",
+     "calls": [
+      {
+       "name": "lens_kami",
+       "pill": {
+        "kind": "val",
+        "text": "120 / 120 HP"
+       }
+      },
+      {
+       "name": "workspace_read",
+       "pill": {
+        "kind": "wk",
+        "text": "manual"
+       }
+      },
+      {
+       "name": "harvest_start",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "lens_kami",
+       "pill": {
+        "kind": "short",
+        "text": "-4.3 HP/hr"
+       }
+      },
+      {
+       "name": "set_next_wake",
+       "pill": {
+        "kind": "short",
+        "text": "600 min"
+       }
+      }
+     ],
+     "aside": "Looking for why accrual is slow, it reads the section on strain: a health cost per unit collected. It takes that as the only cost, and explains away the live drain rate it had trusted for ten days.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0072.jsonl",
+      "line": 8
+     },
+     "note": {
+      "kind": "soft",
+      "tag": "the manual overrides it",
+      "quote": [
+       "HP is NOT drained by the mere passage\n  of time while harvesting - it's drained by STRAIN, which is only inflicted WHEN\n  you collect/stop",
+       "The lens_kami/lens_node\n  \"hpRatePerHr\": \"-4.3\" projection may be a forward-looking estimate of future\n  strain, not an actual passive drain - VERIFY this empirically next session"
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0072.jsonl",
+       "line": 49,
+       "field": "tool_calls.0.args.content",
+       "sha256": "60e487fbd4a5ce9760b13e58df8eb84972822cf327e264c09ef44c1444e386a5"
+      }
+     }
+    },
+    {
+     "kind": "stage",
+     "session": 73,
+     "date": "Aug 24",
+     "beat": "Ten hours later the creature is at 41% health. The belief is corrected in the notes and never revisited",
+     "calls": [
+      {
+       "name": "lens_kami",
+       "pill": {
+        "kind": "low",
+        "text": "49 / 120 HP"
+       }
+      },
+      {
+       "name": "harvest_collect",
+       "pill": {
+        "kind": "ok"
+       }
+      },
+      {
+       "name": "feed_kami",
+       "pill": {
+        "kind": "ok"
+       }
+      }
+     ],
+     "aside": "Ten hours later. Nothing was collected in between.",
+     "transcript": {
+      "dataset": "experiment-006-knowledge-delivery",
+      "revision": "v0-final",
+      "path": "sonnet5_control/transcripts/session-0073.jsonl",
+      "line": 8
+     },
+     "note": {
+      "kind": "rule",
+      "tag": "corrected by observation",
+      "quote": [
+       "Confirmed HP DOES drain passively while HARVESTING even without collecting\n  (contra earlier hypothesis) - kami went from full-ish to 49/120 (41%) over the\n  unmanaged harvest period since session 72.",
+       "IMPORTANT\n  correction to session 72 notes: don't let a kami sit HARVESTING unmonitored for\n  too long, it WILL take passive HP damage and can die if left too long."
+      ],
+      "source": {
+       "dataset": "experiment-006-knowledge-delivery",
+       "revision": "v0-final",
+       "path": "sonnet5_control/transcripts/session-0073.jsonl",
+       "line": 84,
+       "field": "tool_calls.0.args.content",
+       "sha256": "b2c6665aa54780c3bcac054e266ed941791bc40eb35811a24985fad55e7e339a"
+      }
+     }
+    }
+   ],
+   "takeaway": "A written source outranked the agent's own measurements, because it was read under a goal: the manual offered a mechanism for a puzzle the agent wanted solved. The measurements were right and had been in its notes for ten days. What saved it was labelling the new belief a hypothesis and checking. The correction was made once and held to the end."
+  }
+ ]
+}

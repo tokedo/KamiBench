@@ -1,35 +1,30 @@
-# Transcript excerpts and research gallery
+# Behavior cards
 
-`learning-from-experience.json` is the single content source for twenty examples.
-Twelve appear in [What agents remember, and what they do next](../2026-09-10-what-agents-remember.md);
-all twenty appear at `/gallery`. The `archive` group is gallery-only.
-The post places galleries with `<!-- TRAJECTORY:memory -->`,
-`<!-- TRAJECTORY:stack -->`, and `<!-- TRAJECTORY:knowledge -->`.
+`behaviors.json` is the single content source for the four example cards in
+[What agents remember, and what they do next](../2026-09-10-what-agents-remember.md).
+The post places a card with `<!-- BEHAVIOR:<id> -->`; the renderer is
+`site/src/lib/behaviors.ts`.
 
-Every step stores an exact substring of a transcript field, the public dataset,
-the pinned revision (`v0-baseline` for run 001, `v0-final` for the other runs),
-the file path, the one-based JSONL line number,
-the JSON field path, and the whole-file SHA256. All excerpts were verified
-against the public files, not only the local research copy. `memory-write`
-quotes are from `workspace_write` arguments; `memory-read` quotes are from
-the corresponding `workspace_read` result. An excerpt is not evidence that
-the agent's assertion was correct. The step annotations and takeaways are
-editorial explanations. `content.$json.hits.0.text` means decode the JSON in
-the content string and select the first search hit's text. No other quote
-normalization is permitted.
+All four cards come from one arm: run 006, Sonnet 5, control condition
+(`sonnet5_control` in the public dataset `experiment-006-knowledge-delivery`,
+revision `v0-final`). The card titles, beats, asides, tags, ledes and
+takeaways are editorial. Quotes are the agent's own words from the
+`workspace_write` call that wrote `notes.md` in that session, stored as one or
+more verbatim segments of that single field and joined with an ellipsis when
+rendered; whitespace is collapsed for display and nothing else is changed.
+Every quote carries the dataset, revision, file path, one-based JSONL line,
+JSON field path and whole-file SHA256; every stage links the full session
+file. Tool-call rows list the calls that matter for the beat, with a short
+label of what they returned; they are a selection, not the session's full
+call list. Token figures on pills are the change in prompt size between the
+model call before and after the tool result, from the run's telemetry.
 
-Outcome labels describe the selected sequence, not the model or run. All
-gallery interpretations are exploratory. Topic labels and questions beyond
-the game are editorial aids, not benchmark outcomes or demonstrated transfer.
-The collection's coverage and selection limits are recorded in
-`research/trajectory-review-2026-09-11.md`.
+An excerpt is not evidence that the agent's assertion was correct. All
+interpretations on the cards are exploratory (one agent, one run). The
+delegation service used by the agent is not named on public pages; a quote
+segment may start or end so as to omit it.
 
-The renderer HTML-escapes quotes and inserts them after markdown processing.
-It does not rewrite punctuation, linkify tool names, or interpret markdown
-inside a quotation. Excerpts retain their original whitespace. Omitted context
-is available through the original-transcript link on every step.
-
-To verify again, download each referenced file from
+To verify, download each referenced file from
 `https://huggingface.co/datasets/KamiBench/<dataset>/resolve/<revision>/<path>`
 into `<directory>/<dataset>/<path>`, then run:
 
@@ -37,20 +32,5 @@ into `<directory>/<dataset>/<path>`, then run:
 python3 scripts/verify-trajectories.py <directory>
 ```
 
-The galleries are complete HTML before enhancement. JavaScript adds native
-horizontal scrolling, buttons, keyboard navigation, and a read-all toggle.
-There is no autoplay or runtime dataset dependency. Print and no-JavaScript
-views show all examples vertically.
-
-The full gallery uses native expandable records with search and topic,
-outcome and run filters. Every example has a stable fragment URL. Without
-JavaScript all records are expanded. Printing expands the currently filtered
-selection and restores the prior open state afterward. `/gallery.json`
-exports the same source records for reuse; it is generated at build time.
-
-The quest figure uses the lab's supplied frozen CSVs in `../figures/data/`.
-`scripts/plot-006-quests.py` styles those series and the supplied stop boundaries;
-it does not extract new experiment outcomes. Scientific corrections follow
-the lab's September 11, 2026 errata: eight level-ups in sessions 60 (one),
-70 (six in 37 seconds), and 74 (one); the control had access to documentation;
-the treatment failed the joint rule but did produce useful quest behavior.
+The generator that produced the file from the lab's transcript copies lives in
+the lab repo; the public file is the record.

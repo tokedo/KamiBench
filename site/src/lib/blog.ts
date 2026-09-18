@@ -13,7 +13,7 @@
 // uncontrolled observations). Rendered as chips so the label is visible at the
 // claim, not just in methodology text.
 import { marked } from 'marked';
-import { renderTrajectories } from './trajectories';
+import { renderBehaviors } from './behaviors';
 import {
   linkArxivIds,
   slugify,
@@ -131,7 +131,7 @@ function renderBody(src: string): string {
   html = wrapTables(html);
   html = tierChips(html);
   html = transformTextNodes(html, linkArxivIds);
-  return renderTrajectories(html);
+  return renderBehaviors(html);
 }
 
 export function getPosts(): BlogPost[] {

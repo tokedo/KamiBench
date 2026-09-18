@@ -10,5 +10,8 @@ export default defineConfig({
     // static output this emits a meta-refresh page; vercel.json adds a real 308
     // on the deployed host.
     '/paper': '/blog/why-kamibench-for-continual-learning',
+    // The trajectory gallery was retired 2026-09-18; its examples were rebuilt
+    // as the four behavior cards in the second post.
+    '/gallery': '/blog/what-agents-remember',
   },
 });
