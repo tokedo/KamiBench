@@ -4,6 +4,11 @@
       "source": "/paper",
       "destination": "/blog/why-kamibench-for-continual-learning",
       "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/blog/what-agents-remember",
+      "permanent": true
     }
   ]
 }
