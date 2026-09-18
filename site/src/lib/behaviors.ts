@@ -75,30 +75,38 @@ function gap(g: Gap): string {
   return `<li class="bh-gap"><span class="bh-dots" aria-hidden="true">···</span><span>${escape(g.text)}</span></li>`;
 }
 
+const TAB_LABELS: Record<string, string> = {
+  'context-budget': 'Context budget',
+  'tool-order': 'Order of operations',
+  'long-goal': 'A long goal',
+  'belief-correction': 'A corrected belief',
+};
+
 export function renderCase(c: Case, index: number): string {
   const rows = c.stages.map((s) => (s.kind === 'gap' ? gap(s) : stage(s))).join('\n');
-  const stages = c.stages.filter((s): s is Stage => s.kind === 'stage');
-  const beats = stages.map((s) => `<li><span class="bh-beat-n">Session ${s.session}</span>${escape(s.beat)}</li>`).join('');
-  return `<section class="bh-card" id="${c.id}" aria-labelledby="${c.id}-title">
+  return `<section class="bh-card${index === 0 ? ' is-active' : ''}" id="${c.id}" role="tabpanel" aria-labelledby="${c.id}-tab" data-bh-panel="${c.id}">
     <header class="bh-head">
-      <p class="label">Example ${index + 1} · run ${meta.run} · ${escape(meta.model)} · ${escape(meta.condition)} agent <span class="chip chip-pending">${meta.tier}</span></p>
+      <p class="label">Example ${index + 1} of ${cases.length} · run ${meta.run} · ${escape(meta.model)} · ${escape(meta.condition)} agent <span class="chip chip-pending">${meta.tier}</span></p>
       <h3 id="${c.id}-title">${escape(c.title)}</h3>
       <p class="bh-lede">${escape(c.lede)}</p>
     </header>
-    <ol class="bh-beats">${beats}</ol>
-    <details class="bh-evidence"${index === 0 ? ' open' : ''}>
-      <summary>See the ${stages.length} sessions <span>· the calls that matter, and the note the agent wrote to itself, verbatim</span></summary>
-      <ol class="bh-stages">${rows}</ol>
-    </details>
+    <p class="bh-key">Each row: what to see, then the calls that matter and the note the agent wrote to itself, verbatim.</p>
+    <ol class="bh-stages">${rows}</ol>
     <p class="bh-take"><strong>What it shows.</strong> ${escape(c.takeaway)}</p>
   </section>`;
 }
 
-/** Replace `<!-- BEHAVIOR:id -->` markers with cards, after markdown processing. */
+/** Replace `<!-- BEHAVIORS -->` with one tabbed block holding all cards.
+ * Without JavaScript the cards render stacked; the script shows one at a
+ * time behind tabs, follows hash links, and switches on swipe and arrow keys. */
 export function renderBehaviors(html: string): string {
-  return html.replace(/<!-- BEHAVIOR:([a-z-]+) -->/g, (_, id: string) => {
-    const i = cases.findIndex((c) => c.id === id);
-    if (i < 0) throw new Error(`Unknown behavior card: ${id}`);
-    return renderCase(cases[i]!, i);
+  return html.replace(/<!-- BEHAVIORS -->/g, () => {
+    const tabs = cases.map((c, i) => `<button type="button" role="tab" id="${c.id}-tab" aria-controls="${c.id}" aria-selected="${i === 0}" data-bh-tab="${c.id}"><span class="bh-tab-n">${i + 1}</span>${escape(TAB_LABELS[c.id] ?? c.title)}</button>`).join('');
+    const panels = cases.map((c, i) => renderCase(c, i)).join('\n');
+    return `<div class="bh-tabs" data-bh-tabs>
+      <div class="bh-tablist" role="tablist" aria-label="Examples" hidden>${tabs}</div>
+      ${panels}
+      <p class="bh-swipe" hidden>Swipe or use ← → to move between examples</p>
+    </div>`;
   });
 }

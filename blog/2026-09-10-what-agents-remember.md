@@ -62,13 +62,7 @@ agent. They show what happened, not how often it happens. Every transcript
 is public: each card links its quotes to the exact line of the session file
 on Hugging Face, at a pinned revision.
 
-<!-- BEHAVIOR:context-budget -->
-
-<!-- BEHAVIOR:tool-order -->
-
-<!-- BEHAVIOR:long-goal -->
-
-<!-- BEHAVIOR:belief-correction -->
+<!-- BEHAVIORS -->
 
 ## What the four have in common
 
