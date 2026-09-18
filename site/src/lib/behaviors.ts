@@ -72,14 +72,19 @@ function gap(g: Gap): string {
 
 export function renderCase(c: Case, index: number): string {
   const rows = c.stages.map((s) => (s.kind === 'gap' ? gap(s) : stage(s))).join('\n');
+  const stages = c.stages.filter((s): s is Stage => s.kind === 'stage');
+  const beats = stages.map((s) => `<li><span class="bh-beat-n">Session ${s.session}</span>${escape(s.beat)}</li>`).join('');
   return `<section class="bh-card" id="${c.id}" aria-labelledby="${c.id}-title">
     <header class="bh-head">
       <p class="label">Example ${index + 1} · run ${meta.run} · ${escape(meta.model)} · ${escape(meta.condition)} agent <span class="chip chip-pending">${meta.tier}</span></p>
       <h3 id="${c.id}-title">${escape(c.title)}</h3>
       <p class="bh-lede">${escape(c.lede)}</p>
     </header>
-    <p class="bh-key">Left: what to see. Right: the calls that matter and the note the agent wrote to itself, verbatim.</p>
-    <ol class="bh-stages">${rows}</ol>
+    <ol class="bh-beats">${beats}</ol>
+    <details class="bh-evidence"${index === 0 ? ' open' : ''}>
+      <summary>See the ${stages.length} sessions <span>· the calls that matter, and the note the agent wrote to itself, verbatim</span></summary>
+      <ol class="bh-stages">${rows}</ol>
+    </details>
     <p class="bh-take"><strong>What it shows.</strong> ${escape(c.takeaway)}</p>
   </section>`;
 }

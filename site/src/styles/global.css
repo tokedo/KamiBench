@@ -1229,10 +1229,20 @@ td:first-child {
 .bh-head .label { margin: 0 0 0.35rem; }
 .post-body .bh-head h3 { font-size: 1.35rem; line-height: 1.25; margin: 0 0 0.6rem; }
 .bh-lede { margin: 0 0 1rem; font-size: 0.98rem; line-height: 1.55; }
-.bh-key { margin: 0 0 0.6rem; font-size: 0.74rem; color: var(--muted); }
+.post-body .bh-beats { list-style: none; margin: 0 0 0.9rem; padding: 0; }
+.post-body .bh-beats li { margin: 0; padding: 0.45rem 0; border-top: 1px solid var(--line); font-size: 0.98rem; line-height: 1.4; display: grid; grid-template-columns: 5.2rem 1fr; column-gap: 0.6rem; }
+.bh-beat-n { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 0.25rem; font-variant-numeric: tabular-nums; }
+.bh-evidence { border-top: 1px solid var(--line); }
+.bh-evidence > summary { cursor: pointer; padding: 0.7rem 0; font-size: 0.88rem; font-weight: 600; list-style: none; display: flex; align-items: baseline; gap: 0.5rem; }
+.bh-evidence > summary::-webkit-details-marker { display: none; }
+.bh-evidence > summary::before { content: "▸"; color: var(--accent); font-size: 0.8rem; }
+.bh-evidence[open] > summary::before { content: "▾"; }
+.bh-evidence > summary span { font-weight: 400; color: var(--muted); font-size: 0.78rem; }
+.bh-evidence > summary:hover { color: var(--accent); }
 .bh-stages { list-style: none; margin: 0; padding: 0; }
 .bh-stage { padding: 0.9rem 0 1rem; border-top: 1px solid var(--line); }
-.post-body .bh-beat { margin: 0 0 0.7rem; font-size: 1.05rem; font-weight: 600; line-height: 1.35; }
+.bh-stages .bh-stage:first-child { border-top: 0; }
+.post-body .bh-beat { margin: 0 0 0.7rem; font-size: 0.95rem; font-weight: 600; line-height: 1.35; color: var(--muted); }
 .bh-row { display: grid; grid-template-columns: 3.4rem minmax(0, 16.5rem) minmax(0, 1fr); column-gap: 0.8rem; }
 .bh-s { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.7rem; line-height: 1.2; padding-top: 0.15rem; }
 .bh-s small { display: block; font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -1271,4 +1281,5 @@ td:first-child {
   .bh-card { padding: 1rem 0.9rem; }
   .bh-row { grid-template-columns: 2.8rem minmax(0, 1fr); }
   .bh-wrote { grid-column: 2 / 3; margin-top: 0.6rem; }
+  .post-body .bh-beats li { grid-template-columns: 1fr; row-gap: 0.1rem; }
 }

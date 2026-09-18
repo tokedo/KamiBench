@@ -21,7 +21,7 @@ each one out the same way: what to see, in plain words, next to the evidence,
 the tool calls and the note the agent wrote to itself. The quoted words are
 the agent's, verbatim, and can be wrong. The explanations are ours.
 
-<nav class="post-route" aria-label="In this post"><a href="#the-world-and-one-agent-in-it">The world</a> · <a href="#context-budget">1 · Context budget</a> · <a href="#tool-order">2 · Order of operations</a> · <a href="#long-goal">3 · A long goal</a> · <a href="#belief-correction">4 · A corrected belief</a> · <a href="#what-the-four-have-in-common">What they share</a> · <a href="#where-these-come-from">Where they come from</a></nav>
+<nav class="post-route" aria-label="In this post"><a href="#the-world-and-one-agent-in-it">The world</a> · <a href="#context-budget">1 · Context budget</a> · <a href="#tool-order">2 · Order of operations</a> · <a href="#long-goal">3 · A long goal</a> · <a href="#belief-correction">4 · A corrected belief</a> · <a href="#what-the-four-have-in-common">What they share</a> · <a href="#next-make-efficiency-matter">What comes next</a></nav>
 
 ## The world, and one agent in it
 
@@ -55,10 +55,12 @@ lands. Every line in the action log is a transaction on the chain.
 </figure>
 
 The four examples below all come from this agent: Sonnet 5, the control
-condition of run 006, 82 sessions between August 17 and 25. It had the
-game's documentation in its folder and nothing else. **[EXPLORATORY]** These
-are case studies of one agent. They show what happened, not how often it
-happens.
+condition of [run 006](../experiments/006-knowledge-delivery-wave-1.md), 82
+sessions between August 17 and 25. It had the game's documentation in its
+folder and nothing else. **[EXPLORATORY]** These are case studies of one
+agent. They show what happened, not how often it happens. Every transcript
+is public: each card links its quotes to the exact line of the session file
+on Hugging Face, at a pinned revision.
 
 <!-- BEHAVIOR:context-budget -->
 
@@ -86,49 +88,17 @@ None of this changes the model. It changes what the model finds when it wakes
 up. That is the whole mechanism we are studying, and these four sequences are
 what it looks like when it works.
 
-## Where these come from
-
-**[REGISTERED]** [Run 006](../experiments/006-knowledge-delivery-wave-1.md)
-asked whether pushing game knowledge into a capable model's workflow changes
-what it does. Sonnet 5 and gpt-5.2 each ran a control agent, which had the
-documentation in its folder, and a guided agent, which also received an
-orientation, keyword search, facts inside tool results, and mechanics notes
-when calls failed. The guided agents completed more quests than their
-controls, but neither leveled up a creature, and the Sonnet control leveled
-up eight times. Extra guidance did not meet the experiment's
-[success criterion](../experiments/knowledge-delivery.md#what-decides).
-The examples above are from the control agent: the one that was given the
-least.
-
-![Run 006 quest trajectories compare control and pushed knowledge within each model; only the Sonnet control has landed level-up events.](figures/006-quests-over-time.svg)
-
-The chart calls the guided condition “pushed knowledge.” Both pairs were
-stopped early with budget remaining: gpt on August 24 because of its burn
-rate, and Sonnet on August 25 after the verdict was decided.
-
-Run 006 was the first run where the stack itself was not in the way.
-**[REGISTERED]** Four earlier runs on smaller models, all
-[budget-boxed](../experiments/budget-boxed.md) to $10 and seven days, were
-spent finding and fixing what the tools hid from the agents: an inventory
-endpoint that failed on every call, error messages an agent could not act on,
-a quest counter it could not see. By [run 005](../experiments/005-verification-run.md)
-the exit test found no remaining stack defect affecting what agents could see
-or do. The remaining failures were in their choices.
-
-![Across the four completed stack-validation runs, failed on-chain writes became much less common while quest progress remained modest.](../experiments/figures/budget-boxed-series.svg)
-
-Every transcript is public. Each card links its quotes to the exact line of
-the session file on Hugging Face, at a pinned revision, and the
-[first post](2026-08-14-why-kamibench-for-continual-learning.md) explains
-why a persistent world is the right place to study this.
-
 ## Next: make efficiency matter
 
 The first example shows an agent noticing, on its own, that reading is not
-free. The next [sustainability family](../experiments/sustainability.md)
-makes that cost part of survival. An agent starts with seed money, earns in
+free. The next experiment family, sustainability, makes that cost part of
+survival. An agent starts with seed money, earns in
 the game, and pays for its own inference and gas. It lives as long as it can
-pay, and its balance is the score. Will that pressure produce more of what
-the four examples show: cheaper reads, procedures that stick, goals that
-survive the night, beliefs that get checked? That is what the next experiment
+pay, and its balance is the score.
+
+![The running balance: seed money, minus the cost of thinking, minus transaction fees, plus what the agent earns in the world.](../experiments/figures/balance.svg)
+
+Will that pressure produce more of what the four examples show: cheaper
+reads, procedures that stick, goals that survive the night, beliefs that get
+checked? That is what the [next experiment](../experiments/sustainability.md)
 will test.
