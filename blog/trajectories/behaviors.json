@@ -28,7 +28,14 @@
        }
       }
      ],
-     "aside": "The seventh full-registry call in ten sessions. A sixth of the session budget in one result.",
+     "aside": "The seventh full-registry call in ten sessions.",
+     "cost": {
+      "base": 35,
+      "delta": 23,
+      "cap": 150,
+      "kind": "bad",
+      "label": "base 35k → +23k · 16% of budget"
+     },
      "transcript": {
       "dataset": "experiment-006-knowledge-delivery",
       "revision": "v0-final",
@@ -68,6 +75,13 @@
       }
      ],
      "aside": "Routine end-of-session rewrite of the notes. Having just used the cheap check, it split the earlier bullet into the rule and the quest facts.",
+     "cost": {
+      "base": 42,
+      "delta": 0.9,
+      "cap": 150,
+      "kind": "ok",
+      "label": "at 42k → +0.9k · session peaks at 31%"
+     },
      "transcript": {
       "dataset": "experiment-006-knowledge-delivery",
       "revision": "v0-final",
@@ -108,7 +122,14 @@
        }
       }
      ],
-     "aside": "A fifth of the session budget in one turn. Fired in the same parallel batch as the read of the notes, so the warning landed after the call.",
+     "aside": "Fired in the same parallel batch as the read of the notes, so the warning landed after the call.",
+     "cost": {
+      "base": 33,
+      "delta": 29,
+      "cap": 150,
+      "kind": "bad",
+      "label": "base 33k → +29k · 19% of budget, in one turn"
+     },
      "transcript": {
       "dataset": "experiment-006-knowledge-delivery",
       "revision": "v0-final",
@@ -147,7 +168,14 @@
        }
       }
      ],
-     "aside": "Session peaks at a third of the budget. No registry call in the rest of the run.",
+     "aside": "No registry call in the rest of the run.",
+     "cost": {
+      "base": 41,
+      "delta": 2.4,
+      "cap": 150,
+      "kind": "ok",
+      "label": "at 41k → +2.4k for the turn · session peaks at 33%"
+     },
      "transcript": {
       "dataset": "experiment-006-knowledge-delivery",
       "revision": "v0-final",

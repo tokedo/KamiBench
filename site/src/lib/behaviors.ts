@@ -17,7 +17,8 @@ type Source = { dataset: string; revision: string; path: string; line: number; f
 type Note =
   | { kind: 'empty'; text: string }
   | { kind: 'obs' | 'rule' | 'soft'; tag: string; quote: string[]; why?: string; source: Source };
-type Stage = { kind: 'stage'; session: number; date: string; beat: string; calls: Call[]; aside?: string; transcript: Source; note: Note };
+type Cost = { base: number; delta: number; cap: number; kind: 'bad' | 'ok'; label: string };
+type Stage = { kind: 'stage'; session: number; date: string; beat: string; calls: Call[]; aside?: string; cost?: Cost; transcript: Source; note: Note };
 type Gap = { kind: 'gap'; text: string };
 type Case = { id: string; title: string; lede: string; stages: (Stage | Gap)[]; takeaway: string };
 
@@ -54,13 +55,17 @@ function note(n: Note): string {
   </div>`;
 }
 
+function cost(c: Cost): string {
+  const pct = (n: number) => `${((n / c.cap) * 100).toFixed(1)}%`;
+  return `<div class="bh-cost" aria-label="${escape(c.label)}"><div class="bh-bar"><i style="width:${pct(c.base)}"></i><b class="bh-${c.kind}" style="left:${pct(c.base)};width:${pct(c.delta)}"></b></div><small>${escape(c.label)}</small></div>`;
+}
+
 function stage(s: Stage): string {
   return `<li class="bh-stage">
     <p class="bh-beat">${escape(s.beat)}</p>
     <div class="bh-row">
-      <div class="bh-s"><small>Session</small><b>${s.session}</b><small>${escape(s.date)}</small></div>
-      <div class="bh-did">${calls(s.calls)}${s.aside ? `<p class="bh-aside">${escape(s.aside)}</p>` : ''}
-        <a class="bh-src" href="${hfUrl(s.transcript)}">full session transcript<span class="visually-hidden"> (Hugging Face, opens in a new tab)</span> ↗</a></div>
+      <a class="bh-s" href="${hfUrl(s.transcript)}" title="Full session transcript on Hugging Face"><small>Session</small><b>${s.session}</b><small>${escape(s.date)}</small><small class="bh-s-link">transcript ↗</small></a>
+      <div class="bh-did">${calls(s.calls)}${s.cost ? cost(s.cost) : ''}${s.aside ? `<p class="bh-aside">${escape(s.aside)}</p>` : ''}</div>
       <div class="bh-wrote">${note(s.note)}</div>
     </div>
   </li>`;
