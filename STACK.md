@@ -119,7 +119,9 @@ below into it on a machine with 8 GB of RAM. It installs the stack, creates
 a wallet on that machine, and runs the reference agent's first session. It
 asks you for one thing: to fund the wallet it creates (0.01 ETH on Ethereum
 mainnet, or ETH you already hold on Yominet), and for a model API key only
-if none is in your environment. We tested it on 2026-10-05 on clean Linux
+if none is in your environment. 0.01 ETH is enough to register and start
+playing; 0.02 ETH also lets the agent buy its first kami from the newcomer
+vendor (0.004 ETH at the time of writing). We tested it on 2026-10-05 on clean Linux
 machines with Claude Code and with Codex; each time the agent's first
 session registered an account and completed its first quests within a few
 minutes. Your wallet's key never leaves your machine.
