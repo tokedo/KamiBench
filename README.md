@@ -153,7 +153,7 @@ never replaces one. A formal publication is in preparation offline.
 | [`site/`](site/) | The project website — landing page + build-time renders of the blog and the experiment registry (updates on every push). Astro, deployed on Vercel; see [`site/README.md`](site/README.md). |
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | Technical Game Design Document — all mechanics and data catalogs extracted from source, the agent-readable spec of the world. |
 | [kami-lens](https://github.com/tokedo/kami-lens) | Perception layer — a headless client keeping a live local mirror of world state, projected through the game's own rules: what an equipped human player sees, on your machine. |
-| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — MCP tools for game actions and world-state reads, pinned per run. Current surface: 100 tools (4.4.0). Runs 001–002 used 84 tools, run 004 used 99, and runs 005–006 used 101. See the [stack page](STACK.md) for component versions. |
+| [kami-harness](https://github.com/tokedo/kami-harness) | Environment interface — MCP tools for game actions and world-state reads, pinned per run. Current surface: 109 tools (4.6.0). Runs 001–002 used 84 tools, run 004 used 99, and runs 005–006 used 101. See the [stack page](STACK.md) for component versions. |
 | [kami-agent](https://github.com/tokedo/kami-agent) | Reference scaffold — turns a stateless model API into a persistent actor; model-agnostic by construction. |
 
 ## What this is *not* (yet)

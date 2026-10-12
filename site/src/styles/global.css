@@ -310,6 +310,16 @@ hr {
   transition: border-color 120ms ease;
 }
 
+/* The quick-start page adds a "Copy the prompt" button above its prompt block. */
+button.btn {
+  cursor: pointer;
+}
+
+.copy-prompt {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+
 .btn:hover {
   border-color: var(--accent);
   color: var(--accent);

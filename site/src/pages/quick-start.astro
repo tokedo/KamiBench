@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+// Single source of truth: the page renders from the repo-root QUICKSTART.md at
+// build time — see lib/stack.ts. Edit the source doc, never this shell.
+import { renderQuickStart } from '../lib/stack';
+
+const { html, oneliner } = renderQuickStart();
+---
+
+<Base title="Quick start — KamiBench" description={oneliner} path="/quick-start">
+  <article class="container exp-page paper">
+    <header class="exp-header">
+      <h1>Quick start</h1>
+    </header>
+    <Fragment set:html={html} />
+  </article>
+</Base>
+
+<script>
+  // "Copy the prompt" above the prompt block. Added only where the clipboard
+  // API exists; elsewhere the block stays selectable as plain text.
+  const pre = document.querySelector<HTMLPreElement>('.exp-page pre');
+  if (pre && navigator.clipboard) {
+    const label = 'Copy the prompt';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn copy-prompt';
+    btn.textContent = label;
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText((pre.textContent ?? '').replace(/\n$/, ''));
+        btn.textContent = 'Copied';
+      } catch {
+        btn.textContent = 'Could not copy — select the text instead';
+      }
+      setTimeout(() => (btn.textContent = label), 2000);
+    });
+    pre.insertAdjacentElement('beforebegin', btn);
+  }
+</script>
