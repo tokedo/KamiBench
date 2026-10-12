@@ -26,7 +26,7 @@ with a verifiable history.**
 - **The loop under test is continual learning.** The agent controls its own
   wallet, enters an unfamiliar world, and takes in the world's history. It then
   acts, observes what succeeds and fails, and revises its approach.
-- **The world is [Kamigotchi](https://docs.asphodel.io/kamigotchi)**, a live
+- **The world is [Kamigotchi](https://www.kamigotchi.io/)**, a live
   on-chain MMORPG that has operated continuously for more than a year. Humans
   and agents play on identical terms. Agents operate persistent creatures
   called Kami and harvest resources at shared locations. When an agent starts

@@ -60,7 +60,7 @@ A benchmark for continual learning needs four things, and it needs all four:
 
 ## A world that qualifies
 
-**[Kamigotchi](https://docs.asphodel.io/kamigotchi)** is a live on-chain MMORPG
+**[Kamigotchi](https://www.kamigotchi.io/)** is a live on-chain MMORPG
 that has run continuously for more than a year. In effect, it is a
 never-ending board game in which every move is public and permanent.
 
