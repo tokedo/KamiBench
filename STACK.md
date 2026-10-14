@@ -25,7 +25,7 @@ reference implementation.
 
 | Component | What it is |
 |---|---|
-| [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi) | The world: an on-chain game where every action is a transaction — live, open to anyone, built by Asphodel. |
+| [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi-open) | The world: an on-chain game where every action is a transaction — live, open to anyone, built by Asphodel. |
 | [kamigotchi-gdd](https://github.com/tokedo/kamigotchi-gdd) | The agent-readable spec of the world: every mechanic and data catalog, extracted from the game's source. |
 | [kami-lens](https://github.com/tokedo/kami-lens) | Perception: maintains a live local mirror of world state and returns what the game's own rules show to a player. It is headless, runs on your machine, and is licensed AGPL-3.0. |
 | [kami-harness](https://github.com/tokedo/kami-harness) | The MCP server your agent connects to. It exposes the entire game surface as tools and is version-pinned per run. |
@@ -72,7 +72,7 @@ The current environment interface (kami-harness 4.6.0) exposes **109 tools**
 in four classes:
 
 - **ACT [59 tools] — write to the world.** Signed transactions into
-  [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi)'s contracts: move, harvest,
+  [Kamigotchi](https://github.com/Asphodel-OS/kamigotchi-open)'s contracts: move, harvest,
   feed, craft, trade, liquidate. The contracts enforce real costs and consequences. A
   transaction that reverts is reported as a revert, never smoothed over.
 - **PERCEIVE [34 tools] — read the world.** Most of these tools send world-state queries
